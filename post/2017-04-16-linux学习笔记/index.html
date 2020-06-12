@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.72.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Linux学习笔记&nbsp;&ndash;&nbsp;My New Hugo Site</title><link rel="stylesheet" href="/css/core.min.6c1becca84f7f7bd0f8b66b515373e029781dd3e338e609d4a51916e2dfa66aeaffd223213d52e46f3765ba1f627f441.css" integrity="sha384-bBvsyoT3970Pi2a1FTc&#43;ApeB3T4zjmCdSlGRbi36Zq6v/SIyE9UuRvN2W6H2J/RB"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Linux学习笔记" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">My New Hugo Site</span></a></span>
+        <span class="header right-side"></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Linux学习笔记</h1><p class="article date">2017-04-16</p></section><article class="article markdown-body"><h3 id="linux系统目录">linux系统目录</h3>
+<ul>
+<li>/boot 放置Linux内核以及其他用来启动树莓派的软件包</li>
+<li>/bin 放置与Raspbian有关(包括运行图形界面所需的)的二进制可执行文件</li>
+<li>/dev 这是虚拟文件夹之一，用来访问所有连接设备，包括存储卡</li>
+<li>/etc 系统管理和配置文件</li>
+<li>/home Linux上的我的文档，包含用户名命名的文件夹</li>
+<li>/lib 各种应用需要的代码库</li>
+<li>/lost+found 一般情况下是空的，当系统非法关机后，这里就存放了一些文件</li>
+<li>/media 放置可移动存储驱动器，比如USB和CD</li>
+<li>/mnt 用来手动挂在外部硬件驱动器或存储设备</li>
+<li>/opt 可选软件文件夹，非系统部分的软件将会放置在这里</li>
+<li>/sbin 放置超级用户使用的系统管理命令</li>
+<li>/sys 放置操作系统文件</li>
+<li>/tmp 放置临时文件</li>
+<li>/usr 放置用户使用的程序</li>
+<li>/var 虚拟文件，用于程序保存数据</li>
+</ul>
+<!-- raw HTML omitted -->
+<h3 id="更新源信息数据库">更新源信息数据库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get update
+</code></pre></div><h3 id="更新已安装的包">更新已安装的包</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get upgrade
+</code></pre></div><h3 id="升级系统">升级系统</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get dist-upgrade
+</code></pre></div><h3 id="开启root权限su进入root">开启root权限，su进入root</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo passwd root
+sudo passwd --unlock root
+su
+</code></pre></div><h3 id="显示系统日期时间">显示系统日期时间</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">date
+</code></pre></div><h3 id="从最后一行开始显示">从最后一行开始显示</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tac /proc/cgroups
+</code></pre></div><h3 id="显示的时候顺道输出行号">显示的时候，顺道输出行号</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nl /proc/cgroups
+</code></pre></div><h3 id="一页一页的显示文件内容">一页一页的显示文件内容</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">more /proc/cgroups
+</code></pre></div><h3 id="一页一页的显示文件内容可以往前翻页">一页一页的显示文件内容(可以往前翻页)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">less /proc/cgroups
+</code></pre></div><h3 id="只看头几行">只看头几行</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">head -5 /proc/cgroups
+</code></pre></div><h3 id="只看尾巴几行">只看尾巴几行</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tail -5 /proc/cgroups
+</code></pre></div><h3 id="删除一个空的目录">删除一个空的目录</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rmdir name
+</code></pre></div><h3 id="编译c语言">编译c语言</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gcc test.c -o test
+<span style="color:#75715e"># arm 平台</span>
+arm-linux-gcc test.c -o test
+<span style="color:#75715e"># 运行</span>
+./test
+</code></pre></div><h3 id="赋予超级可执行权限">赋予超级可执行权限</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod u+x test
+chmod <span style="color:#ae81ff">777</span> test
+</code></pre></div><h3 id="关机">关机</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 可以定时</span>
+sudo shutdown -h now
+sudo halt
+sudo poweroff
+sudo init <span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="重启">重启</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo reboot
+sudo init <span style="color:#ae81ff">6</span>
+</code></pre></div><h3 id="软件包管理软件">软件包管理软件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt --help
+dpkg --help
+yum --help
+</code></pre></div><h3 id="wget">Wget</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget https://www.python.org/ftp/python/3.4.3/Python-3.4.3.tgz
+</code></pre></div><h3 id="查看系统信息">查看系统信息</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查看操作系统版本</span>
+cat /proc/version
+<span style="color:#75715e"># 查看主板版</span>
+cat /proc/cpuinfo
+cat /proc/...
+</code></pre></div><h3 id="查看硬盘剩余空间">查看硬盘剩余空间</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">df -h
+</code></pre></div><h3 id="搜索局域网中ip地址">搜索局域网中IP地址</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">arp -a
+</code></pre></div><h3 id="查看挂载信息">查看挂载信息</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo fdisk –l
+</code></pre></div><h3 id="执行shell脚本">执行shell脚本</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./test.sh
+sh test.sh
+</code></pre></div><h3 id="解压">解压</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 解压一个zip格式压缩包</span>
+unzip file1.zip 
+<span style="color:#75715e"># 解压一个gzip格式的压缩包</span>
+tar -xvfz archive.tar.gz 
+</code></pre></div><h3 id="压缩">压缩</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 创建一个zip格式的压缩包</span>
+zip file1.zip file1 
+<span style="color:#75715e"># 创建一个gzip格式的压缩包</span>
+tar -cvfz archive.tar.gz dir1 
+</code></pre></div><h3 id="查看usb设备">查看USB设备</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">lsusb
+</code></pre></div><h3 id="显示已载入系统的模块">显示已载入系统的模块</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># lsmod 其实就是list modules的缩写</span>
+lsmod
+</code></pre></div><h3 id="设置启动服务">设置启动服务</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo insserv /etc/init.d/mysript
+</code></pre></div><h3 id="删除启动服务">删除启动服务</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo insserv -r /etc/init.d/mysript
+</code></pre></div><h3 id="修改主机名">修改主机名</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo hostname newname
+</code></pre></div><h3 id="增加用户">增加用户</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo adduser username
+</code></pre></div><h3 id="删除用户">删除用户</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo deluser username
+</code></pre></div><h3 id="查看系统运行情况">查看系统运行情况</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">top
+</code></pre></div><h3 id="进程管理">进程管理</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ps -aux
+<span style="color:#75715e"># 或者</span>
+ps -ef | less
+</code></pre></div><blockquote>
+<p>静态显示系统正在运行的进程</p>
+<ul>
+<li>ps -aux</li>
+<li>
+<ul>
+<li>参数</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-a：显示终端上的所有进程，包括造作系统动态执行的基本单元</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-u：显示进程的详细状态</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-x：显示没有控制的终端的进程</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-w：显示加宽，以便显示等多信息</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-r：只显示正在进行的进程
+动态显示系统进程：top</li>
+</ul>
+</li>
+<li>top</li>
+<li>
+<ul>
+<li>参数</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>M：根据内存使用量来排序</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>P：根据CPU占有率来排序</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>T：根据进程运行时间长短来排序</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>U：可以根据后面输入的用户名来筛选进程</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>K：可以根据后面输入的PID来杀死进程</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>q：退出</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>h：获取帮助</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>查看进程树：pstree [选项]  [PID或用户名]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>查看后台任务列表： jobs -l</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>将后台任务恢复到前台运行： fg</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>激活后台被挂起的任务： bg</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>挂起当前进程：Ctrl+z 组合键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>中断正在执行的命令程序：Ctrl+c组合键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>杀死置顶PID的进程： kill 13613</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>显示同名的进程：pgrep -l vim</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>杀死多个同名进程： killall -9 vim</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>杀死符合条件的进程： pgrep -l -U google</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>强制提出用户： pkill -9 -U google</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="查看内存分配情况">查看内存分配情况</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">free -m <span style="color:#f92672">(</span>-k, -g<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="当前目录下的磁盘使用信息">当前目录下的磁盘使用信息</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo du -sh
+</code></pre></div><h3 id="对进程做出一定的操作">对进程做出一定的操作</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kill -&lt;signal&gt; &lt;PID&gt;
+</code></pre></div><ul>
+<li>signal 1 (SIGHUP): hang-up的缩写，该信号通知应用程序重新启动</li>
+<li>signal 3 （SIGQUIT）：该信号通知应用程序清理自身资源并退出</li>
+<li>signal 6 （SIGABRT）：该信号通知应用程序终止并立即退出</li>
+<li>signal 9  （SIGKILL）：该信号立即终止应用程序</li>
+<li>PID ：应用程序的进程号，可以通过ps 查看</li>
+</ul>
+<h3 id="文件管理">文件管理</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 显示当前的绝对路径</span>
+pwd
+<span style="color:#75715e"># 切换路径</span>
+cd 
+<span style="color:#75715e"># 新建文件夹</span>
+mkdir
+<span style="color:#75715e"># 新建文件</span>
+touch
+</code></pre></div><blockquote>
+<p>cd</p>
+<ul>
+<li>cd .. :切换到上级目录</li>
+<li>cd ~ :切换到/home/pi</li>
+<li>cd / :切换到更目录</li>
+<li>
+<ul>
+<li>-L ：表示启动符号连接跟踪，默认情况下是不会启动的。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-maxdepth<!-- raw HTML omitted -->: 该选项指定find命令最大的目录查看深度，如果为1的话表示当前目录文件和一级子目录文件。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-newer<!-- raw HTML omitted -->:表示只查找指定文件的修改时间更新的文件</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-empty：表示只查找空文件</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-atime<!-- raw HTML omitted --> ：表示只查找距离上次访问指定天数之后的文件</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-name<!-- raw HTML omitted -->:表示搜索完全匹配指定文件名的文件</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>-exec<!-- raw HTML omitted -->:指示find命令为每个匹配的文件路径执行指定的命令。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="查找文件">查找文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">find
+<span style="color:#75715e"># 该命令会搜索/mnt/volumer 中的所有名称匹配foobar的空文件，并执行rm命令将其删去</span>
+find /mnt/volumer -empty -name foobar -exec rm
+<span style="color:#75715e"># 按文件名查找文件</span>
+ind ./ -name test.py
+<span style="color:#75715e"># 按文件大小查找文件</span>
+find ./ -size +2M
+</code></pre></div><h3 id="通过读取filename文件">通过读取filename文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">file &lt;filename&gt;
+</code></pre></div><h3 id="grep">grep</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">grep &lt;pattern&gt; &lt;file&gt;
+<span style="color:#75715e"># &gt; 定向符号(以把一个命令的输出结果重定向到一个文件)</span>
+top &gt; Desktop/file_top.txt
+<span style="color:#75715e"># &gt;&gt; 重定向符号(在一个文件里追加内容)</span>
+ls -alh &gt;&gt; Desktop/file_top.txt
+<span style="color:#75715e"># 筛选内容</span>
+tail -f /linux.log | grep <span style="color:#e6db74">&#39;error&#39;</span>
+<span style="color:#75715e"># 搜索文件中的内容(头部：^ 结尾：$)</span>
+grep -n <span style="color:#e6db74">&#39;abcd&#39;</span> test.py
+</code></pre></div><h3 id="查看历史命令">查看历史命令</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">history
+</code></pre></div><h3 id="管道命令">管道命令</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 管道命令允许你把一个命令的输出结果转移给另一个命令</span>
+ls /home/pi | grep duer_linux.log
+</code></pre></div><h3 id="声卡">声卡</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查看声卡</span>
+arecord -l
+<span style="color:#75715e"># 录音</span>
+arecord -Dhw:1,0 -c <span style="color:#ae81ff">2</span> -r <span style="color:#ae81ff">16000</span> -f S16_LE test.wav
+arecord -D <span style="color:#e6db74">&#34;plughw:0,0&#34;</span> -f S16_LE -r <span style="color:#ae81ff">16000</span> -d <span style="color:#ae81ff">5</span> -t wav file.wav  
+</code></pre></div><h3 id="软链接">软链接</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 创建文件的软链接（win中的快捷方式）</span>
+ln -s test.py test_link.py
+<span style="color:#75715e"># 创建文件的硬链接(创建文件的不同文件名：内存中记录指向该数据的文件名的个数，为0时是彻底删除)</span>
+ln test.py test_link.py
+</code></pre></div><h3 id="合并两个文件">合并两个文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat test_1.py test_2.py &gt; test_3.py
+</code></pre></div><h3 id="目录结构">目录结构</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tree .
+</code></pre></div><blockquote>
+<p>文件打包管理：tar</p>
+<ul>
+<li>-c ：生成压缩包文件，创建打包文件</li>
+<li>-v ：列出压缩解压的详细过程，显示进度</li>
+<li>-f ：指出压缩文件名称，f后面一定是.tar文件，所以必须放选项最后（必须在参数的最后）</li>
+<li>-t ：列出压缩中包含的文件</li>
+<li>-x ：解开压缩文件</li>
+<li>-C ：指定解压路径（大写字母C）</li>
+<li>-z ：表示是tar.gz格式</li>
+</ul>
+</blockquote>
+<h3 id="解压缩">解压缩</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 打包成tar文件（未压缩）</span>
+tar -cvf testTar.tar ./*
+<span style="color:#75715e"># 解压tar文件</span>
+tar -xvf testTar.tar
+<span style="color:#75715e"># 将已经打包的文件压缩成tar.gz文件：gzip</span>
+gzip -r testTar.tar
+<span style="color:#75715e"># 将tar.gz压缩包文件解压成tar打包文件</span>
+gzip -d testTar.tar.gz
+<span style="color:#75715e"># 直接压缩成tar.gz压缩包：</span>
+tar -zcvf teatTar.tar.gz ./*
+<span style="color:#75715e"># 直接解压tar.gz压缩包</span>
+tar -zxvf tearTar.tar.gz
+<span style="color:#75715e"># 解压到指定路径</span>
+tar -zxvf testTar.tar.gz -C /home/pi/test
+<span style="color:#75715e"># 直接压缩成tar.bz2压缩包：</span>
+tar -jcvf testTar.tar.bz2 ./*
+<span style="color:#75715e"># 直接解压tar.bz2压缩包</span>
+tar -jxvf tesrTar.tar.bz2
+<span style="color:#75715e"># 压缩成zip</span>
+zip -r testZip.zip ./*
+<span style="color:#75715e"># 解压zip</span>
+unzip -d /home/pi/test testZip.zip
+</code></pre></div><h3 id="查看位置">查看位置</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> which java
+ <span style="color:#75715e"># 或者</span>
+ whereis java
+</code></pre></div><h3 id="退出超级管理员">退出超级管理员</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">exit
+</code></pre></div><h3 id="查看linux系统操作位">查看Linux系统操作位</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">getconf LONG_BIT
+<span style="color:#75715e"># 包括系统内核</span>
+uname -a
+</code></pre></div><h3 id="查看端口占用">查看端口占用</h3>
+<p><code>id</code>是指端口号或进程ID</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">netstat -anp | grep id
+</code></pre></div><h3 id="查看进程信息">查看进程信息</h3>
+<p><code>id/name</code>:值进程ID或进程名称</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ps aux | grep id/name
+</code></pre></div><p>或者</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ll /proc/id
+</code></pre></div><h3 id="远程复制本地20190112">远程复制本地<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp -rp www.yibuwulianwang.com:/usr/local/java/jdk1.8.0_151/ ./
+</code></pre></div><h3 id="本地复制到远程">本地复制到远程</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt install sshpass
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sshpass -p <span style="color:#e6db74">&#34;password&#34;</span> scp -rp ./target/ybwlw.war root@47.106.91.50:/usr/local/src/tomcat/tomcat-1/webapps/
+</code></pre></div><h3 id="检查和控制内核的环形缓冲区20190409">检查和控制内核的环形缓冲区<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">dmesg | grep pid/name
+</code></pre></div><h3 id="linux命令大全">Linux命令大全</h3>
+<p><a href="http://man.linuxde.net/"target="_blank">Linux命令大全</a></p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>20190112更新 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>20190409更新 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</article><section class="article labels"><a class="tag" href=/tags/linux/>Linux</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/first/"><span class="iconfont icon-article"></span>First</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">My New Hugo Site</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

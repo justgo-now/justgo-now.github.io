@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on My New Hugo Site</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 16 Apr 2017 12:22:22 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux学习笔记</title>
+      <link>/post/2017-04-16-linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 16 Apr 2017 12:22:22 +0800</pubDate>
+      
+      <guid>/post/2017-04-16-linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>linux系统目录 /boot 放置Linux内核以及其他用来启动树莓派的软件包 /bin 放置与Raspbian有关(包括运行图形界面所需的)的二进制可执行文件</description>
+      
+    </item>
+    
+  </channel>
+</rss>
