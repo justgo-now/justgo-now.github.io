@@ -1,13 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https://justgo-now.github.io/post/first/</loc><lastmod>2020-06-12T08:46:36+08:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/</loc><lastmod>2020-06-12T08:46:36+08:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/post/</loc><lastmod>2020-06-12T08:46:36+08:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/archives/</loc><lastmod>2019-10-23T18:54:13+00:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/categories/</loc><lastmod>2019-10-23T18:23:31+00:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/about/</loc><lastmod>2019-10-23T18:23:20+00:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/tags/</loc><lastmod>2019-10-23T18:23:15+00:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/tags/linux/</loc><lastmod>2017-04-16T12:22:22+08:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/post/2017-04-16-linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc><lastmod>2017-04-16T12:22:22+08:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/tags/</loc><lastmod>2017-04-16T12:22:22+08:00</lastmod></url><url>
-    <loc>https://justgo-now.github.io/categories/</loc></url></urlset>
+<?xml-stylesheet type="text/xsl" href="http://localhost:1313/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://localhost:1313/about/</loc>
+    <lastmod>2017-08-28T21:41:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2020-06-12T14:09:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2020-06-12T14:09:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2020-06-12T14:08:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/archives/</loc>
+    <lastmod>2020-06-12T13:51:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/linux/</loc>
+    <lastmod>2020-06-12T08:46:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2020-06-12T08:46:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/tcpdump/</loc>
+    <lastmod>2020-06-12T08:46:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/2020-06-12-tcpdump-usage/</loc>
+    <lastmod>2020-06-12T08:46:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/tools/</loc>
+    <lastmod>2020-06-12T08:46:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

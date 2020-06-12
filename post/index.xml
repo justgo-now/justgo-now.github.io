@@ -1,34 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <title>Posts on JustGo</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
+    <language>en</language>
     <lastBuildDate>Fri, 12 Jun 2020 08:46:36 +0800</lastBuildDate>
     
-        <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>First</title>
-      <link>/post/first/</link>
+      <title>tcpdump 使用</title>
+      <link>http://localhost:1313/post/2020-06-12-tcpdump-usage/</link>
       <pubDate>Fri, 12 Jun 2020 08:46:36 +0800</pubDate>
       
-      <guid>/post/first/</guid>
-      <description>first.</description>
-      
-    </item>
-    
-    <item>
-      <title>Linux学习笔记</title>
-      <link>/post/2017-04-16-linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Sun, 16 Apr 2017 12:22:22 +0800</pubDate>
-      
-      <guid>/post/2017-04-16-linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description>linux系统目录 /boot 放置Linux内核以及其他用来启动树莓派的软件包 /bin 放置与Raspbian有关(包括运行图形界面所需的)的二进制可执行文件</description>
-      
+      <guid>http://localhost:1313/post/2020-06-12-tcpdump-usage/</guid>
+      <description>tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分</description>
     </item>
     
   </channel>
