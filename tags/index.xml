@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on JustGo</title>
-    <link>http://justgo-now.github.io/tags/</link>
+    <link>http://justgo-now.github.io/tags.html</link>
     <description>Recent content in Tags on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -13,19 +13,19 @@
     
     <item>
       <title>linux</title>
-      <link>http://justgo-now.github.io/tags/linux/</link>
+      <link>http://justgo-now.github.io/tags/linux.html</link>
       <pubDate>Fri, 12 Jun 2020 08:46:36 +0800</pubDate>
       
-      <guid>http://justgo-now.github.io/tags/linux/</guid>
+      <guid>http://justgo-now.github.io/tags/linux.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>tcpdump</title>
-      <link>http://justgo-now.github.io/tags/tcpdump/</link>
+      <link>http://justgo-now.github.io/tags/tcpdump.html</link>
       <pubDate>Fri, 12 Jun 2020 08:46:36 +0800</pubDate>
       
-      <guid>http://justgo-now.github.io/tags/tcpdump/</guid>
+      <guid>http://justgo-now.github.io/tags/tcpdump.html</guid>
       <description></description>
     </item>
     
