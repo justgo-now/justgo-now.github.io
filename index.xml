@@ -33,15 +33,15 @@
     
     <item>
       <title>tcpdump 使用</title>
-      <link>http://justgo-now.github.io/post/2020/2020-06-12-tcpdump-usage/</link>
+      <link>http://justgo-now.github.io/post/2020/tcpdump-%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 12 Jun 2020 08:46:36 +0800</pubDate>
       
-      <guid>http://justgo-now.github.io/post/2020/2020-06-12-tcpdump-usage/</guid>
+      <guid>http://justgo-now.github.io/post/2020/tcpdump-%E4%BD%BF%E7%94%A8/</guid>
       
         <description>&lt;p&gt;tcpdump - dump traffic on a network&lt;/p&gt;
 &lt;p&gt;tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分析和问题排查的首选工具&lt;/p&gt;
 &lt;p&gt;tcpdump 支持针对网络层、协议、主机、网络或端口的过滤，并提供and、or、not等逻辑语句来帮助你去掉无用的信息&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;2020-06-12-tcpdump-usage/10797253-0ac0eb9ebc75adb4.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;10797253-0ac0eb9ebc75adb4.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;tcpdump的命令格式如下&#34;&gt;tcpdump的命令格式如下&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;tcpdump [ -AdDeflLnNOpqRStuUvxX ] [ -c count ]
 [ -C file_size ] [ -F file ]
