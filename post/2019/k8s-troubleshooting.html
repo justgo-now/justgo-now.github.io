@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Kubernetes排错指南 - JustGo</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Frank" />
+  <meta name="description" content="" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+<link rel="canonical" href="http://justgo-now.github.io/post/2019/k8s-troubleshooting.html" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="Kubernetes排错指南" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://justgo-now.github.io/post/2019/k8s-troubleshooting.html" />
+<meta property="article:published_time" content="2019-11-02T08:12:50+00:00" />
+<meta property="article:modified_time" content="2019-11-02T08:12:50+00:00" />
+<meta itemprop="name" content="Kubernetes排错指南">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2019-11-02T08:12:50&#43;00:00" />
+<meta itemprop="dateModified" content="2019-11-02T08:12:50&#43;00:00" />
+<meta itemprop="wordCount" content="2663">
+
+
+
+<meta itemprop="keywords" content="kubernetes," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kubernetes排错指南"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">JustGo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/post.html">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      JustGo
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/post.html">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Kubernetes排错指南</h1>
+      
+      <div class="post-meta">
+        <time datetime="2019-11-02" class="post-time">
+          2019-11-02
+        </time>
+        <div class="post-category">
+            <a href="http://justgo-now.github.io/categories/devops.html"> devops </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#分析-exitcode-定位-pod-异常退出原因">分析 ExitCode 定位 Pod 异常退出原因</a>
+      <ul>
+        <li><a href="#退出状态码的区间">退出状态码的区间</a></li>
+        <li><a href="#常见异常状态码">常见异常状态码</a></li>
+        <li><a href="#状态码参考">状态码参考</a></li>
+        <li><a href="#linux-标准中断信号">Linux 标准中断信号</a></li>
+        <li><a href="#cc-退出状态码">C/C++ 退出状态码</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用-systemtap-定位疑难杂症">使用 systemtap 定位疑难杂症</a>
+      <ul>
+        <li><a href="#ubuntu">Ubuntu</a></li>
+        <li><a href="#centos">CentOS</a></li>
+        <li><a href="#使用-systemtap-揪出杀死容器的真凶">使用 systemtap 揪出杀死容器的真凶</a></li>
+      </ul>
+    </li>
+    <li><a href="#非root用户执行docker命令时提示permission-denied">非root用户执行docker命令时提示permission denied</a></li>
+    <li><a href="#原因">原因</a>
+      <ul>
+        <li><a href="#解决方法1">解决方法1</a></li>
+        <li><a href="#解决方法2">解决方法2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="分析-exitcode-定位-pod-异常退出原因">分析 ExitCode 定位 Pod 异常退出原因</h2>
+<p>使用 <code>kubectl describe pod &lt;pod name&gt;</code> 查看异常 pod 的状态:</p>
+<pre><code>Containers:
+  kubedns:
+    Container ID:  docker://5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
+    Image:         ccr.ccs.tencentyun.com/library/kubedns-amd64:1.14.4
+    Image ID:      docker-pullable://ccr.ccs.tencentyun.com/library/kubedns-amd64@sha256:40790881bbe9ef4ae4ff7fe8b892498eecb7fe6dcc22661402f271e03f7de344
+    Ports:         10053/UDP, 10053/TCP, 10055/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      --domain=cluster.local.
+      --dns-port=10053
+      --config-dir=/kube-dns-config
+      --v=2
+    State:          Running
+      Started:      Tue, 27 Aug 2019 10:58:49 +0800
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    255
+      Started:      Tue, 27 Aug 2019 10:40:42 +0800
+      Finished:     Tue, 27 Aug 2019 10:58:27 +0800
+    Ready:          True
+    Restart Count:  1
+</code></pre><p>在容器列表里看 <code>Last State</code> 字段，其中 <code>ExitCode</code> 即程序上次退出时的状态码，如果不为 0，表示异常退出，我们可以分析下原因。</p>
+<h3 id="退出状态码的区间">退出状态码的区间</h3>
+<ul>
+<li>必须在 0-255 之间</li>
+<li>0 表示正常退出</li>
+<li>外界中断将程序退出的时候状态码区间在 129-255，(操作系统给程序发送中断信号，比如 <code>kill -9</code> 是 <code>SIGKILL</code>，<code>ctrl+c</code> 是 <code>SIGINT</code>)</li>
+<li>一般程序自身原因导致的异常退出状态区间在 1-128 (这只是一般约定，程序如果一定要用129-255的状态码也是可以的)</li>
+</ul>
+<p>假如写代码指定的退出状态码时不在 0-255 之间，例如: <code>exit(-1)</code>，这时会自动做一个转换，最终呈现的状态码还是会在 0-255 之间。我们把状态码记为 <code>code</code></p>
+<ul>
+<li>当指定的退出时状态码为负数，那么转换公式如下:</li>
+</ul>
+<pre><code>256 - (|code| % 256)
+</code></pre><ul>
+<li>当指定的退出时状态码为正数，那么转换公式如下:</li>
+</ul>
+<pre><code>code % 256
+</code></pre><h3 id="常见异常状态码">常见异常状态码</h3>
+<ul>
+<li>
+<p>137 (被  <code>SIGKILL</code> 中断信号杀死)</p>
+<ul>
+<li>
+<p>此状态码一般是因为 pod 中容器内存达到了它的资源限制(<code>resources.limits</code>)，一般是内存溢出(OOM)，CPU达到限制只需要不分时间片给程序就可以。因为限制资源是通过 linux 的 cgroup 实现的，所以 cgroup 会将此容器强制杀掉，类似于 <code>kill -9</code>，此时在 <code>describe pod</code> 中可以看到 Reason 是 <code>OOMKilled</code></p>
+</li>
+<li>
+<p>还可能是宿主机本身资源不够用了(OOM)，内核会选取一些进程杀掉来释放内存</p>
+</li>
+<li>
+<p>不管是 cgroup 限制杀掉进程还是因为节点机器本身资源不够导致进程死掉，都可以从系统日志中找到记录:</p>
+<blockquote>
+<p>ubuntu 的系统日志在 <code>/var/log/syslog</code>，centos 的系统日志在 <code>/var/log/messages</code>，都可以用 <code>journalctl -k</code> 来查看系统日志</p>
+</blockquote>
+</li>
+<li>
+<p>也可能是 livenessProbe (存活检查) 失败，kubelet 杀死的 pod</p>
+</li>
+<li>
+<p>还可能是被恶意木马进程杀死</p>
+</li>
+</ul>
+</li>
+<li>
+<p>1 和 255</p>
+<ul>
+<li>这种可能是一般错误，具体错误原因只能看容器日志，因为很多程序员写异常退出时习惯用 <code>exit(1)</code> 或 <code>exit(-1)</code>，-1 会根据转换规则转成 255</li>
+</ul>
+</li>
+</ul>
+<h3 id="状态码参考">状态码参考</h3>
+<p>这里罗列了一些状态码的含义：<a href="http://tldp.org/LDP/abs/html/exitcodes.html">Appendix E. Exit Codes With Special Meanings</a></p>
+<h3 id="linux-标准中断信号">Linux 标准中断信号</h3>
+<p>Linux 程序被外界中断时会发送中断信号，程序退出时的状态码就是中断信号值加上 128 得到的，比如 <code>SIGKILL</code> 的中断信号值为 9，那么程序退出状态码就为 9+128=137。以下是标准信号值参考：</p>
+<pre><code>Signal     Value     Action   Comment
+──────────────────────────────────────────────────────────────────────
+SIGHUP        1       Term    Hangup detected on controlling terminal
+                                     or death of controlling process
+SIGINT        2       Term    Interrupt from keyboard
+SIGQUIT       3       Core    Quit from keyboard
+SIGILL        4       Core    Illegal Instruction
+SIGABRT       6       Core    Abort signal from abort(3)
+SIGFPE        8       Core    Floating-point exception
+SIGKILL       9       Term    Kill signal
+SIGSEGV      11       Core    Invalid memory reference
+SIGPIPE      13       Term    Broken pipe: write to pipe with no
+                                     readers; see pipe(7)
+SIGALRM      14       Term    Timer signal from alarm(2)
+SIGTERM      15       Term    Termination signal
+SIGUSR1   30,10,16    Term    User-defined signal 1
+SIGUSR2   31,12,17    Term    User-defined signal 2
+SIGCHLD   20,17,18    Ign     Child stopped or terminated
+SIGCONT   19,18,25    Cont    Continue if stopped
+SIGSTOP   17,19,23    Stop    Stop process
+SIGTSTP   18,20,24    Stop    Stop typed at terminal
+SIGTTIN   21,21,26    Stop    Terminal input for background process
+SIGTTOU   22,22,27    Stop    Terminal output for background process
+</code></pre><h3 id="cc-退出状态码">C/C++ 退出状态码</h3>
+<p><code>/usr/include/sysexits.h</code> 试图将退出状态码标准化(仅限 C/C++):</p>
+<pre><code>#define EX_OK           0       /* successful termination */
+
+#define EX__BASE        64      /* base value for error messages */
+
+#define EX_USAGE        64      /* command line usage error */
+#define EX_DATAERR      65      /* data format error */
+#define EX_NOINPUT      66      /* cannot open input */
+#define EX_NOUSER       67      /* addressee unknown */
+#define EX_NOHOST       68      /* host name unknown */
+#define EX_UNAVAILABLE  69      /* service unavailable */
+#define EX_SOFTWARE     70      /* internal software error */
+#define EX_OSERR        71      /* system error (e.g., can't fork) */
+#define EX_OSFILE       72      /* critical OS file missing */
+#define EX_CANTCREAT    73      /* can't create (user) output file */
+#define EX_IOERR        74      /* input/output error */
+#define EX_TEMPFAIL     75      /* temp failure; user is invited to retry */
+#define EX_PROTOCOL     76      /* remote error in protocol */
+#define EX_NOPERM       77      /* permission denied */
+#define EX_CONFIG       78      /* configuration error */
+
+#define EX__MAX 78      /* maximum listed value */
+</code></pre><h2 id="使用-systemtap-定位疑难杂症">使用 systemtap 定位疑难杂症</h2>
+<h3 id="ubuntu">Ubuntu</h3>
+<p>安装 systemtap:</p>
+<pre><code>apt install -y systemtap
+</code></pre><p>运行 <code>stap-prep</code> 检查还有什么需要安装:</p>
+<pre><code>$ stap-prep
+Please install linux-headers-4.4.0-104-generic
+You need package linux-image-4.4.0-104-generic-dbgsym but it does not seem to be available
+ Ubuntu -dbgsym packages are typically in a separate repository
+ Follow https://wiki.ubuntu.com/DebuggingProgramCrash to add this repository
+
+apt install -y linux-headers-4.4.0-104-generic
+</code></pre><p>提示需要 dbgsym 包但当前已有软件源中并不包含，需要使用第三方软件源安装，下面是 dbgsym 安装方法(参考官方wiki: <a href="https://wiki.ubuntu.com/Kernel/Systemtap">https://wiki.ubuntu.com/Kernel/Systemtap</a>):</p>
+<pre><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C8CAB6595FDFF622
+
+codename=$(lsb_release -c | awk  '{print $2}')
+sudo tee /etc/apt/sources.list.d/ddebs.list &lt;&lt; EOF
+deb http://ddebs.ubuntu.com/ ${codename}      main restricted universe multiverse
+deb http://ddebs.ubuntu.com/ ${codename}-security main restricted universe multiverse
+deb http://ddebs.ubuntu.com/ ${codename}-updates  main restricted universe multiverse
+deb http://ddebs.ubuntu.com/ ${codename}-proposed main restricted universe multiverse
+EOF
+
+sudo apt-get update
+</code></pre><p>配置好源后再运行下 <code>stap-prep</code>:</p>
+<pre><code>$ stap-prep
+Please install linux-headers-4.4.0-104-generic
+Please install linux-image-4.4.0-104-generic-dbgsym
+</code></pre><p>提示需要装这两个包，我们安装一下:</p>
+<pre><code>apt install -y linux-image-4.4.0-104-generic-dbgsym
+apt install -y linux-headers-4.4.0-104-generic
+</code></pre><h3 id="centos">CentOS</h3>
+<p>安装 systemtap:</p>
+<pre><code>yum install -y systemtap
+</code></pre><p>默认没装 <code>debuginfo</code>，我们需要装一下，添加软件源 <code>/etc/yum.repos.d/CentOS-Debug.repo</code>:</p>
+<pre><code>[debuginfo]
+name=CentOS-$releasever - DebugInfo
+baseurl=http://debuginfo.centos.org/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+protect=1
+priority=1
+</code></pre><p>执行 <code>stap-prep</code> (会安装 <code>kernel-debuginfo</code>)</p>
+<p>最后检查确保 <code>kernel-debuginfo</code> 和 <code>kernel-devel</code> 均已安装并且版本跟当前内核版本相同，如果有多个版本，就删除跟当前内核版本不同的包(通过<code>uname -r</code>查看当前内核版本)。</p>
+<p>重点检查是否有多个版本的 <code>kernel-devel</code>:</p>
+<pre><code>$ rpm -qa | grep kernel-devel
+kernel-devel-3.10.0-327.el7.x86_64
+kernel-devel-3.10.0-514.26.2.el7.x86_64
+kernel-devel-3.10.0-862.9.1.el7.x86_64
+</code></pre><p>如果存在多个，保证只留跟当前内核版本相同的那个，假设当前内核版本是 <code>3.10.0-862.9.1.el7.x86_64</code>，那么使用 rpm 删除多余的版本:</p>
+<pre><code>rpm -e kernel-devel-3.10.0-327.el7.x86_64 kernel-devel-3.10.0-514.26.2.el7.x86_64
+</code></pre><h3 id="使用-systemtap-揪出杀死容器的真凶">使用 systemtap 揪出杀死容器的真凶</h3>
+<p>Pod 莫名其妙被杀死? 可以使用 systemtap 来监视进程的信号发送，原理是 systemtap 将脚本翻译成 C 代码然后调用 gcc 编译成 linux 内核模块，再通过 <code>modprobe</code> 加载到内核，根据脚本内容在内核做各种 hook，在这里我们就 hook 一下信号的发送，找出是谁 kill 掉了容器进程。</p>
+<p>首先，找到被杀死的 pod 又自动重启的容器的当前 pid，describe 一下 pod:</p>
+<pre><code>    ......
+    Container ID:  docker://5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
+    ......
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    137
+      Started:      Thu, 05 Sep 2019 19:22:30 +0800
+      Finished:     Thu, 05 Sep 2019 19:33:44 +0800
+</code></pre><p>拿到容器 id 反查容器的主进程 pid:</p>
+<pre><code>$ docker inspect -f &quot;{{.State.Pid}}&quot; 5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
+7942
+</code></pre><p>通过 <code>Exit Code</code> 可以看出容器上次退出的状态码，如果进程是被外界中断信号杀死的，退出状态码将在 129-255 之间，137 表示进程是被 SIGKILL 信号杀死的，但我们从这里并不能看出是被谁杀死的。</p>
+<p>如果问题可以复现，我们可以使用下面的 systemtap 脚本来监视容器是被谁杀死的(保存为<code>sg.stp</code>):</p>
+<pre><code>global target_pid = 7942
+probe signal.send{
+  if (sig_pid == target_pid) {
+    printf(&quot;%s(%d) send %s to %s(%d)\n&quot;, execname(), pid(), sig_name, pid_name, sig_pid);
+    printf(&quot;parent of sender: %s(%d)\n&quot;, pexecname(), ppid())
+    printf(&quot;task_ancestry:%s\n&quot;, task_ancestry(pid2task(pid()), 1));
+  }
+}
+</code></pre><ul>
+<li>变量 <code>pid</code> 的值替换为查到的容器主进程 pid</li>
+</ul>
+<p>运行脚本:</p>
+<pre><code>stap sg.stp
+</code></pre><p>当容器进程被杀死时，脚本捕捉到事件，执行输出:</p>
+<pre><code>pkill(23549) send SIGKILL to server(7942)
+parent of sender: bash(23495)
+task_ancestry:swapper/0(0m0.000000000s)=&gt;systemd(0m0.080000000s)=&gt;vGhyM0(19491m2.579563677s)=&gt;sh(33473m38.074571885s)=&gt;bash(33473m38.077072025s)=&gt;bash(33473m38.081028267s)=&gt;bash(33475m4.817798337s)=&gt;pkill(33475m5.202486630s)
+</code></pre><p>通过观察 <code>task_ancestry</code> 可以看到杀死进程的所有父进程，在这里可以看到有个叫 <code>vGhyM0</code> 的奇怪进程名，通常是中了木马，需要安全专家介入继续排查。</p>
+<h2 id="非root用户执行docker命令时提示permission-denied">非root用户执行docker命令时提示permission denied</h2>
+<h2 id="原因">原因</h2>
+<p>摘自docker mannual上的一段话</p>
+<pre><code>Manage Docker as a non-root user
+
+The docker daemon binds to a Unix socket instead of a TCP port. By default that Unix socket is owned by the user root and other users can only access it using sudo. The docker daemon always runs as the root user.
+
+If you don’t want to use sudo when you use the docker command, create a Unix group called docker and add users to it. When the docker daemon starts, it makes the ownership of the Unix socket read/writable by the docker group.
+</code></pre><p>大概的意思就是：docker进程使用Unix Socket而不是TCP端口。而默认情况下，Unix socket属于root用户，需要root权限才能访问。</p>
+<h3 id="解决方法1">解决方法1</h3>
+<p>使用sudo获取管理员权限，运行docker命令</p>
+<h3 id="解决方法2">解决方法2</h3>
+<p>docker守护进程启动的时候，会默认赋予名字为docker的用户组读写Unix socket的权限，因此只要创建docker用户组，并将当前用户加入到docker用户组中，那么当前用户就有权限访问Unix socket了，进而也就可以执行docker相关命令</p>
+<pre><code>sudo groupadd docker     #添加docker用户组
+sudo gpasswd -a $USER docker     #将登陆用户加入到docker用户组中
+newgrp docker     #更新用户组
+docker ps    #测试docker命令是否可以使用sudo正常使用
+</code></pre>
+    </div>
+
+    
+    
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://justgo-now.github.io/tags/kubernetes.html">kubernetes</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/2019/helm%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6chart%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93.html">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Helm模板文件chart编写语法总结</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/2019/k8s%E9%83%A8%E7%BD%B2%E7%AE%80%E4%BB%8B.html">
+            <span class="next-text nav-default">K8S部署简介</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="http://justgo-now.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  
+
+  <span class="copyright-year">
+    &copy;
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Frank
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.dee43230127a73d039a734510fa896c89c3c7ce0cf0be0c7a7433f8fd69b76dc.js" integrity="sha256-3uQyMBJ6c9A5pzRRD6iWyJw8fODPC&#43;DHp0M/j9abdtw=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

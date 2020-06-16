@@ -39,6 +39,33 @@
     </item>
     
     <item>
+      <title>Helm模板文件chart编写语法总结</title>
+      <link>http://justgo-now.github.io/post/2019/helm%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6chart%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93.html</link>
+      <pubDate>Sat, 02 Nov 2019 10:14:06 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2019/helm%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6chart%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93.html</guid>
+      <description>helm-charts用户指南 开始 快速创建一个chart模板,helm create mychart,执行命令后本地生成一个mychart目录. chart</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes排错指南</title>
+      <link>http://justgo-now.github.io/post/2019/k8s-troubleshooting.html</link>
+      <pubDate>Sat, 02 Nov 2019 08:12:50 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2019/k8s-troubleshooting.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>K8S部署简介</title>
+      <link>http://justgo-now.github.io/post/2019/k8s%E9%83%A8%E7%BD%B2%E7%AE%80%E4%BB%8B.html</link>
+      <pubDate>Thu, 31 Oct 2019 20:01:22 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2019/k8s%E9%83%A8%E7%BD%B2%E7%AE%80%E4%BB%8B.html</guid>
+      <description>概述 当你在Module2创建了一个Deployment之后，Kuebernetes创建会创建一个Pod去托管你的应用实例。一个Pod是一种K</description>
+    </item>
+    
+    <item>
       <title>聊聊 C&#43;&#43; 的优雅写法</title>
       <link>http://justgo-now.github.io/post/2019/conventional-cpp.html</link>
       <pubDate>Tue, 05 Feb 2019 16:01:23 +0800</pubDate>

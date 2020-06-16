@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>helm on JustGo</title>
+    <link>http://justgo-now.github.io/tags/helm.html</link>
+    <description>Recent content in helm on JustGo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 02 Nov 2019 10:14:06 +0000</lastBuildDate>
+    
+	<atom:link href="http://justgo-now.github.io/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Helm模板文件chart编写语法总结</title>
+      <link>http://justgo-now.github.io/post/2019/helm%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6chart%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93.html</link>
+      <pubDate>Sat, 02 Nov 2019 10:14:06 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2019/helm%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6chart%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93.html</guid>
+      <description>helm-charts用户指南 开始 快速创建一个chart模板,helm create mychart,执行命令后本地生成一个mychart目录. chart</description>
+    </item>
+    
+  </channel>
+</rss>
