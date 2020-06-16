@@ -6,7 +6,7 @@
     <description>Recent content on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Jun 2020 09:50:04 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2020 11:21:02 +0800</lastBuildDate>
     
         <atom:link href="http://justgo-now.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -28,6 +28,20 @@
 &lt;/ul&gt;
 &lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
+      
+    </item>
+    
+    <item>
+      <title>Qr Code Generator</title>
+      <link>http://justgo-now.github.io/post/misc/qr-code-generator.html</link>
+      <pubDate>Tue, 16 Jun 2020 11:21:02 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/misc/qr-code-generator.html</guid>
+      
+        <description>&lt;h2 id=&#34;input&#34;&gt;Input&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;output&#34;&gt;Output&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
       
     </item>
     

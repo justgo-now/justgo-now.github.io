@@ -9,6 +9,41 @@
   </url>
   
   <url>
+    <loc>http://justgo-now.github.io/</loc>
+    <lastmod>2020-06-16T11:21:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/categories/misc.html</loc>
+    <lastmod>2020-06-16T11:21:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post.html</loc>
+    <lastmod>2020-06-16T11:21:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/misc/qr-code-generator.html</loc>
+    <lastmod>2020-06-16T11:21:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/tags/qr-code.html</loc>
+    <lastmod>2020-06-16T11:21:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://justgo-now.github.io/categories/coding.html</loc>
     <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,20 +59,6 @@
   
   <url>
     <loc>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</loc>
-    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/</loc>
-    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/post.html</loc>
     <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
