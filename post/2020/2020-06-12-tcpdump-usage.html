@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Frank" />
-  <meta name="description" content="tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分" />
+  <meta name="description" content="tcpdump - dump traffic on a network
+" />
 
 
 
@@ -59,13 +60,13 @@
 
 
 <meta property="og:title" content="tcpdump 使用" />
-<meta property="og:description" content="tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分" />
+<meta property="og:description" content="tcpdump - dump traffic on a network" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://justgo-now.github.io/post/2020/2020-06-12-tcpdump-usage.html" />
 <meta property="article:published_time" content="2020-06-12T08:46:36+08:00" />
 <meta property="article:modified_time" content="2020-06-12T08:46:36+08:00" />
 <meta itemprop="name" content="tcpdump 使用">
-<meta itemprop="description" content="tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分">
+<meta itemprop="description" content="tcpdump - dump traffic on a network">
 <meta itemprop="datePublished" content="2020-06-12T08:46:36&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-12T08:46:36&#43;08:00" />
 <meta itemprop="wordCount" content="3668">
@@ -74,7 +75,7 @@
 
 <meta itemprop="keywords" content="tcpdump,linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="tcpdump 使用"/>
-<meta name="twitter:description" content="tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分"/>
+<meta name="twitter:description" content="tcpdump - dump traffic on a network"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -539,7 +540,6 @@ route.port1 &gt; ice.port2: udp lenth</p>
 </blockquote>
 <p>UDP十分简单，上面的输出行表明从主机ROUTE的port1端口发出的一个UDP数据包到主机ICE的port2端口，类型是UDP， 包的长度是lenth。</p>
 <p>另外，为了让网络接口可以让tcpdump监听，所以执行tcpdump时网络接口会启动在“混杂模式（promiscuous）”，所以你会在 /var/log/messages里面看到很多的警告信息，通知你说你的网卡被设置成为混杂模式。别担心，那是正常的。至于更多的应用，请参考man tcpdump了。</p>
-
     </div>
 
     

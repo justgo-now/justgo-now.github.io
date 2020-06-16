@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Frank" />
-  <meta name="description" content="先把 Docker说清楚 简介 1、了解Docker的前生LXC LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和" />
+  <meta name="description" content="" />
 
 
 
@@ -59,13 +59,13 @@
 
 
 <meta property="og:title" content="关于docker的一些说明" />
-<meta property="og:description" content="先把 Docker说清楚 简介 1、了解Docker的前生LXC LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html" />
 <meta property="article:published_time" content="2020-04-12T21:12:14+00:00" />
 <meta property="article:modified_time" content="2020-04-12T21:12:14+00:00" />
 <meta itemprop="name" content="关于docker的一些说明">
-<meta itemprop="description" content="先把 Docker说清楚 简介 1、了解Docker的前生LXC LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和">
+<meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-12T21:12:14&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-12T21:12:14&#43;00:00" />
 <meta itemprop="wordCount" content="22552">
@@ -74,7 +74,7 @@
 
 <meta itemprop="keywords" content="docker," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="关于docker的一些说明"/>
-<meta name="twitter:description" content="先把 Docker说清楚 简介 1、了解Docker的前生LXC LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -325,7 +325,6 @@
       <ul>
         <li><a href="#简介"><strong>简介</strong></a></li>
         <li><a href="#docker架构"><strong>docker架构</strong></a></li>
-        <li><a href="#img2020-04-12-docker-detaildocker-detail640-1572599922229webp"><img src="2020-04-12-docker-detail/docker-detail/640-1572599922229.webp" alt="img"></a></li>
         <li><a href="#docker架构2各个模块的功能带完善"><strong>docker架构2各个模块的功能（带完善）</strong></a></li>
       </ul>
     </li>
@@ -504,7 +503,7 @@
 </ul>
 <h4 id="2docker架构2"><strong>2、docker架构2</strong></h4>
 <p>如果觉得上面架构图比较乱可以看这个架构：</p>
-<h3 id="img2020-04-12-docker-detaildocker-detail640-1572599922229webp"><img src="2020-04-12-docker-detail/docker-detail/640-1572599922229.webp" alt="img"></h3>
+<p><img src="2020-04-12-docker-detail/docker-detail/640-1572599922229.webp" alt="img"></p>
 <p>从上图不难看出，用户是使用Docker Client与Docker Daemon建立通信，并发送请求给后者。</p>
 <p>而Docker Daemon作为Docker架构中的主体部分，首先提供Server的功能使其可以接受Docker Client的请求；而后Engine执行Docker内部的一系列工作，每一项工作都是以一个Job的形式的存在。</p>
 <p>Job的运行过程中，当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储；当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境；当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成。</p>
@@ -1612,7 +1611,6 @@ do
         EOF
 done
 </code></pre><p>需要注意的是在<code>do</code>和<code>done</code>之间应该使用<code>tab</code>而不是空格。</p>
-
     </div>
 
     
@@ -1645,6 +1643,19 @@ done
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         
+          <a class="next" href="/post/2019/conventional-cpp.html">
+            <span class="next-text nav-default">聊聊 C&#43;&#43; 的优雅写法</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
       </nav>
     </footer>
   </article>

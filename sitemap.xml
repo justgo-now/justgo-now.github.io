@@ -113,4 +113,18 @@
     <priority>0.5</priority>
   </url>
   
+  <url>
+    <loc>http://justgo-now.github.io/tags/c&#43;&#43;.html</loc>
+    <lastmod>2019-12-02T16:01:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/2019/conventional-cpp.html</loc>
+    <lastmod>2019-12-02T16:01:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
 </urlset>

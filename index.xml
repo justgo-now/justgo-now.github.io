@@ -641,8 +641,7 @@
 &lt;p&gt;&lt;a href=&#34;http://www.runoob.com/http/http-status-codes.html&#34;&gt;菜鸟教程（&lt;strong&gt;推荐&lt;/strong&gt;）&lt;/a&gt;&lt;br&gt;
 &lt;a href=&#34;http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html&#34;&gt;RESTful API 最佳实践&lt;/a&gt;&lt;br&gt;
 &lt;a href=&#34;https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81&#34;&gt;HTTP状态码&lt;/a&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;文档来源&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-</description>
+&lt;!-- raw HTML omitted --&gt;文档来源&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -836,8 +835,7 @@ route.port1 &amp;gt; ice.port2: udp lenth&lt;/p&gt;
 &amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;UDP十分简单，上面的输出行表明从主机ROUTE的port1端口发出的一个UDP数据包到主机ICE的port2端口，类型是UDP， 包的长度是lenth。&lt;/p&gt;
-&lt;p&gt;另外，为了让网络接口可以让tcpdump监听，所以执行tcpdump时网络接口会启动在“混杂模式（promiscuous）”，所以你会在 /var/log/messages里面看到很多的警告信息，通知你说你的网卡被设置成为混杂模式。别担心，那是正常的。至于更多的应用，请参考man tcpdump了。&lt;/p&gt;
-</description>
+&lt;p&gt;另外，为了让网络接口可以让tcpdump监听，所以执行tcpdump时网络接口会启动在“混杂模式（promiscuous）”，所以你会在 /var/log/messages里面看到很多的警告信息，通知你说你的网卡被设置成为混杂模式。别担心，那是正常的。至于更多的应用，请参考man tcpdump了。&lt;/p&gt;</description>
       
     </item>
     
@@ -962,7 +960,7 @@ route.port1 &amp;gt; ice.port2: udp lenth&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;2docker架构2&#34;&gt;&lt;strong&gt;2、docker架构2&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;如果觉得上面架构图比较乱可以看这个架构：&lt;/p&gt;
-&lt;h3 id=&#34;img2020-04-12-docker-detaildocker-detail640-1572599922229webp&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922229.webp&#34; alt=&#34;img&#34;&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922229.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从上图不难看出，用户是使用Docker Client与Docker Daemon建立通信，并发送请求给后者。&lt;/p&gt;
 &lt;p&gt;而Docker Daemon作为Docker架构中的主体部分，首先提供Server的功能使其可以接受Docker Client的请求；而后Engine执行Docker内部的一系列工作，每一项工作都是以一个Job的形式的存在。&lt;/p&gt;
 &lt;p&gt;Job的运行过程中，当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储；当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境；当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成。&lt;/p&gt;
@@ -2069,8 +2067,1010 @@ do
         mv awr.html awr_${i}.html
         EOF
 done
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;需要注意的是在&lt;code&gt;do&lt;/code&gt;和&lt;code&gt;done&lt;/code&gt;之间应该使用&lt;code&gt;tab&lt;/code&gt;而不是空格。&lt;/p&gt;
-</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;需要注意的是在&lt;code&gt;do&lt;/code&gt;和&lt;code&gt;done&lt;/code&gt;之间应该使用&lt;code&gt;tab&lt;/code&gt;而不是空格。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>聊聊 C&#43;&#43; 的优雅写法</title>
+      <link>http://justgo-now.github.io/post/2019/conventional-cpp.html</link>
+      <pubDate>Tue, 05 Feb 2019 16:01:23 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2019/conventional-cpp.html</guid>
+      
+        <description>&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;培养习惯 —— 安全、高效、可维护&lt;/li&gt;
+&lt;li&gt;消除隐患 —— 泄露、崩溃、逻辑错误&lt;/li&gt;
+&lt;li&gt;不用纠结 格式，让工具 自动格式化&lt;/li&gt;
+&lt;li&gt;使用现代 C++ (not your father&amp;rsquo;s C++)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;docs&#34;&gt;Docs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html&#34;&gt;Google C++ Style Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c%2B%2B/c%2B%2B.md&#34;&gt;Chromium C++ Style Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c%2B%2B/c%2B%2B-dos-and-donts.md&#34;&gt;Chromium C++ Dos and Don&amp;rsquo;ts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines&#34;&gt;ISOCpp C++ Core Guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tools&#34;&gt;Tools&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/google/styleguide/blob/gh-pages/cpplint/cpplint.py&#34;&gt;cpplint.py&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://clang.llvm.org/docs/ClangFormat.html&#34;&gt;clang-format&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://clang.llvm.org/extra/clang-tidy/&#34;&gt;clang-tidy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;google-style&#34;&gt;Google Style&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;self-contained-headers&#34;&gt;Self-contained Headers&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// foo.h
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; param);
+&lt;span style=&#34;color:#75715e&#34;&gt;// bar.h
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// baz.cc
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;string&amp;gt;        // give &amp;lt;string&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;foo.h&amp;#34;         // need &amp;lt;string&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;bar.h&amp;#34;         // give &amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Bar();  &lt;span style=&#34;color:#75715e&#34;&gt;// need &amp;lt;vector&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Self_contained_Headers&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-implicit&#34;&gt;SF.10: Avoid dependencies on implicitly &lt;code&gt;#include&lt;/code&gt;d names&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;可以通过 &lt;code&gt;cpplint --filter=+build/include_what_you_use&lt;/code&gt; 检查（然后再手动加上）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-contained&#34;&gt;SF.11: Header files should be self-contained&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;可以通过 &lt;code&gt;foo.cc&lt;/code&gt; 首先引用 &lt;code&gt;foo.h&lt;/code&gt; 检查（参考：[sec|Names and Order of Includes]）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;define-guard&#34;&gt;&lt;code&gt;#define&lt;/code&gt; Guard&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#pragma once            &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Bad?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#ifndef FOO_BAR_BAZ_H_  &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#define FOO_BAR_BAZ_H_
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;// file: `foo/bar/baz.h`
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// format: &amp;lt;PROJECT&amp;gt;_&amp;lt;PATH&amp;gt;_&amp;lt;FILE&amp;gt;_H_
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#endif  &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// FOO_BAR_BAZ_H_
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#The__define_Guard&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-guards&#34;&gt;SF.8: Use &lt;code&gt;#include&lt;/code&gt; guards for all &lt;code&gt;.h&lt;/code&gt; files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;可以通过 &lt;code&gt;cpplint --root=PATH&lt;/code&gt; 检查（然后复制出来）&lt;/li&gt;
+&lt;li&gt;不推荐使用非标准的 &lt;code&gt;#pragma once&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;forward-declarations&#34;&gt;Forward Declarations&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;src/foo.h&amp;#34;  // include Foo&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Bar&lt;/span&gt;;            &lt;span style=&#34;color:#75715e&#34;&gt;// declare Bar
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Baz&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Bar&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Qux(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Bar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// use Bar
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo foo_;              &lt;span style=&#34;color:#75715e&#34;&gt;// own Foo
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Bar&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; bar_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;;   &lt;span style=&#34;color:#75715e&#34;&gt;// refer Bar
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Forward_Declarations&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-cycles&#34;&gt;SF.9: Avoid cyclic dependencies among source files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;正方观点：节省编译时间，避免重新编译，消除循环依赖（Chromium Style 支持）&lt;/li&gt;
+&lt;li&gt;反方观点：隐藏依赖关系，可能错误重载基类和派生类参数，不能前向声明嵌套类（Google Style 不支持）&lt;/li&gt;
+&lt;li&gt;对于值类型的类成员变量，不要为了 前向声明 改用为指针类型（&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c%2B%2B/c%2B%2B.md#forward-declarations-vs-includes&#34;&gt;Chromium Style&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;names-and-order-of-includes&#34;&gt;Names and Order of Includes&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;foo/bar/baz.h&amp;#34;  // self&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// blank
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stdio.h&amp;gt;        // C&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;sys/types.h&amp;gt;    // system&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// blank
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;string&amp;gt;         // C++&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// blank
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;base/macros.h&amp;#34;  // other libs&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;foo/bar/qux.h&amp;#34;  // in project&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-consistency&#34;&gt;SF.5: A &lt;code&gt;.cpp&lt;/code&gt; file must include the &lt;code&gt;.h&lt;/code&gt; file(s) that defines its interface&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;只能编译时检查 函数返回值、类的成员函数 是否匹配&lt;/li&gt;
+&lt;li&gt;不能编译时检查 函数参数 是否匹配
+&lt;ul&gt;
+&lt;li&gt;不同参数视为重载，链接时检查&lt;/li&gt;
+&lt;li&gt;可利用 名字空间限定符 &lt;em&gt;(namespace qualifier)&lt;/em&gt; 在编译时检查（参考：&lt;a href=&#34;http://llvm.org/docs/CodingStandards.html#use-namespace-qualifiers-to-implement-previously-declared-functions&#34;&gt;Use Namespace Qualifiers to Implement Previously Declared Functions&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;顺序：自身头文件 + 空行 + C/系统头文件 + 空行 + C++ 库 + 空行 + 其他库/当前项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;namespaces&#34;&gt;Namespaces&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; foo {         &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;inline&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; bar {  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;    &lt;span style=&#34;color:#75715e&#34;&gt;// Bad  in global
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                        &lt;span style=&#34;color:#75715e&#34;&gt;// Bad? in local
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; baz &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;baz;  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad? in global
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                        &lt;span style=&#34;color:#75715e&#34;&gt;// Good in local
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string;      &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}  &lt;span style=&#34;color:#75715e&#34;&gt;// namespace bar
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}  &lt;span style=&#34;color:#75715e&#34;&gt;// namespace foo
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Namespaces&#34;&gt;来源 1&lt;/a&gt; / &lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Namespace_Formatting&#34;&gt;来源 2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-using&#34;&gt;SF.6: Use &lt;code&gt;using namespace&lt;/code&gt; directives for transition, for foundation libraries (such as &lt;code&gt;std&lt;/code&gt;), or within a local scope (only)&lt;/a&gt;（Google Style 不允许）
+&lt;ul&gt;
+&lt;li&gt;反例：TarsCpp &lt;a href=&#34;https://github.com/TarsCloud/TarsCpp/blob/v2.1.1/util/include/util/tc_ex.h#L23&#34;&gt;&lt;code&gt;using namespace std;&lt;/code&gt;&lt;/a&gt; 导致 &lt;a href=&#34;https://github.com/TarsCloud/TarsCpp/blob/711a5ed70c9c70c3cb29ec731d77a3753a489ce5/servant/promise/promise.h#L33&#34;&gt;&lt;code&gt;namespace promise&lt;/code&gt;&lt;/a&gt; 和 &lt;code&gt;std::promise&lt;/code&gt; 冲突（&lt;a href=&#34;https://github.com/TarsCloud/TarsCpp/commit/2401420e787aa5fdeeec14621ae34f633ceaefe5#diff-ce8a8875b781dbc3f442408117240665&#34;&gt;TarsCpp &lt;code&gt;promise&lt;/code&gt; 已被移除&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-using-directive&#34;&gt;SF.7: Don’t write &lt;code&gt;using namespace&lt;/code&gt; at global scope in a header file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;不要使用 &lt;a href=&#34;http://www.stroustrup.com/C++11FAQ.html#inline-namespace&#34;&gt;&lt;code&gt;inline namespace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;unnamed-namespaces-and-static&#34;&gt;Unnamed Namespaces and Static&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Good in .cc, Bad in .h
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; {
+&lt;span style=&#34;color:#66d9ef&#34;&gt;constexpr&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; kFoo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BarImpl&lt;/span&gt;() { ... }
+}  &lt;span style=&#34;color:#75715e&#34;&gt;// namespace
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;// Good in .cc, Bad in .h
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;constexpr&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; kFoo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BarImpl&lt;/span&gt;() { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Unnamed_Namespaces_and_Static_Variables&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-unnamed&#34;&gt;SF.21: Don’t use an unnamed (anonymous) namespace in a header&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-unnamed2&#34;&gt;SF.22: Use an unnamed (anonymous) namespace for all internal/nonexported entities&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;也可以使用 &lt;code&gt;static&lt;/code&gt; 修饰常量/函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;use-of-sizeof&#34;&gt;Use of &lt;code&gt;sizeof&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/* Foo data; */&lt;/span&gt; Bar data;
+memset(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;data, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;sizeof&lt;/span&gt;(Foo));   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;memset(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;data, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;sizeof&lt;/span&gt;(data));  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#sizeof&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;如果和变量有关，尽量使用 &lt;code&gt;sizeof(varname)&lt;/code&gt;，而不是 &lt;code&gt;sizeof(type)&lt;/code&gt;（因为类型会被修改，但不易察觉）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;preincrement-and-predecrement&#34;&gt;Preincrement and Predecrement&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ; i &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; ; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {}  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ; i &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; ; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;i) {}  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Preincrement_and_Predecrement&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;尽量使用 &lt;code&gt;++i&lt;/code&gt;/&lt;code&gt;--i&lt;/code&gt;，避免使用 &lt;code&gt;i++&lt;/code&gt;/&lt;code&gt;i--&lt;/code&gt; 生成不需要的临时对象（如果需要，可以使用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;pointer-and-reference-expressions&#34;&gt;Pointer and Reference Expressions&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x;              &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x, y;           &lt;span style=&#34;color:#75715e&#34;&gt;// Good?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; a;             &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;a;             &lt;span style=&#34;color:#75715e&#34;&gt;// Good?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; a, b;          &lt;span style=&#34;color:#75715e&#34;&gt;// Bad, |b| is int
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x;         &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x;         &lt;span style=&#34;color:#75715e&#34;&gt;// Good?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x, n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y;  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad, |n| is int
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Pointer_and_Reference_Expressions&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-name-one&#34;&gt;ES.10: Declare one name (only) per declaration&lt;/a&gt;（Google Style 没有限制）&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rl-ptr&#34;&gt;NL.18: Use C++-style declarator layout&lt;/a&gt;（Google Style 没有限制）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;use-of-constconstexpr&#34;&gt;Use of &lt;code&gt;const&lt;/code&gt;/&lt;code&gt;constexpr&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Ret&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Bar(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Param&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;constexpr&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; kBaz &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;;
+};
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; foo : arr) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; qux &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ...;  &lt;span style=&#34;color:#75715e&#34;&gt;// unnecessary
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;const_cast&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;gt;&lt;/span&gt;(foo) &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; qux;  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://google.github.io/styleguide/cppguide.html#Use_of_const&#34;&gt;来源 1&lt;/a&gt; / &lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Use_of_constexpr&#34;&gt;来源 2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconst-fct&#34;&gt;Con.2: By default, make member functions &lt;code&gt;const&lt;/code&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;锁、缓存 等数据成员可以使用 &lt;code&gt;mutable&lt;/code&gt;（逻辑 &lt;code&gt;const&lt;/code&gt; 即可）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconst-ref&#34;&gt;Con.3: By default, pass pointers and references to &lt;code&gt;const&lt;/code&gt;s&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconst-const&#34;&gt;Con.4: Use &lt;code&gt;const&lt;/code&gt; to define objects with values that do not change after construction&lt;/a&gt;（Google Style 没有限制）
+&lt;ul&gt;
+&lt;li&gt;在复杂逻辑中，使用 &lt;code&gt;const&lt;/code&gt; 可以避免错误&lt;/li&gt;
+&lt;li&gt;可以使用 lambda 初始化，避免污染（参考：[sec|Lambda for Complex Initialization]）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconst-constexpr&#34;&gt;Con.5: Use &lt;code&gt;constexpr&lt;/code&gt; for values that can be computed at compile time&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-casts-const&#34;&gt;ES.50: Don’t cast away &lt;code&gt;const&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;local-variables&#34;&gt;Local Variables&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i;               &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f();
+std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; v;  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;v.push_back(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;);
+v.push_back(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;);
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f();                  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;};  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; YieldI()) {}  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Local_Variables&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-always&#34;&gt;ES.20: Always initialize an object&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-introduce&#34;&gt;ES.21: Don’t introduce a variable (or constant) before you need to use it&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-init&#34;&gt;ES.22: Don’t declare a variable until you have a value to initialize it with&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;参考：[sec|Names and Scopes]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;constructors&#34;&gt;Constructors&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Init(...);         &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Foo() &lt;span style=&#34;color:#75715e&#34;&gt;/* noexcept */&lt;/span&gt; {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (...) &lt;span style=&#34;color:#66d9ef&#34;&gt;throw&lt;/span&gt; Err;   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;VirtualFn(); }  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Create() {
+    ret&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;VirtualFn(); }   &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Doing_Work_in_Constructors&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rnr-two-phase-init&#34;&gt;NR.5: Don’t use two-phase initialization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-complete&#34;&gt;C.41: A constructor should create a fully initialized object&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;如果 允许异常，&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-throw&#34;&gt;C.42: If a constructor cannot construct a valid object, throw an exception&lt;/a&gt;（Google Style 不允许）&lt;/li&gt;
+&lt;li&gt;如果 禁用异常，可以使用 工厂方法 &lt;code&gt;Create()&lt;/code&gt; 支持构造失败
+&lt;ul&gt;
+&lt;li&gt;建议返回 智能指针（参考：[sec|Smart Pointers Ownership]）保存多态对象（参考：[sec|Polymorphic Classes Slicing]）&lt;/li&gt;
+&lt;li&gt;不要同时提供 &lt;code&gt;public&lt;/code&gt; 构造函数 和 工厂方法（参考：&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c%2B%2B/blink-c++.md#dont-mix-create-factory-methods-and-public-constructors-in-one-class&#34;&gt;Don&amp;rsquo;t mix &lt;code&gt;Create()&lt;/code&gt; factory methods and public constructors in one class&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-ctor-virtual&#34;&gt;C.82: Don’t call virtual functions in constructors and destructors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-factory&#34;&gt;C.50: Use a factory function if you need “virtual behavior” during initialization&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;structs-vs-classes&#34;&gt;Structs vs. Classes&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; {
+  Node() { depth_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ...; }  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;InvertBinaryTree&lt;/span&gt;();  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Node&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;;     &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Node&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;;    &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Reset&lt;/span&gt;();             &lt;span style=&#34;color:#75715e&#34;&gt;// Good?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  size_t depth_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;        &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Structs_vs._Classes&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-struct&#34;&gt;C.2: Use &lt;code&gt;class&lt;/code&gt; if the class has an invariant; use &lt;code&gt;struct&lt;/code&gt; if the data members can vary independently&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-class&#34;&gt;C.8: Use &lt;code&gt;class&lt;/code&gt; rather than &lt;code&gt;struct&lt;/code&gt; if any member is non-public&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-ctor&#34;&gt;C.40: Define a constructor if a class has an invariant&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;access-control&#34;&gt;Access Control&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Bar bar_;                     &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;constexpr&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Baz baz_;  &lt;span style=&#34;color:#75715e&#34;&gt;// has invariant?  // Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Qux qux_;                     &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Access_Control&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-private&#34;&gt;C.9: Minimize exposure of members&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-protected&#34;&gt;C.133: Avoid &lt;code&gt;protected&lt;/code&gt; data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;implicit-conversions&#34;&gt;Implicit Conversions&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo(Bar bar);          &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Baz&lt;/span&gt;() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;explicit&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt;(Bar bar);          &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;explicit&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Baz&lt;/span&gt;() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Implicit_Conversions&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-explicit&#34;&gt;C.46: By default, declare single-argument constructors explicit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ro-conversion&#34;&gt;C.164: Avoid implicit conversion operators&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;尤其是 隐式转换 + 异常 容易出错（参考：[sec|Exceptions]）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;copyable-types-movable&#34;&gt;Copyable Types (Movable)&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+  Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;// move operations implicit deleted:
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Foo(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+  Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;可拷贝（可移动）：可以写 &lt;code&gt;copy = default;&lt;/code&gt; 和 &lt;code&gt;move = default;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最好都不写（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-zero&#34;&gt;C.20: If you can avoid defining default operations, do&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;copyable-types-not-movable&#34;&gt;Copyable Types (Not Movable)&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+  Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;// move operations implicit deleted:
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// Foo(Foo&amp;amp;&amp;amp;) = delete;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// Foo&amp;amp; operator=(Foo&amp;amp;&amp;amp;) = delete;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;可拷贝（不可移动）：只需要写 &lt;code&gt;copy = default;&lt;/code&gt;，不需要写 &lt;code&gt;move = delete;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;moveonly-types&#34;&gt;MoveOnly Types&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+  Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;// copy operations implicit deleted:
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// Foo(const Foo&amp;amp;) = delete;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// Foo&amp;amp; operator=(const Foo&amp;amp;) = delete;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;仅移动（不可拷贝）：只需要写 &lt;code&gt;move = default;&lt;/code&gt;，不需要写 &lt;code&gt;copy = delete;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;not-copyable-or-movable-types&#34;&gt;Not Copyable Or Movable Types&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;delete&lt;/span&gt;;
+  Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;delete&lt;/span&gt;;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;// move operations implicit deleted:
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// Foo(Foo&amp;amp;&amp;amp;) = delete;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// Foo&amp;amp; operator=(Foo&amp;amp;&amp;amp;) = delete;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;不可拷贝或移动：只需要写 &lt;code&gt;copy = delete;&lt;/code&gt;，不需要写 &lt;code&gt;move = delete;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最好都写（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-five&#34;&gt;C.21: If you define or &lt;code&gt;=delete&lt;/code&gt; any default operation, define or &lt;code&gt;=delete&lt;/code&gt; them all&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;declaration-order&#34;&gt;Declaration Order&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Bar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;;  ...  &lt;span style=&#34;color:#66d9ef&#34;&gt;enum&lt;/span&gt; { k &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; };
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Create();
+  Foo();  ...  Foo(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;);  ...  &lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;Foo();
+  &lt;span style=&#34;color:#75715e&#34;&gt;/* inline */&lt;/span&gt; Bar &lt;span style=&#34;color:#a6e22e&#34;&gt;bar&lt;/span&gt;() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; { ... }
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; QuxImpl();  ...  Bar bar_;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Declaration_Order&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rl-order&#34;&gt;NL.16: Use a conventional class member declaration order&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;顺序：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;public&lt;/code&gt; + &lt;code&gt;protected&lt;/code&gt; + &lt;code&gt;private&lt;/code&gt;（空则不写）&lt;/li&gt;
+&lt;li&gt;类型（&lt;code&gt;typedef&lt;/code&gt;/&lt;code&gt;using&lt;/code&gt;/嵌套类）+ 常量（&lt;code&gt;constexpr&lt;/code&gt;/&lt;code&gt;enum&lt;/code&gt;）+ 工厂方法 + 构造函数 + 构造函数（拷贝/移动）+ 赋值函数（拷贝/移动）+ 析构函数 + 成员函数（静态/方法）+ 数据成员（静态/普通）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;注意：
+&lt;ul&gt;
+&lt;li&gt;在类定义中，可以内联定义 accessor(getter)、mutator(setter) 和 空函数&lt;/li&gt;
+&lt;li&gt;不要定义长函数，不需要显式 &lt;code&gt;inline&lt;/code&gt;（参考：&lt;a href=&#34;http://llvm.org/docs/CodingStandards.html#don-t-use-inline-when-defining-a-function-in-a-class-definition&#34;&gt;Don’t use &lt;code&gt;inline&lt;/code&gt; when defining a function in a class definition&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;建议在 静态成员（函数/数据）上一行加 &lt;code&gt;// static&lt;/code&gt; 注释，可在代码折叠后方便查看&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;inheritance&#34;&gt;Inheritance&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;/* private */&lt;/span&gt; Bar,  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; BarImpl,  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; IBar {       &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; IFooFn() &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;    &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IBarFn&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;/* virtual */&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IBarFn&lt;/span&gt;();   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IBarFn&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// Check
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Inheritance&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-override&#34;&gt;C.128: Virtual functions should specify exactly one of &lt;code&gt;virtual&lt;/code&gt;, &lt;code&gt;override&lt;/code&gt;, or &lt;code&gt;final&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-kind&#34;&gt;C.129: When designing a class hierarchy, distinguish between implementation inheritance and interface inheritance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-mi-interface&#34;&gt;C.135: Use multiple inheritance to represent multiple distinct interfaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-mi-implementation&#34;&gt;C.136: Use multiple inheritance to represent the union of implementation attributes&lt;/a&gt;（Google Style 不允许）&lt;/li&gt;
+&lt;li&gt;编译器无法检查 &lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-virtual-default-arg&#34;&gt;C.140: Do not provide different default arguments for a virtual function and an overrider&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;避免使用 &lt;code&gt;private&lt;/code&gt; 和 &lt;code&gt;protected&lt;/code&gt; 继承&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;parameters-and-arguments&#34;&gt;Parameters and Arguments&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;MaybeMultiOut &lt;span style=&#34;color:#a6e22e&#34;&gt;fn&lt;/span&gt;(  &lt;span style=&#34;color:#75715e&#34;&gt;// ISOCpp
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      T   in_not_null_mutable,
+&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;  in_not_null_const,
+      T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;  in_nullable_mutable,
+&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;  in_nullable_const,
+      T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; in_move_or_forward,
+      T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;  in_out,  &lt;span style=&#34;color:#75715e&#34;&gt;// Google
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;  in_out,  &lt;span style=&#34;color:#75715e&#34;&gt;// ISOCpp
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;  out);    &lt;span style=&#34;color:#75715e&#34;&gt;// Google
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Output_Parameters&#34;&gt;来源 1&lt;/a&gt; / &lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Reference_Arguments&#34;&gt;来源 2&lt;/a&gt; / &lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Rvalue_references&#34;&gt;来源 3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-conventional&#34;&gt;F.15: Prefer simple and conventional ways of passing information&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;分类 1：拷贝代价低、不可拷贝（一般传 值）&lt;/li&gt;
+&lt;li&gt;分类 2：移动代价低、移动代价中、通用类型&lt;/li&gt;
+&lt;li&gt;分类 3：移动代价高（一般传 指针/引用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不为空的输入参数：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;T&lt;/code&gt; 可变 / &lt;code&gt;const T&amp;amp;&lt;/code&gt; 不变（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-in&#34;&gt;F.16: For “in” parameters, pass cheaply-copied types by value and others by reference to &lt;code&gt;const&lt;/code&gt;&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;一般不需要 &lt;code&gt;const T&lt;/code&gt; 参数（Google Style 没有限制，参考：[sec|Use of &lt;code&gt;const&lt;/code&gt;/&lt;code&gt;constexpr&lt;/code&gt;]）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可为空的输入参数：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;T*&lt;/code&gt; 可变 / &lt;code&gt;const T*&lt;/code&gt; 不变（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-ptr-ref&#34;&gt;F.60: Prefer &lt;code&gt;T*&lt;/code&gt; over &lt;code&gt;T&amp;amp;&lt;/code&gt; when “no argument” is a valid option&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;右值引用参数：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;被移动的参数（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-consume&#34;&gt;F.18: For “will-move-from” parameters, pass by &lt;code&gt;X&amp;amp;&amp;amp;&lt;/code&gt; and &lt;code&gt;std::move&lt;/code&gt; the parameter&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;需转发的参数（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-forward&#34;&gt;F.19: For “forward” parameters, pass by &lt;code&gt;TP&amp;amp;&amp;amp;&lt;/code&gt; and only &lt;code&gt;std::forward&lt;/code&gt; the parameter&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;输入/输出参数：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;T*&lt;/code&gt;（Google Style）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;T&amp;amp;&lt;/code&gt;（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-inout&#34;&gt;F.17: For “in-out” parameters, pass by reference to non-&lt;code&gt;const&lt;/code&gt;&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;输出参数：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;T*&lt;/code&gt;（Google Style）&lt;/li&gt;
+&lt;li&gt;不提倡，可通过 返回值 输出结果（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-out&#34;&gt;F.20: For “out” output values, prefer return values to output parameters&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;不提倡，可通过 多个返回值 输出结果（&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-out-multi&#34;&gt;F.21: To return multiple “out” values, prefer returning a struct or tuple&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;可能需要判空，容易遗漏输出逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;smart-pointers-ownership&#34;&gt;Smart Pointers Ownership&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; owned_;   &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;shared_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; shared_;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;weak_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; referred_;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; referred_without_check_;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;shared_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; owned_;   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; owned_or_shared_;         &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Ownership_and_Smart_Pointers&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-owner&#34;&gt;R.20: Use &lt;code&gt;unique_ptr&lt;/code&gt; or &lt;code&gt;shared_ptr&lt;/code&gt; to represent ownership&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-unique&#34;&gt;R.21: Prefer &lt;code&gt;unique_ptr&lt;/code&gt; over &lt;code&gt;shared_ptr&lt;/code&gt; unless you need to share ownership&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-weak_ptr&#34;&gt;R.24: Use &lt;code&gt;std::weak_ptr&lt;/code&gt; to break cycles of &lt;code&gt;shared_ptr&lt;/code&gt;s&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;避免直接使用 &lt;code&gt;new&lt;/code&gt;/&lt;code&gt;delete&lt;/code&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-make_shared&#34;&gt;R.22: Use &lt;code&gt;make_shared()&lt;/code&gt; to make &lt;code&gt;shared_ptr&lt;/code&gt;s&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-make_unique&#34;&gt;R.23: Use &lt;code&gt;make_unique()&lt;/code&gt; to make &lt;code&gt;unique_ptr&lt;/code&gt;s&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;smart-pointers-parameters&#34;&gt;Smart Pointers Parameters&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt;(
+  &lt;span style=&#34;color:#75715e&#34;&gt;/* const */&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,              &lt;span style=&#34;color:#75715e&#34;&gt;// refer
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;,          &lt;span style=&#34;color:#75715e&#34;&gt;// own
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;amp;&lt;/span&gt;,         &lt;span style=&#34;color:#75715e&#34;&gt;// reseat
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;amp;&lt;/span&gt;,   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;shared_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;,          &lt;span style=&#34;color:#75715e&#34;&gt;// share
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;shared_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;amp;&lt;/span&gt;,         &lt;span style=&#34;color:#75715e&#34;&gt;// reseat?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;shared_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;amp;&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// share?
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Ownership_and_Smart_Pointers&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-smartptrparam&#34;&gt;R.30: Take smart pointers as parameters only to explicitly express lifetime semantics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-uniqueptrparam&#34;&gt;R.32: Take a &lt;code&gt;unique_ptr&amp;lt;widget&amp;gt;&lt;/code&gt; parameter to express that a function assumes ownership of a &lt;code&gt;widget&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-reseat&#34;&gt;R.33: Take a &lt;code&gt;unique_ptr&amp;lt;widget&amp;gt;&amp;amp;&lt;/code&gt; parameter to express that a function reseats the &lt;code&gt;widget&lt;/code&gt;&lt;/a&gt;（Google Style 不允许，改用指针）&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-sharedptrparam-owner&#34;&gt;R.34: Take a &lt;code&gt;shared_ptr&amp;lt;widget&amp;gt;&lt;/code&gt; parameter to express that a function is part owner&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-sharedptrparam&#34;&gt;R.35: Take a &lt;code&gt;shared_ptr&amp;lt;widget&amp;gt;&amp;amp;&lt;/code&gt; parameter to express that a function might reseat the shared pointer&lt;/a&gt;（Google Style 不允许，改用指针）&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-sharedptrparam-const&#34;&gt;R.36: Take a &lt;code&gt;const shared_ptr&amp;lt;widget&amp;gt;&amp;amp;&lt;/code&gt; parameter to express that it might retain a reference count to the object ???&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;返回值 原则相同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;lambda-expressions&#34;&gt;Lambda expressions&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Bar() {
+  Baz baz;     &lt;span style=&#34;color:#75715e&#34;&gt;// local variable
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;async(  &lt;span style=&#34;color:#75715e&#34;&gt;// async invocation
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    [&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;] { Use(baz); }          &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    [&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;] { Use(baz); }          &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    [&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, baz] { Use(baz); }  &lt;span style=&#34;color:#75715e&#34;&gt;// Good?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    [q &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Qux()] { q.QFn(); }   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  );  &lt;span style=&#34;color:#75715e&#34;&gt;// - `Use(baz)` is `Foo::Use(baz)`
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}     &lt;span style=&#34;color:#75715e&#34;&gt;// - `Qux()` is not `Foo::Qux()`
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Lambda_expressions&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-capture-vs-overload&#34;&gt;F.50: Use a lambda when a function won’t do (to capture local variables, or to write a local function)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;不要滥用全局 lambda（如果可以定义函数）&lt;/li&gt;
+&lt;li&gt;一个问题在于 &lt;code&gt;__FUNCTION__&lt;/code&gt; 只能拿到 &lt;code&gt;operator() const&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-reference-capture&#34;&gt;F.52: Prefer capturing by reference in lambdas that will be used locally, including passed to algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-value-capture&#34;&gt;F.53: Avoid capturing by reference in lambdas that will be used nonlocally, including returned, stored on the heap, or passed to another thread&lt;/a&gt;（参考：&lt;a href=&#34;../2019/Inside-Cpp-Callback.md#%E5%9B%9E%E8%B0%83%E6%97%B6%EF%BC%88%E5%BC%B1%E5%BC%95%E7%94%A8%EF%BC%89%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BC%9A%E4%B8%8D%E4%BC%9A%E5%A4%B1%E6%95%88&#34;&gt;回调时上下文会不会失效&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-this-capture&#34;&gt;F.54: If you capture &lt;code&gt;this&lt;/code&gt;, capture all variables explicitly (no default capture)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;不要滥用 初始化捕获 &lt;em&gt;(init capture)&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;如果不依赖于 闭包作用域 &lt;em&gt;(enclosing scope)&lt;/em&gt;，可以推迟到 lambda 内构造（但要考虑一份还是多份）&lt;/li&gt;
+&lt;li&gt;仅用于 &lt;code&gt;std::move()&lt;/code&gt; 不可拷贝的对象（参考：[sec|MoveOnly Types]）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;exceptions&#34;&gt;Exceptions&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+  LOG(INFO) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; x;   &lt;span style=&#34;color:#75715e&#34;&gt;// may throw?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  MayThrowFoo();    &lt;span style=&#34;color:#75715e&#34;&gt;// may throw Foo!
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Deserialize(y);   &lt;span style=&#34;color:#75715e&#34;&gt;// exception no stack
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Get();  &lt;span style=&#34;color:#75715e&#34;&gt;// null or throw?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; b;   &lt;span style=&#34;color:#75715e&#34;&gt;// crash if |b| is 0
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Bar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; bar) {
+  &lt;span style=&#34;color:#75715e&#34;&gt;// uncaught, and throw to caller...
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Exceptions&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;反方观点：避免使用异常，使用显式的错误处理，降低心智负担
+&lt;ul&gt;
+&lt;li&gt;是否会抛出异常 不能在 编译时检查 ??&lt;/li&gt;
+&lt;li&gt;抛出异常的类型 不能在 编译时检查 ??&lt;/li&gt;
+&lt;li&gt;难以确定 抛出来源（默认只有 &lt;code&gt;.what()&lt;/code&gt;，没有 &lt;code&gt;.stack()&lt;/code&gt;）
+&lt;ul&gt;
+&lt;li&gt;例如 隐式转换 &lt;a href=&#34;https://github.com/nlohmann/json#implicit-conversions&#34;&gt;&lt;code&gt;std::string detail = json_object;&lt;/code&gt;&lt;/a&gt;（忘了加 &lt;code&gt;.dump()&lt;/code&gt;）抛出异常 &lt;code&gt;[json.exception.type_error.302] type must be string, but is object&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;因为 一般认为此处不会抛异常，但又被外层 &lt;code&gt;try-catch&lt;/code&gt; 捕获，导致无法定位来源（&lt;a href=&#34;https://gcc.gnu.org/bugzilla/show_bug.cgi?id=55917&#34;&gt;未捕获的异常 一般可以看到调用栈&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;另外 上层逻辑往往不希望看到 最原始的异常，而希望拿到 更有意义的异常（例如 &lt;code&gt;type of |json_object| must be string, but is object&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;容易混淆 异常 和 错误
+&lt;ul&gt;
+&lt;li&gt;例如 &lt;code&gt;const Value&amp;amp; Path::resolve(const Value&amp;amp; root) const;&lt;/code&gt; 可能 &lt;a href=&#34;https://github.com/open-source-parsers/jsoncpp/blob/7165f6ac4c482e68475c9e1dac086f9e12fff0d0/src/lib_json/json_value.cpp#L1417&#34;&gt;抛异常&lt;/a&gt;，也可能 &lt;a href=&#34;https://github.com/open-source-parsers/jsoncpp/blob/ddabf50f72cf369bf652a95c4d9fe31a1865a781/src/lib_json/json_value.cpp#L1597&#34;&gt;返回 null 的 singleton 引用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;容易混淆 异常 和 契约（参考：[sec|Contracts]）
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-zero&#34;&gt;ES.105: Don’t divide by zero&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;正方观点：&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rnr-no-exceptions&#34;&gt;NR.3: Don’t avoid exceptions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;run-time-type-information-rtti&#34;&gt;Run-Time Type Information (RTTI)&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Derived&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; derived &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;dynamic_cast&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Derived&lt;span style=&#34;color:#f92672&#34;&gt;*&amp;gt;&lt;/span&gt;(base)) {
+  Foo(derived);  &lt;span style=&#34;color:#75715e&#34;&gt;// #1
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+  Foo(base);     &lt;span style=&#34;color:#75715e&#34;&gt;// #2
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Base&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Foo() { &lt;span style=&#34;color:#75715e&#34;&gt;/* #2 */&lt;/span&gt; }
+&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Derived&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Foo() { &lt;span style=&#34;color:#75715e&#34;&gt;/* #1 */&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Run-Time_Type_Information__RTTI_&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;反方观点：&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-use-virtual&#34;&gt;C.153: Prefer virtual function to casting&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;不符合 面向对象设计，应该避免使用 &lt;code&gt;typeid&lt;/code&gt; 检查类型 或 &lt;code&gt;dynamic_cast&lt;/code&gt; 向下转换（以及 type-tag 和 &lt;code&gt;static_cast&lt;/code&gt;），可以改为：
+&lt;ul&gt;
+&lt;li&gt;用 虚函数多态 实现 单分派 &lt;em&gt;(single dispatch)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;用 &lt;a href=&#34;../2017/Design-Patterns-Notes-3.md#Visitor&#34;&gt;访问者模式&lt;/a&gt; 实现 双分派 &lt;em&gt;(double dispatch)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;类型假设随时可能失效（错误使用 &lt;code&gt;static_cast&lt;/code&gt; 造成内存不对齐，&lt;a href=&#34;../2019/Crash-Analysis-Notes.md&#34;&gt;可能导致崩溃&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;正方观点：&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-dynamic_cast&#34;&gt;C.146: Use &lt;code&gt;dynamic_cast&lt;/code&gt; where class hierarchy navigation is unavoidable&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-ref-cast&#34;&gt;C.147: Use &lt;code&gt;dynamic_cast&lt;/code&gt; to a reference type when failure to find the required class is considered an error&lt;/a&gt;（Google Style 不允许，禁用异常）&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-ptr-cast&#34;&gt;C.148: Use &lt;code&gt;dynamic_cast&lt;/code&gt; to a pointer type when failure to find the required class is considered a valid alternative&lt;/a&gt;（参考：&lt;a href=&#34;https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Capability_Query&#34;&gt;Capability Query&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;用于实现 &lt;a href=&#34;https://condor.depaul.edu/dmumaugh/OOT/Design-Principles/acv.pdf&#34;&gt;Acyclic Visitor&lt;/a&gt;（Robert C. Martin 提出）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;line-length-80-columns&#34;&gt;Line Length: 80 columns&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (...) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (...) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (...) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (...) &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+        }
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt;(...) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;; }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Line_Length&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coolshell.cn/articles/17757.html&#34;&gt;&lt;img src=&#34;Conventional-Cpp/arrow-code.jpg&#34; alt=&#34;如何重构“箭头型”代码&#34;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;如果超过 80 列，先检查：
+&lt;ul&gt;
+&lt;li&gt;格式上，是否存在 4 空格缩进？&lt;code&gt;namespace&lt;/code&gt; 缩进（参考：[sec|Namespaces]）？&lt;/li&gt;
+&lt;li&gt;逻辑上，是否存在 箭头型代码？callback hell？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;尤其是 &lt;code&gt;while/for&lt;/code&gt; 嵌套的 &lt;code&gt;switch&lt;/code&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;break&lt;/code&gt; 作用于 &lt;code&gt;switch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;continue&lt;/code&gt; 作用于 &lt;code&gt;while/for&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;naming--formatting&#34;&gt;Naming &amp;amp; Formatting&lt;/h3&gt;
+&lt;p&gt;[img=max-width:88%]&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/voidccc/article/details/37599203&#34;&gt;&lt;img src=&#34;Conventional-Cpp/google-cpp-style.png&#34; alt=&#34;一张图总结 Google C++ 编程规范&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Naming&#34;&gt;来源 1&lt;/a&gt; / &lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Formatting&#34;&gt;来源 2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;命名需要熟悉，格式需要自动化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;chromium-style&#34;&gt;Chromium Style&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;variable-initialization&#34;&gt;Variable Initialization&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt;;
+std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;pair&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {true, &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;};
+std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;};
+
+Foo &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1.7&lt;/span&gt;, false, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;);
+std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; v(&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.97&lt;/span&gt;);
+
+Bar bar{std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string()};  &lt;span style=&#34;color:#75715e&#34;&gt;// explicit ctor
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#variable-initialization&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;优先级：赋值写法 &amp;gt; 构造写法 &amp;gt; C++ 11 &lt;code&gt;{}&lt;/code&gt; 写法（仅当前两种写法不可用时，例如 &lt;code&gt;Bar bar(std::string());&lt;/code&gt; 会导致 &lt;a href=&#34;https://www.fluentcpp.com/2018/01/30/most-vexing-parse/&#34;&gt;most vexing parse&lt;/a&gt; 歧义）&lt;/li&gt;
+&lt;li&gt;不同观点：
+&lt;ul&gt;
+&lt;li&gt;Google Style &lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Variable_and_Array_Initialization&#34;&gt;没有限制&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-list&#34;&gt;ES.23: Prefer the &lt;code&gt;{}&lt;/code&gt;-initializer syntax&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;in-class-initializers&#34;&gt;In-class Initializers&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo() &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; b_(&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;) { &lt;span style=&#34;color:#75715e&#34;&gt;/* empty */&lt;/span&gt; }  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Foo(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; b_(b) {}  &lt;span style=&#34;color:#75715e&#34;&gt;// set |b_|
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; b_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;;           &lt;span style=&#34;color:#75715e&#34;&gt;// use |b| or 42
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string c_;        &lt;span style=&#34;color:#75715e&#34;&gt;// default ctor
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Bar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; bar_{&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;};   &lt;span style=&#34;color:#75715e&#34;&gt;// use |this|
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#initialize-members-in-the-declaration-where-possible&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-default&#34;&gt;C.45: Don’t define a default constructor that only initializes data members; use member initializers instead&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-in-class-initializer&#34;&gt;C.48: Prefer in-class initializers to member initializers in constructors for constant initializers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;prefer-default&#34;&gt;Prefer &lt;code&gt;=default&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  Foo();  &lt;span style=&#34;color:#75715e&#34;&gt;// non-inlined defined below
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Foo(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;     &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Foo(&lt;span style=&#34;color:#75715e&#34;&gt;/* const */&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;);         &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Foo(Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;/* noexcept */&lt;/span&gt;;     &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
+Foo&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Foo() &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// Good for pImpl
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#prefer-to-use-default&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-eqdefault&#34;&gt;C.80: Use &lt;code&gt;=default&lt;/code&gt; if you have to be explicit about using the default semantics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;拷贝构造函数 参数 &lt;code&gt;const T&amp;amp;&lt;/code&gt; 容易误写为 &lt;code&gt;T&amp;amp;&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;导致 &lt;a href=&#34;../2018/Cpp-Rvalue-Reference.md#%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E9%87%8D%E8%BD%BD%E4%BC%98%E5%85%88%E7%BA%A7&#34;&gt;无法重载右值参数&lt;/a&gt;（编译器允许？）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;赋值函数 更容易写错：
+&lt;ul&gt;
+&lt;li&gt;定义为 &lt;code&gt;virtual&lt;/code&gt;/参数为 &lt;code&gt;T&amp;amp;&lt;/code&gt;/不返回 &lt;code&gt;T&amp;amp;&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-copy-assignment&#34;&gt;C.60: Make copy assignment non-&lt;code&gt;virtual&lt;/code&gt;, take the parameter by &lt;code&gt;const&amp;amp;&lt;/code&gt;, and return by non-&lt;code&gt;const&amp;amp;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-move-assignment&#34;&gt;C.63: Make move assignment non-&lt;code&gt;virtual&lt;/code&gt;, take the parameter by &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;, and return by non-&lt;code&gt;const&amp;amp;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;没检查参数是否 &lt;code&gt; == this&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-copy-self&#34;&gt;C.62: Make copy assignment safe for self-assignment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-move-self&#34;&gt;C.65: Make move assignment safe for self-assignment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;移动构造函数 容易漏掉 &lt;code&gt;noexcept&lt;/code&gt;（&lt;code&gt;=default&lt;/code&gt; 会自动加上）
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-move-noexcept&#34;&gt;C.66: Make move operations &lt;code&gt;noexcept&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;导致 &lt;a href=&#34;../2018/Cpp-Rvalue-Reference.md#%E8%AF%AF%E8%A7%A3%EF%BC%9A%E6%89%8B%E5%86%99%E9%94%99%E8%AF%AF%E7%9A%84%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0&#34;&gt;不能高效使用标准库和语言工具&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-pimpl&#34;&gt;I.27: For stable library ABI, consider the Pimpl idiom&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;auto-p--&#34;&gt;&lt;code&gt;auto* p = ...;&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;  item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; item_.get();  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; item_.get();  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#do-not-use-auto-to-deduce-a-raw-pointer&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;增强可读性 + 检查 &lt;code&gt;item&lt;/code&gt; 必须为 指针类型&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://llvm.org/docs/CodingStandards.html#beware-unnecessary-copies-with-auto&#34;&gt;Beware unnecessary copies with &lt;code&gt;auto&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;comment-style&#34;&gt;Comment Style&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// TODO(botman): use FooImpl as FooBase.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// FooFunction() modifies |foo_member_|.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#comment-style&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TODO(xxx)&lt;/code&gt; 待办 要关联信息（&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#TODO_Comments&#34;&gt;Google Style&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FooImpl&lt;/code&gt;/&lt;code&gt;FooBase&lt;/code&gt; 类名&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FooFunction&lt;/code&gt; 函数后加 &lt;code&gt;()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;foo_member_&lt;/code&gt; 变量外加 &lt;code&gt;||&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;core-guidelines&#34;&gt;Core Guidelines&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;intent&#34;&gt;Intent&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;                   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v.size(); &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;i) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (v[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; val) {  &lt;span style=&#34;color:#75715e&#34;&gt;// compare     Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i;        &lt;span style=&#34;color:#75715e&#34;&gt;// set index   Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;            &lt;span style=&#34;color:#75715e&#34;&gt;// terminate   Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  }
+}
+&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; iter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;find(            &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;begin(v), std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;end(v), val);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rp-direct&#34;&gt;P.1: Express ideas directly in code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rp-what&#34;&gt;P.3: Express intent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rl-comments&#34;&gt;NL.1: Don’t say in comments what can be clearly stated in code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;封装统一的 &lt;a href=&#34;https://github.com/chromium/chromium/blob/master/base/stl_util.h&#34;&gt;&lt;code&gt;base::Contains(c, v)&lt;/code&gt;&lt;/a&gt; 语义：
+&lt;ul&gt;
+&lt;li&gt;字符串 &lt;code&gt;s.find(v) != S::npos&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;线性容器 &lt;code&gt;std::find(c, v) != c.end()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;关联容器 &lt;code&gt;c.find(v) != c.end()&lt;/code&gt;（&lt;a href=&#34;http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0458r2.html&#34;&gt;P0458R2&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://llvm.org/docs/CodingStandards.html#turn-predicate-loops-into-predicate-functions&#34;&gt;Turn Predicate Loops into Predicate Functions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;names-and-scopes&#34;&gt;Names and Scopes&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetStartIndex();
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ; i &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; ; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;i) {}       &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ; i &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; ; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;i) {}  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; foo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetFoo()) {      &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Reuse(i);                     &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Bar i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foo&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;GetBar();        &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#75715e&#34;&gt;/* handle nullptr */&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-scope&#34;&gt;ES.5: Keep scopes small&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-cond&#34;&gt;ES.6: Declare names in for-statement initializers and conditions to limit scope&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-reuse&#34;&gt;ES.12: Do not reuse names in nested scopes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-recycle&#34;&gt;ES.26: Don’t use a variable for two unrelated purposes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;参考：[sec|Local Variables]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;virtual-destructors&#34;&gt;Virtual Destructors&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Strategy&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;Strategy() &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+};
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Observer&lt;/span&gt; {
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;Observer() &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-dtor-virtual&#34;&gt;C.35: A base class destructor should be either public and virtual, or protected and nonvirtual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-dtor&#34;&gt;C.127: A class with a virtual function should have a virtual or protected destructor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;设计虚基类时，一定要考虑：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;public virtual&lt;/code&gt; 析构
+&lt;ul&gt;
+&lt;li&gt;使用者 管理 &lt;a href=&#34;../2017/Design-Patterns-Notes-3.md#Strategy&#34;&gt;&lt;code&gt;Strategy&lt;/code&gt;&lt;/a&gt; 生命周期&lt;/li&gt;
+&lt;li&gt;例如 &lt;code&gt;std::unique_ptr&amp;lt;Strategy&amp;gt;&lt;/code&gt; 存储策略对象（参考：[sec|Smart Pointers Ownership]）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;protected non-virtual&lt;/code&gt; 析构
+&lt;ul&gt;
+&lt;li&gt;使用者 仅使用 &lt;a href=&#34;../2017/Design-Patterns-Notes-3.md#Observer&#34;&gt;&lt;code&gt;Observer&lt;/code&gt;&lt;/a&gt; 接口&lt;/li&gt;
+&lt;li&gt;例如 &lt;code&gt;std::vector&amp;lt;Observer*&amp;gt;&lt;/code&gt; 记录观察者列表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;polymorphic-classes-slicing&#34;&gt;Polymorphic Classes Slicing&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;  base &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; derived;            &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; base &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; derived&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;clone();   &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PolyFoo&lt;/span&gt;(      Base  base);  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PolyFoo&lt;/span&gt;(      Base&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; base);  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PolyFoo&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Base&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; base);  &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Base&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  foos;         &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Base&lt;span style=&#34;color:#f92672&#34;&gt;*&amp;gt;&lt;/span&gt; foos;         &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Base&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; foos;
+                                 &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-slice&#34;&gt;ES.63: Don’t slice&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-copy-virtual&#34;&gt;C.67: A polymorphic class should suppress copying&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-copy&#34;&gt;C.130: For making deep copies of polymorphic classes prefer a virtual clone function instead of copy construction/assignment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-poly&#34;&gt;C.145: Access polymorphic objects through pointers and references&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;设计多态类时，一定要考虑：
+&lt;ul&gt;
+&lt;li&gt;[sec|Copyable Types (Movable)]&lt;/li&gt;
+&lt;li&gt;[sec|Copyable Types (Not Movable)]&lt;/li&gt;
+&lt;li&gt;[sec|MoveOnly Types]&lt;/li&gt;
+&lt;li&gt;[sec|Not Copyable Or Movable Types]（常用 &lt;a href=&#34;https://github.com/chromium/chromium/blob/master/base/macros.h&#34;&gt;&lt;code&gt;DISALLOW_COPY_AND_ASSIGN&lt;/code&gt;&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;raii&#34;&gt;RAII&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;FILE&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fopen(filename, mode);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (...) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (...) &lt;span style=&#34;color:#66d9ef&#34;&gt;throw&lt;/span&gt; XXX;
+fclose(file);  &lt;span style=&#34;color:#75715e&#34;&gt;// maybe unreachable, leak
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;// Good (or use std::fstream)
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;FILE, &lt;span style=&#34;color:#66d9ef&#34;&gt;decltype&lt;/span&gt;(fclose)&lt;span style=&#34;color:#f92672&#34;&gt;*&amp;gt;&lt;/span&gt;
+    file(fopen(filename, mode), fclose);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii&#34;&gt;R.1: Manage resources automatically using resource handles and RAII (Resource Acquisition Is Initialization)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Re-finally&#34;&gt;E.19: Use a final_action object to express cleanup if no suitable resource handle is available&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;smart-pointers-dangling&#34;&gt;Smart Pointers Dangling&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;shared_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Bar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;bar() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; foo) {    &lt;span style=&#34;color:#75715e&#34;&gt;// aliased
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  UseBarPtr(foo.bar().get());   &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  foo.bar()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IBar();            &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; pinned &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foo.bar();  &lt;span style=&#34;color:#75715e&#34;&gt;// pinned
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  UseBarPtr(pinned.get());      &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  pinned&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IBar();               &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/styleguide/cppguide.html#Ownership_and_Smart_Pointers&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-smartptrget&#34;&gt;R.37: Do not pass a pointer or reference obtained from an aliased smart pointer&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;仅在 多线程/协程 等并发环境下可能悬垂&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::shared_ptr&lt;/code&gt; 通过 原子性引用计数 &lt;em&gt;(atomic ref-count)&lt;/em&gt; 保证 引用对象的析构过程 线程安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;contracts&#34;&gt;Contracts&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sqrt&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;unsigned&lt;/span&gt; x) {  &lt;span style=&#34;color:#75715e&#34;&gt;// Bad
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Expects(x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);         &lt;span style=&#34;color:#75715e&#34;&gt;// Good
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt;() {
+  &lt;span style=&#34;color:#75715e&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  memset(buffer, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, kMax);
+  Ensures(buffer[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-pre&#34;&gt;I.5: State preconditions (if any)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-expects&#34;&gt;I.6: Prefer &lt;code&gt;Expects()&lt;/code&gt; for expressing preconditions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-post&#34;&gt;I.7: State postconditions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-ensures&#34;&gt;I.8: Prefer &lt;code&gt;Ensures()&lt;/code&gt; for expressing postconditions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-nonnegative&#34;&gt;ES.106: Don’t try to avoid negative values by using &lt;code&gt;unsigned&lt;/code&gt;&lt;/a&gt;（参考：&lt;a href=&#34;../2019/Cpp-Check.md#%E6%95%B0%E5%80%BC%E6%BA%A2%E5%87%BA%E6%A3%80%E6%9F%A5&#34;&gt;数值溢出检查&lt;/a&gt;，注意 underflow）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;lambda-for-complex-initialization&#34;&gt;Lambda for Complex Initialization&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Map &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Foo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;// cannot use Map{ {1, bar}, {2, baz}, }
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Map foo_map &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [] {
+  Map r;
+  r.emplace(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;make_unique&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Bar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;());
+  r.emplace(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;make_unique&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Baz&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;());
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; r;
+}();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-lambda-init&#34;&gt;ES.28: Use lambdas for complex initialization, especially of &lt;code&gt;const&lt;/code&gt; variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;不能直接用 C++ 11 &lt;code&gt;{}&lt;/code&gt; 写法构造（因为 &lt;code&gt;std::unique_ptr&lt;/code&gt; 不可拷贝）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;</description>
       
     </item>
     
