@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Http状态码</title>
+      <title>Http状态码及协议头</title>
       <link>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</link>
       <pubDate>Tue, 16 Jun 2020 09:50:04 +0800</pubDate>
       
       <guid>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</guid>
-      <description>服务器返回的 响应报文 中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。 状态码 类别 原因短语 1XX Informational（信</description>
+      <description>状态码 服务器返回的 响应报文 中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。 状态码 类别 原因短语 1XX Informationa</description>
     </item>
     
   </channel>

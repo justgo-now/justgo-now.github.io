@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>http://justgo-now.github.io/categories/coding.html</loc>
+    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://justgo-now.github.io/tags/http.html</loc>
     <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -31,13 +38,6 @@
   
   <url>
     <loc>http://justgo-now.github.io/post.html</loc>
-    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/categories/%E7%BC%96%E7%A8%8B.html</loc>
     <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -88,6 +88,27 @@
   <url>
     <loc>http://justgo-now.github.io/categories/tools.html</loc>
     <lastmod>2020-06-12T08:46:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/categories/devops.html</loc>
+    <lastmod>2020-04-12T21:12:14+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/tags/docker.html</loc>
+    <lastmod>2020-04-12T21:12:14+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</loc>
+    <lastmod>2020-04-12T21:12:14+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

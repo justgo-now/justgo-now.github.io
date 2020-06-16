@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Http状态码</title>
+      <title>Http状态码及协议头</title>
       <link>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</link>
       <pubDate>Tue, 16 Jun 2020 09:50:04 +0800</pubDate>
       
       <guid>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</guid>
-      <description>服务器返回的 响应报文 中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。 状态码 类别 原因短语 1XX Informational（信</description>
+      <description>状态码 服务器返回的 响应报文 中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。 状态码 类别 原因短语 1XX Informationa</description>
     </item>
     
     <item>
@@ -27,6 +27,15 @@
       
       <guid>http://justgo-now.github.io/post/2020/2020-06-12-tcpdump-usage.html</guid>
       <description>tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分</description>
+    </item>
+    
+    <item>
+      <title>关于docker的一些说明</title>
+      <link>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</link>
+      <pubDate>Sun, 12 Apr 2020 21:12:14 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</guid>
+      <description>先把 Docker说清楚 简介 1、了解Docker的前生LXC LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和</description>
     </item>
     
   </channel>

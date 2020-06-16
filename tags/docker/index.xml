@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on JustGo</title>
+    <link>http://justgo-now.github.io/tags/docker.html</link>
+    <description>Recent content in docker on JustGo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 12 Apr 2020 21:12:14 +0000</lastBuildDate>
+    
+	<atom:link href="http://justgo-now.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于docker的一些说明</title>
+      <link>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</link>
+      <pubDate>Sun, 12 Apr 2020 21:12:14 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</guid>
+      <description>先把 Docker说清楚 简介 1、了解Docker的前生LXC LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和</description>
+    </item>
+    
+  </channel>
+</rss>

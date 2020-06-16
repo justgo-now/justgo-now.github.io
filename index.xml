@@ -32,13 +32,14 @@
     </item>
     
     <item>
-      <title>Http状态码</title>
+      <title>Http状态码及协议头</title>
       <link>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</link>
       <pubDate>Tue, 16 Jun 2020 09:50:04 +0800</pubDate>
       
       <guid>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</guid>
       
-        <description>&lt;p&gt;服务器返回的  &lt;strong&gt;响应报文&lt;/strong&gt;  中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。&lt;/p&gt;
+        <description>&lt;h2 id=&#34;状态码&#34;&gt;状态码&lt;/h2&gt;
+&lt;p&gt;服务器返回的  &lt;strong&gt;响应报文&lt;/strong&gt;  中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -322,6 +323,320 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Header&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;解释&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Accept&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;指定客户端能够接收的内容类型&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Accept:text/plain,text/html&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Charset&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;浏览器可以接受的字符编码集。&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Charset:iso-8859-5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Encoding&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;指定浏览器可以支持的web服务器返回内容压缩编码类型。&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Encoding:compress,gzip&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Language&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;浏览器可接受的语言&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Language:en,zh&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Ranges&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;可以请求网页实体的一个或者多个子范围字段&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Ranges:bytes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Authorization&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;HTTP授权的授权证书&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Authorization:BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ==&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Cache-Control&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;指定请求和响应遵循的缓存机制&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Cache-Control:no-cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Connection&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;表示是否需要持久连接。（HTTP1.1默认进行持久连接）&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Connection:close&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Cookie&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Cookie:$Version=1;Skin=new;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Length&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;请求的内容长度&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Length:348&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Type&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;请求的与实体对应的MIME信息&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Type:application/x-www-form-urlencoded&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Date&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;请求发送的日期和时间&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Date:Tue,15Nov201008:12:31GMT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Expect&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;请求的特定的服务器行为&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Expect:100-continue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;From&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;发出请求的用户的Email&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;From:&lt;a href=&#34;mailto:user@email.com&#34;&gt;user@email.com&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Host&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;指定请求的服务器的域名和端口号&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Host:&lt;a href=&#34;www.google.cn&#34;&gt;www.google.cn&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;If-Match&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;只有请求内容与实体相匹配才有效&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;If-Match:“737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;If-Modified-Since&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;If-Modified-Since:Sat,29Oct201019:43:31GMT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;If-None-Match&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;If-None-Match:“737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;If-Range&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;If-Range:“737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;If-Unmodified-Since&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;只在实体在指定时间之后未被修改才请求成功&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;If-Unmodified-Since:Sat,29Oct201019:43:31GMT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Max-Forwards&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;限制信息通过代理和网关传送的时间&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Max-Forwards:10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Pragma&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;用来包含实现特定的指令&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Pragma:no-cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Proxy-Authorization&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;连接到代理的授权证书&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Proxy-Authorization:BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ==&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Range&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;只请求实体的一部分，指定范围&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Range:bytes=500-999&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Referer&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;先前网页的地址，当前请求网页紧随其后,即来路&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Referer:https://www.google.cn/&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;TE&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TE:trailers,deflate;q=0.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Upgrade&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;向服务器指定某种传输协议以便服务器进行转换（如果支持）&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Upgrade:HTTP/2.0,SHTTP/1.3,IRC/6.9,RTA/x11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;User-Agent&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;User-Agent的内容包含发出请求的用户信息&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;User-Agent:Mozilla/5.0(Linux;X11)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Via&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;通知中间网关或代理服务器地址，通信协议&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Via:1.0fred,1.1nowhere.com(Apache/1.1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Warning&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;关于消息实体的警告信息&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Warn:199Miscellaneouswarning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Header&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;解释&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Ranges&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;表明服务器是否支持指定范围请求及哪种类型的分段请求&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Accept-Ranges:bytes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Age&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;从原始服务器到代理缓存形成的估算时间（以秒计，非负）&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Age:12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Allow&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;对某网络资源的有效的请求行为，不允许则返回405&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Allow:GET,HEAD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Cache-Control&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;告诉所有的缓存机制是否可以缓存及哪种类型&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Cache-Control:no-cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Encoding&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;web服务器支持的返回内容压缩编码类型。&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Encoding:gzip&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Language&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;响应体的语言&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Language:en,zh&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Length&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;响应体的长度&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Length:348&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Location&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;请求资源可替代的备用的另一地址&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Location:/index.htm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-MD5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回资源的MD5校验值&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-MD5:Q2hlY2sgSW50ZWdyaXR5IQ==&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Range&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;在整个返回体中本部分的字节位置&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Range:bytes21010-47021/47022&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Type&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回内容的MIME类型&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Content-Type:text/html;charset=utf-8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Date&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;原始服务器消息发出的时间&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Date:Tue,15Nov201008:12:31GMT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;ETag&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;请求变量的实体标签的当前值&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;ETag:“737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Expires&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;响应过期的日期和时间&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Expires:Thu,01Dec201016:00:00GMT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Last-Modified&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;请求资源的最后修改时间&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Last-Modified:Tue,15Nov201012:45:26GMT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Location&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;用来重定向接收方到非请求URL的位置来完成请求或标识新的资源&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Location:https://www.google.cn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Pragma&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;包括实现特定的指令，它可应用到响应链上的任何接收方&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Pragma:no-cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Proxy-Authenticate&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;它指出认证方案和可应用到代理的该URL上的参数&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Proxy-Authenticate:Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;refresh&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;应用于重定向或一个新的资源被创造，在5秒之后重定向（由网景提出，被大部分浏览器支持）&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Refresh:5;url=https://www.google.cn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Retry-After&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果实体暂时不可取，通知客户端在指定时间之后再次尝试&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Retry-After:120&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Server&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;web服务器软件名称&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Server:Apache/1.3.27(Unix)(Red-Hat/Linux)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Set-Cookie&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;设置HttpCookie&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Set-Cookie:UserID=JohnDoe;Max-Age=3600;Version=1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Trailer&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;指出头域在分块传输编码的尾部存在&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Trailer:Max-Forwards&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Transfer-Encoding&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;文件传输编码&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Transfer-Encoding:chunked&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Vary&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;告诉下游代理是使用缓存响应还是从原始服务器请求&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Vary:*&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Via&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;告知代理客户端响应是通过哪里发送的&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Via:1.0fred,1.1nowhere.com(Apache/1.1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Warning&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;警告实体可能存在的问题&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Warning:199Miscellaneouswarning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;WWW-Authenticate&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;表明客户端请求实体应该使用的授权方案&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;WWW-Authenticate:Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;参考文献&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.runoob.com/http/http-status-codes.html&#34;&gt;菜鸟教程（&lt;strong&gt;推荐&lt;/strong&gt;）&lt;/a&gt;&lt;br&gt;
 &lt;a href=&#34;http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html&#34;&gt;RESTful API 最佳实践&lt;/a&gt;&lt;br&gt;
@@ -522,6 +837,1239 @@ route.port1 &amp;gt; ice.port2: udp lenth&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;UDP十分简单，上面的输出行表明从主机ROUTE的port1端口发出的一个UDP数据包到主机ICE的port2端口，类型是UDP， 包的长度是lenth。&lt;/p&gt;
 &lt;p&gt;另外，为了让网络接口可以让tcpdump监听，所以执行tcpdump时网络接口会启动在“混杂模式（promiscuous）”，所以你会在 /var/log/messages里面看到很多的警告信息，通知你说你的网卡被设置成为混杂模式。别担心，那是正常的。至于更多的应用，请参考man tcpdump了。&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>关于docker的一些说明</title>
+      <link>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</link>
+      <pubDate>Sun, 12 Apr 2020 21:12:14 +0000</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-04-12-docker-detail.html</guid>
+      
+        <description>&lt;h2 id=&#34;先把-docker说清楚&#34;&gt;先把 Docker说清楚&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;简介&#34;&gt;&lt;strong&gt;简介&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&#34;1了解docker的前生lxc&#34;&gt;&lt;strong&gt;1、了解Docker的前生LXC&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;LXC为Linux Container的简写。可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。相当于C++中的NameSpace。容器有效地将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求。&lt;/p&gt;
+&lt;p&gt;与传统虚拟化技术相比，它的优势在于：&lt;/p&gt;
+&lt;p&gt;（1）与宿主机使用同一个内核，性能损耗小；&lt;/p&gt;
+&lt;p&gt;（2）不需要指令级模拟；&lt;/p&gt;
+&lt;p&gt;（3）不需要即时(Just-in-time)编译；&lt;/p&gt;
+&lt;p&gt;（4）容器可以在CPU核心的本地运行指令，不需要任何专门的解释机制；&lt;/p&gt;
+&lt;p&gt;（5）避免了准虚拟化和系统调用替换中的复杂性；&lt;/p&gt;
+&lt;p&gt;（6）轻量级隔离，在隔离的同时还提供共享机制，以实现容器与宿主机的资源共享。&lt;/p&gt;
+&lt;p&gt;总结：Linux Container是一种轻量级的虚拟化的手段。&lt;/p&gt;
+&lt;p&gt;Linux Container提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化。&lt;/p&gt;
+&lt;h4 id=&#34;2lxc与docker什么关系&#34;&gt;&lt;strong&gt;2、LXC与docker什么关系？&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;docker并不是LXC替代品，docker底层使用了LXC来实现，LXC将linux进程沙盒化，使得进程之间相互隔离，并且能够课哦内阁制各进程的资源分配。&lt;/p&gt;
+&lt;p&gt;在LXC的基础之上，docker提供了一系列更强大的功能。&lt;/p&gt;
+&lt;h4 id=&#34;3什么是docker&#34;&gt;&lt;strong&gt;3、什么是docker&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;docker是一个开源的应用容器引擎，基于go语言开发并遵循了apache2.0协议开源。&lt;/p&gt;
+&lt;p&gt;docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的linux服务器，也可以实现虚拟化。&lt;/p&gt;
+&lt;p&gt;容器是完全使用沙箱机制，相互之间不会有任何接口（类iphone的app），并且容器开销极其低。&lt;/p&gt;
+&lt;h4 id=&#34;4docker官方文档&#34;&gt;&lt;strong&gt;4、docker官方文档&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/&#34;&gt;https://docs.docker.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;5为什么docker越来越受欢迎&#34;&gt;&lt;strong&gt;5、为什么docker越来越受欢迎&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;官方话语：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;容器化越来越受欢迎，因为容器是：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;灵活：即使是最复杂的应用也可以集装箱化。&lt;/li&gt;
+&lt;li&gt;轻量级：容器利用并共享主机内核。&lt;/li&gt;
+&lt;li&gt;可互换：您可以即时部署更新和升级。&lt;/li&gt;
+&lt;li&gt;便携式：您可以在本地构建，部署到云，并在任何地方运行。&lt;/li&gt;
+&lt;li&gt;可扩展：您可以增加并自动分发容器副本。&lt;/li&gt;
+&lt;li&gt;可堆叠：您可以垂直和即时堆叠服务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;镜像和容器（contalners）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过镜像启动一个容器，一个镜像是一个可执行的包，其中包括运行应用程序所需要的所有内容包含代码，运行时间，库、环境变量、和配置文件。&lt;/p&gt;
+&lt;p&gt;容器是镜像的运行实例，当被运行时有镜像状态和用户进程，可以使用docker ps 查看。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器和虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;容器时在linux上本机运行，并与其他容器共享主机的内核，它运行的一个独立的进程，不占用其他任何可执行文件的内存，非常轻量。&lt;/p&gt;
+&lt;p&gt;虚拟机运行的是一个完成的操作系统，通过虚拟机管理程序对主机资源进行虚拟访问，相比之下需要的资源更多。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;6docker版本&#34;&gt;&lt;strong&gt;6、docker版本&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Docker Community Edition（CE）社区版&lt;/p&gt;
+&lt;p&gt;Enterprise Edition(EE) 商业版&lt;/p&gt;
+&lt;h4 id=&#34;7docker和openstack的几项对比&#34;&gt;&lt;strong&gt;7、docker和openstack的几项对比&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;8容器在内核中支持2种重要技术&#34;&gt;&lt;strong&gt;8、容器在内核中支持2种重要技术&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;docker本质就是宿主机的一个进程，docker是通过namespace实现资源隔离，通过cgroup实现资源限制，通过写时复制技术（copy-on-write）实现了高效的文件操作（类似虚拟机的磁盘比如分配500g并不是实际占用物理磁盘500g）&lt;/p&gt;
+&lt;p&gt;1）namespaces 名称空间&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922202.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;2）control Group 控制组&lt;/p&gt;
+&lt;p&gt;cgroup的特点是：　　　　　　&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cgroup的api以一个伪文件系统的实现方式，用户的程序可以通过文件系统实现cgroup的组件管理&lt;/li&gt;
+&lt;li&gt;cgroup的组件管理操作单元可以细粒度到线程级别，另外用户可以创建和销毁cgroup，从而实现资源载分配和再利用&lt;/li&gt;
+&lt;li&gt;所有资源管理的功能都以子系统的方式实现，接口统一子任务创建之初与其父任务处于同一个cgroup的控制组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;四大功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;资源限制：可以对任务使用的资源总额进行限制&lt;/li&gt;
+&lt;li&gt;优先级分配：通过分配的cpu时间片数量以及磁盘IO带宽大小，实际上相当于控制了任务运行优先级&lt;/li&gt;
+&lt;li&gt;资源统计：可以统计系统的资源使用量，如cpu时长，内存用量等&lt;/li&gt;
+&lt;li&gt;任务控制：cgroup可以对任务执行挂起、恢复等操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;9了解docker三个重要概念&#34;&gt;&lt;strong&gt;9、了解docker三个重要概念&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;1）image镜像&lt;/p&gt;
+&lt;p&gt;docker镜像就是一个只读模板，比如，一个镜像可以包含一个完整的centos，里面仅安装apache或用户的其他应用，镜像可以用来创建docker容器，另外docker提供了一个很简单的机制来创建镜像或者更新现有的镜像，用户甚至可以直接从其他人那里下周一个已经做好的镜像来直接使用&lt;/p&gt;
+&lt;p&gt;2）container容器&lt;/p&gt;
+&lt;p&gt;docker利用容器来运行应用，容器是从镜像创建的运行实例，它可以被启动，开始、停止、删除、每个容器都是互相隔离的，保证安全的平台，可以吧容器看做是要给简易版的linux环境（包括root用户权限、镜像空间、用户空间和网络空间等）和运行再其中的应用程序&lt;/p&gt;
+&lt;p&gt;3）repostory仓库&lt;/p&gt;
+&lt;p&gt;仓库是集中存储镜像文件的沧桑，registry是仓库主从服务器，实际上参考注册服务器上存放着多个仓库，每个仓库中又包含了多个镜像，每个镜像有不同的标签（tag）&lt;/p&gt;
+&lt;p&gt;仓库分为两种，公有参考，和私有仓库，最大的公开仓库是docker Hub，存放了数量庞大的镜像供用户下周，国内的docker pool，这里仓库的概念与Git类似，registry可以理解为github这样的托管服务。&lt;/p&gt;
+&lt;h4 id=&#34;10docker的主要用途&#34;&gt;&lt;strong&gt;10、docker的主要用途&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;官方就是Bulid 、ship、run any app/any where，编译、装载、运行、任何app/在任意地放都能运行。&lt;/p&gt;
+&lt;p&gt;就是实现了应用的封装、部署、运行的生命周期管理只要在glibc的环境下，都可以运行。&lt;/p&gt;
+&lt;p&gt;运维生成环境中：docker化。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发布服务不用担心服务器的运行环境，所有的服务器都是自动分配docker，自动部署，自动安装，自动运行&lt;/li&gt;
+&lt;li&gt;再不用担心其他服务引擎的磁盘问题，cpu问题，系统问题了&lt;/li&gt;
+&lt;li&gt;资源利用更出色&lt;/li&gt;
+&lt;li&gt;自动迁移，可以制作镜像，迁移使用自定义的镜像即可迁移，不会出现什么问题&lt;/li&gt;
+&lt;li&gt;管理更加方便了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;11docker改变了什么&#34;&gt;&lt;strong&gt;11、docker改变了什么&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;面向产品：产品交付&lt;/li&gt;
+&lt;li&gt;面向开发：简化环境配置&lt;/li&gt;
+&lt;li&gt;面向测试：多版本测试&lt;/li&gt;
+&lt;li&gt;面向运维：环境一致性&lt;/li&gt;
+&lt;li&gt;面向架构：自动化扩容（微服务）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;docker架构&#34;&gt;&lt;strong&gt;docker架构&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&#34;1总体架构&#34;&gt;&lt;strong&gt;1、总体架构&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922216.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;distribution 负责与docker registry交互，上传洗澡镜像以及v2 registry 有关的源数据&lt;/li&gt;
+&lt;li&gt;registry负责docker registry有关的身份认证、镜像查找、镜像验证以及管理registry mirror等交互操作&lt;/li&gt;
+&lt;li&gt;image 负责与镜像源数据有关的存储、查找，镜像层的索引、查找以及镜像tar包有关的导入、导出操作&lt;/li&gt;
+&lt;li&gt;reference负责存储本地所有镜像的repository和tag名，并维护与镜像id之间的映射关系&lt;/li&gt;
+&lt;li&gt;layer模块负责与镜像层和容器层源数据有关的增删改查，并负责将镜像层的增删改查映射到实际存储镜像层文件的graphdriver模块&lt;/li&gt;
+&lt;li&gt;graghdriver是所有与容器镜像相关操作的执行者&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2docker架构2&#34;&gt;&lt;strong&gt;2、docker架构2&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;如果觉得上面架构图比较乱可以看这个架构：&lt;/p&gt;
+&lt;h3 id=&#34;img2020-04-12-docker-detaildocker-detail640-1572599922229webp&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922229.webp&#34; alt=&#34;img&#34;&gt;&lt;/h3&gt;
+&lt;p&gt;从上图不难看出，用户是使用Docker Client与Docker Daemon建立通信，并发送请求给后者。&lt;/p&gt;
+&lt;p&gt;而Docker Daemon作为Docker架构中的主体部分，首先提供Server的功能使其可以接受Docker Client的请求；而后Engine执行Docker内部的一系列工作，每一项工作都是以一个Job的形式的存在。&lt;/p&gt;
+&lt;p&gt;Job的运行过程中，当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储；当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境；当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成。&lt;/p&gt;
+&lt;p&gt;而libcontainer是一项独立的容器管理包，networkdriver以及execdriver都是通过libcontainer来实现具体对容器进行的操作。当执行完运行容器的命令后，一个实际的Docker容器就处于运行状态，该容器拥有独立的文件系统，独立并且安全的运行环境等。&lt;/p&gt;
+&lt;h4 id=&#34;3docker架构3&#34;&gt;&lt;strong&gt;3、docker架构3&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;再来看看另外一个架构，这个个架构就简单清晰指明了server/client交互，容器和镜像、数据之间的一些联系。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922232.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这个架构图更加清晰了架构&lt;/p&gt;
+&lt;p&gt;docker daemon就是docker的守护进程即server端，可以是远程的，也可以是本地的，这个不是C/S架构吗，客户端Docker client 是通过rest api进行通信。&lt;/p&gt;
+&lt;p&gt;docker cli 用来管理容器和镜像，客户端提供一个只读镜像，然后通过镜像可以创建多个容器，这些容器可以只是一个RFS（Root file system根文件系统），也可以ishi一个包含了用户应用的RFS，容器再docker client中只是要给进程，两个进程之间互不可见。&lt;/p&gt;
+&lt;p&gt;用户不能与server直接交互，但可以通过与容器这个桥梁来交互，由于是操作系统级别的虚拟技术，中间的损耗几乎可以不计。&lt;/p&gt;
+&lt;h3 id=&#34;docker架构2各个模块的功能带完善&#34;&gt;&lt;strong&gt;docker架构2各个模块的功能（带完善）&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;主要的模块有：Docker Client、Docker Daemon、Docker Registry、Graph、Driver、libcontainer以及Docker container。　　　&lt;/p&gt;
+&lt;h4 id=&#34;1docker-client&#34;&gt;&lt;strong&gt;1、docker client&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;docker client 是docker架构中用户用来和docker daemon建立通信的客户端，用户使用的可执行文件为docker，通过docker命令行工具可以发起众多管理container的请求。&lt;/p&gt;
+&lt;p&gt;docker client可以通过一下三宗方式和docker daemon建立通信：tcp://host:port;unix:path_to_socket;fd://socketfd。，docker client可以通过设置命令行flag参数的形式设置安全传输层协议(TLS)的有关参数，保证传输的安全性。&lt;/p&gt;
+&lt;p&gt;docker client发送容器管理请求后，由docker daemon接受并处理请求，当docker client 接收到返回的请求相应并简单处理后，docker client 一次完整的生命周期就结束了，当需要继续发送容器管理请求时，用户必须再次通过docker可以执行文件创建docker client。&lt;/p&gt;
+&lt;h4 id=&#34;2docker-daemon&#34;&gt;&lt;strong&gt;2、docker daemon&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;docker daemon 是docker架构中一个常驻在后台的系统进程，功能是：接收处理docker client发送的请求。该守护进程在后台启动一个server，server负载接受docker client发送的请求；接受请求后，server通过路由与分发调度，找到相应的handler来执行请求。&lt;/p&gt;
+&lt;p&gt;docker daemon启动所使用的可执行文件也为docker，与docker client启动所使用的可执行文件docker相同，在docker命令执行时，通过传入的参数来判别docker daemon与docker client。&lt;/p&gt;
+&lt;p&gt;docker daemon的架构可以分为：docker server、engine、job。daemon&lt;/p&gt;
+&lt;h4 id=&#34;3docker-server&#34;&gt;&lt;strong&gt;3、docker server&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;docker server在docker架构中时专门服务于docker client的server，该server的功能时：接受并调度分发docker client发送的请求，架构图如下：&lt;/p&gt;
+&lt;p&gt;　　　　&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922233.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在Docker的启动过程中，通过包gorilla/mux（golang的类库解析），创建了一个mux.Router，提供请求的路由功能。在Golang中，gorilla/mux是一个强大的URL路由器以及调度分发器。该mux.Router中添加了众多的路由项，每一个路由项由HTTP请求方法（PUT、POST、GET或DELETE）、URL、Handler三部分组成。&lt;/p&gt;
+&lt;p&gt;若Docker Client通过HTTP的形式访问Docker Daemon，创建完mux.Router之后，Docker将Server的监听地址以及mux.Router作为参数，创建一个httpSrv=http.Server{}，最终执行httpSrv.Serve()为请求服务。&lt;/p&gt;
+&lt;p&gt;在Server的服务过程中，Server在listener上接受Docker Client的访问请求，并创建一个全新的goroutine来服务该请求。在goroutine中，首先读取请求内容，然后做解析工作，接着找到相应的路由项，随后调用相应的Handler来处理该请求，最后Handler处理完请求之后回复该请求。&lt;/p&gt;
+&lt;p&gt;需要注意的是：Docker Server的运行在Docker的启动过程中，是靠一个名为”serveapi”的job的运行来完成的。原则上，Docker Server的运行是众多job中的一个，但是为了强调Docker Server的重要性以及为后续job服务的重要特性，将该”serveapi”的job单独抽离出来分析，理解为Docker Server。&lt;/p&gt;
+&lt;h4 id=&#34;4engine&#34;&gt;&lt;strong&gt;4、engine&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Engine是Docker架构中的运行引擎，同时也Docker运行的核心模块。它扮演Docker container存储仓库的角色，并且通过执行job的方式来操纵管理这些容器。&lt;/p&gt;
+&lt;p&gt;在Engine数据结构的设计与实现过程中，有一个handler对象。该handler对象存储的都是关于众多特定job的handler处理访问。举例说明，Engine的handler对象中有一项为：{“create”: daemon.ContainerCreate,}，则说明当名为”create”的job在运行时，执行的是daemon.ContainerCreate的handler。&lt;/p&gt;
+&lt;h4 id=&#34;5job&#34;&gt;&lt;strong&gt;5、job&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;一个Job可以认为是Docker架构中Engine内部最基本的工作执行单元。Docker可以做的每一项工作，都可以抽象为一个job。例如：在容器内部运行一个进程，这是一个job；创建一个新的容器，这是一个job，从Internet上下载一个文档，这是一个job；包括之前在Docker Server部分说过的，创建Server服务于HTTP的API，这也是一个job，等等。&lt;/p&gt;
+&lt;p&gt;Job的设计者，把Job设计得与Unix进程相仿。比如说：Job有一个名称，有参数，有环境变量，有标准的输入输出，有错误处理，有返回状态等。&lt;/p&gt;
+&lt;h4 id=&#34;6docker-registry&#34;&gt;&lt;strong&gt;6、docker registry&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Docker Registry是一个存储容器镜像的仓库。而容器镜像是在容器被创建时，被加载用来初始化容器的文件架构与目录。&lt;/p&gt;
+&lt;p&gt;在Docker的运行过程中，Docker Daemon会与Docker Registry通信，并实现搜索镜像、下载镜像、上传镜像三个功能，这三个功能对应的job名称分别为”search”，”pull” 与 “push”。&lt;/p&gt;
+&lt;p&gt;其中，在Docker架构中，Docker可以使用公有的Docker Registry，即大家熟知的Docker Hub，如此一来，Docker获取容器镜像文件时，必须通过互联网访问Docker Hub；同时Docker也允许用户构建本地私有的Docker Registry，这样可以保证容器镜像的获取在内网完成。&lt;/p&gt;
+&lt;h4 id=&#34;7graph&#34;&gt;&lt;strong&gt;7、Graph&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Graph在Docker架构中扮演已下载容器镜像的保管者，以及已下载容器镜像之间关系的记录者。一方面，Graph存储着本地具有版本信息的文件系统镜像，另一方面也通过GraphDB记录着所有文件系统镜像彼此之间的关系。&lt;/p&gt;
+&lt;p&gt;Graph的架构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572599922235.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其中，GraphDB是一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系。&lt;/p&gt;
+&lt;p&gt;同时在Graph的本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs。&lt;/p&gt;
+&lt;h4 id=&#34;8driver&#34;&gt;&lt;strong&gt;8、driver&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Driver是Docker架构中的驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境的定制。由于Docker运行的生命周期中，并非用户所有的操作都是针对Docker容器的管理，另外还有关于Docker运行信息的获取，Graph的存储与记录等。因此，为了将Docker容器的管理从Docker Daemon内部业务逻辑中区分开来，设计了Driver层驱动来接管所有这部分请求。&lt;/p&gt;
+&lt;p&gt;在Docker Driver的实现中，可以分为以下三类驱动：graphdriver、networkdriver和execdriver。&lt;/p&gt;
+&lt;p&gt;graphdriver主要用于完成容器镜像的管理，包括存储与获取。即当用户需要下载指定的容器镜像时，graphdriver将容器镜像存储在本地的指定目录；同时当用户需要使用指定的容器镜像来创建容器的rootfs时，graphdriver从本地镜像存储目录中获取指定的容器镜像。&lt;/p&gt;
+&lt;p&gt;在graphdriver的初始化过程之前，有4种文件系统或类文件系统在其内部注册，它们分别是aufs、btrfs、vfs和devmapper。而Docker在初始化之时，通过获取系统环境变量”DOCKER_DRIVER”来提取所使用driver的指定类型。而之后所有的graph操作，都使用该driver来执行。&lt;/p&gt;
+&lt;p&gt;graphdriver的架构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572600680712.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;networkdriver的用途是完成Docker容器网络环境的配置，其中包括Docker启动时为Docker环境创建网桥；Docker容器创建时为其创建专属虚拟网卡设备；以及为Docker容器分配IP、端口并与宿主机做端口映射，设置容器防火墙策略等。networkdriver的架构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572600696159.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;execdriver作为Docker容器的执行驱动，负责创建容器运行命名空间，负责容器资源使用的统计与限制，负责容器内部进程的真正运行等。在execdriver的实现过程中，原先可以使用LXC驱动调用LXC的接口，来操纵容器的配置以及生命周期，而现在execdriver默认使用native驱动，不依赖于LXC。&lt;/p&gt;
+&lt;p&gt;具体体现在Daemon启动过程中加载的ExecDriverflag参数，该参数在配置文件已经被设为”native”。这可以认为是Docker在1.2版本上一个很大的改变，或者说Docker实现跨平台的一个先兆。execdriver架构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572600706623.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;9libcontainer&#34;&gt;&lt;strong&gt;9、libcontainer&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;libcontainer是Docker架构中一个使用Go语言设计实现的库，设计初衷是希望该库可以不依靠任何依赖，直接访问内核中与容器相关的API。&lt;/p&gt;
+&lt;p&gt;正是由于libcontainer的存在，Docker可以直接调用libcontainer，而最终操纵容器的namespace、cgroups、apparmor、网络设备以及防火墙规则等。这一系列操作的完成都不需要依赖LXC或者其他包。libcontainer架构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572600714042.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;另外，libcontainer提供了一整套标准的接口来满足上层对容器管理的需求。或者说，libcontainer屏蔽了Docker上层对容器的直接管理。又由于libcontainer使用Go这种跨平台的语言开发实现，且本身又可以被上层多种不同的编程语言访问，因此很难说，未来的Docker就一定会紧紧地和Linux捆绑在一起。而于此同时，Microsoft在其著名云计算平台Azure中，也添加了对Docker的支持，可见Docker的开放程度与业界的火热度。&lt;/p&gt;
+&lt;p&gt;暂不谈Docker，由于libcontainer的功能以及其本身与系统的松耦合特性，很有可能会在其他以容器为原型的平台出现，同时也很有可能催生出云计算领域全新的项目。&lt;/p&gt;
+&lt;h4 id=&#34;10docker-container&#34;&gt;&lt;strong&gt;10、docker container&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Docker container（Docker容器）是Docker架构中服务交付的最终体现形式。&lt;/p&gt;
+&lt;p&gt;Docker按照用户的需求与指令，订制相应的Docker容器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户通过指定容器镜像，使得Docker容器可以自定义rootfs等文件系统；&lt;/li&gt;
+&lt;li&gt;用户通过指定计算资源的配额，使得Docker容器使用指定的计算资源；&lt;/li&gt;
+&lt;li&gt;用户通过配置网络及其安全策略，使得Docker容器拥有独立且安全的网络环境；&lt;/li&gt;
+&lt;li&gt;用户通过指定运行的命令，使得Docker容器执行指定的工作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-detail/640-1572600728419.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;理解容器和镜像&#34;&gt;理解容器和镜像&lt;/h2&gt;
+&lt;p&gt;这篇文章希望能够帮助读者深入理解Docker的命令，还有容器（container）和镜像（image）之间的区别，并深入探讨容器和运行中的容器之间的区别。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/d6ad9c257d160164480b25b278f4a2ad.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115301_427.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;当我对Docker技术还是一知半解的时候，我发现理解Docker的命令非常困难。于是，我花了几周的时间来学习Docker的工作原理，更确 切地说，是关于Docker统一文件系统（the union file system）的知识，然后回过头来再看Docker的命令，一切变得顺理成章，简单极了。&lt;/p&gt;
+&lt;p&gt;题外话：就我个人而言，掌握一门技术并合理使用它的最好办法就是深入理解这项技术背后的工作原理。通常情况 下，一项新技术的诞生常常会伴随着媒体的大肆宣传和炒作，这使得用户很难看清技术的本质。更确切地说，新技术总是会发明一些新的术语或者隐喻词来帮助宣 传，这在初期是非常有帮助的，但是这给技术的原理蒙上了一层砂纸，不利于用户在后期掌握技术的真谛。&lt;/p&gt;
+&lt;p&gt;Git就是一个很好的例子。我之前不能够很好的使用Git，于是我花了一段时间去学习Git的原理，直到这时，我才真正明白了Git的用法。我坚信只有真正理解Git内部原理的人才能够掌握这个工具。&lt;/p&gt;
+&lt;h3 id=&#34;image-definition&#34;&gt;Image Definition&lt;/h3&gt;
+&lt;p&gt;镜像（Image）就是一堆只读层（read-only layer）的统一视角，也许这个定义有些难以理解，下面的这张图能够帮助读者理解镜像的定义。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/522c40256149bad2b471d1a97c2b6bb5.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115301_703.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;从左边我们看到了多个只读层，它们重叠在一起。除了最下面一层，其它层都会有一个指针指向下一层。这些层是Docker内部的实现细节，并且能够 在主机（译者注：运行Docker的机器）的文件系统上访问到。统一文件系统（union file system）技术能够将不同的层整合成一个文件系统，为这些层提供了一个统一的视角，这样就隐藏了多层的存在，在用户的角度看来，只存在一个文件系统。 我们可以在图片的右边看到这个视角的形式。&lt;/p&gt;
+&lt;p&gt;你可以在你的主机文件系统上找到有关这些层的文件。需要注意的是，在一个运行中的容器内部，这些层是不可见的。在我的主机上，我发现它们存在于/var/lib/docker/aufs目录下。&lt;/p&gt;
+&lt;h3 id=&#34;sudo-tree--l-1-varlibdocker&#34;&gt;sudo tree -L 1 /var/lib/docker/&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/var/lib/docker/
+├── aufs
+├── containers
+├── graph
+├── init
+├── linkgraph.db
+├── repositories-aufs
+├── tmp
+├── trust
+└── volumes
+7 directories, 2 files
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;container-definition&#34;&gt;Container Definition&lt;/h3&gt;
+&lt;p&gt;容器（container）的定义和镜像（image）几乎一模一样，也是一堆层的统一视角，唯一区别在于容器的最上面那一层是可读可写的。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/b7fb9d924aa12099369c4793050fcfab.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115302_58.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;细心的读者可能会发现，容器的定义并没有提及容器是否在运行，没错，这是故意的。正是这个发现帮助我理解了很多困惑。&lt;/p&gt;
+&lt;p&gt;要点：容器 = 镜像 + 可读层。并且容器的定义并没有提及是否要运行容器。&lt;/p&gt;
+&lt;p&gt;接下来，我们将会讨论运行态容器。&lt;/p&gt;
+&lt;h3 id=&#34;running-container-definition&#34;&gt;Running Container Definition&lt;/h3&gt;
+&lt;p&gt;一个运行态容器（running container）被定义为一个可读写的统一文件系统加上隔离的进程空间和包含其中的进程。下面这张图片展示了一个运行中的容器。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/8022edeebeb313742bd615aa695bbad3.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115302_576.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;正是文件系统隔离技术使得Docker成为了一个前途无量的技术。一个容器中的进程可能会对文件进行修改、删除、创建，这些改变都将作用于可读写层（read-write layer）。下面这张图展示了这个行为。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/1dc88de5a114b68d05c37aab7e103597.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115302_268.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们可以通过运行以下命令来验证我们上面所说的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run ubuntu touch happiness.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;即便是这个ubuntu容器不再运行，我们依旧能够在主机的文件系统上找到这个新文件。&lt;/p&gt;
+&lt;h3 id=&#34;find---name-happinesstxt&#34;&gt;find / -name happiness.txt&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/var/lib/docker/aufs/diff/860a7b...889/happiness.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;image-layer-definition&#34;&gt;Image Layer Definition&lt;/h3&gt;
+&lt;p&gt;为了将零星的数据整合起来，我们提出了镜像层（image layer）这个概念。下面的这张图描述了一个镜像层，通过图片我们能够发现一个层并不仅仅包含文件系统的改变，它还能包含了其他重要信息。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/e42d56394306894244af5bc6d757bee1.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115302_80.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;元数据（metadata）就是关于这个层的额外信息，它不仅能够让Docker获取运行和构建时的信息，还包括父层的层次信息。需要注意，只读层和读写层都包含元数据。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/5cca590212e2a110be84cbdd3b6101ee.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115302_513.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;除此之外，每一层都包括了一个指向父层的指针。如果一个层没有这个指针，说明它处于最底层。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/1ead4d955aeb5d968219794489948fc2.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115303_299.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Metadata Location: 
+我发现在我自己的主机上，镜像层（image layer）的元数据被保存在名为”json”的文件中，比如说：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/var/lib/docker/graph/e809f156dc985.../json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;e809f156dc985&amp;hellip;就是这层的id&lt;/p&gt;
+&lt;p&gt;一个容器的元数据好像是被分成了很多文件，但或多或少能够在/var/lib/docker/containers/&lt;!-- raw HTML omitted --&gt;目录下找到，&lt;!-- raw HTML omitted --&gt;就是一个可读层的id。这个目录下的文件大多是运行时的数据，比如说网络，日志等等。&lt;/p&gt;
+&lt;h3 id=&#34;全局理解tying-it-all-together&#34;&gt;全局理解（Tying It All Together）&lt;/h3&gt;
+&lt;p&gt;现在，让我们结合上面提到的实现细节来理解Docker的命令。&lt;/p&gt;
+&lt;h4 id=&#34;docker-create-image-id&#34;&gt;docker create &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/1397bbddca6651a3ae0316daa8d6d1cd.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115303_594.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker create 命令为指定的镜像（image）添加了一个可读写层，构成了一个新的容器。注意，这个容器并没有运行。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/bbe622329b399778b077617ae6468676.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115303_843.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;docker-start-container-id&#34;&gt;docker start &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/3f08537e309b923d049fdde3d3a1f926.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115303_670.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Docker start命令为容器文件系统创建了一个进程隔离空间。注意，每一个容器只能够有一个进程隔离空间。&lt;/p&gt;
+&lt;h4 id=&#34;docker-run-image-id&#34;&gt;docker run &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/4178f2b64f6a2eeb994866931417f263.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115303_318.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;看到这个命令，读者通常会有一个疑问：docker start 和 docker run命令有什么区别。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/ea18907dedcd8893b39ae1f9e3ad8a3e.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115304_352.png&#34; alt=&#34;7.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;从图片可以看出，docker run 命令先是利用镜像创建了一个容器，然后运行这个容器。这个命令非常的方便，并且隐藏了两个命令的细节，但从另一方面来看，这容易让用户产生误解。&lt;/p&gt;
+&lt;p&gt;题外话：继续我们之前有关于Git的话题，我认为docker run命令类似于git pull命令。git pull命令就是git fetch 和 git merge两个命令的组合，同样的，docker run就是docker create和docker start两个命令的组合。&lt;/p&gt;
+&lt;h4 id=&#34;docker-ps&#34;&gt;docker ps&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/fafeb4eb072e64b54b9979930a6d8db7.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115304_250.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker ps 命令会列出所有运行中的容器。这隐藏了非运行态容器的存在，如果想要找出这些容器，我们需要使用下面这个命令。&lt;/p&gt;
+&lt;h4 id=&#34;docker-ps-a&#34;&gt;docker ps –a&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/120d394e57a03a5bb996b23e6e373cf1.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115304_237.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker ps –a命令会列出所有的容器，不管是运行的，还是停止的。&lt;/p&gt;
+&lt;h4 id=&#34;docker-images&#34;&gt;docker images&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/f8b34de7f7f325e2933aac5cc679e224.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115304_909.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker images命令会列出了所有顶层（top-level）镜像。实际上，在这里我们没有办法区分一个镜像和一个只读层，所以我们提出了top-level 镜像。只有创建容器时使用的镜像或者是直接pull下来的镜像能被称为顶层（top-level）镜像，并且每一个顶层镜像下面都隐藏了多个镜像层。&lt;/p&gt;
+&lt;h4 id=&#34;docker-images-a&#34;&gt;docker images –a&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/6b3d2d1cae5a26961dc554fc05783b22.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115305_620.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker images –a命令列出了所有的镜像，也可以说是列出了所有的可读层。如果你想要查看某一个image-id下的所有层，可以使用docker history来查看。&lt;/p&gt;
+&lt;h4 id=&#34;docker-stop-container-id&#34;&gt;docker stop &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/081cf8fbe8ab4dea4130ce2f25eae071.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115306_454.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker stop命令会向运行中的容器发送一个SIGTERM的信号，然后停止所有的进程。&lt;/p&gt;
+&lt;h4 id=&#34;docker-kill-container-id&#34;&gt;docker kill &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/8aeee0c4c1134ee9d0c2200e03defcf4.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115306_977.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker kill 命令向所有运行在容器中的进程发送了一个不友好的SIGKILL信号。&lt;/p&gt;
+&lt;h4 id=&#34;docker-pause-container-id&#34;&gt;docker pause &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/2b34576a2187a972d4cc1cf9346658e2.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115306_230.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker stop和docker kill命令会发送UNIX的信号给运行中的进程，docker pause命令则不一样，它利用了cgroups的特性将运行中的进程空间暂停。具体的内部原理你可以在这里找到：&lt;a href=&#34;https://www.kernel.org/doc/Documentation/cgroups/freezer-subsystem.txt&#34;&gt;https://www.kernel.org/doc/Doc &amp;hellip; m.txt&lt;/a&gt;，但是这种方式的不足之处在于发送一个SIGTSTP信号对于进程来说不够简单易懂，以至于不能够让所有进程暂停。&lt;/p&gt;
+&lt;h4 id=&#34;docker-rm-container-id&#34;&gt;docker rm &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/bba4521356b43813a634a0859fa53743.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115306_974.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker rm命令会移除构成容器的可读写层。注意，这个命令只能对非运行态容器执行。&lt;/p&gt;
+&lt;h4 id=&#34;docker-rmi-image-id&#34;&gt;docker rmi &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/df0fadb17158696cdce49a8e30f8c4c4.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115307_574.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker rmi 命令会移除构成镜像的一个只读层。你只能够使用docker rmi来移除最顶层（top level layer）（也可以说是镜像），你也可以使用-f参数来强制删除中间的只读层。&lt;/p&gt;
+&lt;h4 id=&#34;docker-commit-container-id&#34;&gt;docker commit &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/f642149d0144c83679dd228c93a91a37.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115307_730.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker commit命令将容器的可读写层转换为一个只读层，这样就把一个容器转换成了不可变的镜像。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/a206a291a8d4b9c968061b853f92ad4e.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115307_969.png&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;docker-build&#34;&gt;docker build&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/d569d50a2c6cb4cdb07eb4cfc0712ab0.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115307_796.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker build命令非常有趣，它会反复的执行多个命令。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151103/17f6091cc228e14eb151cc8909b4ab00.png&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115308_396.png&#34; alt=&#34;9.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们从上图可以看到，build命令根据Dockerfile文件中的FROM指令获取到镜像，然后重复地1）run（create和start）、2）修改、3）commit。在循环中的每一步都会生成一个新的层，因此许多新的层会被创建。&lt;/p&gt;
+&lt;h4 id=&#34;docker-exec-running-container-id&#34;&gt;docker exec &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/91b0fd6b6b3c0d372eafbe40221835a8.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115308_659.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker exec 命令会在运行中的容器执行一个新进程。&lt;/p&gt;
+&lt;h4 id=&#34;docker-inspect-container-id-or-image-id&#34;&gt;docker inspect &lt;!-- raw HTML omitted --&gt; or &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/eb03a3d750a4da43fc5825d8336314c1.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115308_430.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker inspect命令会提取出容器或者镜像最顶层的元数据。&lt;/p&gt;
+&lt;h4 id=&#34;docker-save-image-id&#34;&gt;docker save &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/db73c5aad485bbacb3e97d0a8ddcdea4.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115309_345.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker save命令会创建一个镜像的压缩文件，这个文件能够在另外一个主机的Docker上使用。和export命令不同，这个命令为每一个层都保存了它们的元数据。这个命令只能对镜像生效。&lt;/p&gt;
+&lt;h4 id=&#34;docker-export-container-id&#34;&gt;docker export &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/a766de204b53f10d5f56c36955b6b0ee.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115309_215.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker export命令创建一个tar文件，并且移除了元数据和不必要的层，将多个层整合成了一个层，只保存了当前统一视角看到的内容（译者注：expoxt后 的容器再import到Docker中，通过docker images –tree命令只能看到一个镜像；而save后的镜像则不同，它能够看到这个镜像的历史镜像）。&lt;/p&gt;
+&lt;h4 id=&#34;docker-history-image-id&#34;&gt;docker history &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://dockerone.com/uploads/article/20151031/f20de692d890a55b84ee5540c62e054e.jpg&#34;&gt;&lt;img src=&#34;2020-04-12-docker-detail/docker-diff/20151105115309_191.jpg&#34; alt=&#34; 10张图带你深入理解Docker容器和镜像&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker history命令递归地输出指定镜像的历史镜像。&lt;/p&gt;
+&lt;h2 id=&#34;查看docker运行信息&#34;&gt;查看docker运行信息&lt;/h2&gt;
+&lt;p&gt;docker inspect 会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker inspect NAMES 
+# 查看容器所有状态信息；
+
+docker inspect --format=&#39;{{.NetworkSettings.IPAddress}}&#39; ID/NAMES
+# 查看 容器ip 地址
+
+docker inspect --format &#39;{{.Name}} {{.State.Running}}&#39; NAMES
+# 容器运行状态
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;查看进程信息&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker top NAMES
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;查看端口；(使用容器ID 或者 容器名称)&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker port ID/NAMES
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;查看IP地址 也可以直接通过用 远程执行命令也可以&lt;/strong&gt;（Centos7）；&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker exec -it ID/NAMES ip addr 
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;docker-的安装及使用&#34;&gt;docker 的安装及使用&lt;/h2&gt;
+&lt;h3 id=&#34;简单介绍&#34;&gt;简单介绍&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;docker 是一个开源的软件部署解决方案
+docker 也是轻量级的应用容器框架
+docker 可以打包、发布、运行任何的应用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;阿里云&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;daocloud&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt; curl -sSL https://get.daocloud.io/docker | sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装后将会自动重启&lt;/p&gt;
+&lt;h3 id=&#34;卸载&#34;&gt;卸载&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get remove docker docker-engine
+rm -fr /var/lib/docker/
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;配置加速器&#34;&gt;配置加速器&lt;/h3&gt;
+&lt;p&gt;下面是我的配置，实际使用需要根据自己的账号去查看自己的地址&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.daocloud.io/mirror#accelerator-doc&#34;&gt;DaoCloud&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://ced808ab.m.daocloud.io
+sudo systemctl restart docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://cr.console.aliyun.com/cn-hangzhou/mirrors&#34;&gt;阿里云&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &amp;lt;&amp;lt;-&#39;EOF&#39;
+{
+  &amp;quot;registry-mirrors&amp;quot;: [&amp;quot;https://dist7hw1.mirror.aliyuncs.com&amp;quot;]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;基础命令&#34;&gt;基础命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;查看版本:&lt;code&gt;docker -v&lt;/code&gt; //文章使用版本：Docker version 18.06.0-ce, build 0ffa825&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看镜像：&lt;code&gt;docker images&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看容器：&lt;code&gt;docker ps&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动 docker 服务：&lt;code&gt;sudo service docker start&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;停止 docker 服务：&lt;code&gt;sudo service docker stop&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启 docker 服务：&lt;code&gt;sudo service docker restart&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进入一个运行中的容器：&lt;code&gt;docker exec -it 容器Id /bin/bash&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通过-dockerfile-使用-nginx&#34;&gt;通过 Dockerfile 使用 nginx&lt;/h3&gt;
+&lt;p&gt;通过下面的一个脚本可以简单快速的创建一个镜像并运行起来
+大概看下应该就可以大概明白镜像的基本使用了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &#39;0.创建测试目录及代码&#39;
+mkdir dockerfiletest
+cd dockerfiletest
+mkdir dist
+echo &#39;hello world&#39;&amp;gt;./dist/index.html
+
+echo &#39;1.创建Dockerfile&#39;
+echo &#39;
+From daocloud.io/library/nginx:1.13.0-alpine
+COPY dist/ /usr/share/nginx/html/
+&#39;&amp;gt;./Dockerfile
+
+echo &#39;2.构建镜像&#39;
+docker build -t dockerfiletest .
+
+echo &#39;3.运行镜像&#39;
+docker run -p 3344:80 dockerfiletest
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;下面分步拆解下&lt;/p&gt;
+&lt;h4 id=&#34;1添加-dockerfile-文件&#34;&gt;1.添加 Dockerfile 文件&lt;/h4&gt;
+&lt;p&gt;详细请参考：https://hub.daocloud.io/repos/2b7310fb-1a50-48f2-9586-44622a2d1771&lt;/p&gt;
+&lt;p&gt;html 的简单部署&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;From daocloud.io/library/nginx:1.13.0-alpine
+# 将发布目录的文件拷贝到镜像中
+COPY dist/ /usr/share/nginx/html/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;若要使用自己的配置脚本，比如 vue 的配置,可以将自己的配置文件复制到容器中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;From daocloud.io/library/nginx:1.13.0-alpine
+# 删除镜像中 nginx 的默认配置
+RUN rm /etc/nginx/conf.d/default.conf
+# 复制 default.conf 到镜像中
+ADD default.conf /etc/nginx/conf.d/
+# 将发布目录的文件拷贝到镜像中
+COPY dist/ /usr/share/nginx/html/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;nginx 中 vue history 模式的配置 如下，可参考&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server {
+    listen       80;
+    location / {
+        root /usr/share/nginx/html/;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;若是将&lt;code&gt;/usr/share/nginx/html/&lt;/code&gt;和&lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;挂载到本地，这样应该能够灵活使用 docker 安装的 nginx 了(未实践过)&lt;/del&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2构建镜像&#34;&gt;2.构建镜像&lt;/h4&gt;
+&lt;p&gt;构建参数说明参考：http://www.runoob.com/docker/docker-build-command.html&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker build -t docker-nginx-test .
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;3运行镜像&#34;&gt;3.运行镜像&lt;/h4&gt;
+&lt;p&gt;&amp;ndash;name 服务名
+-d 后台运行
+-p 暴露端口:nginx 端口
+docker-nginx-test 镜像名/IMAGE ID&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run --name dockertest -d -p 4455:80 docker-nginx-test
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;4测试访问&#34;&gt;4.测试访问&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;root@ubuntu:~# curl http://localhost:4455
+hello world
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;现在，可以通过 IP+端口的形式在外网访问站点了，但在实际使用肯定还需要绑定域名等一些操作
+最简单的是我认为是使用 nginx 去做代理
+目前我们公司使用的 &lt;a href=&#34;https://traefik.io/&#34;&gt;traefik&lt;/a&gt; ，最爽的莫过于 https 的支持，可以了解一下&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;5基础操作&#34;&gt;5.基础操作&lt;/h4&gt;
+&lt;p&gt;1 &lt;strong&gt;docker images&lt;/strong&gt; 查看镜像信息列表 镜像是静态的&lt;/p&gt;
+&lt;p&gt;2 &lt;strong&gt;docker ps -a&lt;/strong&gt; 查看运行中的所有容器&lt;/p&gt;
+&lt;p&gt;3 **docker pull  [images]:[version]**从dockerhub拉取指定镜像&lt;/p&gt;
+&lt;p&gt;4 &lt;strong&gt;docker run -p 8000:80 -tdi &amp;ndash;privileged [imageID] [command]&lt;/strong&gt;  后台启动docker,并指定宿主机端口和docker映射端口。&lt;/p&gt;
+&lt;p&gt;**-i:**以交互模式运行容器，通常与 -t 同时使用；&lt;/p&gt;
+&lt;p&gt;**-d:**后台运行容器，并返回容器ID；&lt;/p&gt;
+&lt;p&gt;**-t:**为容器重新分配一个伪输入终端，通常与 -i 同时使用；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ndash;privileged&lt;/strong&gt; 容器将拥有访问主机所有设备的权限&lt;/p&gt;
+&lt;p&gt;通常情况下 [command] 填下 &lt;strong&gt;/bin/bash&lt;/strong&gt; 即可。&lt;/p&gt;
+&lt;p&gt;完整参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-a stdin:&lt;/strong&gt; 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-d:&lt;/strong&gt; 后台运行容器，并返回容器ID；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-i:&lt;/strong&gt; 以交互模式运行容器，通常与 -t 同时使用；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-P:&lt;/strong&gt; 随机端口映射，容器内部端口&lt;strong&gt;随机&lt;/strong&gt;映射到主机的高端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-p:&lt;/strong&gt; 指定端口映射，格式为：&lt;strong&gt;主机(宿主)端口:容器端口&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-t:&lt;/strong&gt; 为容器重新分配一个伪输入终端，通常与 -i 同时使用；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;name=&amp;quot;nginx-lb&amp;rdquo;:&lt;/strong&gt; 为容器指定一个名称；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;dns 8.8.8.8:&lt;/strong&gt; 指定容器使用的DNS服务器，默认和宿主一致；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;dns-search example.com:&lt;/strong&gt; 指定容器DNS搜索域名，默认和宿主一致；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-h &amp;ldquo;mars&amp;rdquo;:&lt;/strong&gt; 指定容器的hostname；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-e username=&amp;quot;ritchie&amp;rdquo;:&lt;/strong&gt; 设置环境变量；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;env-file=[]:&lt;/strong&gt; 从指定文件读入环境变量；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;cpuset=&amp;quot;0-2&amp;rdquo; or &amp;ndash;cpuset=&amp;quot;0,1,2&amp;rdquo;:&lt;/strong&gt; 绑定容器到指定CPU运行；&lt;/li&gt;
+&lt;li&gt;**-m :**设置容器使用内存最大值；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;net=&amp;quot;bridge&amp;rdquo;:&lt;/strong&gt; 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;link=[]:&lt;/strong&gt; 添加链接到另一个容器；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;expose=[]:&lt;/strong&gt; 开放一个端口或一组端口；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;volume , -v:&lt;/strong&gt; 绑定一个卷&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;特殊情况下，如需要在centos镜像中使用&lt;strong&gt;systemctl&lt;/strong&gt; . 则应添加**&amp;ndash;privileged** 并设置[command ]为 **init**。&lt;/p&gt;
+&lt;p&gt;5 当镜像通过run 启动后，便会载入到一个动态的container(容器)中运行，此时若需要进入终端交互模式：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sudo docker exec -it [containerID] /bin/bash&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;交互模式中，使用  ctrl+p+q退出交互 保持运行,使用 exit命令退出并停止容器。&lt;/p&gt;
+&lt;p&gt;6 在容器非交互模式下，通过docker  start/stop 命令来启动/停止已部署的容器服务。&lt;/p&gt;
+&lt;p&gt;7 &lt;strong&gt;docker rm [containerID]&lt;/strong&gt; 删除容器&lt;/p&gt;
+&lt;p&gt;8 &lt;strong&gt;docker rmi [imageID]&lt;/strong&gt; 删除镜像&lt;/p&gt;
+&lt;p&gt;9 &lt;strong&gt;docker cp [YourHostFilePath] [containerID]:[DockerPath]&lt;/strong&gt;  将宿主机内的指定文件传输至容器内部的指定地址。&lt;/p&gt;
+&lt;p&gt;10 &lt;strong&gt;docker logs -f  [containerID]  &amp;ndash;tail 10 -t&lt;/strong&gt; 查看日志，使用 &lt;code&gt;-f&lt;/code&gt; 参数后，就可以查看实时日志了，&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;--tail&lt;/code&gt; 参数可以精确控制日志的输出行数， &lt;code&gt;-t&lt;/code&gt; 参数则可以显示日志的输出时间。&lt;/p&gt;
+&lt;h4 id=&#34;6镜像制作&#34;&gt;6.镜像制作&lt;/h4&gt;
+&lt;p&gt;1  &lt;strong&gt;docker commit [containerID] [ImageName]:[Version]&lt;/strong&gt; 将修改后的容器重新打包成镜像&lt;/p&gt;
+&lt;p&gt;2 &lt;strong&gt;docker commit -a &amp;ldquo;runoob.com&amp;rdquo; -m &amp;ldquo;my apache&amp;rdquo; a404c6c174a2 mymysql:v1&lt;/strong&gt; 将容器a404c6c174a2 保存为新的镜像,并添加提交人信息和说明信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;-a&lt;/strong&gt; :提交的镜像作者；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;-c&lt;/strong&gt; :使用Dockerfile指令来创建镜像；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;-m&lt;/strong&gt; :提交时的说明文字；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;-p&lt;/strong&gt; :在commit时，将容器暂停。&lt;/p&gt;
+&lt;p&gt;3 **docker push [ImageID] [repertory_address]**提交镜像到云仓库&lt;/p&gt;
+&lt;h2 id=&#34;docker容器及镜像清理&#34;&gt;docker容器及镜像清理&lt;/h2&gt;
+&lt;p&gt;To clean up, all unused containers, images, network, and volumes, use the following command.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker system prune
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Recommended:&lt;/strong&gt; &lt;a href=&#34;http://skillslane.com/offer/learn-docker-technologies-devops-developers/&#34;&gt;Learn Docker Technologies for DevOps and Developers 53&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To individually delete all the components, use the following commands.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker container prune
+docker image prune
+docker network prune
+docker volume prune
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For Docker versions below 1.13&lt;/p&gt;
+&lt;p&gt;To clean up containers, first, you need to clean up your containers. So that all the unwanted images can be deleted without dependency problems.&lt;/p&gt;
+&lt;p&gt;Delete all Exited Containers&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;docker rm $(docker ps -q -f status=exited)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Delete all Stopped Containers&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;docker rm $(docker ps -a -q)
+####Delete All Running and Stopped Containers
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;delete-all-none-images&#34;&gt;Delete all “none” Images&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;docker rmi $(docker images | grep &amp;quot;^&amp;lt;none&amp;gt;&amp;quot; | awk &#39;{ print $3 }&#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;delete-all-dangling-images&#34;&gt;Delete all Dangling Images&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker rmi $(sudo docker images -f &amp;quot;dangling=true&amp;quot; -q)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Update Sept. 2016: Docker 1.13: &lt;a href=&#34;https://github.com/docker/docker/pull/26108&#34;&gt;PR 26108&lt;/a&gt; and &lt;a href=&#34;https://github.com/docker/docker/commit/86de7c000f5d854051369754ad1769194e8dd5e1&#34;&gt;commit 86de7c0&lt;/a&gt; introduce a few new commands to help facilitate visualizing how much space the docker daemon data is taking on disk and allowing for easily cleaning up &amp;ldquo;unneeded&amp;rdquo; excess.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/engine/reference/commandline/system_prune/&#34;&gt;&lt;strong&gt;docker system prune&lt;/strong&gt;&lt;/a&gt; will delete ALL dangling data (i.e. In order: containers stopped, volumes without containers and images with no containers). Even unused data, with &lt;code&gt;-a&lt;/code&gt; option.&lt;/p&gt;
+&lt;p&gt;You also have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/engine/reference/commandline/container_prune/&#34;&gt;&lt;code&gt;docker container prune&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/engine/reference/commandline/image_prune/&#34;&gt;&lt;code&gt;docker image prune&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/engine/reference/commandline/network_prune/&#34;&gt;&lt;code&gt;docker network prune&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/engine/reference/commandline/volume_prune/&#34;&gt;&lt;code&gt;docker volume prune&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For &lt;em&gt;unused&lt;/em&gt; images, use &lt;code&gt;docker image prune -a&lt;/code&gt; (for removing dangling &lt;em&gt;and&lt;/em&gt; ununsed images).
+Warning: &amp;lsquo;&lt;em&gt;unused&lt;/em&gt;&amp;rsquo; means &amp;ldquo;images not referenced by any container&amp;rdquo;: be careful before using &lt;code&gt;-a&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As illustrated in &lt;a href=&#34;https://stackoverflow.com/users/1207596/a-l&#34;&gt;A L&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://stackoverflow.com/a/50405599/6309&#34;&gt;answer&lt;/a&gt;, &lt;code&gt;docker system prune --all&lt;/code&gt; will remove all &lt;em&gt;unused&lt;/em&gt; images not just dangling ones&amp;hellip; which can be a bit too much.&lt;/p&gt;
+&lt;p&gt;Combining &lt;code&gt;docker xxx prune&lt;/code&gt; with the &lt;a href=&#34;https://docs.docker.com/engine/reference/commandline/system_prune/#filtering&#34;&gt;&lt;code&gt;--filter&lt;/code&gt; option&lt;/a&gt; can be a great way to limit the pruning (&lt;a href=&#34;https://docs.docker.com/develop/sdk/#api-version-matrix&#34;&gt;docker SDK API 1.28 minimum, so docker 17.04+&lt;/a&gt;)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The currently supported filters are:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;until (&amp;lt;timestamp&amp;gt;)&lt;/code&gt; - only remove containers, images, and networks created before given timestamp&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;label&lt;/code&gt; (&lt;code&gt;label=&amp;lt;key&amp;gt;&lt;/code&gt;, &lt;code&gt;label=&amp;lt;key&amp;gt;=&amp;lt;value&amp;gt;&lt;/code&gt;, &lt;code&gt;label!=&amp;lt;key&amp;gt;&lt;/code&gt;, or &lt;code&gt;label!=&amp;lt;key&amp;gt;=&amp;lt;value&amp;gt;&lt;/code&gt;) - only remove containers, images, networks, and volumes with (or &lt;em&gt;without&lt;/em&gt;, in case &lt;code&gt;label!=...&lt;/code&gt; is used) the specified labels.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See &amp;ldquo;&lt;a href=&#34;https://docs.docker.com/config/pruning/#prune-images&#34;&gt;Prune images&lt;/a&gt;&amp;rdquo; for an example.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Original answer (Sep. 2016)&lt;/p&gt;
+&lt;p&gt;I usually do:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker rmi $(docker images --filter &amp;quot;dangling=true&amp;quot; -q --no-trunc)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I have an [alias for removing those &lt;a href=&#34;https://github.com/docker/docker/blob/634a848b8e3bdd8aed834559f3b2e0dfc7f5ae3a/man/docker-images.1.md#options&#34;&gt;dangling images]&lt;/a&gt;&lt;a href=&#34;https://github.com/docker/docker/blob/634a848b8e3bdd8aed834559f3b2e0dfc7f5ae3a/man/docker-images.1.md#options&#34;&gt;13&lt;/a&gt;: &lt;code&gt;drmi&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;dangling=true&lt;/code&gt; filter finds unused images&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That way, any intermediate image no longer referenced by a labelled image is removed.&lt;/p&gt;
+&lt;p&gt;I do the same &lt;strong&gt;first&lt;/strong&gt; for &lt;a href=&#34;https://github.com/VonC/b2d/blob/b010ab51974ac7de6162cdcbff795d7b9e84fd67/.bash_aliases#L21&#34;&gt;exited processes (containers)&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;alias drmae=&#39;docker rm $(docker ps -qa --no-trunc --filter &amp;quot;status=exited&amp;quot;)&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As &lt;a href=&#34;https://stackoverflow.com/users/95750/haridsv&#34;&gt;haridsv&lt;/a&gt; points out &lt;a href=&#34;https://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images/32723127#comment63457575_32723127&#34;&gt;in the comments&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Technically, &lt;strong&gt;you should first clean up containers before cleaning up images, as this will catch more dangling images and less errors&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/jfrazelle&#34;&gt;Jess Frazelle (jfrazelle)&lt;/a&gt; has the &lt;a href=&#34;https://github.com/jfrazelle/dotfiles/blob/a7fd3df6ab423e6dd04f27727f653753453db837/.dockerfunc#L8-L11&#34;&gt;bashrc function&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dcleanup(){
+    docker rm -v $(docker ps --filter status=exited -q 2&amp;gt;/dev/null) 2&amp;gt;/dev/null
+    docker rmi $(docker images --filter dangling=true -q 2&amp;gt;/dev/null) 2&amp;gt;/dev/null
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;p&gt;To remove old images, and not just &amp;ldquo;unreferenced-dangling&amp;rdquo; images, you can consider &lt;a href=&#34;https://github.com/spotify/docker-gc&#34;&gt;&lt;strong&gt;docker-gc&lt;/strong&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker images --no-trunc --format &#39;{{.ID}} {{.CreatedSince}} {{.Repository}}&#39; \
+    | grep &#39; months&#39; | awk &#39;{ print $1 }&#39; \
+    | xargs --no-run-if-empty docker rmi
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Example of &lt;code&gt;/etc/cron.daily/docker-gc&lt;/code&gt; script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/sh -e
+
+# Delete all stopped containers (including data-only containers).
+docker ps -a -q --no-trunc --filter &amp;quot;status=exited&amp;quot; | xargs --no-run-if-empty docker rm -v
+
+# Delete all tagged images more than a month old
+# (will fail to remove images still used).
+docker images --no-trunc --format &#39;{{.ID}} {{.CreatedSince}}&#39; | grep &#39; months&#39; | awk &#39;{ print $1 }&#39; | xargs --no-run-if-empty docker rmi || true
+
+# Delete all &#39;untagged/dangling&#39; (&amp;lt;none&amp;gt;) images
+# Those are used for Docker caching mechanism.
+docker images -q --no-trunc --filter dangling=true | xargs --no-run-if-empty docker rmi
+
+# Delete all dangling volumes.
+docker volume ls -qf dangling=true | xargs --no-run-if-empty docker volume rm
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;docker-compose-的安装及使用&#34;&gt;docker-compose 的安装及使用&lt;/h2&gt;
+&lt;h3 id=&#34;简单介绍-1&#34;&gt;简单介绍&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker Compose 是一个用来定义和运行复杂应用的 Docker 工具。
+使用 Docker Compose 不再需要使用 shell 脚本来启动容器。(通过 docker-compose.yml 配置)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装-1&#34;&gt;安装&lt;/h3&gt;
+&lt;p&gt;可以通过修改 URL 中的版本，自定义您需要的版本。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Github源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Daocloud镜像&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &amp;gt; /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;卸载-1&#34;&gt;卸载&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;sudo rm /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;基础命令-1&#34;&gt;基础命令&lt;/h3&gt;
+&lt;p&gt;需要在 docker-compose.yml 所在文件夹中执行命令&lt;/p&gt;
+&lt;p&gt;使用 docker-compose 部署项目的简单步骤&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;停止现有 docker-compose 中的容器：&lt;code&gt;docker-compose down&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重新拉取镜像：&lt;code&gt;docker-compose pull&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;后台启动 docker-compose 中的容器：&lt;code&gt;docker-compose up -d&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面将介绍 &lt;code&gt;docker-compose&lt;/code&gt; 子命令的使用。也可以通过运行 &lt;code&gt;docker-compose --help&lt;/code&gt;来查看这些信息。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#build&#34;&gt;build&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#help&#34;&gt;help&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#kill&#34;&gt;kill&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ps&#34;&gt;ps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#restart&#34;&gt;restart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#run&#34;&gt;run&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#start&#34;&gt;start&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#up&#34;&gt;up&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#logs&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#port&#34;&gt;port&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pull&#34;&gt;pull&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#rm&#34;&gt;rm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#scale&#34;&gt;scale&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#stop&#34;&gt;stop&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;build&#34;&gt;build&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：build [options] [SERVICE...]
+选项：
+	--force-rm  总是移除构建过程中产生的中间项容器
+	--no-cache  构建镜像过程中不使用Cache
+	--pull      总是尝试获取更新版本的镜像
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;构建服务并打上&lt;code&gt;project_service&lt;/code&gt;风格的标签（如：&lt;code&gt;composetest_db&lt;/code&gt;）。如果你更改了服务的&lt;code&gt;Dockerfile&lt;/code&gt;或者构建目录下的内容，需要运行&lt;code&gt;docker-compose build&lt;/code&gt;重新构建服务。&lt;/p&gt;
+&lt;h4 id=&#34;help&#34;&gt;help&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：help COMMAND
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;显示命令的帮助信息及用法教程。&lt;/p&gt;
+&lt;h4 id=&#34;kill&#34;&gt;kill&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：kill [options] [SERVICE...]
+选项：
+	-s SIGNAL         SIGNAL 是发送给容器的信号量，默认是 SIGKILL
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;通过发送&lt;code&gt;SIGKILL&lt;/code&gt;信号来强制终止运行中的容器，也可以发送指定的信号量，例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose kill -s SIGINT
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;ps&#34;&gt;ps&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：ps [options] [SERVICE...]
+选项：
+	-q		仅仅显示容器ID
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;列出容器。&lt;/p&gt;
+&lt;h4 id=&#34;restart&#34;&gt;restart&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：restart [options] [SERVICE...]
+选项：
+	-t, --timeout TIMEOUT      设置关闭服务的超时时间，单位为秒，默认为10
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启服务。&lt;/p&gt;
+&lt;h4 id=&#34;run&#34;&gt;run&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：run [options] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]
+选项：
+	-d                    分离模式：在后台运行容器，只打印新的容器名称
+	--entrypoint CMD      覆盖镜像的入口点（CMD ...）
+	-e KEY=VAL            设置环境变量，可以使用多次
+	-u, --user=&amp;quot;&amp;quot;         通过指定的用户名或用户id来运行
+	--no-deps             不启动link连接的服务
+	--rm                  运行结束后移除容器，在分离模式下将被忽略
+	-p, --publish=[]      将容器暴露端口映射到主机端口
+	--service-ports       通过服务映射到主机的端口执行命令
+	-T                    禁用pseudo-tty分配，默认会分配一个TTY
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;对服务运行的命令。例如，以下命令启动web服务并运行bash命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose run web bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;run&lt;/code&gt;命令，将使用服务中已经定义的配置来创建运行一个新的容器。也就是说，如此创建的容器，将会使用相同的挂载卷、容器连接等相同的配置，但它们依旧可以存在差异。&lt;/p&gt;
+&lt;p&gt;第一个区别是，可以使用&lt;code&gt;run&lt;/code&gt;命令覆盖服务中指定的运行命令。例如，&lt;code&gt;web&lt;/code&gt;服务中的配置指定的运行命令为&lt;code&gt;bash&lt;/code&gt;，那么&lt;code&gt;docker-compose run web python app.py&lt;/code&gt;将使用&lt;code&gt;python app.py&lt;/code&gt;来覆盖它。&lt;/p&gt;
+&lt;p&gt;第二个区别是，&lt;code&gt;docker-compose run&lt;/code&gt;命令不会创建任何服务配置中指定的端口映射，这样可以防止多个容器映射同一端口的冲突。如果你需要使得服务的端口创建并映射到主机，需要指定&lt;code&gt;--service-ports&lt;/code&gt;标记，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose run --service-ports web python manage.py shell
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者可以手动指定端口映射，和使用&lt;code&gt;docker run&lt;/code&gt;一样，使用&lt;code&gt;--publish&lt;/code&gt;或&lt;code&gt;-p&lt;/code&gt;选项：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose run --publish 8080:80 -p 2022:22 -p 127.0.0.1:2021:21 web python manage.py shell
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果启动一个带有容器连接的服务，&lt;code&gt;run&lt;/code&gt;命令将首先检查连接到的服务是否已运行，如果是停止状态，将会启动它，直到所有的相关服务都处于正在运行状态，才会执行你创建的命令。例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose run db psql -h db -U docker
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这将创建一个与PostgreSQL容器&lt;code&gt;db&lt;/code&gt;交互服务。&lt;/p&gt;
+&lt;p&gt;如果你不希望启动相关联容器，可以使用&lt;code&gt;--no-deps&lt;/code&gt;标记：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose run --no-deps web python manage.py shell
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;start&#34;&gt;start&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：start [SERVICE...]
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;启动服务中已经存在的容器。&lt;/p&gt;
+&lt;h4 id=&#34;up&#34;&gt;up&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：up [options] [SERVICE...]
+选项：
+	-d                     分离模式：在后台运行容器，只打印新的容器名称
+	--no-color             单色输出
+	--no-deps              不启动link连接的服务
+	--force-recreate       强制重新创建容器，即使镜像没有任何改变。与--no-recreate会冲突
+	--no-recreate          如果对应容器已经存在,不重新创建它。与--force-recreate会冲突
+	--no-build             不构建镜像，即使缺失
+	-t, --timeout TIMEOUT  为容器设置关闭超时时间，单位：秒 (默认为 10)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;对服务，构建镜像、(重新)创建容器、启动容器。&lt;/p&gt;
+&lt;p&gt;该命令还将启动任何相关的且没有被启动的服务。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker-compose up&lt;/code&gt;命令将显示所有容器的输出，命令结束时，所有容器都将关闭。运行&lt;code&gt;docker-compose up -d &lt;/code&gt;将在后台启动运行容器。&lt;/p&gt;
+&lt;p&gt;如果服务中已经存在运行中的容器了，并且在容器创建后更改服务配置或者镜像，&lt;code&gt;docker-compose up&lt;/code&gt;命令将会停止当前容器（保存挂载卷）并重新构建启动容器。当然，也可以通过&lt;code&gt;--no-recreate&lt;/code&gt;选项来避免重新构建。&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;--force-recreate&lt;/code&gt;标记，可以强制停止并重构所有容器。&lt;/p&gt;
+&lt;h4 id=&#34;logs&#34;&gt;logs&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：logs [options] [SERVICE...]
+选项：
+	--no-color  单色输出
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;显示服务输出的日志内容。&lt;/p&gt;
+&lt;h4 id=&#34;port&#34;&gt;port&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：port [options] SERVICE PRIVATE_PORT
+选项：
+	--protocol=proto  tcp 或 udp [默认为 tcp]
+	--index=index     对应实例服务的第几个容器[默认为 1]
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;打印服务中端口绑定对应的主机端口。&lt;/p&gt;
+&lt;h4 id=&#34;pull&#34;&gt;pull&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：pull [options] [SERVICE...]
+选项：
+	--ignore-pull-failures 尽可能拉取服务，忽略拉取失败
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;拉取服务镜像。&lt;/p&gt;
+&lt;h4 id=&#34;rm&#34;&gt;rm&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：rm [options] [SERVICE...]
+选项:
+	-f, --force   强制删除，不询问确认信息
+	-v            移除容器挂载的卷
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;删除停止的服务容器。&lt;/p&gt;
+&lt;h4 id=&#34;scale&#34;&gt;scale&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：scale [SERVICE=NUM...]
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置一个服务需要运行的容器数量。
+参数形式为&lt;code&gt;service=num&lt;/code&gt;。例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ docker-compose scale web=2 worker=3
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;stop&#34;&gt;stop&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;用法：stop [options] [SERVICE...]
+选项：
+	-t, --timeout TIMEOUT      设置关闭容器的超时时间
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;停止容器而不移除，可以通&lt;code&gt;docker-compose start&lt;/code&gt;重新启动。&lt;/p&gt;
+&lt;h3 id=&#34;通过-docker-composeyml-部署应用&#34;&gt;通过 docker-compose.yml 部署应用&lt;/h3&gt;
+&lt;p&gt;我将上面所创建的镜像推送到了阿里云，在此使用它&lt;/p&gt;
+&lt;h4 id=&#34;1新建-docker-composeyml-文件&#34;&gt;1.新建 docker-compose.yml 文件&lt;/h4&gt;
+&lt;p&gt;通过以下配置，在运行后可以创建两个站点(只为演示)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;version: &amp;quot;3&amp;quot;
+services:
+  web1:
+    image: registry.cn-hangzhou.aliyuncs.com/yimo_public/docker-nginx-test:latest
+    ports:
+      - &amp;quot;4466:80&amp;quot;
+  web2:
+    image: registry.cn-hangzhou.aliyuncs.com/yimo_public/docker-nginx-test:latest
+    ports:
+      - &amp;quot;4477:80&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此处只是简单演示写法，说明 docker-compose 的方便&lt;/p&gt;
+&lt;h4 id=&#34;2构建完成后台运行镜像&#34;&gt;2.构建完成，后台运行镜像&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行后就可以使用 ip+port 访问这两个站点了&lt;/p&gt;
+&lt;h4 id=&#34;3镜像更新重新部署&#34;&gt;3.镜像更新重新部署&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;docker-compose down
+docker-compose pull
+docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;详细命名说明&#34;&gt;详细命名说明&lt;/h2&gt;
+&lt;h3 id=&#34;1docker安装&#34;&gt;1、Docker安装&lt;/h3&gt;
+&lt;p&gt;系统环境：docker最低支持centos7且在64位平台上，内核版本在3.10以上&lt;/p&gt;
+&lt;p&gt;版本：社区版，企业版（包含了一些收费服务）&lt;/p&gt;
+&lt;p&gt;官方版安装教程（英文）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-after-using-the-convenience-script&#34;&gt;https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-after-using-the-convenience-script&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;博主版安装教程：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 安装docker
+yum install docker
+# 启动docker 
+systemctl start/status docker 
+# 查看docker启动状态
+docker version 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;配置加速器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;简介：DaoCloud 加速器 是广受欢迎的 Docker 工具，解决了国内用户访问 Docker Hub 缓慢的问题。DaoCloud 加速器结合国内的 CDN 服务与协议层优化，成倍的提升了下载速度。&lt;/p&gt;
+&lt;p&gt;DaoCloud官网：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.daocloud.io/mirror#accelerator-doc&#34;&gt;https://www.daocloud.io/mirror#accelerator-doc&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;# 一条命令加速（记得重启docker）
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://95822026.m.daocloud.io
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;2docker基础命令&#34;&gt;2、Docker基础命令&lt;/h3&gt;
+&lt;p&gt;docker &amp;ndash;help（中文注解）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Usage:
+docker [OPTIONS] COMMAND [arg...]
+       docker daemon [ --help | ... ]
+       docker [ --help | -v | --version ]
+A
+self-sufficient runtime for containers.
+
+Options:
+  --config=~/.docker              Location of client config files  #客户端配置文件的位置
+  -D, --debug=false               Enable debug mode  #启用Debug调试模式
+  -H, --host=[]                   Daemon socket(s) to connect to  #守护进程的套接字（Socket）连接
+  -h, --help=false                Print usage  #打印使用
+  -l, --log-level=info            Set the logging level  #设置日志级别
+  --tls=false                     Use TLS; implied by--tlsverify  #
+  --tlscacert=~/.docker/ca.pem    Trust certs signed only by this CA  #信任证书签名CA
+  --tlscert=~/.docker/cert.pem    Path to TLS certificate file  #TLS证书文件路径
+  --tlskey=~/.docker/key.pem      Path to TLS key file  #TLS密钥文件路径
+  --tlsverify=false               Use TLS and verify the remote  #使用TLS验证远程
+  -v, --version=false             Print version information and quit  #打印版本信息并退出
+
+Commands:
+    attach    Attach to a running container  #当前shell下attach连接指定运行镜像
+    build     Build an image from a Dockerfile  #通过Dockerfile定制镜像
+    commit    Create a new image from a container&#39;s changes  #提交当前容器为新的镜像
+    cp    Copy files/folders from a container to a HOSTDIR or to STDOUT  #从容器中拷贝指定文件或者目录到宿主机中
+    create    Create a new container  #创建一个新的容器，同run 但不启动容器
+    diff    Inspect changes on a container&#39;s filesystem  #查看docker容器变化
+    events    Get real time events from the server#从docker服务获取容器实时事件
+    exec    Run a command in a running container#在已存在的容器上运行命令
+    export    Export a container&#39;s filesystem as a tar archive  #导出容器的内容流作为一个tar归档文件(对应import)
+    history    Show the history of an image  #展示一个镜像形成历史
+    images    List images  #列出系统当前镜像
+    import    Import the contents from a tarball to create a filesystem image  #从tar包中的内容创建一个新的文件系统映像(对应export)
+    info    Display system-wide information  #显示系统相关信息
+    inspect    Return low-level information on a container or image  #查看容器详细信息
+    kill    Kill a running container  #kill指定docker容器
+    load    Load an image from a tar archive or STDIN  #从一个tar包中加载一个镜像(对应save)
+    login    Register or log in to a Docker registry#注册或者登陆一个docker源服务器
+    logout    Log out from a Docker registry  #从当前Docker registry退出
+    logs    Fetch the logs of a container  #输出当前容器日志信息
+    pause    Pause all processes within a container#暂停容器
+    port    List port mappings or a specific mapping for the CONTAINER  #查看映射端口对应的容器内部源端口
+    ps    List containers  #列出容器列表
+    pull    Pull an image or a repository from a registry  #从docker镜像源服务器拉取指定镜像或者库镜像
+    push    Push an image or a repository to a registry  #推送指定镜像或者库镜像至docker源服务器
+    rename    Rename a container  #重命名容器
+    restart    Restart a running container  #重启运行的容器
+    rm    Remove one or more containers  #移除一个或者多个容器
+    rmi    Remove one or more images  #移除一个或多个镜像(无容器使用该镜像才可以删除，否则需要删除相关容器才可以继续或者-f强制删除)
+    run    Run a command in a new container  #创建一个新的容器并运行一个命令
+    save    Save an image(s) to a tar archive#保存一个镜像为一个tar包(对应load)
+    search    Search the Docker Hub for images  #在docker
+hub中搜索镜像
+    start    Start one or more stopped containers#启动容器
+    stats    Display a live stream of container(s) resource usage statistics  #统计容器使用资源
+    stop    Stop a running container  #停止容器
+    tag         Tag an image into a repository  #给源中镜像打标签
+    top       Display the running processes of a container #查看容器中运行的进程信息
+    unpause    Unpause all processes within a container  #取消暂停容器
+    version    Show the Docker version information#查看容器版本号
+    wait         Block until a container stops, then print its exit code  #截取容器停止时的退出状态值
+
+Run &#39;docker COMMAND --help&#39; for more information on a command.  #运行docker命令在帮助可以获取更多信息
+docker search  hello-docker  # 搜索hello-docker的镜像
+docker search centos # 搜索centos镜像
+docker pull hello-docker # 获取centos镜像
+docker run  hello-world   #运行一个docker镜像，产生一个容器实例（也可以通过镜像id前三位运行）
+docker image ls  # 查看本地所有镜像
+docker images  # 查看docker镜像
+docker image rmi hello-docker # 删除centos镜像
+docker ps  #列出正在运行的容器（如果创建容器中没有进程正在运行，容器就会立即停止）
+docker ps -a  # 列出所有运行过的容器记录
+docker save centos &amp;gt; /opt/centos.tar.gz  # 导出docker镜像至本地
+docker load &amp;lt; /opt/centos.tar.gz   #导入本地镜像到docker镜像库
+docker stop  `docker ps -aq`  # 停止所有正在运行的容器
+docker  rm `docker ps -aq`    # 一次性删除所有容器记录
+docker rmi  `docker images -aq`   # 一次性删除所有本地的镜像记录
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;21-启动容器的两种方式&#34;&gt;2.1 启动容器的两种方式&lt;/h4&gt;
+&lt;p&gt;容器是运行应用程序的，所以必须得先有一个操作系统为基础&lt;/p&gt;
+&lt;p&gt;1、基于镜像新建一个容器并启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 1. 后台运行一个docker
+docker run -d centos /bin/sh -c &amp;quot;while true;do echo 正在运行; sleep 1;done&amp;quot;
+    # -d  后台运行容器
+    # /bin/sh  指定使用centos的bash解释器
+    # -c 运行一段shell命令
+    # &amp;quot;while true;do echo 正在运行; sleep 1;done&amp;quot;  在linux后台，每秒中打印一次正在运行
+docker ps  # 检查容器进程
+docker  logs  -f  容器id/名称  # 不间断打印容器的日志信息 
+docker stop centos  # 停止容器
+
+# 2. 启动一个bash终端,允许用户进行交互
+docker run --name mydocker -it centos /bin/bash  
+    # --name  给容器定义一个名称
+    # -i  让容器的标准输入保持打开
+    # -t 让Docker分配一个伪终端,并绑定到容器的标准输入上
+    # /bin/bash 指定docker容器，用shell解释器交互
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当利用docker run来创建容器时，Docker在后台运行的步骤如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;检查本地是否存在指定的镜像，不存在就从公有仓库下载&lt;/li&gt;
+&lt;li&gt;利用镜像创建并启动一个容器&lt;/li&gt;
+&lt;li&gt;分配一个文件系统，并在只读的镜像层外面挂在一层可读写层&lt;/li&gt;
+&lt;li&gt;从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去&lt;/li&gt;
+&lt;li&gt;从地址池配置一个ip地址给容器&lt;/li&gt;
+&lt;li&gt;执行用户指定的应用程序&lt;/li&gt;
+&lt;li&gt;执行完毕后容器被终止&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2、将一个终止状态(stopped)的容器重新启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# docker ps -a  # 先查询记录
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                        PORTS                    NAMES
+ee92fcf6f32d        centos              &amp;quot;/bin/bash&amp;quot;              4 days ago          Exited (137) 3 days ago                                kickass_raman
+
+[root@localhost ~]# docker start ee9  # 再启动这个容器
+ee9
+
+[root@localhost ~]# docker exec -it  ee9 /bin/bash  # 进入容器交互式界面
+[root@ee92fcf6f32d /]#   # 注意看用户名，已经变成容器用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;22-提交创建自定义镜像&#34;&gt;2.2 提交创建自定义镜像&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# 1.我们进入交互式的centos容器中，发现没有vim命令
+    docker run -it centos
+# 2.在当前容器中，安装一个vim
+    yum install -y vim
+# 3.安装好vim之后，exit退出容器
+    exit
+# 4.查看刚才安装好vim的容器记录
+    docker container ls -a
+# 5.提交这个容器，创建新的image
+    docker commit 059fdea031ba chaoyu/centos-vim
+# 6.查看镜像文件
+    docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+chaoyu/centos-vim   latest              fd2685ae25fe        5 minutes ago   
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;23-外部访问容器&#34;&gt;2.3 外部访问容器&lt;/h4&gt;
+&lt;p&gt;容器中可以运行网络应用，但是要让外部也可以访问这些应用，可以通过-p或-P参数指定端口映射。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -d -P training/webapp python app.py
+  # -P 参数会随机映射端口到容器开放的网络端口
+
+# 检查映射的端口
+docker ps -l
+CONTAINER ID        IMAGE               COMMAND             CREATED            STATUS              PORTS                     NAMES
+cfd632821d7a        training/webapp     &amp;quot;python app.py&amp;quot;     21 seconds ago      Up 20 seconds       0.0.0.0:32768-&amp;gt;5000/tcp   brave_fermi
+#宿主机ip:32768 映射容器的5000端口
+
+# 查看容器日志信息
+docker logs -f cfd  # #不间断显示log
+
+# 也可以通过-p参数指定映射端口
+docker run -d -p 9000:5000 training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;打开浏览器访问服务器的9000端口， 内容显示 Hello world！表示正常启动&lt;/p&gt;
+&lt;p&gt;(如果访问失败的话，检查自己的防火墙，以及云服务器的安全组)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3利用dockerfile定制镜像&#34;&gt;3、利用dockerfile定制镜像&lt;/h3&gt;
+&lt;p&gt;镜像是容器的基础，每次执行docker run的时候都会指定哪个镜像作为容器运行的基础。我们之前的例子都是使用来自docker hub的镜像，直接使用这些镜像只能满足一定的需求，当镜像无法满足我们的需求时，就得自定制这些镜像。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;镜像的定制就是定制每一层所添加的配置、文件。如果可以吧每一层修改、安装、构建、操作的命令都写入到一个脚本，用脚本来构建、定制镜像，这个脚本就是dockerfile。&lt;/p&gt;
+&lt;p&gt;Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令 构建一层，因此每一条指令的内容，就是描述该层应当如何构建。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;参数详解&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;FROM scratch #制作base image 基础镜像，尽量使用官方的image作为base image
+FROM centos #使用base image
+FROM ubuntu:14.04 #带有tag的base image
+
+LABEL version=“1.0” #容器元信息，帮助信息，Metadata，类似于代码注释
+LABEL maintainer=“yc_uuu@163.com&amp;quot;
+
+#对于复杂的RUN命令，避免无用的分层，多条命令用反斜线换行，合成一条命令！
+RUN yum update &amp;amp;&amp;amp; yum install -y vim 
+    Python-dev #反斜线换行
+RUN /bin/bash -c &amp;quot;source $HOME/.bashrc;echo $HOME”
+
+WORKDIR /root #相当于linux的cd命令，改变目录，尽量使用绝对路径！！！不要用RUN cd
+WORKDIR /test # 如果没有就自动创建
+WORKDIR demo # 再进入demo文件夹
+RUN pwd     # 打印结果应该是/test/demo
+
+ADD and COPY 
+ADD hello /  # 把本地文件添加到镜像中，吧本地的hello可执行文件拷贝到镜像的/目录
+ADD test.tar.gz /  # 添加到根目录并解压
+
+WORKDIR /root
+ADD hello test/  # 进入/root/ 添加hello可执行命令到test目录下，也就是/root/test/hello 一个绝对路径
+COPY hello test/  # 等同于上述ADD效果
+
+ADD与COPY
+   - 优先使用COPY命令
+    -ADD除了COPY功能还有解压功能
+添加远程文件/目录使用curl或wget
+
+ENV # 环境变量，尽可能使用ENV增加可维护性
+ENV MYSQL_VERSION 5.6 # 设置一个mysql常量
+RUN yum install -y mysql-server=“${MYSQL_VERSION}” 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进阶知识(了解)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;VOLUME and EXPOSE 
+存储和网络
+
+RUN and CMD and ENTRYPOINT
+RUN：执行命令并创建新的Image Layer
+CMD：设置容器启动后默认执行的命令和参数
+ENTRYPOINT：设置容器启动时运行的命令
+
+Shell格式和Exec格式
+RUN yum install -y vim
+CMD echo ”hello docker”
+ENTRYPOINT echo “hello docker”
+
+Exec格式
+RUN [“apt-get”,”install”,”-y”,”vim”]
+CMD [“/bin/echo”,”hello docker”]
+ENTRYPOINT [“/bin/echo”,”hello docker”]
+
+
+通过shell格式去运行命令，会读取$name指令，而exec格式是仅仅的执行一个命令，而不是shell指令
+cat Dockerfile
+    FROM centos
+    ENV name Docker
+    ENTRYPOINT [“/bin/echo”,”hello $name”]#这个仅仅是执行echo命令，读取不了shell变量
+    ENTRYPOINT  [“/bin/bash”,”-c”,”echo hello $name&amp;quot;]
+
+CMD
+容器启动时默认执行的命令
+如果docker run指定了其他命令(docker run -it [image] /bin/bash )，CMD命令被忽略
+如果定义多个CMD，只有最后一个执行
+
+ENTRYPOINT
+让容器以应用程序或服务形式运行
+不会被忽略，一定会执行
+最佳实践：写一个shell脚本作为entrypoint
+COPY docker-entrypoint.sh /usr/local/bin
+ENTRYPOINT [“docker-entrypoint.sh]
+EXPOSE 27017
+CMD [“mongod”]
+
+[root@master home]# more Dockerfile
+FROm centos
+ENV name Docker
+#CMD [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;,&amp;quot;echo hello $name&amp;quot;]
+ENTRYPOINT [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;,&amp;quot;echo hello $name”]
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;4发布到仓库&#34;&gt;4、发布到仓库&lt;/h3&gt;
+&lt;h4 id=&#34;41-docker-hub共有镜像发布&#34;&gt;4.1 docker hub共有镜像发布&lt;/h4&gt;
+&lt;p&gt;docker提供了一个类似于github的仓库docker hub，官方网站（需注册使用）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://hub.docker.com/&#34;&gt;https://hub.docker.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;# 注册docker id后，在linux中登录dockerhub
+    docker login
+
+# 注意要保证image的tag是账户名，如果镜像名字不对，需要改一下tag
+    docker tag chaoyu/centos-vim peng104/centos-vim
+    # 语法是：docker tag   仓库名   peng104/仓库名
+
+# 推送docker image到dockerhub
+    docker push peng104/centps-cmd-exec:latest
+
+# 去dockerhub中检查镜像
+# 先删除本地镜像，然后再测试下载pull 镜像文件
+    docker pull peng104/centos-entrypoint-exec
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;42-私有仓库&#34;&gt;4.2 私有仓库&lt;/h4&gt;
+&lt;p&gt;docker hub 是公开的，其他人也是可以下载，并不安全，因此还可以使用docker registry官方提供的私有仓库&lt;/p&gt;
+&lt;p&gt;用法详解：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://yeasy.gitbooks.io/docker_practice/repository/registry.html&#34;&gt;https://yeasy.gitbooks.io/docker_practice/repository/registry.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;# 1.下载一个docker官方私有仓库镜像
+    docker pull registry
+# 2.运行一个docker私有容器仓库
+docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  registry
+    -d 后台运行 
+    -p  端口映射 宿主机的5000:容器内的5000
+    -v  数据卷挂载  宿主机的 /opt/data/registry :/var/lib/registry 
+    registry  镜像名
+    /var/lib/registry  存放私有仓库位置
+# Docker 默认不允许非 HTTPS 方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制
+# 3.修改docker的配置文件，让他支持http方式，上传私有镜像
+    vim /etc/docker/daemon.json 
+    # 写入如下内容
+    {
+        &amp;quot;registry-mirrors&amp;quot;: [&amp;quot;http://f1361db2.m.daocloud.io&amp;quot;],
+        &amp;quot;insecure-registries&amp;quot;:[&amp;quot;192.168.11.37:5000&amp;quot;]
+    }
+# 4.修改docker的服务配置文件
+    vim /lib/systemd/system/docker.service
+# 找到[service]这一代码区域块，写入如下参数
+    [Service]
+    EnvironmentFile=-/etc/docker/daemon.json
+# 5.重新加载docker服务
+    systemctl daemon-reload
+# 6.重启docker服务
+    systemctl restart docker
+    # 注意:重启docker服务，所有的容器都会挂掉
+
+# 7.修改本地镜像的tag标记，往自己的私有仓库推送
+    docker tag docker.io/peng104/hello-world-docker 192.168.11.37:5000/peng-hello
+    # 浏览器访问http://192.168.119.10:5000/v2/_catalog查看仓库
+# 8.下载私有仓库的镜像
+    docker pull 192.168.11.37:5000/peng-hello
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;5实例演示&#34;&gt;5、实例演示&lt;/h3&gt;
+&lt;p&gt;编写dockerfile，构建自己的镜像，运行flask程序。&lt;/p&gt;
+&lt;p&gt;确保app.py和dockerfile在同一个目录！&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 1.准备好app.py的flask程序
+    [root@localhost ~]# cat app.py
+    from flask import Flask
+    app=Flask(__name__)
+    @app.route(&#39;/&#39;)
+    def hello():
+        return &amp;quot;hello docker&amp;quot;
+    if __name__==&amp;quot;__main__&amp;quot;:
+        app.run(host=&#39;0.0.0.0&#39;,port=8080)
+    [root@master home]# ls
+    app.py  Dockerfile
+
+# 2.编写dockerfile
+    [root@localhost ~]# cat Dockerfile
+    FROM python:2.7
+    LABEL maintainer=&amp;quot;温而新&amp;quot;
+    RUN pip install flask
+    COPY app.py /app/
+    WORKDIR /app
+    EXPOSE 8080
+    CMD [&amp;quot;python&amp;quot;,&amp;quot;app.py&amp;quot;]
+
+# 3.构建镜像image,找到当前目录的Dockerfile，开始构建
+    docker build -t peng104/flask-hello-docker .
+
+# 4.查看创建好的images
+    docker image ls
+
+# 5.启动此flask-hello-docker容器，映射一个端口供外部访问
+    docker run -d -p 8080:8080 peng104/flask-hello-docker
+
+# 6.检查运行的容器
+    docker container ls
+
+# 7.推送这个镜像到私有仓库
+    docker tag  peng104/flask-hello-docker   192.168.11.37:5000/peng-flaskweb
+    docker push 192.168.11.37:5000/peng-flaskweb
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;补充一些用法&#34;&gt;补充一些用法&lt;/h2&gt;
+&lt;h3 id=&#34;挂载宿主机目录&#34;&gt;挂载宿主机目录&lt;/h3&gt;
+&lt;p&gt;docker可以支持把一个宿主机上的目录挂载到镜像里。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker run -it -v /home/dock/Downloads:/usr/Downloads ubuntu64 /bin/bash&lt;/code&gt;
+通过-v参数，冒号前为宿主机目录，必须为绝对路径，冒号后为镜像内挂载的路径。&lt;/p&gt;
+&lt;p&gt;现在镜像内就可以共享宿主机里的文件了。&lt;/p&gt;
+&lt;p&gt;默认挂载的路径权限为读写。如果指定为只读可以用：ro
+&lt;code&gt;docker run -it -v /home/dock/Downloads:/usr/Downloads:ro ubuntu64 /bin/bash&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;docker还提供了一种高级的用法。叫数据卷。&lt;/p&gt;
+&lt;p&gt;数据卷：“其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的”。感觉像是由一个容器定义的一个数据挂载信息。其他的容器启动可以直接挂载数据卷容器中定义的挂载信息。&lt;/p&gt;
+&lt;p&gt;看示例：
+&lt;code&gt;docker run -v /home/dock/Downloads:/usr/Downloads --name dataVol ubuntu64 /bin/bash&lt;/code&gt;
+创建一个普通的容器。用&amp;ndash;name给他指定了一个名（不指定的话会生成一个随机的名子）。&lt;/p&gt;
+&lt;p&gt;再创建一个新的容器，来使用这个数据卷。
+&lt;code&gt;docker run -it --volumes-from dataVol ubuntu64 /bin/bash --volumes-from用来指定要从哪个数据卷来挂载数据。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;生成的docker镜像保存下来：docker save -o test.tar test:1.0
+导入docker镜像：docker load -i test.tar&lt;/p&gt;
+&lt;h3 id=&#34;docker容器内外互相拷贝数据&#34;&gt;Docker容器内外互相拷贝数据&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;从容器内拷贝文件到主机上
+docker cp &amp;lt;containerId&amp;gt;:/file/path/within/container /host/path/target 
+
+从主机上拷贝文件到容器内
+参考自：
+http://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container
+1.用-v挂载主机数据卷到容器内
+docker run -v /path/to/hostdir:/mnt $container
+在容器内拷贝
+cp /mnt/sourcefile /path/to/destfile
+2.直接在主机上拷贝到容器物理存储系统
+A. 获取容器名称或者id :
+$ docker ps
+B. 获取整个容器的id
+$ docker inspect -f   &#39;{{.Id}}&#39;  步骤A获取的名称或者id
+C. 在主机上拷贝文件:
+$ sudo cp path-file-host /var/lib/docker/aufs/mnt/FULL_CONTAINER_ID/PATH-NEW-FILE 
+或者
+$ sudo cp path-file-host /var/lib/docker/devicemapper/mnt/123abc&amp;lt;&amp;lt;id&amp;gt;&amp;gt;/rootfs/root
+
+例子：
+$ docker ps
+CONTAINER ID      IMAGE    COMMAND       CREATED      STATUS       PORTS        NAMES
+d8e703d7e303   solidleon/ssh:latest      /usr/sbin/sshd -D                      cranky_pare
+
+$ docker inspect -f   &#39;{{.Id}}&#39; cranky_pare
+or 
+$ docker inspect -f   &#39;{{.Id}}&#39; d8e703d7e303
+d8e703d7e3039a6df6d01bd7fb58d1882e592a85059eb16c4b83cf91847f88e5
+
+$ sudo cp file.txt /var/lib/docker/aufs/mnt/**d8e703d7e3039a6df6d01bd7fb58d1882e592a85059eb16c4b83cf91847f88e5
+
+3.用输入输出符
+docker run -i ubuntu /bin/bash -c &#39;cat &amp;gt; /path/to/container/file&#39; &amp;lt; /path/to/host/file/
+
+或者
+
+docker exec -it &amp;lt;container_id&amp;gt; bash -c &#39;cat &amp;gt; /path/to/container/file&#39; &amp;lt; /path/to/host/file/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;总结一下&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从主机复制到容器&lt;code&gt;sudo docker cp host_path containerID:container_path&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;从容器复制到主机&lt;code&gt;sudo docker cp containerID:container_path host_path&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;容器ID的查询方法想必大家都清楚:&lt;code&gt;docker ps -a&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;docker-运行容器时为容器起别名&#34;&gt;docker 运行容器时为容器起别名&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;docker run &amp;ndash;name=mydemo -p  -d 2222:80 imagename&lt;/p&gt;
+&lt;p&gt;&amp;ndash;name: 指定容器名称&lt;/p&gt;
+&lt;p&gt;-p:指定容器端口号&lt;/p&gt;
+&lt;p&gt;-d:指定容器后台运行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;docker一些有用的清理命令&#34;&gt;docker一些有用的清理命令&lt;/h3&gt;
+&lt;p&gt;以下命令参考自这篇&lt;a href=&#34;http://blog.loof.fr/2016/05/docker-cleanup.html#&#34;&gt;文章&lt;/a&gt;：&lt;/p&gt;
+&lt;p&gt;（1）清除已经终止的&lt;code&gt;container&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker rm -v $(docker ps --filter status=exited -q)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（2）清除已经没用的&lt;code&gt;volume&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker volume rm $(docker volume ls -q -f &#39;dangling=true&#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（3）清除已经没用的&lt;code&gt;image&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker rmi $(docker images -f &amp;quot;dangling=true&amp;quot; -q) 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（4）清除所有的&lt;code&gt;container&lt;/code&gt;（包括正在运行的和已经退出的）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker rm -f $(docker ps -a | awk &#39;NR &amp;gt; 1 {print $1}&#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;在docker-container中执行命令的脚本&#34;&gt;在docker container中执行命令的脚本&lt;/h3&gt;
+&lt;p&gt;下面脚本的功能是循环地在各个&lt;code&gt;container&lt;/code&gt;中执行命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash -x
+
+for i in {1..2}
+do
+        docker exec -i hammerdb_net${i} bash &amp;lt;&amp;lt;-EOF
+        su oracle
+        source /tmp/ora_env
+        cd /data/oracle/tablespaces/
+        rm -f *.html
+        ./create_awr.sh
+        mv awr.html awr_${i}.html
+        EOF
+done
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;需要注意的是在&lt;code&gt;do&lt;/code&gt;和&lt;code&gt;done&lt;/code&gt;之间应该使用&lt;code&gt;tab&lt;/code&gt;而不是空格。&lt;/p&gt;
 </description>
       
     </item>
