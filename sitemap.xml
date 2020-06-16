@@ -9,14 +9,42 @@
   </url>
   
   <url>
-    <loc>http://justgo-now.github.io/categories.html</loc>
-    <lastmod>2020-06-12T14:09:23+08:00</lastmod>
+    <loc>http://justgo-now.github.io/tags/http.html</loc>
+    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</loc>
+    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://justgo-now.github.io/</loc>
+    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post.html</loc>
+    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/categories/%E7%BC%96%E7%A8%8B.html</loc>
+    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/categories.html</loc>
     <lastmod>2020-06-12T14:09:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -38,13 +66,6 @@
   
   <url>
     <loc>http://justgo-now.github.io/tags/linux.html</loc>
-    <lastmod>2020-06-12T08:46:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/post.html</loc>
     <lastmod>2020-06-12T08:46:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

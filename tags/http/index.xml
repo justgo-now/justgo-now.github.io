@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on JustGo</title>
-    <link>http://justgo-now.github.io/post.html</link>
-    <description>Recent content in Posts on JustGo</description>
+    <title>http on JustGo</title>
+    <link>http://justgo-now.github.io/tags/http.html</link>
+    <description>Recent content in http on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 16 Jun 2020 09:50:04 +0800</lastBuildDate>
     
-	<atom:link href="http://justgo-now.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://justgo-now.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</guid>
       <description>服务器返回的 响应报文 中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。 状态码 类别 原因短语 1XX Informational（信</description>
-    </item>
-    
-    <item>
-      <title>tcpdump 使用</title>
-      <link>http://justgo-now.github.io/post/2020/2020-06-12-tcpdump-usage.html</link>
-      <pubDate>Fri, 12 Jun 2020 08:46:36 +0800</pubDate>
-      
-      <guid>http://justgo-now.github.io/post/2020/2020-06-12-tcpdump-usage.html</guid>
-      <description>tcpdump - dump traffic on a network tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分</description>
     </item>
     
   </channel>
