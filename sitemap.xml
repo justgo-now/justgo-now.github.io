@@ -9,6 +9,41 @@
   </url>
   
   <url>
+    <loc>http://justgo-now.github.io/categories/devops.html</loc>
+    <lastmod>2020-06-22T09:57:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/</loc>
+    <lastmod>2020-06-22T09:57:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/tags/nfs.html</loc>
+    <lastmod>2020-06-22T09:57:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/2020/2020-06-22-nfs-deploy-config.html</loc>
+    <lastmod>2020-06-22T09:57:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post.html</loc>
+    <lastmod>2020-06-22T09:57:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://justgo-now.github.io/categories/coding.html</loc>
     <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,20 +59,6 @@
   
   <url>
     <loc>http://justgo-now.github.io/post/2020/2020-06-16-http-status-code.html</loc>
-    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/</loc>
-    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/post.html</loc>
     <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -88,13 +109,6 @@
   <url>
     <loc>http://justgo-now.github.io/categories/tools.html</loc>
     <lastmod>2020-06-12T08:46:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/categories/devops.html</loc>
-    <lastmod>2020-04-12T21:12:14+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

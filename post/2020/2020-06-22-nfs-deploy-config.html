@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>NFS服务器配置及常见错误 - JustGo</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Frank" />
+  <meta name="description" content="NFS是基于UDP/IP协议的应用，其实现主要是采用远程过程调用RPC机制，RPC提供了一组与机器、操作系统以及低层传送协议无关的存取远程文件的操作。RPC采用了XDR的支持。XDR是一种与机器无关的数据描述编码的协议，他以独立与任意机器体系结构的格式对网上传送的数据进行编码和解码，支持在异构系统之间数据的传送。
+" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+<link rel="canonical" href="http://justgo-now.github.io/post/2020/2020-06-22-nfs-deploy-config.html" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="NFS服务器配置及常见错误" />
+<meta property="og:description" content="NFS是基于UDP/IP协议的应用，其实现主要是采用远程过程调用RPC机制，RPC提供了一组与机器、操作系统以及低层传送协议无关的存取远程文件的操作。RPC采用了XDR的支持。XDR是一种与机器无关的数据描述编码的协议，他以独立与任意机器体系结构的格式对网上传送的数据进行编码和解码，支持在异构系统之间数据的传送。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://justgo-now.github.io/post/2020/2020-06-22-nfs-deploy-config.html" />
+<meta property="article:published_time" content="2020-06-22T09:57:19+08:00" />
+<meta property="article:modified_time" content="2020-06-22T09:57:19+08:00" />
+<meta itemprop="name" content="NFS服务器配置及常见错误">
+<meta itemprop="description" content="NFS是基于UDP/IP协议的应用，其实现主要是采用远程过程调用RPC机制，RPC提供了一组与机器、操作系统以及低层传送协议无关的存取远程文件的操作。RPC采用了XDR的支持。XDR是一种与机器无关的数据描述编码的协议，他以独立与任意机器体系结构的格式对网上传送的数据进行编码和解码，支持在异构系统之间数据的传送。">
+<meta itemprop="datePublished" content="2020-06-22T09:57:19&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-22T09:57:19&#43;08:00" />
+<meta itemprop="wordCount" content="8183">
+
+
+
+<meta itemprop="keywords" content="nfs," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NFS服务器配置及常见错误"/>
+<meta name="twitter:description" content="NFS是基于UDP/IP协议的应用，其实现主要是采用远程过程调用RPC机制，RPC提供了一组与机器、操作系统以及低层传送协议无关的存取远程文件的操作。RPC采用了XDR的支持。XDR是一种与机器无关的数据描述编码的协议，他以独立与任意机器体系结构的格式对网上传送的数据进行编码和解码，支持在异构系统之间数据的传送。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">JustGo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/post.html">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      JustGo
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/post.html">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">NFS服务器配置及常见错误</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-06-22" class="post-time">
+          2020-06-22
+        </time>
+        <div class="post-category">
+            <a href="http://justgo-now.github.io/categories/devops.html"> devops </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nfs挂载原理">NFS挂载原理</a></li>
+    <li><a href="#rpc与nfs通讯原理">RPC与NFS通讯原理</a></li>
+    <li><a href="#nfs服务端">NFS服务端</a></li>
+    <li><a href="#nfs客户端">NFS客户端</a></li>
+    <li><a href="#nfs客户端和nfs服务器通讯过程">NFS客户端和NFS服务器通讯过程</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#服务端安装nfs服务步骤">服务端安装NFS服务步骤</a></li>
+    <li><a href="#nfs客户端挂载配置">NFS客户端挂载配置</a></li>
+    <li><a href="#在window上挂载nfs">在Window上挂载NFS</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#nfs-server">nfs server</a></li>
+    <li><a href="#nfs-client">nfs client</a>
+      <ul>
+        <li><a href="#umount-nfs文件系统">umount nfs文件系统</a></li>
+      </ul>
+    </li>
+    <li><a href="#nfs常见故障解决方法">NFS常见故障解决方法</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#参数列表">参数列表</a></li>
+    <li><a href="#补充说明">补充说明</a></li>
+    <li><a href="#使用样例">使用样例</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p>NFS是基于<a href="https://baike.baidu.com/item/UDP/571511">UDP</a>/IP协议的应用，其实现主要是采用<a href="https://baike.baidu.com/item/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8">远程过程调用</a><a href="https://baike.baidu.com/item/RPC/609861">RPC</a>机制，RPC提供了一组与机器、操作系统以及低层传送协议无关的存取远程文件的操作。<a href="https://baike.baidu.com/item/RPC">RPC</a>采用了<a href="https://baike.baidu.com/item/XDR">XDR</a>的支持。<a href="https://baike.baidu.com/item/XDR/8796904">XDR</a>是一种与机器无关的数据描述编码的协议，他以独立与任意机器体系结构的格式对网上传送的数据进行编码和解码，支持在异构系统之间数据的传送。</p>
+<p>NFS是Network File System的缩写，即网络文件系统。一种使用于分散式文件协定，功能是通过网络让不同的机器、不同的操作系统能够分享个人数据，让应用程序通过网络可以访问位于服务器磁盘中的数据。
+NFS在文件传送或信息传送的过过程中，依赖于RPC协议。RPC，远程过程调用（Remote Procedure Call）,是使客户端能够执行其他系统中程序的一种机制。NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，就是因为NFS使用了RPC提供的传输协议，可以说NFS就是使用PRC的一个程序。</p>
+<p><img src="2020-06-22-nfs-deploy-config/2018062513544128" alt="img"></p>
+<h1 id="简介">简介</h1>
+<h2 id="nfs挂载原理">NFS挂载原理</h2>
+<p><img src="2020-06-22-nfs-deploy-config/20181018144004725" alt="在这里插入图片描述"></p>
+<p>如上图示：</p>
+<p>当我们在NFS服务器设置好一个共享目录/home/public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上图客户端A与客户端B挂载的目录就不相同。并且挂载好后我们在本地能够看到服务端/home/public的所有数据。如果服务器端配置的客户端只读，那么客户端就只能够只读。如果配置读写，客户端就能够进行读写。挂载后，NFS客户端查看磁盘信息命令：</p>
+<blockquote>
+<p>df –h。</p>
+</blockquote>
+<p>既然NFS是通过网络来进行服务器端和客户端之间的数据传输，那么两者之间要传输数据就要有想对应的网络端口，NFS服务器到底使用哪个端口来进行数据传输呢？基本上NFS这个服务器的端口开在2049,但由于文件系统非常复杂。因此NFS还有其他的程序去启动额外的端口，这些额外的用来传输数据的端口是随机选择的，是小于1024的端口；既然是随机的那么客户端又是如何知道NFS服务器端到底使用的是哪个端口呢？这时就需要通过远程过程调用（Remote Procedure Call,RPC）协议来实现了！</p>
+<h2 id="rpc与nfs通讯原理">RPC与NFS通讯原理</h2>
+<p>因为NFS支持的功能相当多，而不同的功能都会使用不同的程序来启动，每启动一个功能就会启用一些端口来传输数据，因此NFS的功能对应的端口并不固定，客户端要知道NFS服务器端的相关端口才能建立连接进行数据传输，而RPC就是用来统一管理NFS端口的服务，并且统一对外的端口是111，RPC会记录NFS端口的信息，如此我们就能够通过RPC实现服务端和客户端沟通端口信息。PRC最主要的功能就是指定每个NFS功能所对应的port number,并且通知客户端，记客户端可以连接到正常端口上去。</p>
+<p>那么RPC又是如何知道每个NFS功能的端口呢？</p>
+<p>首先当NFS启动后，就会随机的使用一些端口，然后NFS就会向RPC去注册这些端口，RPC就会记录下这些端口，并且RPC会开启111端口，等待客户端RPC的请求，如果客户端有请求，那么服务器端的RPC就会将之前记录的NFS端口信息告知客户端。如此客户端就会获取NFS服务器端的端口信息，就会以实际端口进行数据的传输了。</p>
+<blockquote>
+<p>注意：在启动NFS SERVER之前，首先要启动RPC服务（即portmap服务，下同）否则NFS SERVER就无法向RPC服务区注册，另外，如果RPC服务重新启动，原来已经注册好的NFS端口数据就会全部丢失。因此此时RPC服务管理的NFS程序也要重新启动以重新向RPC注册。特别注意：一般修改NFS配置文档后，是不需要重启NFS的，直接在命令执行systemctl reload nfs或exportfs –rv即可使修改的/etc/exports生效</p>
+</blockquote>
+<h2 id="nfs服务端">NFS服务端</h2>
+<p><img src="2020-06-22-nfs-deploy-config/20180625135202315" alt="img"></p>
+<h2 id="nfs客户端">NFS客户端</h2>
+<p><img src="2020-06-22-nfs-deploy-config/20180625135220381" alt="img"></p>
+<h2 id="nfs客户端和nfs服务器通讯过程">NFS客户端和NFS服务器通讯过程</h2>
+<p><img src="2020-06-22-nfs-deploy-config/20181018144052796" alt="在这里插入图片描述"></p>
+<ol>
+<li>
+<p>首先服务器端启动RPC服务，并开启111端口</p>
+</li>
+<li>
+<p>服务器端启动NFS服务，并向RPC注册端口信息</p>
+</li>
+<li>
+<p>客户端启动RPC（portmap服务），向服务端的RPC(portmap)服务请求服务端的NFS端口</p>
+</li>
+<li>
+<p>服务端的RPC(portmap)服务反馈NFS端口信息给客户端。</p>
+</li>
+<li>
+<p>客户端通过获取的NFS端口来建立和服务端的NFS连接并进行数据的传输。</p>
+</li>
+</ol>
+<h1 id="部署">部署</h1>
+<h2 id="服务端安装nfs服务步骤">服务端安装NFS服务步骤</h2>
+<p><strong>首先， 检查系统中是否安装 NFS 和 RPC ，并进行安装NFS 和RPC</strong></p>
+<blockquote>
+<p>[root@NFS ~]# rpm -qa nfs-utils rpcbind</p>
+<p>rpcbind-0.2.0-13.el6.x86_64</p>
+<p>nfs-utils-1.2.3-75.el6.x86_64</p>
+</blockquote>
+<p><strong>第一步：安装NFS和rpc。</strong></p>
+<blockquote>
+<p>[root@localhost ~]# yum install -y  nfs-utils</p>
+<p>#安装nfs服务</p>
+<p>[root@localhost ~]# yum install -y rpcbind</p>
+<p>#安装rpc服务</p>
+</blockquote>
+<p><strong>第二步：启动服务和设置开启启动：</strong></p>
+<p>注意：先启动rpc服务，再启动nfs服务。</p>
+<blockquote>
+<p>[root@localhost ~]# systemctl start rpcbind    #先启动rpc服务</p>
+<p>[root@localhost ~]# systemctl enable rpcbind   #设置开机启动</p>
+<p>[root@localhost ~]# systemctl start nfs-server nfs-secure-server</p>
+<p>#启动nfs服务和nfs安全传输服务</p>
+<p>[root@localhost ~]# systemctl enable nfs-server nfs-secure-server</p>
+<p>[root@localhost /]# firewall-cmd &ndash;permanent &ndash;add-service=nfs</p>
+<p>success   #配置防火墙放行nfs服务</p>
+<p>[root@localhost /]# firewall-cmd  &ndash;reload</p>
+<p>success</p>
+</blockquote>
+<p><strong>第三步：配置共享文件目录，编辑配置文件：</strong></p>
+<p>首先创建共享目录，然后在/etc/exports配置文件中编辑配置即可。</p>
+<blockquote>
+<p>[root@localhost /]# mkdir /public</p>
+<p>#创建public共享目录</p>
+<p>[root@localhost /]# vi /etc/exports</p>
+<p>​	/public 192.168.245.0/24(ro)</p>
+<p>​	/protected 192.168.245.0/24（rw）</p>
+<p>[root@localhost /]# systemctl reload nfs</p>
+<p>#重新加载NFS服务，使配置文件生效</p>
+</blockquote>
+<p>配置文件说明：</p>
+<blockquote>
+<p>格式： <code>共享目录的路径 允许访问的NFS客户端（共享权限参数）</code></p>
+<p>如上，共享目录为/public , 允许访问的客户端为192.168.245.0/24网络用户，权限为只读。</p>
+<p><strong>请注意，NFS客户端地址与权限之间没有空格。</strong></p>
+<p>NFS输出保护需要用到kerberos加密（none，sys，krb5，krb5i，krb5p），格式sec=XXX</p>
+<p>none：以匿名身份访问，如果要允许写操作，要映射到nfsnobody用户，同时布尔值开关要打开，setsebool nfsd_anon_write 1</p>
+<p>sys：文件的访问是基于标准的文件访问，如果没有指定，默认就是sys， 信任任何发送过来用户名</p>
+<p>krb5：客户端必须提供标识，客户端的表示也必须是krb5，基于域环境的认证</p>
+<p>krb5i：在krb5的基础上做了加密的操作，对用户的密码做了加密，但是传输的数据没有加密</p>
+<p>krb5p：所有的数据都加密</p>
+</blockquote>
+<p>用于配置NFS服务程序配置文件的参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ro</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>rw</td>
+<td>读写</td>
+</tr>
+<tr>
+<td>root_squash</td>
+<td>当NFS客户端以root管理员访问时，映射为NFS服务器的匿名用户</td>
+</tr>
+<tr>
+<td>no_root_squash</td>
+<td>当NFS客户端以root管理员访问时，映射为NFS服务器的root管理员</td>
+</tr>
+<tr>
+<td>all_squash</td>
+<td>无论NFS客户端使用什么账户访问，均映射为NFS服务器的匿名用户</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>同时将数据写入到内存与硬盘中，保证不丢失数据</td>
+</tr>
+<tr>
+<td>async</td>
+<td>优先将数据保存到内存，然后再写入硬盘；这样效率更高，但可能会丢失数据</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nfs客户端挂载配置">NFS客户端挂载配置</h2>
+<p><strong>第一步：使用showmount命令查看nfs服务器共享信息。输出格式为“共享的目录名称 允许使用客户端地址”。</strong></p>
+<blockquote>
+<p>[root@localhost ~]# showmount -e 192.168.245.128</p>
+<p>Export list for 192.168.245.128:</p>
+<p>/protected 192.168.245.0/24</p>
+<p>/public    192.168.245.0/24</p>
+</blockquote>
+<p>showmount命令的用法；</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-e</td>
+<td>显示NFS服务器的共享列表</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>显示本机挂载的文件资源的情况NFS资源的情况</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示版本号</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二步，在客户端创建目录，并挂载共享目录。</strong></p>
+<blockquote>
+<p>[root@localhost ~]# mkdir /mnt/public</p>
+<p>[root@localhost ~]# mkdir /mnt/data</p>
+<p>[root@localhost ~]# vim /etc/fstab</p>
+<p>#在该文件中挂载，使系统每次启动时都能自动挂载</p>
+<p>​	192.168.245.128:/public  /mnt/public       nfs    defaults 0 0</p>
+<p>​	192.168.245.128:/protected /mnt/data     nfs    defaults  0 1</p>
+<p>[root@localhost ~]# mount -a   #是文件/etc/fstab生效</p>
+</blockquote>
+<p><strong>第三步：检查</strong></p>
+<blockquote>
+<p>[root@mail ~]# df -Th</p>
+<p>Filesystem                 Type      Size  Used Avail Use% Mounted on</p>
+<p>&hellip;</p>
+<p>192.168.245.128:/public    nfs4       17G  3.7G   14G  22% /mnt/public</p>
+<p>192.168.245.128:/protected nfs4       17G  3.7G   14G  22% /mnt/data</p>
+</blockquote>
+<h2 id="在window上挂载nfs">在Window上挂载NFS</h2>
+<p>第一步：在控制面板–&gt;添加程序和功能–&gt;添加NFS组件。
+<img src="2020-06-22-nfs-deploy-config/20181018144130862" alt="在这里插入图片描述"></p>
+<p>第二步：在此电脑，映射驱动器中添加nfs地址，和要共享的文件夹。</p>
+<p><img src="2020-06-22-nfs-deploy-config/20181018144138483" alt="在这里插入图片描述"></p>
+<p>第三步：如果权限有问题，打开注册表：regedit, 在</p>
+<blockquote>
+<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default</p>
+</blockquote>
+<p>下新建两个OWORD（64）位值，添加值AnonymousGid，值默认为0，AnonymousUid，值默认为0。</p>
+<h1 id="排错">排错</h1>
+<h2 id="nfs-server">nfs server</h2>
+<p>1、检查是否安装</p>
+<blockquote>
+<p>[root@host ~]# rpm -qa |grep nfs     //查看是否安装了nfs</p>
+<p>nfs-utils-lib-1.0.8-7.6.el5</p>
+<p>nfs-utils-1.0.9-42.el5              //nfs主程序，已安装</p>
+</blockquote>
+<p>2、NFS配置文件设置</p>
+<p>若要共享目录或文件，需要在共享清单中指明该文件/etc/exports  (语法参照 man  exports)</p>
+<blockquote>
+<p>#vim   /etc/exports</p>
+<p>/home/nfs 192.168.2.0/24(rw,sync)    (192.168.2.0网段的用户对/home/nfs NFS卷具有读写)</p>
+<p>/media/cdrom 192.168.2.*(ro)        (192.168.2.0网段的用户对/media/cdromNFS卷具有读)</p>
+</blockquote>
+<p>注：/etc/exports，配置文件有三部分： 输出目录，客户端，参数选项</p>
+<ul>
+<li>
+<p>输出目录是指NFS系统中需要共享给客户机使用的目录；</p>
+<p>客户端是指网络中可以访问这个NFS输出目录的计算机</p>
+</li>
+<li>
+<p>客户端常用的指定方式</p>
+<p>指定ip地址的主机 192.168.0.200</p>
+<p>指定子网中的所有主机 192.168.0.0/24</p>
+<p>指定域名的主机 a.liusuping.com</p>
+<p>指定域中的所有主机 *.liusuping.com</p>
+<p>所有主机 *</p>
+</li>
+<li>
+<p>选项：</p>
+<p>选项用来设置输出目录的访问权限、用户映射等。NFS主要有3类选项：</p>
+<p>访问权限选项</p>
+<p>设置输出目录只读 ro</p>
+<p>设置输出目录读写 rw</p>
+</li>
+<li>
+<p>用户映射选项</p>
+<p>all_squash 将远程访问的所有普通用户及所属组都映射为匿名用户或用户组（nfsnobody）；</p>
+<p>no_all_squash 与all_squash取反（默认设置）；</p>
+<p>root_squash 将root用户及所属组都映射为匿名用户或用户组（默认设置）;</p>
+<p>no_root_squash 与rootsquash取反；</p>
+<p>anonuid=xxx 将远程访问的所有用户都映射为匿名用户，并指定该用户为本地用户（UID=xxx）；</p>
+<p>anongid=xxx 将远程访问的所有用户组都映射为匿名用 户组账户，并指定该匿名用户组账户为本地用户组账户（GID=xxx）；</p>
+</li>
+<li>
+<p>其它选项</p>
+<p>secure 限制客户端只能从小于1024的tcp/ip端口连接nfs服务器（默认设置）；</p>
+<p>insecure 允许客户端从大于1024的tcp/ip端口连接服务器；</p>
+<p>sync 将数据同步写入内存缓冲区与磁盘中，效率低，但可以保证数据的一致性；</p>
+<p>async 将数据先保存在内存缓冲区中，必要时才写入磁盘；</p>
+<p>wdelay 检查是否有相关的写操作，如果有则将这些写操作 一起执行，这样可以提高效率（默认设置）；</p>
+<p>no_wdelay 若有写操作则立即执行，应与sync配合使用；</p>
+<p>subtree 若输出目录是一个子目录，则nfs服务器将检查其父目录的权限(默认设置)；</p>
+<p>no_subtree 即使输出目录是一个子目录,nfs服务器也不检查其父目录的权限,这样可以提高效率</p>
+</li>
+</ul>
+<p>3、启动nfs服务</p>
+<blockquote>
+<p>service nfs start
+启动 NFS 服务：                                            [确定]</p>
+<p>关掉 NFS 配额：                                            [确定]</p>
+<p>启动 NFS 守护进程：                                        [确定]</p>
+<p>启动 NFS mountd：                                          [确定]</p>
+</blockquote>
+<p>4、查看自己的rpc进程，与NFS相关的是否正常开启，如下表明已经正常开启：</p>
+<blockquote>
+<p>#rpcinfo -p  192.168.2.1 (本机ip,)</p>
+<p>100011    1   udp    821  rquotad</p>
+<p>100003    2   udp   2049  nfs</p>
+<p>100021    1   tcp  34647  nlockmgr</p>
+<p>100005    1   udp    852  mountd</p>
+</blockquote>
+<p>5、导出共享清单</p>
+<blockquote>
+<p>[root@host ~]# exportfs -rv</p>
+<p>exporting 192.168.2.0/24:/home/nfs</p>
+<p>exporting 192.168.2.*:/media/cdrom</p>
+</blockquote>
+<h2 id="nfs-client">nfs client</h2>
+<p>1、查看自己的rpc进程是否开启</p>
+<blockquote>
+<p>[root@client ~]# rpcinfo -p</p>
+<p>程序 版本 协议   端口</p>
+<p>100000    2   tcp    111  portmapper</p>
+<p>100024    1   udp    794  status</p>
+<p>100021    1   udp  58859  nlockmgr</p>
+</blockquote>
+<p>2、查看nsf-server的exports文件是否可以访问：</p>
+<blockquote>
+<p>[root@client ~]# showmount -e 192.168.2.1</p>
+<p>Export list for 192.168.2.1:</p>
+<p>/media/cdrom 192.168.2.*</p>
+<p>/home/nfs    192.168.2.0/24</p>
+</blockquote>
+<p>3、创建挂载点，手动挂载</p>
+<blockquote>
+<p>#mkdir  /tmp/abc</p>
+<p>#mkdir  /tmp/cdrom</p>
+<p>mount 192.168.2.1:/home/nfs  /tmp/abc</p>
+<p>mount 192.168.2.1:/media/cdrom  /tmp/cdrom</p>
+</blockquote>
+<p>4、设置开机自动挂载</p>
+<blockquote>
+<p>#vim /etc/fstab</p>
+<p>192.168.2.1:/home/nfs   /tmp/abc                nfs     defaults,soft,intr      0 0</p>
+<p>192.168.2.1:/media/cdrom   /tmp/cdrom           nfs     defaults,soft,intr      0 0</p>
+</blockquote>
+<p>注：（soft、intr等参数可查看man nfs）</p>
+<p>-ro,soft,intr:  -ro:挂载时的权限，soft:如果有I/O错误时，会告知系统，中继挂载；intr:挂载时有大量超时时，中继挂载，并告知系统。</p>
+<blockquote>
+<p>#umount /tmp/cdrom    /tmp/abc</p>
+<p>#mount -a</p>
+</blockquote>
+<p>5、这种方式的挂载需要消耗大量的资源来维持连接，可以使用自动挂载当切换到该目录时进行挂载，退出时，取消挂载</p>
+<p>a、安装autofs软件包</p>
+<blockquote>
+<p>[root@client tmp]# rpm -qa|grep autofs</p>
+<p>autofs-5.0.1-0.rc2.131.el5</p>
+</blockquote>
+<p>b、编辑autofs的配置文件/etc/auto.master</p>
+<blockquote>
+<p>#vim /etc/auto.master</p>
+<p>/tmp /etc/nfs.misc   &ndash;timeout=08</p>
+<p>/tmp /etc/nfs.misc   &ndash;timeout=08</p>
+</blockquote>
+<p>c、编辑要求的产生/etc/nfs.misc</p>
+<blockquote>
+<p>#vim /etc/nfs.misc</p>
+<p>abc     -fstype=nfs   192.168.2.1:/home/nfs</p>
+<p>cdrom   -fstype=nfs   192.168.2.1:/media/cdrom</p>
+</blockquote>
+<p>d、启动autofs服务</p>
+<blockquote>
+<p>#service autofs  start</p>
+<p>#rm -rf /tmp/abc</p>
+<p>#rm -rf /tmp/cdrom</p>
+</blockquote>
+<p>e、测试</p>
+<p>注：abc、cdrom : 本地目录，我们不需要创建它，用于挂载远程共享文件192.168.2.1:/home/nfs，在我们想要使用远程共享文件/home/nfs时，只要在本地目录/tmp下键入cd abc 系统就会自动挂载到远程共享目录:192.168.2.10:/home/nfs,我们就可以正常使用里面的共享文件了 ，在到达超时时间时就会自动卸载。</p>
+<p>f、以rw自动挂载/home/nfs/ NFS卷到/tmp/abc目录下，却发现无法创建目录，因为nfs-server的本地目录还没有写权限，</p>
+<blockquote>
+<p>[root@client abc]# touch nfs.txt</p>
+<p>touch: 无法触碰 “nfs.txt”: 权限不够</p>
+</blockquote>
+<p>g、nfs-server服务端修改/home/nfs的本地权限</p>
+<blockquote>
+<p>[root@host home]# chmod o+wt nfs/</p>
+</blockquote>
+<p>就可以正常创建了，</p>
+<blockquote>
+<p>[root@client abc]# touch nfs.txt</p>
+<p>[root@client abc]# dir</p>
+<p>hello-word.txt nfs.txt  nft-test</p>
+</blockquote>
+<p>注：NFS客户端与NFS服务器在连接上之后，为了保证其正常的连接，NFS客户端与NFS服务器之间要不断的发送数据包，来宣告自己还在与NFS服务器进行着连接，但是，如果一个NFS服务器上有许多的客户端一直连接的话，NFS服务器会承受很大的带宽压力，这对NFS服务器的正常使用会造成很大的影响，因此，为了避免这种情况的发生，人们就想到了一种方法，让NFS客户端在获取数据时与NFS服务器进行连接，而在没有获取数据的时间内，自动的断开与NFS服务器之间的连接，但只要客户端发送获取数据的请求进，客户端就与服务器自动连接上，自动挂载的方法对客户端主机与服务器主机都有很大的好处。配置方法是在NFS客户端方面进行配置的</p>
+<h3 id="umount-nfs文件系统">umount nfs文件系统</h3>
+<blockquote>
+<p>root@ubuntu:/# umount /app/nfs/</p>
+<p>umount.nfs: /app/nfs: device is busy</p>
+<p>umount.nfs: /app/nfs: device is busy</p>
+</blockquote>
+<p>提示文件系统设置busy</p>
+<blockquote>
+<p>root@ubuntu:/# fuser -km /app/nfs/   先使用这条命令
+/data/nfs/:                     8119c
+root@ubuntu:/# umount /app/nfs/      在umount 就可以了
+root@ubuntu:/#</p>
+</blockquote>
+<p>也可使用</p>
+<blockquote>
+<p>umount -f /app/nfs</p>
+</blockquote>
+<h2 id="nfs常见故障解决方法">NFS常见故障解决方法</h2>
+<p>NFS服务出现了故障，主要从以下几个方面检查原因：</p>
+<p>（1）检查NFS客户机和服务器的负荷是否太高，Server和Client之间的网络是否正常；</p>
+<p>（2）检查/etc/exports文件的正确性；</p>
+<p>（3）必要时重启NFS和portmap服务；</p>
+<p>（4）运行下列命令重新启动portmap和NFS:</p>
+<blockquote>
+<p>/etc/init.d/portmap restart</p>
+<p>/etc/init.d/nfs restart</p>
+<p>/etc/init.d/rpcbind restart （在RHEL/CentOS 6.x里面）</p>
+<p>chkconfig portmap on</p>
+<p>chkconfig nfs on</p>
+<p>chkconfig rpcbind on （在RHEL/CentOS 6.x里面）</p>
+</blockquote>
+<p>注意：在RHEL/CentOS 6.x里面，portmap服务改名为rpcbind服务了；顺便说一下，rpcbind服务也是图形界面的关键基础服务，不启动此服务，不能启动图形桌面。</p>
+<p>（5） 检查Client上的mount命令或/etc/fstab的语法是否正确;</p>
+<p>（6） 查看内核是否支持NFS和RPC服务。一般正常安装的Linux系统都会默认支持NFS和RPC服务，除非你自己重新编译的内核，而且没选择nfs支持选项编译。</p>
+<p>1、The rpcbind failure error
+故障现象：</p>
+<blockquote>
+<p>nfs mount: server1:: RPC: Rpcbind failure
+RPC: Timed Out
+nfs mount: retrying: /mntpoint</p>
+</blockquote>
+<p>原因：
+第一，可能因为客户机的hosts文件中存在错误的ip地址、主机名或节点名组合；
+第二，服务器因为过载而暂时停止服务。</p>
+<p>2、The server not responding error
+现象：</p>
+<blockquote>
+<p>NFS server server2 not responding, still trying</p>
+</blockquote>
+<p>原因：
+第一，网络不通，用ping命令检测一下。
+第二，服务器关机。</p>
+<p>3、The NFS client fails a reboot error
+现象：</p>
+<blockquote>
+<p>启动客户机后停住了，不断显示如下提示信息：
+Setting default interface for multicast: add net 224.0.0.0: gateway:
+client_node_name.</p>
+</blockquote>
+<p>原因：
+在etc/vfstab的mount选项中使用了fg而又无法成功mount服务器上的资源，改成bg或将该行注释掉，直到服务器可用为止。</p>
+<p>4、The service not responding error
+现象：</p>
+<blockquote>
+<p>nfs mount: dbserver: NFS: Service not responding
+nfs mount: retrying: /mntpoint</p>
+</blockquote>
+<p>原因：
+第一，当前级别不是级别3，用who -r查看，用init 3切换。
+第二，NFS Server守护进程不存在，用ps -ef | grep nfs检查，用/etc/init.d/nfs start启动。</p>
+<p>5、The program not registered error
+现象：</p>
+<blockquote>
+<p>nfs mount: dbserver: RPC: Program not registered
+nfs mount: retrying: /mntpoint</p>
+</blockquote>
+<p>原因：
+第一，当前级别不是级别3。
+第二，mountd守护进程没有启动，用/etc/init.d/nfs脚本启动NFS守护进程。
+第三，看/etc/dfs/dfstab中的条目是否正常。</p>
+<p>6、The stale file handle error
+现象：</p>
+<blockquote>
+<p>stale NFS file handle</p>
+</blockquote>
+<p>原因：
+服务器上的共享资源移动位置了，在客户端使用umount和mount重新挂接就可以了。</p>
+<p>7、The unknown host error
+现象：</p>
+<blockquote>
+<p>nfs mount: sserver1:: RPC: Unknown host</p>
+</blockquote>
+<p>原因：
+hosts文件中的内容不正确。</p>
+<p>8、The mount point error
+现象：</p>
+<blockquote>
+<p>mount: mount-point /DS9 does not exist.</p>
+</blockquote>
+<p>原因：
+该挂接点在客户机上不存在，注意检查命令行或/etc/vfstab文件中相关条目的拼写。</p>
+<p>9、The no such file error
+现象：</p>
+<blockquote>
+<p>No such file or directory.</p>
+</blockquote>
+<p>原因：
+该挂接点在服务器上不存在，注意检查命令行或/etc/vfstab文件中相关条目的拼写。</p>
+<p>10、No route to host
+错误现象：</p>
+<blockquote>
+<p>mount 10.10.11.211:/opt/data/xmldb /c2c-web1/data/xmldb -t nfs -o rw</p>
+<p>mount: mount to NFS server ’10.10.11.211′ failed: System Error: No route to host.</p>
+</blockquote>
+<p>原因：
+防火墙被打开，关闭防火墙。
+这个原因很多人都忽视了，如果开启了防火墙（包括iptables和硬件防火墙），NFS默认使用111端口，我们先要检测是否打开了这个端口，还要检查TCP_Wrappers的设定。</p>
+<p>11、Not owner
+现象：</p>
+<blockquote>
+<p>mount -t nfs -o rw 10.10.2.3:/mnt/c2c/data/resinfo2 /data/data/resinfo2</p>
+<p>nfs mount: mount: /data/data/resinfo2: Not owner</p>
+</blockquote>
+<p>原因：
+这是Solaris 10版本挂载较低版本nfs时报的错误。</p>
+<p>解决：
+需要用-o vers=3参数</p>
+<p>示例：</p>
+<blockquote>
+<p>mount -F nfs -o vers=3 10.10.2.3:/mnt/c2c/data/resinfo2 /data/data/resinfo2</p>
+</blockquote>
+<p>12、RPC: Program not registered &amp; retrying
+现象：</p>
+<blockquote>
+<p>nfs mount: 10.10.2.3: : RPC: Program not registered
+nfs mount: retrying: /data/data/resinfo2</p>
+</blockquote>
+<p>原因：
+没有启动NFS共享端服务。</p>
+<p>解决：需要重新启动share端的NFS服务，</p>
+<blockquote>
+<p>Linux:
+mount: RPC: Program not registered</p>
+<p>/etc/init.d/nfs restart</p>
+<p>Solaris:
+mount: RPC: Program not registered</p>
+<p>/etc/rc.d/init.d/nfs restart</p>
+</blockquote>
+<p>13、can’t contact portmapper: RPC: Remote system error – Connection refused
+现象：</p>
+<blockquote>
+<p>exportfs -a</p>
+<p>can’t contact portmapper: RPC: Remote system error – Connection refused</p>
+</blockquote>
+<p>原因：
+出现这个错误信息是由于server端的portmap没有启动。</p>
+<p>解决：</p>
+<blockquote>
+<p>/etc/init.d/portmap start</p>
+</blockquote>
+<p>14、Cannot register service: RPC</p>
+<blockquote>
+<p>[root@IT_Only 20180815_std]# showmount -e nas09
+mount clntudp_create: RPC: Port mapper failure - RPC: Unable to receive</p>
+</blockquote>
+<p>发现无法找到共享，决定在nas存储上重启nfs服务，报错如下</p>
+<blockquote>
+<p>Starting NFS quotas: Cannot register service: RPC: Unable to receive; errno = Connection refused rpc.rquotad: unable to register (RQUOTAPROG, RQUOTAVERS, udp).</p>
+<p><a href="https://www.centos.bz/tag/service/">service</a> nfs restart</p>
+<p>Shutting down NFS mountd: [ OK ]</p>
+<p>Shutting down NFS daemon: [ OK ]</p>
+<p>Shutting down NFS quotas: [ OK ]</p>
+<p>Shutting down NFS services: [ OK ]</p>
+<p>Starting NFS services: [ OK ]</p>
+<p>Starting NFS quotas: Cannot <a href="https://www.centos.bz/tag/register/">register</a> service: RPC: Unable to receive; errno = Connection refused</p>
+<p>rpc.rquotad: unable to register (RQUOTAPROG, RQUOTAVERS, udp).</p>
+<p>[FAILED]</p>
+</blockquote>
+<p>解决方法：</p>
+<blockquote>
+<p>service portmap start</p>
+<p>先启动portmap才行</p>
+</blockquote>
+<p>15、Address already in use</p>
+<blockquote>
+<p>tail -f /var/log/message</p>
+<p>Apr :: bogon nfsd[]: nfssvc: Setting version failed: errno (Device or resource busy)</p>
+<p>Apr :: bogon nfsd[]: nfssvc: unable to bind UPD <a href="https://www.centos.bz/tag/socket/">socket</a>: errno (Address already in use)</p>
+<p>Apr :: bogon nfsd[]: nfssvc: Setting version failed: errno (Device or resource busy)</p>
+<p>Apr :: bogon nfsd[]: nfssvc: unable to bind UPD socket: errno (Address already in use)</p>
+<p>Apr :: bogon nfsd[]: nfssvc: Setting version failed: errno (Device or resource busy)</p>
+</blockquote>
+<p>解决方法：</p>
+<blockquote>
+<p>ps aux | grep nfs</p>
+</blockquote>
+<p>然后用kill干掉这些进程</p>
+<p>16、reason given by server: Permission denied</p>
+<blockquote>
+<p>mount: …:/nfsdata failed, reason given by server: Permission denied</p>
+</blockquote>
+<p>解决方法：</p>
+<blockquote>
+<p>a.把该客户端的ip加入服务端的/etc/exports</p>
+<p>b.服务端的和客户端规则要统一，要么都使用主机名（注意每台机器的hosts文件），要么都使用IP</p>
+</blockquote>
+<p>17、客户端挂载超时</p>
+<blockquote>
+<p>tail -f /var/log/message</p>
+<p>Apr :: localhost kernel: portmap: <a href="https://www.centos.bz/tag/server/">server</a> localhost not responding, timed out</p>
+<p>Apr :: localhost kernel: RPC: failed to contact portmap (errno -).</p>
+<p>Apr :: localhost kernel: RPC: failed to contact portmap (errno -).</p>
+<p>Apr :: localhost kernel: lockd_up: makesock failed, <a href="https://www.centos.bz/tag/error/">error</a>=-</p>
+<p>Apr :: localhost kernel: RPC: failed to contact portmap (errno -).</p>
+</blockquote>
+<p>解决方法：</p>
+<blockquote>
+<p>service portmap restart</p>
+<p>service nfs restart</p>
+</blockquote>
+<p>18、Error: RPC MTAB does not exist.</p>
+<blockquote>
+<p>service nfs start</p>
+<p>Starting NFS services: [ OK ]</p>
+<p>Starting NFS quotas: [ OK ]</p>
+<p>Starting NFS daemon: [ OK ]</p>
+<p>Starting NFS mountd: [ OK ]</p>
+<p>Starting RPC idmapd: Error: RPC MTAB does not exist.</p>
+</blockquote>
+<p>解决方法：</p>
+<p>手动执行</p>
+<blockquote>
+<p>mount -t rpc_pipefs sunrpc /var/lib/nfs/rpc_pipefs/</p>
+</blockquote>
+<p>需要时加入开机启动时，加入下面两行到/etc/fstab</p>
+<blockquote>
+<p>rpc_pipefs /var/lib/nfs/rpc_pipefs rpc_pipefs defaults</p>
+<p>nfsd /proc/fs/nfsd nfsd defaults</p>
+</blockquote>
+<h1 id="exportfs">exportfs</h1>
+<p>exportfs主要用于管理当前NFS服务器的文件系统。</p>
+<p>此命令的适用范围：RedHat、RHEL、Ubuntu、CentOS、Fedora。</p>
+<h2 id="参数列表">参数列表</h2>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>-a</strong></td>
+<td>共享nfs配置文件中所有的共享目录</td>
+</tr>
+<tr>
+<td><strong>-i</strong></td>
+<td>忽略/etc/exports配置文件，只使用exportfs指令的默认值和命令行指定的参数</td>
+</tr>
+<tr>
+<td><strong>-r</strong></td>
+<td>重新共享所有的nfs文件系统</td>
+</tr>
+<tr>
+<td><strong>-u</strong></td>
+<td>取消一个或者多个NFS共享文件系统的共享</td>
+</tr>
+<tr>
+<td><strong>-v</strong></td>
+<td>显示详细执行信息</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[root@localhost ~]# exportfs -u 192.168.1.7:/media/test</p>
+</blockquote>
+<h2 id="补充说明">补充说明</h2>
+<ul>
+<li>exportfs命令和nfs-utils这个包一起安装的</li>
+<li>例子：
+<ul>
+<li>假设在第一次配置nfs的共享目录，之后需要新增、更改某些机器或共享的目录；</li>
+<li>首先需要更改配置文件，然后重启NFS服务，但如果远程客户端正在使用NFS服务，正在挂载着，如果你需要先停止nfs服务，那远程的客户端就会挂起，就会很大的影响，造成服务异常，进程异常，有很大可能导致系统坏掉</li>
+</ul>
+</li>
+<li>nfs服务不能随便重启，要重启，就需要先去服务器上，把挂载的目录卸载下来
+<ul>
+<li>在卸载目录的时候，若是在当前目录下去卸载会提示umount.nfs4: /mnt: device is busy
+<ul>
+<li>方法一：退出该目录后，再去卸载</li>
+<li>方法二：在目录下卸载的时候，加 -l 选项，表示 lazy 懒惰的意思</li>
+</ul>
+</li>
+<li>在卸载目录后，在重启nfs服务</li>
+</ul>
+</li>
+<li>若是挂载了很多台机器，那么每台机器都需要去卸载，就会很麻烦，降低了工作效率
+<ul>
+<li>方法：使用exportfs命令，重新加载下</li>
+</ul>
+</li>
+<li>exportfs命令
+<ul>
+<li>-a 全部挂载或者全部卸载</li>
+<li>-r 重新挂载</li>
+<li>-u 卸载某一个目录</li>
+<li>-v 显示共享目录</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用样例">使用样例</h2>
+<ul>
+<li>在B机器客户端，卸载目录</li>
+</ul>
+<blockquote>
+<p>[root@test ~]# umount /mnt/</p>
+</blockquote>
+<ul>
+<li>然后在A机器服务端，使用exportfs -arv命令，重新使配置文件生效</li>
+</ul>
+<blockquote>
+<p>[root@test~]# exportfs -arv</p>
+<p>exporting 192.168.202.0/24:/home/nfstestdir</p>
+<p>[root@test~]#</p>
+</blockquote>
+<ul>
+<li>在A机器上的/etc/exports配置文件中，在增加一行，把 /tmp 目录单独共享给192.168.202.131 这个IP</li>
+</ul>
+<blockquote>
+<p>[root@test~]# vim /etc/exports</p>
+<p>在配置文件中加入</p>
+<p>/tmp 192.168.202.131(rw,sync,no_root_squash)</p>
+<p>结果如下</p>
+<p>/home/nfstestdir  192.168.202.0/24(rw,sync,all_squash,anonuid=1000,anongid=1000)</p>
+<p>/tmp 192.168.202.131(rw,sync,no_root_squash)</p>
+<p>保存退出</p>
+</blockquote>
+<ul>
+<li>然后在A机器服务端执行exportfs -arv命令</li>
+</ul>
+<blockquote>
+<p>[root@test~]# exportfs -arv</p>
+<p>exporting 192.168.202.131:/tmp</p>
+<p>exporting 192.168.202.0/24:/home/nfstestdir</p>
+</blockquote>
+<ul>
+<li>在B机器客户端showmount -e看是否生效——&gt;并没有重启nfs服务，就已经生效</li>
+</ul>
+<blockquote>
+<p>[root@test ~]# showmount -e 192.168.202.130</p>
+<p>Export list for 192.168.202.130:</p>
+<p>/home/nfstestdir 192.168.202.0/24</p>
+<p>/tmp             192.168.202.131</p>
+</blockquote>
+<ul>
+<li>在B机器客户端挂载，将 tmp目录 挂载到 mnt 目录下</li>
+</ul>
+<blockquote>
+<p>[root@test ~]# mount -t nfs 192.168.202.130:/tmp/ /mnt/</p>
+<p>[root@test ~]# df -h</p>
+<p>文件系统              容量  已用  可用 已用% 挂载点</p>
+<p>192.168.202.130:/tmp   18G  3.2G   15G   18% /mnt</p>
+</blockquote>
+<p>这就是因为在A机器服务端的配置文件中，使用了no_root_squash ，所以root用户不受约束，在B机器上到挂载点下，到共享目录下，就可以像在本地磁盘使用root用户一样，是不受限制的（通常情况下，不限制root用户的比较多）</p>
+    </div>
+
+    
+    
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://justgo-now.github.io/tags/nfs.html">nfs</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/2020/2020-06-16-http-status-code.html">
+            <span class="next-text nav-default">Http状态码及协议头</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="http://justgo-now.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  
+
+  <span class="copyright-year">
+    &copy;
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Frank
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.dee43230127a73d039a734510fa896c89c3c7ce0cf0be0c7a7433f8fd69b76dc.js" integrity="sha256-3uQyMBJ6c9A5pzRRD6iWyJw8fODPC&#43;DHp0M/j9abdtw=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

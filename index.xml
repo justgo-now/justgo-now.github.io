@@ -6,7 +6,7 @@
     <description>Recent content on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Jun 2020 09:50:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2020 09:57:19 +0800</lastBuildDate>
     
         <atom:link href="http://justgo-now.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -28,6 +28,728 @@
 &lt;/ul&gt;
 &lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
+      
+    </item>
+    
+    <item>
+      <title>NFS服务器配置及常见错误</title>
+      <link>http://justgo-now.github.io/post/2020/2020-06-22-nfs-deploy-config.html</link>
+      <pubDate>Mon, 22 Jun 2020 09:57:19 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-06-22-nfs-deploy-config.html</guid>
+      
+        <description>&lt;p&gt;NFS是基于&lt;a href=&#34;https://baike.baidu.com/item/UDP/571511&#34;&gt;UDP&lt;/a&gt;/IP协议的应用，其实现主要是采用&lt;a href=&#34;https://baike.baidu.com/item/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8&#34;&gt;远程过程调用&lt;/a&gt;&lt;a href=&#34;https://baike.baidu.com/item/RPC/609861&#34;&gt;RPC&lt;/a&gt;机制，RPC提供了一组与机器、操作系统以及低层传送协议无关的存取远程文件的操作。&lt;a href=&#34;https://baike.baidu.com/item/RPC&#34;&gt;RPC&lt;/a&gt;采用了&lt;a href=&#34;https://baike.baidu.com/item/XDR&#34;&gt;XDR&lt;/a&gt;的支持。&lt;a href=&#34;https://baike.baidu.com/item/XDR/8796904&#34;&gt;XDR&lt;/a&gt;是一种与机器无关的数据描述编码的协议，他以独立与任意机器体系结构的格式对网上传送的数据进行编码和解码，支持在异构系统之间数据的传送。&lt;/p&gt;
+&lt;p&gt;NFS是Network File System的缩写，即网络文件系统。一种使用于分散式文件协定，功能是通过网络让不同的机器、不同的操作系统能够分享个人数据，让应用程序通过网络可以访问位于服务器磁盘中的数据。
+NFS在文件传送或信息传送的过过程中，依赖于RPC协议。RPC，远程过程调用（Remote Procedure Call）,是使客户端能够执行其他系统中程序的一种机制。NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，就是因为NFS使用了RPC提供的传输协议，可以说NFS就是使用PRC的一个程序。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-22-nfs-deploy-config/2018062513544128&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;h2 id=&#34;nfs挂载原理&#34;&gt;NFS挂载原理&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-22-nfs-deploy-config/20181018144004725&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如上图示：&lt;/p&gt;
+&lt;p&gt;当我们在NFS服务器设置好一个共享目录/home/public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上图客户端A与客户端B挂载的目录就不相同。并且挂载好后我们在本地能够看到服务端/home/public的所有数据。如果服务器端配置的客户端只读，那么客户端就只能够只读。如果配置读写，客户端就能够进行读写。挂载后，NFS客户端查看磁盘信息命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;df –h。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;既然NFS是通过网络来进行服务器端和客户端之间的数据传输，那么两者之间要传输数据就要有想对应的网络端口，NFS服务器到底使用哪个端口来进行数据传输呢？基本上NFS这个服务器的端口开在2049,但由于文件系统非常复杂。因此NFS还有其他的程序去启动额外的端口，这些额外的用来传输数据的端口是随机选择的，是小于1024的端口；既然是随机的那么客户端又是如何知道NFS服务器端到底使用的是哪个端口呢？这时就需要通过远程过程调用（Remote Procedure Call,RPC）协议来实现了！&lt;/p&gt;
+&lt;h2 id=&#34;rpc与nfs通讯原理&#34;&gt;RPC与NFS通讯原理&lt;/h2&gt;
+&lt;p&gt;因为NFS支持的功能相当多，而不同的功能都会使用不同的程序来启动，每启动一个功能就会启用一些端口来传输数据，因此NFS的功能对应的端口并不固定，客户端要知道NFS服务器端的相关端口才能建立连接进行数据传输，而RPC就是用来统一管理NFS端口的服务，并且统一对外的端口是111，RPC会记录NFS端口的信息，如此我们就能够通过RPC实现服务端和客户端沟通端口信息。PRC最主要的功能就是指定每个NFS功能所对应的port number,并且通知客户端，记客户端可以连接到正常端口上去。&lt;/p&gt;
+&lt;p&gt;那么RPC又是如何知道每个NFS功能的端口呢？&lt;/p&gt;
+&lt;p&gt;首先当NFS启动后，就会随机的使用一些端口，然后NFS就会向RPC去注册这些端口，RPC就会记录下这些端口，并且RPC会开启111端口，等待客户端RPC的请求，如果客户端有请求，那么服务器端的RPC就会将之前记录的NFS端口信息告知客户端。如此客户端就会获取NFS服务器端的端口信息，就会以实际端口进行数据的传输了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：在启动NFS SERVER之前，首先要启动RPC服务（即portmap服务，下同）否则NFS SERVER就无法向RPC服务区注册，另外，如果RPC服务重新启动，原来已经注册好的NFS端口数据就会全部丢失。因此此时RPC服务管理的NFS程序也要重新启动以重新向RPC注册。特别注意：一般修改NFS配置文档后，是不需要重启NFS的，直接在命令执行systemctl reload nfs或exportfs –rv即可使修改的/etc/exports生效&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;nfs服务端&#34;&gt;NFS服务端&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-22-nfs-deploy-config/20180625135202315&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nfs客户端&#34;&gt;NFS客户端&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-22-nfs-deploy-config/20180625135220381&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nfs客户端和nfs服务器通讯过程&#34;&gt;NFS客户端和NFS服务器通讯过程&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-22-nfs-deploy-config/20181018144052796&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;首先服务器端启动RPC服务，并开启111端口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器端启动NFS服务，并向RPC注册端口信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端启动RPC（portmap服务），向服务端的RPC(portmap)服务请求服务端的NFS端口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务端的RPC(portmap)服务反馈NFS端口信息给客户端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端通过获取的NFS端口来建立和服务端的NFS连接并进行数据的传输。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;部署&#34;&gt;部署&lt;/h1&gt;
+&lt;h2 id=&#34;服务端安装nfs服务步骤&#34;&gt;服务端安装NFS服务步骤&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;首先， 检查系统中是否安装 NFS 和 RPC ，并进行安装NFS 和RPC&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@NFS ~]# rpm -qa nfs-utils rpcbind&lt;/p&gt;
+&lt;p&gt;rpcbind-0.2.0-13.el6.x86_64&lt;/p&gt;
+&lt;p&gt;nfs-utils-1.2.3-75.el6.x86_64&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;第一步：安装NFS和rpc。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@localhost ~]# yum install -y  nfs-utils&lt;/p&gt;
+&lt;p&gt;#安装nfs服务&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# yum install -y rpcbind&lt;/p&gt;
+&lt;p&gt;#安装rpc服务&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;第二步：启动服务和设置开启启动：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;注意：先启动rpc服务，再启动nfs服务。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@localhost ~]# systemctl start rpcbind    #先启动rpc服务&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# systemctl enable rpcbind   #设置开机启动&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# systemctl start nfs-server nfs-secure-server&lt;/p&gt;
+&lt;p&gt;#启动nfs服务和nfs安全传输服务&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# systemctl enable nfs-server nfs-secure-server&lt;/p&gt;
+&lt;p&gt;[root@localhost /]# firewall-cmd &amp;ndash;permanent &amp;ndash;add-service=nfs&lt;/p&gt;
+&lt;p&gt;success   #配置防火墙放行nfs服务&lt;/p&gt;
+&lt;p&gt;[root@localhost /]# firewall-cmd  &amp;ndash;reload&lt;/p&gt;
+&lt;p&gt;success&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;第三步：配置共享文件目录，编辑配置文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先创建共享目录，然后在/etc/exports配置文件中编辑配置即可。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@localhost /]# mkdir /public&lt;/p&gt;
+&lt;p&gt;#创建public共享目录&lt;/p&gt;
+&lt;p&gt;[root@localhost /]# vi /etc/exports&lt;/p&gt;
+&lt;p&gt;​	/public 192.168.245.0/24(ro)&lt;/p&gt;
+&lt;p&gt;​	/protected 192.168.245.0/24（rw）&lt;/p&gt;
+&lt;p&gt;[root@localhost /]# systemctl reload nfs&lt;/p&gt;
+&lt;p&gt;#重新加载NFS服务，使配置文件生效&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;配置文件说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;格式： &lt;code&gt;共享目录的路径 允许访问的NFS客户端（共享权限参数）&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如上，共享目录为/public , 允许访问的客户端为192.168.245.0/24网络用户，权限为只读。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;请注意，NFS客户端地址与权限之间没有空格。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;NFS输出保护需要用到kerberos加密（none，sys，krb5，krb5i，krb5p），格式sec=XXX&lt;/p&gt;
+&lt;p&gt;none：以匿名身份访问，如果要允许写操作，要映射到nfsnobody用户，同时布尔值开关要打开，setsebool nfsd_anon_write 1&lt;/p&gt;
+&lt;p&gt;sys：文件的访问是基于标准的文件访问，如果没有指定，默认就是sys， 信任任何发送过来用户名&lt;/p&gt;
+&lt;p&gt;krb5：客户端必须提供标识，客户端的表示也必须是krb5，基于域环境的认证&lt;/p&gt;
+&lt;p&gt;krb5i：在krb5的基础上做了加密的操作，对用户的密码做了加密，但是传输的数据没有加密&lt;/p&gt;
+&lt;p&gt;krb5p：所有的数据都加密&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;用于配置NFS服务程序配置文件的参数：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ro&lt;/td&gt;
+&lt;td&gt;只读&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rw&lt;/td&gt;
+&lt;td&gt;读写&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;root_squash&lt;/td&gt;
+&lt;td&gt;当NFS客户端以root管理员访问时，映射为NFS服务器的匿名用户&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;no_root_squash&lt;/td&gt;
+&lt;td&gt;当NFS客户端以root管理员访问时，映射为NFS服务器的root管理员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;all_squash&lt;/td&gt;
+&lt;td&gt;无论NFS客户端使用什么账户访问，均映射为NFS服务器的匿名用户&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;sync&lt;/td&gt;
+&lt;td&gt;同时将数据写入到内存与硬盘中，保证不丢失数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;async&lt;/td&gt;
+&lt;td&gt;优先将数据保存到内存，然后再写入硬盘；这样效率更高，但可能会丢失数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nfs客户端挂载配置&#34;&gt;NFS客户端挂载配置&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;第一步：使用showmount命令查看nfs服务器共享信息。输出格式为“共享的目录名称 允许使用客户端地址”。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@localhost ~]# showmount -e 192.168.245.128&lt;/p&gt;
+&lt;p&gt;Export list for 192.168.245.128:&lt;/p&gt;
+&lt;p&gt;/protected 192.168.245.0/24&lt;/p&gt;
+&lt;p&gt;/public    192.168.245.0/24&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;showmount命令的用法；&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-e&lt;/td&gt;
+&lt;td&gt;显示NFS服务器的共享列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-a&lt;/td&gt;
+&lt;td&gt;显示本机挂载的文件资源的情况NFS资源的情况&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-v&lt;/td&gt;
+&lt;td&gt;显示版本号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;第二步，在客户端创建目录，并挂载共享目录。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@localhost ~]# mkdir /mnt/public&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# mkdir /mnt/data&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# vim /etc/fstab&lt;/p&gt;
+&lt;p&gt;#在该文件中挂载，使系统每次启动时都能自动挂载&lt;/p&gt;
+&lt;p&gt;​	192.168.245.128:/public  /mnt/public       nfs    defaults 0 0&lt;/p&gt;
+&lt;p&gt;​	192.168.245.128:/protected /mnt/data     nfs    defaults  0 1&lt;/p&gt;
+&lt;p&gt;[root@localhost ~]# mount -a   #是文件/etc/fstab生效&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;第三步：检查&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@mail ~]# df -Th&lt;/p&gt;
+&lt;p&gt;Filesystem                 Type      Size  Used Avail Use% Mounted on&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;192.168.245.128:/public    nfs4       17G  3.7G   14G  22% /mnt/public&lt;/p&gt;
+&lt;p&gt;192.168.245.128:/protected nfs4       17G  3.7G   14G  22% /mnt/data&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;在window上挂载nfs&#34;&gt;在Window上挂载NFS&lt;/h2&gt;
+&lt;p&gt;第一步：在控制面板–&amp;gt;添加程序和功能–&amp;gt;添加NFS组件。
+&lt;img src=&#34;2020-06-22-nfs-deploy-config/20181018144130862&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;第二步：在此电脑，映射驱动器中添加nfs地址，和要共享的文件夹。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-22-nfs-deploy-config/20181018144138483&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;第三步：如果权限有问题，打开注册表：regedit, 在&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下新建两个OWORD（64）位值，添加值AnonymousGid，值默认为0，AnonymousUid，值默认为0。&lt;/p&gt;
+&lt;h1 id=&#34;排错&#34;&gt;排错&lt;/h1&gt;
+&lt;h2 id=&#34;nfs-server&#34;&gt;nfs server&lt;/h2&gt;
+&lt;p&gt;1、检查是否安装&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@host ~]# rpm -qa |grep nfs     //查看是否安装了nfs&lt;/p&gt;
+&lt;p&gt;nfs-utils-lib-1.0.8-7.6.el5&lt;/p&gt;
+&lt;p&gt;nfs-utils-1.0.9-42.el5              //nfs主程序，已安装&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2、NFS配置文件设置&lt;/p&gt;
+&lt;p&gt;若要共享目录或文件，需要在共享清单中指明该文件/etc/exports  (语法参照 man  exports)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#vim   /etc/exports&lt;/p&gt;
+&lt;p&gt;/home/nfs 192.168.2.0/24(rw,sync)    (192.168.2.0网段的用户对/home/nfs NFS卷具有读写)&lt;/p&gt;
+&lt;p&gt;/media/cdrom 192.168.2.*(ro)        (192.168.2.0网段的用户对/media/cdromNFS卷具有读)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注：/etc/exports，配置文件有三部分： 输出目录，客户端，参数选项&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;输出目录是指NFS系统中需要共享给客户机使用的目录；&lt;/p&gt;
+&lt;p&gt;客户端是指网络中可以访问这个NFS输出目录的计算机&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端常用的指定方式&lt;/p&gt;
+&lt;p&gt;指定ip地址的主机 192.168.0.200&lt;/p&gt;
+&lt;p&gt;指定子网中的所有主机 192.168.0.0/24&lt;/p&gt;
+&lt;p&gt;指定域名的主机 a.liusuping.com&lt;/p&gt;
+&lt;p&gt;指定域中的所有主机 *.liusuping.com&lt;/p&gt;
+&lt;p&gt;所有主机 *&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选项：&lt;/p&gt;
+&lt;p&gt;选项用来设置输出目录的访问权限、用户映射等。NFS主要有3类选项：&lt;/p&gt;
+&lt;p&gt;访问权限选项&lt;/p&gt;
+&lt;p&gt;设置输出目录只读 ro&lt;/p&gt;
+&lt;p&gt;设置输出目录读写 rw&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用户映射选项&lt;/p&gt;
+&lt;p&gt;all_squash 将远程访问的所有普通用户及所属组都映射为匿名用户或用户组（nfsnobody）；&lt;/p&gt;
+&lt;p&gt;no_all_squash 与all_squash取反（默认设置）；&lt;/p&gt;
+&lt;p&gt;root_squash 将root用户及所属组都映射为匿名用户或用户组（默认设置）;&lt;/p&gt;
+&lt;p&gt;no_root_squash 与rootsquash取反；&lt;/p&gt;
+&lt;p&gt;anonuid=xxx 将远程访问的所有用户都映射为匿名用户，并指定该用户为本地用户（UID=xxx）；&lt;/p&gt;
+&lt;p&gt;anongid=xxx 将远程访问的所有用户组都映射为匿名用 户组账户，并指定该匿名用户组账户为本地用户组账户（GID=xxx）；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;其它选项&lt;/p&gt;
+&lt;p&gt;secure 限制客户端只能从小于1024的tcp/ip端口连接nfs服务器（默认设置）；&lt;/p&gt;
+&lt;p&gt;insecure 允许客户端从大于1024的tcp/ip端口连接服务器；&lt;/p&gt;
+&lt;p&gt;sync 将数据同步写入内存缓冲区与磁盘中，效率低，但可以保证数据的一致性；&lt;/p&gt;
+&lt;p&gt;async 将数据先保存在内存缓冲区中，必要时才写入磁盘；&lt;/p&gt;
+&lt;p&gt;wdelay 检查是否有相关的写操作，如果有则将这些写操作 一起执行，这样可以提高效率（默认设置）；&lt;/p&gt;
+&lt;p&gt;no_wdelay 若有写操作则立即执行，应与sync配合使用；&lt;/p&gt;
+&lt;p&gt;subtree 若输出目录是一个子目录，则nfs服务器将检查其父目录的权限(默认设置)；&lt;/p&gt;
+&lt;p&gt;no_subtree 即使输出目录是一个子目录,nfs服务器也不检查其父目录的权限,这样可以提高效率&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3、启动nfs服务&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service nfs start
+启动 NFS 服务：                                            [确定]&lt;/p&gt;
+&lt;p&gt;关掉 NFS 配额：                                            [确定]&lt;/p&gt;
+&lt;p&gt;启动 NFS 守护进程：                                        [确定]&lt;/p&gt;
+&lt;p&gt;启动 NFS mountd：                                          [确定]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;4、查看自己的rpc进程，与NFS相关的是否正常开启，如下表明已经正常开启：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#rpcinfo -p  192.168.2.1 (本机ip,)&lt;/p&gt;
+&lt;p&gt;100011    1   udp    821  rquotad&lt;/p&gt;
+&lt;p&gt;100003    2   udp   2049  nfs&lt;/p&gt;
+&lt;p&gt;100021    1   tcp  34647  nlockmgr&lt;/p&gt;
+&lt;p&gt;100005    1   udp    852  mountd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;5、导出共享清单&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@host ~]# exportfs -rv&lt;/p&gt;
+&lt;p&gt;exporting 192.168.2.0/24:/home/nfs&lt;/p&gt;
+&lt;p&gt;exporting 192.168.2.*:/media/cdrom&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;nfs-client&#34;&gt;nfs client&lt;/h2&gt;
+&lt;p&gt;1、查看自己的rpc进程是否开启&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@client ~]# rpcinfo -p&lt;/p&gt;
+&lt;p&gt;程序 版本 协议   端口&lt;/p&gt;
+&lt;p&gt;100000    2   tcp    111  portmapper&lt;/p&gt;
+&lt;p&gt;100024    1   udp    794  status&lt;/p&gt;
+&lt;p&gt;100021    1   udp  58859  nlockmgr&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2、查看nsf-server的exports文件是否可以访问：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@client ~]# showmount -e 192.168.2.1&lt;/p&gt;
+&lt;p&gt;Export list for 192.168.2.1:&lt;/p&gt;
+&lt;p&gt;/media/cdrom 192.168.2.*&lt;/p&gt;
+&lt;p&gt;/home/nfs    192.168.2.0/24&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3、创建挂载点，手动挂载&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#mkdir  /tmp/abc&lt;/p&gt;
+&lt;p&gt;#mkdir  /tmp/cdrom&lt;/p&gt;
+&lt;p&gt;mount 192.168.2.1:/home/nfs  /tmp/abc&lt;/p&gt;
+&lt;p&gt;mount 192.168.2.1:/media/cdrom  /tmp/cdrom&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;4、设置开机自动挂载&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#vim /etc/fstab&lt;/p&gt;
+&lt;p&gt;192.168.2.1:/home/nfs   /tmp/abc                nfs     defaults,soft,intr      0 0&lt;/p&gt;
+&lt;p&gt;192.168.2.1:/media/cdrom   /tmp/cdrom           nfs     defaults,soft,intr      0 0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注：（soft、intr等参数可查看man nfs）&lt;/p&gt;
+&lt;p&gt;-ro,soft,intr:  -ro:挂载时的权限，soft:如果有I/O错误时，会告知系统，中继挂载；intr:挂载时有大量超时时，中继挂载，并告知系统。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#umount /tmp/cdrom    /tmp/abc&lt;/p&gt;
+&lt;p&gt;#mount -a&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;5、这种方式的挂载需要消耗大量的资源来维持连接，可以使用自动挂载当切换到该目录时进行挂载，退出时，取消挂载&lt;/p&gt;
+&lt;p&gt;a、安装autofs软件包&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@client tmp]# rpm -qa|grep autofs&lt;/p&gt;
+&lt;p&gt;autofs-5.0.1-0.rc2.131.el5&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;b、编辑autofs的配置文件/etc/auto.master&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#vim /etc/auto.master&lt;/p&gt;
+&lt;p&gt;/tmp /etc/nfs.misc   &amp;ndash;timeout=08&lt;/p&gt;
+&lt;p&gt;/tmp /etc/nfs.misc   &amp;ndash;timeout=08&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;c、编辑要求的产生/etc/nfs.misc&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#vim /etc/nfs.misc&lt;/p&gt;
+&lt;p&gt;abc     -fstype=nfs   192.168.2.1:/home/nfs&lt;/p&gt;
+&lt;p&gt;cdrom   -fstype=nfs   192.168.2.1:/media/cdrom&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;d、启动autofs服务&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;#service autofs  start&lt;/p&gt;
+&lt;p&gt;#rm -rf /tmp/abc&lt;/p&gt;
+&lt;p&gt;#rm -rf /tmp/cdrom&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;e、测试&lt;/p&gt;
+&lt;p&gt;注：abc、cdrom : 本地目录，我们不需要创建它，用于挂载远程共享文件192.168.2.1:/home/nfs，在我们想要使用远程共享文件/home/nfs时，只要在本地目录/tmp下键入cd abc 系统就会自动挂载到远程共享目录:192.168.2.10:/home/nfs,我们就可以正常使用里面的共享文件了 ，在到达超时时间时就会自动卸载。&lt;/p&gt;
+&lt;p&gt;f、以rw自动挂载/home/nfs/ NFS卷到/tmp/abc目录下，却发现无法创建目录，因为nfs-server的本地目录还没有写权限，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@client abc]# touch nfs.txt&lt;/p&gt;
+&lt;p&gt;touch: 无法触碰 “nfs.txt”: 权限不够&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;g、nfs-server服务端修改/home/nfs的本地权限&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@host home]# chmod o+wt nfs/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;就可以正常创建了，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@client abc]# touch nfs.txt&lt;/p&gt;
+&lt;p&gt;[root@client abc]# dir&lt;/p&gt;
+&lt;p&gt;hello-word.txt nfs.txt  nft-test&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注：NFS客户端与NFS服务器在连接上之后，为了保证其正常的连接，NFS客户端与NFS服务器之间要不断的发送数据包，来宣告自己还在与NFS服务器进行着连接，但是，如果一个NFS服务器上有许多的客户端一直连接的话，NFS服务器会承受很大的带宽压力，这对NFS服务器的正常使用会造成很大的影响，因此，为了避免这种情况的发生，人们就想到了一种方法，让NFS客户端在获取数据时与NFS服务器进行连接，而在没有获取数据的时间内，自动的断开与NFS服务器之间的连接，但只要客户端发送获取数据的请求进，客户端就与服务器自动连接上，自动挂载的方法对客户端主机与服务器主机都有很大的好处。配置方法是在NFS客户端方面进行配置的&lt;/p&gt;
+&lt;h3 id=&#34;umount-nfs文件系统&#34;&gt;umount nfs文件系统&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;root@ubuntu:/# umount /app/nfs/&lt;/p&gt;
+&lt;p&gt;umount.nfs: /app/nfs: device is busy&lt;/p&gt;
+&lt;p&gt;umount.nfs: /app/nfs: device is busy&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示文件系统设置busy&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;root@ubuntu:/# fuser -km /app/nfs/   先使用这条命令
+/data/nfs/:                     8119c
+root@ubuntu:/# umount /app/nfs/      在umount 就可以了
+root@ubuntu:/#&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也可使用&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;umount -f /app/nfs&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;nfs常见故障解决方法&#34;&gt;NFS常见故障解决方法&lt;/h2&gt;
+&lt;p&gt;NFS服务出现了故障，主要从以下几个方面检查原因：&lt;/p&gt;
+&lt;p&gt;（1）检查NFS客户机和服务器的负荷是否太高，Server和Client之间的网络是否正常；&lt;/p&gt;
+&lt;p&gt;（2）检查/etc/exports文件的正确性；&lt;/p&gt;
+&lt;p&gt;（3）必要时重启NFS和portmap服务；&lt;/p&gt;
+&lt;p&gt;（4）运行下列命令重新启动portmap和NFS:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/etc/init.d/portmap restart&lt;/p&gt;
+&lt;p&gt;/etc/init.d/nfs restart&lt;/p&gt;
+&lt;p&gt;/etc/init.d/rpcbind restart （在RHEL/CentOS 6.x里面）&lt;/p&gt;
+&lt;p&gt;chkconfig portmap on&lt;/p&gt;
+&lt;p&gt;chkconfig nfs on&lt;/p&gt;
+&lt;p&gt;chkconfig rpcbind on （在RHEL/CentOS 6.x里面）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意：在RHEL/CentOS 6.x里面，portmap服务改名为rpcbind服务了；顺便说一下，rpcbind服务也是图形界面的关键基础服务，不启动此服务，不能启动图形桌面。&lt;/p&gt;
+&lt;p&gt;（5） 检查Client上的mount命令或/etc/fstab的语法是否正确;&lt;/p&gt;
+&lt;p&gt;（6） 查看内核是否支持NFS和RPC服务。一般正常安装的Linux系统都会默认支持NFS和RPC服务，除非你自己重新编译的内核，而且没选择nfs支持选项编译。&lt;/p&gt;
+&lt;p&gt;1、The rpcbind failure error
+故障现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nfs mount: server1:: RPC: Rpcbind failure
+RPC: Timed Out
+nfs mount: retrying: /mntpoint&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+第一，可能因为客户机的hosts文件中存在错误的ip地址、主机名或节点名组合；
+第二，服务器因为过载而暂时停止服务。&lt;/p&gt;
+&lt;p&gt;2、The server not responding error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NFS server server2 not responding, still trying&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+第一，网络不通，用ping命令检测一下。
+第二，服务器关机。&lt;/p&gt;
+&lt;p&gt;3、The NFS client fails a reboot error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;启动客户机后停住了，不断显示如下提示信息：
+Setting default interface for multicast: add net 224.0.0.0: gateway:
+client_node_name.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+在etc/vfstab的mount选项中使用了fg而又无法成功mount服务器上的资源，改成bg或将该行注释掉，直到服务器可用为止。&lt;/p&gt;
+&lt;p&gt;4、The service not responding error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nfs mount: dbserver: NFS: Service not responding
+nfs mount: retrying: /mntpoint&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+第一，当前级别不是级别3，用who -r查看，用init 3切换。
+第二，NFS Server守护进程不存在，用ps -ef | grep nfs检查，用/etc/init.d/nfs start启动。&lt;/p&gt;
+&lt;p&gt;5、The program not registered error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nfs mount: dbserver: RPC: Program not registered
+nfs mount: retrying: /mntpoint&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+第一，当前级别不是级别3。
+第二，mountd守护进程没有启动，用/etc/init.d/nfs脚本启动NFS守护进程。
+第三，看/etc/dfs/dfstab中的条目是否正常。&lt;/p&gt;
+&lt;p&gt;6、The stale file handle error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;stale NFS file handle&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+服务器上的共享资源移动位置了，在客户端使用umount和mount重新挂接就可以了。&lt;/p&gt;
+&lt;p&gt;7、The unknown host error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nfs mount: sserver1:: RPC: Unknown host&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+hosts文件中的内容不正确。&lt;/p&gt;
+&lt;p&gt;8、The mount point error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mount: mount-point /DS9 does not exist.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+该挂接点在客户机上不存在，注意检查命令行或/etc/vfstab文件中相关条目的拼写。&lt;/p&gt;
+&lt;p&gt;9、The no such file error
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;No such file or directory.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+该挂接点在服务器上不存在，注意检查命令行或/etc/vfstab文件中相关条目的拼写。&lt;/p&gt;
+&lt;p&gt;10、No route to host
+错误现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mount 10.10.11.211:/opt/data/xmldb /c2c-web1/data/xmldb -t nfs -o rw&lt;/p&gt;
+&lt;p&gt;mount: mount to NFS server ’10.10.11.211′ failed: System Error: No route to host.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+防火墙被打开，关闭防火墙。
+这个原因很多人都忽视了，如果开启了防火墙（包括iptables和硬件防火墙），NFS默认使用111端口，我们先要检测是否打开了这个端口，还要检查TCP_Wrappers的设定。&lt;/p&gt;
+&lt;p&gt;11、Not owner
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mount -t nfs -o rw 10.10.2.3:/mnt/c2c/data/resinfo2 /data/data/resinfo2&lt;/p&gt;
+&lt;p&gt;nfs mount: mount: /data/data/resinfo2: Not owner&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+这是Solaris 10版本挂载较低版本nfs时报的错误。&lt;/p&gt;
+&lt;p&gt;解决：
+需要用-o vers=3参数&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mount -F nfs -o vers=3 10.10.2.3:/mnt/c2c/data/resinfo2 /data/data/resinfo2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;12、RPC: Program not registered &amp;amp; retrying
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nfs mount: 10.10.2.3: : RPC: Program not registered
+nfs mount: retrying: /data/data/resinfo2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+没有启动NFS共享端服务。&lt;/p&gt;
+&lt;p&gt;解决：需要重新启动share端的NFS服务，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Linux:
+mount: RPC: Program not registered&lt;/p&gt;
+&lt;p&gt;/etc/init.d/nfs restart&lt;/p&gt;
+&lt;p&gt;Solaris:
+mount: RPC: Program not registered&lt;/p&gt;
+&lt;p&gt;/etc/rc.d/init.d/nfs restart&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;13、can’t contact portmapper: RPC: Remote system error – Connection refused
+现象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;exportfs -a&lt;/p&gt;
+&lt;p&gt;can’t contact portmapper: RPC: Remote system error – Connection refused&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因：
+出现这个错误信息是由于server端的portmap没有启动。&lt;/p&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/etc/init.d/portmap start&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;14、Cannot register service: RPC&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@IT_Only 20180815_std]# showmount -e nas09
+mount clntudp_create: RPC: Port mapper failure - RPC: Unable to receive&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;发现无法找到共享，决定在nas存储上重启nfs服务，报错如下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Starting NFS quotas: Cannot register service: RPC: Unable to receive; errno = Connection refused rpc.rquotad: unable to register (RQUOTAPROG, RQUOTAVERS, udp).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.centos.bz/tag/service/&#34;&gt;service&lt;/a&gt; nfs restart&lt;/p&gt;
+&lt;p&gt;Shutting down NFS mountd: [ OK ]&lt;/p&gt;
+&lt;p&gt;Shutting down NFS daemon: [ OK ]&lt;/p&gt;
+&lt;p&gt;Shutting down NFS quotas: [ OK ]&lt;/p&gt;
+&lt;p&gt;Shutting down NFS services: [ OK ]&lt;/p&gt;
+&lt;p&gt;Starting NFS services: [ OK ]&lt;/p&gt;
+&lt;p&gt;Starting NFS quotas: Cannot &lt;a href=&#34;https://www.centos.bz/tag/register/&#34;&gt;register&lt;/a&gt; service: RPC: Unable to receive; errno = Connection refused&lt;/p&gt;
+&lt;p&gt;rpc.rquotad: unable to register (RQUOTAPROG, RQUOTAVERS, udp).&lt;/p&gt;
+&lt;p&gt;[FAILED]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service portmap start&lt;/p&gt;
+&lt;p&gt;先启动portmap才行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;15、Address already in use&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tail -f /var/log/message&lt;/p&gt;
+&lt;p&gt;Apr :: bogon nfsd[]: nfssvc: Setting version failed: errno (Device or resource busy)&lt;/p&gt;
+&lt;p&gt;Apr :: bogon nfsd[]: nfssvc: unable to bind UPD &lt;a href=&#34;https://www.centos.bz/tag/socket/&#34;&gt;socket&lt;/a&gt;: errno (Address already in use)&lt;/p&gt;
+&lt;p&gt;Apr :: bogon nfsd[]: nfssvc: Setting version failed: errno (Device or resource busy)&lt;/p&gt;
+&lt;p&gt;Apr :: bogon nfsd[]: nfssvc: unable to bind UPD socket: errno (Address already in use)&lt;/p&gt;
+&lt;p&gt;Apr :: bogon nfsd[]: nfssvc: Setting version failed: errno (Device or resource busy)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ps aux | grep nfs&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后用kill干掉这些进程&lt;/p&gt;
+&lt;p&gt;16、reason given by server: Permission denied&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mount: …:/nfsdata failed, reason given by server: Permission denied&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a.把该客户端的ip加入服务端的/etc/exports&lt;/p&gt;
+&lt;p&gt;b.服务端的和客户端规则要统一，要么都使用主机名（注意每台机器的hosts文件），要么都使用IP&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;17、客户端挂载超时&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tail -f /var/log/message&lt;/p&gt;
+&lt;p&gt;Apr :: localhost kernel: portmap: &lt;a href=&#34;https://www.centos.bz/tag/server/&#34;&gt;server&lt;/a&gt; localhost not responding, timed out&lt;/p&gt;
+&lt;p&gt;Apr :: localhost kernel: RPC: failed to contact portmap (errno -).&lt;/p&gt;
+&lt;p&gt;Apr :: localhost kernel: RPC: failed to contact portmap (errno -).&lt;/p&gt;
+&lt;p&gt;Apr :: localhost kernel: lockd_up: makesock failed, &lt;a href=&#34;https://www.centos.bz/tag/error/&#34;&gt;error&lt;/a&gt;=-&lt;/p&gt;
+&lt;p&gt;Apr :: localhost kernel: RPC: failed to contact portmap (errno -).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service portmap restart&lt;/p&gt;
+&lt;p&gt;service nfs restart&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;18、Error: RPC MTAB does not exist.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service nfs start&lt;/p&gt;
+&lt;p&gt;Starting NFS services: [ OK ]&lt;/p&gt;
+&lt;p&gt;Starting NFS quotas: [ OK ]&lt;/p&gt;
+&lt;p&gt;Starting NFS daemon: [ OK ]&lt;/p&gt;
+&lt;p&gt;Starting NFS mountd: [ OK ]&lt;/p&gt;
+&lt;p&gt;Starting RPC idmapd: Error: RPC MTAB does not exist.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;p&gt;手动执行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mount -t rpc_pipefs sunrpc /var/lib/nfs/rpc_pipefs/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;需要时加入开机启动时，加入下面两行到/etc/fstab&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;rpc_pipefs /var/lib/nfs/rpc_pipefs rpc_pipefs defaults&lt;/p&gt;
+&lt;p&gt;nfsd /proc/fs/nfsd nfsd defaults&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;exportfs&#34;&gt;exportfs&lt;/h1&gt;
+&lt;p&gt;exportfs主要用于管理当前NFS服务器的文件系统。&lt;/p&gt;
+&lt;p&gt;此命令的适用范围：RedHat、RHEL、Ubuntu、CentOS、Fedora。&lt;/p&gt;
+&lt;h2 id=&#34;参数列表&#34;&gt;参数列表&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;选项&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;-a&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;共享nfs配置文件中所有的共享目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;-i&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;忽略/etc/exports配置文件，只使用exportfs指令的默认值和命令行指定的参数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;-r&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;重新共享所有的nfs文件系统&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;-u&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;取消一个或者多个NFS共享文件系统的共享&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;-v&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;显示详细执行信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@localhost ~]# exportfs -u 192.168.1.7:/media/test&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;补充说明&#34;&gt;补充说明&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;exportfs命令和nfs-utils这个包一起安装的&lt;/li&gt;
+&lt;li&gt;例子：
+&lt;ul&gt;
+&lt;li&gt;假设在第一次配置nfs的共享目录，之后需要新增、更改某些机器或共享的目录；&lt;/li&gt;
+&lt;li&gt;首先需要更改配置文件，然后重启NFS服务，但如果远程客户端正在使用NFS服务，正在挂载着，如果你需要先停止nfs服务，那远程的客户端就会挂起，就会很大的影响，造成服务异常，进程异常，有很大可能导致系统坏掉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;nfs服务不能随便重启，要重启，就需要先去服务器上，把挂载的目录卸载下来
+&lt;ul&gt;
+&lt;li&gt;在卸载目录的时候，若是在当前目录下去卸载会提示umount.nfs4: /mnt: device is busy
+&lt;ul&gt;
+&lt;li&gt;方法一：退出该目录后，再去卸载&lt;/li&gt;
+&lt;li&gt;方法二：在目录下卸载的时候，加 -l 选项，表示 lazy 懒惰的意思&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在卸载目录后，在重启nfs服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;若是挂载了很多台机器，那么每台机器都需要去卸载，就会很麻烦，降低了工作效率
+&lt;ul&gt;
+&lt;li&gt;方法：使用exportfs命令，重新加载下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;exportfs命令
+&lt;ul&gt;
+&lt;li&gt;-a 全部挂载或者全部卸载&lt;/li&gt;
+&lt;li&gt;-r 重新挂载&lt;/li&gt;
+&lt;li&gt;-u 卸载某一个目录&lt;/li&gt;
+&lt;li&gt;-v 显示共享目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用样例&#34;&gt;使用样例&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在B机器客户端，卸载目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@test ~]# umount /mnt/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;然后在A机器服务端，使用exportfs -arv命令，重新使配置文件生效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@test~]# exportfs -arv&lt;/p&gt;
+&lt;p&gt;exporting 192.168.202.0/24:/home/nfstestdir&lt;/p&gt;
+&lt;p&gt;[root@test~]#&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;在A机器上的/etc/exports配置文件中，在增加一行，把 /tmp 目录单独共享给192.168.202.131 这个IP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@test~]# vim /etc/exports&lt;/p&gt;
+&lt;p&gt;在配置文件中加入&lt;/p&gt;
+&lt;p&gt;/tmp 192.168.202.131(rw,sync,no_root_squash)&lt;/p&gt;
+&lt;p&gt;结果如下&lt;/p&gt;
+&lt;p&gt;/home/nfstestdir  192.168.202.0/24(rw,sync,all_squash,anonuid=1000,anongid=1000)&lt;/p&gt;
+&lt;p&gt;/tmp 192.168.202.131(rw,sync,no_root_squash)&lt;/p&gt;
+&lt;p&gt;保存退出&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;然后在A机器服务端执行exportfs -arv命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@test~]# exportfs -arv&lt;/p&gt;
+&lt;p&gt;exporting 192.168.202.131:/tmp&lt;/p&gt;
+&lt;p&gt;exporting 192.168.202.0/24:/home/nfstestdir&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;在B机器客户端showmount -e看是否生效——&amp;gt;并没有重启nfs服务，就已经生效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@test ~]# showmount -e 192.168.202.130&lt;/p&gt;
+&lt;p&gt;Export list for 192.168.202.130:&lt;/p&gt;
+&lt;p&gt;/home/nfstestdir 192.168.202.0/24&lt;/p&gt;
+&lt;p&gt;/tmp             192.168.202.131&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;在B机器客户端挂载，将 tmp目录 挂载到 mnt 目录下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[root@test ~]# mount -t nfs 192.168.202.130:/tmp/ /mnt/&lt;/p&gt;
+&lt;p&gt;[root@test ~]# df -h&lt;/p&gt;
+&lt;p&gt;文件系统              容量  已用  可用 已用% 挂载点&lt;/p&gt;
+&lt;p&gt;192.168.202.130:/tmp   18G  3.2G   15G   18% /mnt&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这就是因为在A机器服务端的配置文件中，使用了no_root_squash ，所以root用户不受约束，在B机器上到挂载点下，到共享目录下，就可以像在本地磁盘使用root用户一样，是不受限制的（通常情况下，不限制root用户的比较多）&lt;/p&gt;</description>
       
     </item>
     
