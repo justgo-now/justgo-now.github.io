@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,6 +58,8 @@
 
 
 
+<link rel="stylesheet" href="/css/custom.css">
+
 
 <meta property="og:title" content="Efficient Shell Programming" />
 <meta property="og:description" content="
@@ -73,7 +75,7 @@
 ">
 <meta itemprop="datePublished" content="2020-06-28T09:07:03&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-28T09:07:03&#43;08:00" />
-<meta itemprop="wordCount" content="1524">
+<meta itemprop="wordCount" content="1604">
 
 
 
@@ -141,7 +143,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
         
       </li>
@@ -277,7 +279,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
 
         
@@ -311,7 +313,8 @@
             <a href="http://justgo-now.github.io/categories/devops.html"> devops </a>
             
           </div>
-        
+        <span class="more-meta"> 约 1604 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
 
         
         
@@ -324,7 +327,7 @@
     
     
 <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Table of Contents</h2>
+  <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
@@ -344,100 +347,222 @@
 <p>平常工作中，你是否感觉shell脚本只是命令的堆砌；很多时候只是为了实现功能而没有好的组织结构；自己的脚本都不想再看一遍；哈哈，我这就教给shell的“葵花宝典“，自此让你的shell脚本有python一样的美感并且极易维护，真的是shell脚本写到停不下来。</p>
 </blockquote>
 <p>现以nginx控制脚本为例，看一下脚本的美容过程：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span><span style="color:#75715e"># set命令的奇妙用途留在文章末尾</span>
-set -eu
-<span style="color:#75715e"># nginx重载配置文件</span>
-nginx -c /etc/nginx/nginx.conf -tkill -HUP <span style="color:#e6db74">`</span>ps auxf | grep -E <span style="color:#e6db74">&#34;nginx:[[:space:]]+master&#34;</span>| awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#e6db74">`</span>
-</code></pre></div><h2 id="宝典秘籍之变量抽离">宝典秘籍之变量抽离</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="c1"># set命令的奇妙用途留在文章末尾</span>
+<span class="nb">set</span> -eu
+<span class="c1"># nginx重载配置文件</span>
+nginx -c /etc/nginx/nginx.conf -tkill -HUP <span class="sb">`</span>ps auxf <span class="p">|</span> grep -E <span class="s2">&#34;nginx:[[:space:]]+master&#34;</span><span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="宝典秘籍之变量抽离">宝典秘籍之变量抽离</h2>
 <p>在脚本中，需要依赖外部的配置，比如配置文件位置，监听端口之类的可变参数，编程时，需要将其抽离为变量，为了更好的引用与维护，省去了外部配置变化时，一个个修改带来的麻烦。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span><span style="color:#75715e"># set命令的奇妙用途留在文章末尾</span>
-set -eu
-<span style="color:#75715e"># nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用</span>
-NGINX_CONFIG_FILE<span style="color:#f92672">=</span>/etc/nginx/nginx.conf
-<span style="color:#75715e"># nginx重载配置文件</span>
-nginx -c $NGINX_CONFIG_FILE -tkill -HUP <span style="color:#e6db74">`</span>ps auxf | grep -E <span style="color:#e6db74">&#34;nginx:[[:space:]]+master&#34;</span>| awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#e6db74">`</span>
-</code></pre></div><h2 id="宝典秘籍之模块化">宝典秘籍之模块化</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="c1"># set命令的奇妙用途留在文章末尾</span>
+<span class="nb">set</span> -eu
+<span class="c1"># nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用</span>
+<span class="nv">NGINX_CONFIG_FILE</span><span class="o">=</span>/etc/nginx/nginx.conf
+<span class="c1"># nginx重载配置文件</span>
+nginx -c <span class="nv">$NGINX_CONFIG_FILE</span> -tkill -HUP <span class="sb">`</span>ps auxf <span class="p">|</span> grep -E <span class="s2">&#34;nginx:[[:space:]]+master&#34;</span><span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="宝典秘籍之模块化">宝典秘籍之模块化</h2>
 <p>运维毕竟不是专业程序员，写脚本时是怎么舒服怎么来，简单讲就是从上到下依次执行，这就导致复用性差，不易维护，解决这问题的关键在于函数化、模块化思想，shell虽然是一种比较简单的语言，但语言基本的逻辑控制、函数功能都有，这就让我们编写高质量shell脚本带了无限可能。接下来就看一下具体例子来感受一下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 由于nginx配置文件检查是执行其他操作的第一步，所以我们将其独立成一个单独函数</span>
-<span style="color:#75715e">#!/bin/bash</span>
-<span style="color:#75715e"># set命令的奇妙用途留在文章末尾</span>
-set -eu
-<span style="color:#75715e"># nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用</span>
-NGINX_CONFIG_FILE<span style="color:#f92672">=</span>/etc/nginx/nginx.conf
-<span style="color:#75715e"># 抽离配置文件检查为单独的函数</span>
-config_test<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
-nginx -c $NGINX_CONFIG_FILE -t
-<span style="color:#f92672">}</span>
-get_nginx_master_pid<span style="color:#f92672">(){</span>    
-echo <span style="color:#e6db74">`</span>ps auxf | grep -E <span style="color:#e6db74">&#34;nginx:[[:space:]]+master&#34;</span>| awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#e6db74">`</span>
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># 抽离配置重载为独立函数</span>
-reload<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
-kill -HUP <span style="color:#e6db74">`</span>get_nginx_master_pid<span style="color:#e6db74">`</span>
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># nginx重载配置文件</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 由于nginx配置文件检查是执行其他操作的第一步，所以我们将其独立成一个单独函数</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># set命令的奇妙用途留在文章末尾</span>
+<span class="nb">set</span> -eu
+<span class="c1"># nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用</span>
+<span class="nv">NGINX_CONFIG_FILE</span><span class="o">=</span>/etc/nginx/nginx.conf
+<span class="c1"># 抽离配置文件检查为单独的函数</span>
+config_test<span class="o">()</span> <span class="o">{</span>    
+nginx -c <span class="nv">$NGINX_CONFIG_FILE</span> -t
+<span class="o">}</span>
+get_nginx_master_pid<span class="o">(){</span>    
+<span class="nb">echo</span> <span class="sb">`</span>ps auxf <span class="p">|</span> grep -E <span class="s2">&#34;nginx:[[:space:]]+master&#34;</span><span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+<span class="o">}</span>
+<span class="c1"># 抽离配置重载为独立函数</span>
+reload<span class="o">()</span> <span class="o">{</span>    
+<span class="nb">kill</span> -HUP <span class="sb">`</span>get_nginx_master_pid<span class="sb">`</span>
+<span class="o">}</span>
+<span class="c1"># nginx重载配置文件</span>
 config_test 
 reload
-</code></pre></div><h2 id="宝典秘籍之main函数">宝典秘籍之main函数</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="宝典秘籍之main函数">宝典秘籍之main函数</h2>
 <p>脚本的可维护性在于脚本的结构的好坏，为了拥有更好的结构，通常需要在脚本中定义入口函数，即main函数，让我在维护脚本时，可以更好的把握脚本的组织架构，找到切入点：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 由于nginx配置文件检查是执行其他操作的第一步，所以我们将其独立成一个单独函数</span>
-<span style="color:#75715e">#!/bin/bash</span>
-<span style="color:#75715e"># set命令的奇妙用途留在文章末尾</span>
-set -eu
-<span style="color:#75715e"># nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用</span>
-NGINX_CONFIG_FILE<span style="color:#f92672">=</span>/etc/nginx/nginx.conf
-<span style="color:#75715e"># 抽离配置文件为单独的函数</span>
-config_test<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
-nginx -c $NGINX_CONFIG_FILE -t
-<span style="color:#f92672">}</span>
-get_nginx_master_pid<span style="color:#f92672">(){</span>    
-echo <span style="color:#e6db74">`</span>ps auxf | grep -E <span style="color:#e6db74">&#34;nginx:[[:space:]]+master&#34;</span>| awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#e6db74">`</span>
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># 抽离配置重载为独立函数</span>
-reload<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
-kill -HUP <span style="color:#e6db74">`</span>get_nginx_master_pid<span style="color:#e6db74">`</span>
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># 入口函数</span>
-main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 由于nginx配置文件检查是执行其他操作的第一步，所以我们将其独立成一个单独函数</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># set命令的奇妙用途留在文章末尾</span>
+<span class="nb">set</span> -eu
+<span class="c1"># nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用</span>
+<span class="nv">NGINX_CONFIG_FILE</span><span class="o">=</span>/etc/nginx/nginx.conf
+<span class="c1"># 抽离配置文件为单独的函数</span>
+config_test<span class="o">()</span> <span class="o">{</span>    
+nginx -c <span class="nv">$NGINX_CONFIG_FILE</span> -t
+<span class="o">}</span>
+get_nginx_master_pid<span class="o">(){</span>    
+<span class="nb">echo</span> <span class="sb">`</span>ps auxf <span class="p">|</span> grep -E <span class="s2">&#34;nginx:[[:space:]]+master&#34;</span><span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+<span class="o">}</span>
+<span class="c1"># 抽离配置重载为独立函数</span>
+reload<span class="o">()</span> <span class="o">{</span>    
+<span class="nb">kill</span> -HUP <span class="sb">`</span>get_nginx_master_pid<span class="sb">`</span>
+<span class="o">}</span>
+<span class="c1"># 入口函数</span>
+main<span class="o">()</span> <span class="o">{</span>    
 config_test    
 reload
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># main在此需要获取脚本本身的参数， 故将$@传递给main函数</span>
-main $@
-</code></pre></div><h2 id="宝典秘籍之函数返回值">宝典秘籍之函数返回值</h2>
+<span class="o">}</span>
+<span class="c1"># main在此需要获取脚本本身的参数， 故将$@传递给main函数</span>
+main <span class="nv">$@</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="宝典秘籍之函数返回值">宝典秘籍之函数返回值</h2>
 <p>在其他编程语言，可以通过return获得函数的返回值，但是return语句在shell中含义不同，return命令会使一个函数返回,会返回一个单一的数字参数,而这个数字参数在调用这个函数的脚本是可见的,如果没有指定返回参数,return在默认情况下会返回上一次命令的返回代码。那如何实现类似其他编程语言的return效果呢？可以使用echo命令:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>set -eu
-NGINX_CONFIG_FILE<span style="color:#f92672">=</span>/etc/nginx/nginx.conf
-config_test<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
-nginx -c $NGINX_CONFIG_FILE -t
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># 在此处直接把nginx的master pid可以通过反引号来获取echo后的值</span>
-get_nginx_master_pid<span style="color:#f92672">(){</span>    
-echo <span style="color:#e6db74">`</span>ps auxf | grep -E <span style="color:#e6db74">&#34;nginx:[[:space:]]+master&#34;</span>| awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#e6db74">`</span>
-<span style="color:#f92672">}</span>
-reload<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
-<span style="color:#75715e"># `get_nginx_master_pid` 获得nginx master pid</span>    
-kill -HUP <span style="color:#e6db74">`</span>get_nginx_master_pid<span style="color:#e6db74">`</span>
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># 入口函数</span>
-main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>    
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="nb">set</span> -eu
+<span class="nv">NGINX_CONFIG_FILE</span><span class="o">=</span>/etc/nginx/nginx.conf
+config_test<span class="o">()</span> <span class="o">{</span>    
+nginx -c <span class="nv">$NGINX_CONFIG_FILE</span> -t
+<span class="o">}</span>
+<span class="c1"># 在此处直接把nginx的master pid可以通过反引号来获取echo后的值</span>
+get_nginx_master_pid<span class="o">(){</span>    
+<span class="nb">echo</span> <span class="sb">`</span>ps auxf <span class="p">|</span> grep -E <span class="s2">&#34;nginx:[[:space:]]+master&#34;</span><span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+<span class="o">}</span>
+reload<span class="o">()</span> <span class="o">{</span>    
+<span class="c1"># `get_nginx_master_pid` 获得nginx master pid</span>    
+<span class="nb">kill</span> -HUP <span class="sb">`</span>get_nginx_master_pid<span class="sb">`</span>
+<span class="o">}</span>
+<span class="c1"># 入口函数</span>
+main<span class="o">()</span> <span class="o">{</span>    
 config_test    
 reload
-<span style="color:#f92672">}</span>
-<span style="color:#75715e"># main在此需要获取脚本本身的参数， 故将$@传递给main函数</span>
-main $@
-</code></pre></div><h2 id="宝典秘籍之set命令">宝典秘籍之set命令</h2>
+<span class="o">}</span>
+<span class="c1"># main在此需要获取脚本本身的参数， 故将$@传递给main函数</span>
+main <span class="nv">$@</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="宝典秘籍之set命令">宝典秘籍之set命令</h2>
 <p>bash内置的set命令，可以改变我们脚本的执行行为，让我对脚本的把握和调试更有力，下面说几种常用的set指令，相信你都会喜欢的：</p>
 <p>•set -e: bash脚本遇到错误立即退出•set -n: 检查脚本语法但不执行•set -u: 遇到未设置的变量立即退出•set -o pipefail: 控制在管道符执行过程中有错误立即退出•set -x: 分步调试命令</p>
 <p>在写脚本时，我们可以直接在脚本开头简写为如下格式:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>set -euxo pipefail
-</code></pre></div><p>检查bash脚本的语法时，可以这样写:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bash -n main.sh
-</code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="nb">set</span> -euxo pipefail
+</code></pre></td></tr></table>
+</div>
+</div><p>检查bash脚本的语法时，可以这样写:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">bash -n main.sh
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     
@@ -459,7 +584,7 @@ main $@
         
           <a class="next" href="/post/2020/2020-06-22-nfs-deploy-config.html">
             <span class="next-text nav-default">NFS服务器配置及常见错误</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
               <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -502,7 +627,13 @@ main $@
 </div>
 
 <div class="copyright">
-  
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
 
   <span class="copyright-year">
     &copy;
@@ -581,6 +712,8 @@ main $@
 
 
 
+
+  <script src="/js/custom.js"></script>
 
 
 </body>

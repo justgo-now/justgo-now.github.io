@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,6 +57,8 @@
 
 
 
+<link rel="stylesheet" href="/css/custom.css">
+
 
 <meta property="og:title" content="关于docker的一些说明" />
 <meta property="og:description" content="" />
@@ -68,7 +70,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-12T21:12:14&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-12T21:12:14&#43;00:00" />
-<meta itemprop="wordCount" content="22552">
+<meta itemprop="wordCount" content="23137">
 
 
 
@@ -134,7 +136,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
         
       </li>
@@ -270,7 +272,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
 
         
@@ -304,7 +306,8 @@
             <a href="http://justgo-now.github.io/categories/devops.html"> DevOps </a>
             
           </div>
-        
+        <span class="more-meta"> 约 23137 字 </span>
+          <span class="more-meta"> 预计阅读 47 分钟 </span>
 
         
         
@@ -317,7 +320,7 @@
     
     
 <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Table of Contents</h2>
+  <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
@@ -588,7 +591,22 @@
 <p>从左边我们看到了多个只读层，它们重叠在一起。除了最下面一层，其它层都会有一个指针指向下一层。这些层是Docker内部的实现细节，并且能够 在主机（译者注：运行Docker的机器）的文件系统上访问到。统一文件系统（union file system）技术能够将不同的层整合成一个文件系统，为这些层提供了一个统一的视角，这样就隐藏了多层的存在，在用户的角度看来，只存在一个文件系统。 我们可以在图片的右边看到这个视角的形式。</p>
 <p>你可以在你的主机文件系统上找到有关这些层的文件。需要注意的是，在一个运行中的容器内部，这些层是不可见的。在我的主机上，我发现它们存在于/var/lib/docker/aufs目录下。</p>
 <h3 id="sudo-tree--l-1-varlibdocker">sudo tree -L 1 /var/lib/docker/</h3>
-<pre><code>/var/lib/docker/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/var/lib/docker/
 ├── aufs
 ├── containers
 ├── graph
@@ -599,7 +617,9 @@
 ├── trust
 └── volumes
 7 directories, 2 files
-</code></pre><h3 id="container-definition">Container Definition</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="container-definition">Container Definition</h3>
 <p>容器（container）的定义和镜像（image）几乎一模一样，也是一堆层的统一视角，唯一区别在于容器的最上面那一层是可读可写的。</p>
 <p><a href="http://dockerone.com/uploads/article/20151103/b7fb9d924aa12099369c4793050fcfab.png"><img src="2020-04-12-docker-detail/docker-diff/20151105115302_58.png" alt=" 10张图带你深入理解Docker容器和镜像"></a></p>
 <p>细心的读者可能会发现，容器的定义并没有提及容器是否在运行，没错，这是故意的。正是这个发现帮助我理解了很多困惑。</p>
@@ -611,11 +631,25 @@
 <p>正是文件系统隔离技术使得Docker成为了一个前途无量的技术。一个容器中的进程可能会对文件进行修改、删除、创建，这些改变都将作用于可读写层（read-write layer）。下面这张图展示了这个行为。</p>
 <p><a href="http://dockerone.com/uploads/article/20151103/1dc88de5a114b68d05c37aab7e103597.png"><img src="2020-04-12-docker-detail/docker-diff/20151105115302_268.png" alt=" 10张图带你深入理解Docker容器和镜像"></a></p>
 <p>我们可以通过运行以下命令来验证我们上面所说的：</p>
-<pre><code>docker run ubuntu touch happiness.txt
-</code></pre><p>即便是这个ubuntu容器不再运行，我们依旧能够在主机的文件系统上找到这个新文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run ubuntu touch happiness.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>即便是这个ubuntu容器不再运行，我们依旧能够在主机的文件系统上找到这个新文件。</p>
 <h3 id="find---name-happinesstxt">find / -name happiness.txt</h3>
-<pre><code>/var/lib/docker/aufs/diff/860a7b...889/happiness.txt
-</code></pre><h3 id="image-layer-definition">Image Layer Definition</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/var/lib/docker/aufs/diff/860a7b...889/happiness.txt
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="image-layer-definition">Image Layer Definition</h3>
 <p>为了将零星的数据整合起来，我们提出了镜像层（image layer）这个概念。下面的这张图描述了一个镜像层，通过图片我们能够发现一个层并不仅仅包含文件系统的改变，它还能包含了其他重要信息。</p>
 <p><a href="http://dockerone.com/uploads/article/20151103/e42d56394306894244af5bc6d757bee1.png"><img src="2020-04-12-docker-detail/docker-diff/20151105115302_80.png" alt=" 10张图带你深入理解Docker容器和镜像"></a></p>
 <p>元数据（metadata）就是关于这个层的额外信息，它不仅能够让Docker获取运行和构建时的信息，还包括父层的层次信息。需要注意，只读层和读写层都包含元数据。</p>
@@ -624,8 +658,15 @@
 <p><a href="http://dockerone.com/uploads/article/20151103/1ead4d955aeb5d968219794489948fc2.png"><img src="2020-04-12-docker-detail/docker-diff/20151105115303_299.png" alt=" 10张图带你深入理解Docker容器和镜像"></a></p>
 <p>Metadata Location: 
 我发现在我自己的主机上，镜像层（image layer）的元数据被保存在名为”json”的文件中，比如说：</p>
-<pre><code>/var/lib/docker/graph/e809f156dc985.../json
-</code></pre><p>e809f156dc985&hellip;就是这层的id</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/var/lib/docker/graph/e809f156dc985.../json
+</code></pre></td></tr></table>
+</div>
+</div><p>e809f156dc985&hellip;就是这层的id</p>
 <p>一个容器的元数据好像是被分成了很多文件，但或多或少能够在/var/lib/docker/containers/<!-- raw HTML omitted -->目录下找到，<!-- raw HTML omitted -->就是一个可读层的id。这个目录下的文件大多是运行时的数据，比如说网络，日志等等。</p>
 <h3 id="全局理解tying-it-all-together">全局理解（Tying It All Together）</h3>
 <p>现在，让我们结合上面提到的实现细节来理解Docker的命令。</p>
@@ -695,21 +736,56 @@
 <p>docker history命令递归地输出指定镜像的历史镜像。</p>
 <h2 id="查看docker运行信息">查看docker运行信息</h2>
 <p>docker inspect 会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息</p>
-<pre><code>docker inspect NAMES 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker inspect NAMES 
 # 查看容器所有状态信息；
 
-docker inspect --format='{{.NetworkSettings.IPAddress}}' ID/NAMES
+docker inspect --format=&#39;{{.NetworkSettings.IPAddress}}&#39; ID/NAMES
 # 查看 容器ip 地址
 
-docker inspect --format '{{.Name}} {{.State.Running}}' NAMES
+docker inspect --format &#39;{{.Name}} {{.State.Running}}&#39; NAMES
 # 容器运行状态
-</code></pre><p><strong>查看进程信息</strong></p>
-<pre><code>docker top NAMES
-</code></pre><p><strong>查看端口；(使用容器ID 或者 容器名称)</strong></p>
-<pre><code>docker port ID/NAMES
-</code></pre><p><strong>查看IP地址 也可以直接通过用 远程执行命令也可以</strong>（Centos7）；</p>
-<pre><code>docker exec -it ID/NAMES ip addr 
-</code></pre><h2 id="docker-的安装及使用">docker 的安装及使用</h2>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>查看进程信息</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker top NAMES
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>查看端口；(使用容器ID 或者 容器名称)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker port ID/NAMES
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>查看IP地址 也可以直接通过用 远程执行命令也可以</strong>（Centos7）；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it ID/NAMES ip addr 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="docker-的安装及使用">docker 的安装及使用</h2>
 <h3 id="简单介绍">简单介绍</h3>
 <blockquote>
 <p>docker 是一个开源的软件部署解决方案
@@ -720,34 +796,78 @@ docker 可以打包、发布、运行任何的应用</p>
 <ul>
 <li>阿里云</li>
 </ul>
-<pre><code>curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
-</code></pre><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>daocloud</li>
 </ul>
-<pre><code> curl -sSL https://get.daocloud.io/docker | sh
-</code></pre><p>安装后将会自动重启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> curl -sSL https://get.daocloud.io/docker | sh
+</code></pre></td></tr></table>
+</div>
+</div><p>安装后将会自动重启</p>
 <h3 id="卸载">卸载</h3>
-<pre><code>sudo apt-get remove docker docker-engine
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get remove docker docker-engine
 rm -fr /var/lib/docker/
-</code></pre><h3 id="配置加速器">配置加速器</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置加速器">配置加速器</h3>
 <p>下面是我的配置，实际使用需要根据自己的账号去查看自己的地址</p>
 <ul>
 <li><a href="https://www.daocloud.io/mirror#accelerator-doc">DaoCloud</a></li>
 </ul>
-<pre><code>curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://ced808ab.m.daocloud.io
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://ced808ab.m.daocloud.io
 sudo systemctl restart docker.service
-</code></pre><ul>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li><a href="https://cr.console.aliyun.com/cn-hangzhou/mirrors">阿里云</a></li>
 </ul>
-<pre><code>sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;
 {
-  &quot;registry-mirrors&quot;: [&quot;https://dist7hw1.mirror.aliyuncs.com&quot;]
+  &#34;registry-mirrors&#34;: [&#34;https://dist7hw1.mirror.aliyuncs.com&#34;]
 }
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-</code></pre><h3 id="基础命令">基础命令</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="基础命令">基础命令</h3>
 <ul>
 <li>
 <p>查看版本:<code>docker -v</code> //文章使用版本：Docker version 18.06.0-ce, build 0ffa825</p>
@@ -774,40 +894,97 @@ sudo systemctl restart docker
 <h3 id="通过-dockerfile-使用-nginx">通过 Dockerfile 使用 nginx</h3>
 <p>通过下面的一个脚本可以简单快速的创建一个镜像并运行起来
 大概看下应该就可以大概明白镜像的基本使用了</p>
-<pre><code>echo '0.创建测试目录及代码'
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">echo &#39;0.创建测试目录及代码&#39;
 mkdir dockerfiletest
 cd dockerfiletest
 mkdir dist
-echo 'hello world'&gt;./dist/index.html
+echo &#39;hello world&#39;&gt;./dist/index.html
 
-echo '1.创建Dockerfile'
-echo '
+echo &#39;1.创建Dockerfile&#39;
+echo &#39;
 From daocloud.io/library/nginx:1.13.0-alpine
 COPY dist/ /usr/share/nginx/html/
-'&gt;./Dockerfile
+&#39;&gt;./Dockerfile
 
-echo '2.构建镜像'
+echo &#39;2.构建镜像&#39;
 docker build -t dockerfiletest .
 
-echo '3.运行镜像'
+echo &#39;3.运行镜像&#39;
 docker run -p 3344:80 dockerfiletest
-</code></pre><p>下面分步拆解下</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面分步拆解下</p>
 <h4 id="1添加-dockerfile-文件">1.添加 Dockerfile 文件</h4>
 <p>详细请参考：https://hub.daocloud.io/repos/2b7310fb-1a50-48f2-9586-44622a2d1771</p>
 <p>html 的简单部署</p>
-<pre><code>From daocloud.io/library/nginx:1.13.0-alpine
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">From daocloud.io/library/nginx:1.13.0-alpine
 # 将发布目录的文件拷贝到镜像中
 COPY dist/ /usr/share/nginx/html/
-</code></pre><p>若要使用自己的配置脚本，比如 vue 的配置,可以将自己的配置文件复制到容器中</p>
-<pre><code>From daocloud.io/library/nginx:1.13.0-alpine
+</code></pre></td></tr></table>
+</div>
+</div><p>若要使用自己的配置脚本，比如 vue 的配置,可以将自己的配置文件复制到容器中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">From daocloud.io/library/nginx:1.13.0-alpine
 # 删除镜像中 nginx 的默认配置
 RUN rm /etc/nginx/conf.d/default.conf
 # 复制 default.conf 到镜像中
 ADD default.conf /etc/nginx/conf.d/
 # 将发布目录的文件拷贝到镜像中
 COPY dist/ /usr/share/nginx/html/
-</code></pre><p>nginx 中 vue history 模式的配置 如下，可参考</p>
-<pre><code>server {
+</code></pre></td></tr></table>
+</div>
+</div><p>nginx 中 vue history 模式的配置 如下，可参考</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server {
     listen       80;
     location / {
         root /usr/share/nginx/html/;
@@ -815,20 +992,44 @@ COPY dist/ /usr/share/nginx/html/
         try_files $uri $uri/ /index.html;
     }
 }
-</code></pre><p><del>若是将<code>/usr/share/nginx/html/</code>和<code>/etc/nginx/conf.d/</code>挂载到本地，这样应该能够灵活使用 docker 安装的 nginx 了(未实践过)</del></p>
+</code></pre></td></tr></table>
+</div>
+</div><p><del>若是将<code>/usr/share/nginx/html/</code>和<code>/etc/nginx/conf.d/</code>挂载到本地，这样应该能够灵活使用 docker 安装的 nginx 了(未实践过)</del></p>
 <h4 id="2构建镜像">2.构建镜像</h4>
 <p>构建参数说明参考：http://www.runoob.com/docker/docker-build-command.html</p>
-<pre><code>docker build -t docker-nginx-test .
-</code></pre><h4 id="3运行镜像">3.运行镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t docker-nginx-test .
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="3运行镜像">3.运行镜像</h4>
 <p>&ndash;name 服务名
 -d 后台运行
 -p 暴露端口:nginx 端口
 docker-nginx-test 镜像名/IMAGE ID</p>
-<pre><code>docker run --name dockertest -d -p 4455:80 docker-nginx-test
-</code></pre><h4 id="4测试访问">4.测试访问</h4>
-<pre><code>root@ubuntu:~# curl http://localhost:4455
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run --name dockertest -d -p 4455:80 docker-nginx-test
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="4测试访问">4.测试访问</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">root@ubuntu:~# curl http://localhost:4455
 hello world
-</code></pre><blockquote>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <p>现在，可以通过 IP+端口的形式在外网访问站点了，但在实际使用肯定还需要绑定域名等一些操作
 最简单的是我认为是使用 nginx 去做代理
 目前我们公司使用的 <a href="https://traefik.io/">traefik</a> ，最爽的莫过于 https 的支持，可以了解一下</p>
@@ -884,14 +1085,31 @@ hello world
 <p>3 **docker push [ImageID] [repertory_address]**提交镜像到云仓库</p>
 <h2 id="docker容器及镜像清理">docker容器及镜像清理</h2>
 <p>To clean up, all unused containers, images, network, and volumes, use the following command.</p>
-<pre><code>docker system prune
-</code></pre><p><strong>Recommended:</strong> <a href="http://skillslane.com/offer/learn-docker-technologies-devops-developers/">Learn Docker Technologies for DevOps and Developers 53</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker system prune
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Recommended:</strong> <a href="http://skillslane.com/offer/learn-docker-technologies-devops-developers/">Learn Docker Technologies for DevOps and Developers 53</a></p>
 <p>To individually delete all the components, use the following commands.</p>
-<pre><code>docker container prune
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker container prune
 docker image prune
 docker network prune
 docker volume prune
-</code></pre><p>For Docker versions below 1.13</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>For Docker versions below 1.13</p>
 <p>To clean up containers, first, you need to clean up your containers. So that all the unwanted images can be deleted without dependency problems.</p>
 <p>Delete all Exited Containers</p>
 <blockquote>
@@ -905,10 +1123,24 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)</p>
 </blockquote>
 <h4 id="delete-all-none-images">Delete all “none” Images</h4>
-<pre><code>docker rmi $(docker images | grep &quot;^&lt;none&gt;&quot; | awk '{ print $3 }')
-</code></pre><h4 id="delete-all-dangling-images">Delete all Dangling Images</h4>
-<pre><code>sudo docker rmi $(sudo docker images -f &quot;dangling=true&quot; -q)
-</code></pre><p>Update Sept. 2016: Docker 1.13: <a href="https://github.com/docker/docker/pull/26108">PR 26108</a> and <a href="https://github.com/docker/docker/commit/86de7c000f5d854051369754ad1769194e8dd5e1">commit 86de7c0</a> introduce a few new commands to help facilitate visualizing how much space the docker daemon data is taking on disk and allowing for easily cleaning up &ldquo;unneeded&rdquo; excess.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rmi $(docker images | grep &#34;^&lt;none&gt;&#34; | awk &#39;{ print $3 }&#39;)
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="delete-all-dangling-images">Delete all Dangling Images</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo docker rmi $(sudo docker images -f &#34;dangling=true&#34; -q)
+</code></pre></td></tr></table>
+</div>
+</div><p>Update Sept. 2016: Docker 1.13: <a href="https://github.com/docker/docker/pull/26108">PR 26108</a> and <a href="https://github.com/docker/docker/commit/86de7c000f5d854051369754ad1769194e8dd5e1">commit 86de7c0</a> introduce a few new commands to help facilitate visualizing how much space the docker daemon data is taking on disk and allowing for easily cleaning up &ldquo;unneeded&rdquo; excess.</p>
 <p><a href="https://docs.docker.com/engine/reference/commandline/system_prune/"><strong>docker system prune</strong></a> will delete ALL dangling data (i.e. In order: containers stopped, volumes without containers and images with no containers). Even unused data, with <code>-a</code> option.</p>
 <p>You also have:</p>
 <ul>
@@ -932,46 +1164,100 @@ Warning: &lsquo;<em>unused</em>&rsquo; means &ldquo;images not referenced by any
 <hr>
 <p>Original answer (Sep. 2016)</p>
 <p>I usually do:</p>
-<pre><code>docker rmi $(docker images --filter &quot;dangling=true&quot; -q --no-trunc)
-</code></pre><p>I have an [alias for removing those <a href="https://github.com/docker/docker/blob/634a848b8e3bdd8aed834559f3b2e0dfc7f5ae3a/man/docker-images.1.md#options">dangling images]</a><a href="https://github.com/docker/docker/blob/634a848b8e3bdd8aed834559f3b2e0dfc7f5ae3a/man/docker-images.1.md#options">13</a>: <code>drmi</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rmi $(docker images --filter &#34;dangling=true&#34; -q --no-trunc)
+</code></pre></td></tr></table>
+</div>
+</div><p>I have an [alias for removing those <a href="https://github.com/docker/docker/blob/634a848b8e3bdd8aed834559f3b2e0dfc7f5ae3a/man/docker-images.1.md#options">dangling images]</a><a href="https://github.com/docker/docker/blob/634a848b8e3bdd8aed834559f3b2e0dfc7f5ae3a/man/docker-images.1.md#options">13</a>: <code>drmi</code></p>
 <blockquote>
 <p>The <code>dangling=true</code> filter finds unused images</p>
 </blockquote>
 <p>That way, any intermediate image no longer referenced by a labelled image is removed.</p>
 <p>I do the same <strong>first</strong> for <a href="https://github.com/VonC/b2d/blob/b010ab51974ac7de6162cdcbff795d7b9e84fd67/.bash_aliases#L21">exited processes (containers)</a></p>
-<pre><code>alias drmae='docker rm $(docker ps -qa --no-trunc --filter &quot;status=exited&quot;)'
-</code></pre><p>As <a href="https://stackoverflow.com/users/95750/haridsv">haridsv</a> points out <a href="https://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images/32723127#comment63457575_32723127">in the comments</a>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">alias drmae=&#39;docker rm $(docker ps -qa --no-trunc --filter &#34;status=exited&#34;)&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>As <a href="https://stackoverflow.com/users/95750/haridsv">haridsv</a> points out <a href="https://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images/32723127#comment63457575_32723127">in the comments</a>:</p>
 <blockquote>
 <p>Technically, <strong>you should first clean up containers before cleaning up images, as this will catch more dangling images and less errors</strong>.</p>
 </blockquote>
 <hr>
 <p><a href="https://github.com/jfrazelle">Jess Frazelle (jfrazelle)</a> has the <a href="https://github.com/jfrazelle/dotfiles/blob/a7fd3df6ab423e6dd04f27727f653753453db837/.dockerfunc#L8-L11">bashrc function</a>:</p>
-<pre><code>dcleanup(){
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dcleanup(){
     docker rm -v $(docker ps --filter status=exited -q 2&gt;/dev/null) 2&gt;/dev/null
     docker rmi $(docker images --filter dangling=true -q 2&gt;/dev/null) 2&gt;/dev/null
 }
-</code></pre><hr>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
 <p>To remove old images, and not just &ldquo;unreferenced-dangling&rdquo; images, you can consider <a href="https://github.com/spotify/docker-gc"><strong>docker-gc</strong></a>:</p>
-<pre><code>$ docker images --no-trunc --format '{{.ID}} {{.CreatedSince}} {{.Repository}}' \
-    | grep ' months' | awk '{ print $1 }' \
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker images --no-trunc --format &#39;{{.ID}} {{.CreatedSince}} {{.Repository}}&#39; \
+    | grep &#39; months&#39; | awk &#39;{ print $1 }&#39; \
     | xargs --no-run-if-empty docker rmi
-</code></pre><p>Example of <code>/etc/cron.daily/docker-gc</code> script:</p>
-<pre><code>#!/bin/sh -e
+</code></pre></td></tr></table>
+</div>
+</div><p>Example of <code>/etc/cron.daily/docker-gc</code> script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh -e
+</span><span class="cp"></span>
+<span class="c1"># Delete all stopped containers (including data-only containers).</span>
+docker ps -a -q --no-trunc --filter <span class="s2">&#34;status=exited&#34;</span> <span class="p">|</span> xargs --no-run-if-empty docker rm -v
 
-# Delete all stopped containers (including data-only containers).
-docker ps -a -q --no-trunc --filter &quot;status=exited&quot; | xargs --no-run-if-empty docker rm -v
+<span class="c1"># Delete all tagged images more than a month old</span>
+<span class="c1"># (will fail to remove images still used).</span>
+docker images --no-trunc --format <span class="s1">&#39;{{.ID}} {{.CreatedSince}}&#39;</span> <span class="p">|</span> grep <span class="s1">&#39; months&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{ print $1 }&#39;</span> <span class="p">|</span> xargs --no-run-if-empty docker rmi <span class="o">||</span> <span class="nb">true</span>
 
-# Delete all tagged images more than a month old
-# (will fail to remove images still used).
-docker images --no-trunc --format '{{.ID}} {{.CreatedSince}}' | grep ' months' | awk '{ print $1 }' | xargs --no-run-if-empty docker rmi || true
+<span class="c1"># Delete all &#39;untagged/dangling&#39; (&lt;none&gt;) images</span>
+<span class="c1"># Those are used for Docker caching mechanism.</span>
+docker images -q --no-trunc --filter <span class="nv">dangling</span><span class="o">=</span><span class="nb">true</span> <span class="p">|</span> xargs --no-run-if-empty docker rmi
 
-# Delete all 'untagged/dangling' (&lt;none&gt;) images
-# Those are used for Docker caching mechanism.
-docker images -q --no-trunc --filter dangling=true | xargs --no-run-if-empty docker rmi
-
-# Delete all dangling volumes.
-docker volume ls -qf dangling=true | xargs --no-run-if-empty docker volume rm
-</code></pre><h2 id="docker-compose-的安装及使用">docker-compose 的安装及使用</h2>
+<span class="c1"># Delete all dangling volumes.</span>
+docker volume ls -qf <span class="nv">dangling</span><span class="o">=</span><span class="nb">true</span> <span class="p">|</span> xargs --no-run-if-empty docker volume rm
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="docker-compose-的安装及使用">docker-compose 的安装及使用</h2>
 <h3 id="简单介绍-1">简单介绍</h3>
 <blockquote>
 <p>Docker Compose 是一个用来定义和运行复杂应用的 Docker 工具。
@@ -982,16 +1268,39 @@ docker volume ls -qf dangling=true | xargs --no-run-if-empty docker volume rm
 <ul>
 <li>Github源</li>
 </ul>
-<pre><code>sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-</code></pre><ul>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Daocloud镜像</li>
 </ul>
-<pre><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
-</code></pre><h3 id="卸载-1">卸载</h3>
-<pre><code>sudo rm /usr/local/bin/docker-compose
-</code></pre><h3 id="基础命令-1">基础命令</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="卸载-1">卸载</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo rm /usr/local/bin/docker-compose
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="基础命令-1">基础命令</h3>
 <p>需要在 docker-compose.yml 所在文件夹中执行命令</p>
 <p>使用 docker-compose 部署项目的简单步骤</p>
 <ul>
@@ -1017,66 +1326,196 @@ chmod +x /usr/local/bin/docker-compose
 <li><a href="#stop">stop</a></li>
 </ul>
 <h4 id="build">build</h4>
-<pre><code>用法：build [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：build [options] [SERVICE...]
 选项：
 	--force-rm  总是移除构建过程中产生的中间项容器
 	--no-cache  构建镜像过程中不使用Cache
 	--pull      总是尝试获取更新版本的镜像
-</code></pre><p>构建服务并打上<code>project_service</code>风格的标签（如：<code>composetest_db</code>）。如果你更改了服务的<code>Dockerfile</code>或者构建目录下的内容，需要运行<code>docker-compose build</code>重新构建服务。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>构建服务并打上<code>project_service</code>风格的标签（如：<code>composetest_db</code>）。如果你更改了服务的<code>Dockerfile</code>或者构建目录下的内容，需要运行<code>docker-compose build</code>重新构建服务。</p>
 <h4 id="help">help</h4>
-<pre><code>用法：help COMMAND
-</code></pre><p>显示命令的帮助信息及用法教程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：help COMMAND
+</code></pre></td></tr></table>
+</div>
+</div><p>显示命令的帮助信息及用法教程。</p>
 <h4 id="kill">kill</h4>
-<pre><code>用法：kill [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：kill [options] [SERVICE...]
 选项：
 	-s SIGNAL         SIGNAL 是发送给容器的信号量，默认是 SIGKILL
-</code></pre><p>通过发送<code>SIGKILL</code>信号来强制终止运行中的容器，也可以发送指定的信号量，例如：</p>
-<pre><code>$ docker-compose kill -s SIGINT
-</code></pre><h4 id="ps">ps</h4>
-<pre><code>用法：ps [options] [SERVICE...]
+</code></pre></td></tr></table>
+</div>
+</div><p>通过发送<code>SIGKILL</code>信号来强制终止运行中的容器，也可以发送指定的信号量，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose kill -s SIGINT
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="ps">ps</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：ps [options] [SERVICE...]
 选项：
 	-q		仅仅显示容器ID
-</code></pre><p>列出容器。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>列出容器。</p>
 <h4 id="restart">restart</h4>
-<pre><code>用法：restart [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：restart [options] [SERVICE...]
 选项：
 	-t, --timeout TIMEOUT      设置关闭服务的超时时间，单位为秒，默认为10
-</code></pre><p>重启服务。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>重启服务。</p>
 <h4 id="run">run</h4>
-<pre><code>用法：run [options] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：run [options] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]
 选项：
 	-d                    分离模式：在后台运行容器，只打印新的容器名称
 	--entrypoint CMD      覆盖镜像的入口点（CMD ...）
 	-e KEY=VAL            设置环境变量，可以使用多次
-	-u, --user=&quot;&quot;         通过指定的用户名或用户id来运行
+	-u, --user=&#34;&#34;         通过指定的用户名或用户id来运行
 	--no-deps             不启动link连接的服务
 	--rm                  运行结束后移除容器，在分离模式下将被忽略
 	-p, --publish=[]      将容器暴露端口映射到主机端口
 	--service-ports       通过服务映射到主机的端口执行命令
 	-T                    禁用pseudo-tty分配，默认会分配一个TTY
-</code></pre><p>对服务运行的命令。例如，以下命令启动web服务并运行bash命令</p>
-<pre><code>$ docker-compose run web bash
-</code></pre><p><code>run</code>命令，将使用服务中已经定义的配置来创建运行一个新的容器。也就是说，如此创建的容器，将会使用相同的挂载卷、容器连接等相同的配置，但它们依旧可以存在差异。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>对服务运行的命令。例如，以下命令启动web服务并运行bash命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run web bash
+</code></pre></td></tr></table>
+</div>
+</div><p><code>run</code>命令，将使用服务中已经定义的配置来创建运行一个新的容器。也就是说，如此创建的容器，将会使用相同的挂载卷、容器连接等相同的配置，但它们依旧可以存在差异。</p>
 <p>第一个区别是，可以使用<code>run</code>命令覆盖服务中指定的运行命令。例如，<code>web</code>服务中的配置指定的运行命令为<code>bash</code>，那么<code>docker-compose run web python app.py</code>将使用<code>python app.py</code>来覆盖它。</p>
 <p>第二个区别是，<code>docker-compose run</code>命令不会创建任何服务配置中指定的端口映射，这样可以防止多个容器映射同一端口的冲突。如果你需要使得服务的端口创建并映射到主机，需要指定<code>--service-ports</code>标记，如下：</p>
-<pre><code>$ docker-compose run --service-ports web python manage.py shell
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run --service-ports web python manage.py shell
 
-</code></pre><p>或者可以手动指定端口映射，和使用<code>docker run</code>一样，使用<code>--publish</code>或<code>-p</code>选项：</p>
-<pre><code>$ docker-compose run --publish 8080:80 -p 2022:22 -p 127.0.0.1:2021:21 web python manage.py shell
+</code></pre></td></tr></table>
+</div>
+</div><p>或者可以手动指定端口映射，和使用<code>docker run</code>一样，使用<code>--publish</code>或<code>-p</code>选项：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run --publish 8080:80 -p 2022:22 -p 127.0.0.1:2021:21 web python manage.py shell
 
-</code></pre><p>如果启动一个带有容器连接的服务，<code>run</code>命令将首先检查连接到的服务是否已运行，如果是停止状态，将会启动它，直到所有的相关服务都处于正在运行状态，才会执行你创建的命令。例如：</p>
-<pre><code>$ docker-compose run db psql -h db -U docker
+</code></pre></td></tr></table>
+</div>
+</div><p>如果启动一个带有容器连接的服务，<code>run</code>命令将首先检查连接到的服务是否已运行，如果是停止状态，将会启动它，直到所有的相关服务都处于正在运行状态，才会执行你创建的命令。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run db psql -h db -U docker
 
-</code></pre><p>这将创建一个与PostgreSQL容器<code>db</code>交互服务。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>这将创建一个与PostgreSQL容器<code>db</code>交互服务。</p>
 <p>如果你不希望启动相关联容器，可以使用<code>--no-deps</code>标记：</p>
-<pre><code>$ docker-compose run --no-deps web python manage.py shell
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run --no-deps web python manage.py shell
 
-</code></pre><h4 id="start">start</h4>
-<pre><code>用法：start [SERVICE...]
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="start">start</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：start [SERVICE...]
 
-</code></pre><p>启动服务中已经存在的容器。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>启动服务中已经存在的容器。</p>
 <h4 id="up">up</h4>
-<pre><code>用法：up [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：up [options] [SERVICE...]
 选项：
 	-d                     分离模式：在后台运行容器，只打印新的容器名称
 	--no-color             单色输出
@@ -1086,73 +1525,175 @@ chmod +x /usr/local/bin/docker-compose
 	--no-build             不构建镜像，即使缺失
 	-t, --timeout TIMEOUT  为容器设置关闭超时时间，单位：秒 (默认为 10)
 
-</code></pre><p>对服务，构建镜像、(重新)创建容器、启动容器。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>对服务，构建镜像、(重新)创建容器、启动容器。</p>
 <p>该命令还将启动任何相关的且没有被启动的服务。</p>
 <p><code>docker-compose up</code>命令将显示所有容器的输出，命令结束时，所有容器都将关闭。运行<code>docker-compose up -d </code>将在后台启动运行容器。</p>
 <p>如果服务中已经存在运行中的容器了，并且在容器创建后更改服务配置或者镜像，<code>docker-compose up</code>命令将会停止当前容器（保存挂载卷）并重新构建启动容器。当然，也可以通过<code>--no-recreate</code>选项来避免重新构建。</p>
 <p>使用<code>--force-recreate</code>标记，可以强制停止并重构所有容器。</p>
 <h4 id="logs">logs</h4>
-<pre><code>用法：logs [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：logs [options] [SERVICE...]
 选项：
 	--no-color  单色输出
 
-</code></pre><p>显示服务输出的日志内容。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>显示服务输出的日志内容。</p>
 <h4 id="port">port</h4>
-<pre><code>用法：port [options] SERVICE PRIVATE_PORT
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：port [options] SERVICE PRIVATE_PORT
 选项：
 	--protocol=proto  tcp 或 udp [默认为 tcp]
 	--index=index     对应实例服务的第几个容器[默认为 1]
 
-</code></pre><p>打印服务中端口绑定对应的主机端口。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>打印服务中端口绑定对应的主机端口。</p>
 <h4 id="pull">pull</h4>
-<pre><code>用法：pull [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：pull [options] [SERVICE...]
 选项：
 	--ignore-pull-failures 尽可能拉取服务，忽略拉取失败
 
-</code></pre><p>拉取服务镜像。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>拉取服务镜像。</p>
 <h4 id="rm">rm</h4>
-<pre><code>用法：rm [options] [SERVICE...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：rm [options] [SERVICE...]
 选项:
 	-f, --force   强制删除，不询问确认信息
 	-v            移除容器挂载的卷
 
-</code></pre><p>删除停止的服务容器。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>删除停止的服务容器。</p>
 <h4 id="scale">scale</h4>
-<pre><code>用法：scale [SERVICE=NUM...]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：scale [SERVICE=NUM...]
 
-</code></pre><p>设置一个服务需要运行的容器数量。
+</code></pre></td></tr></table>
+</div>
+</div><p>设置一个服务需要运行的容器数量。
 参数形式为<code>service=num</code>。例如：</p>
-<pre><code>$ docker-compose scale web=2 worker=3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose scale web=2 worker=3
 
-</code></pre><h4 id="stop">stop</h4>
-<pre><code>用法：stop [options] [SERVICE...]
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="stop">stop</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用法：stop [options] [SERVICE...]
 选项：
 	-t, --timeout TIMEOUT      设置关闭容器的超时时间
 
-</code></pre><p>停止容器而不移除，可以通<code>docker-compose start</code>重新启动。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>停止容器而不移除，可以通<code>docker-compose start</code>重新启动。</p>
 <h3 id="通过-docker-composeyml-部署应用">通过 docker-compose.yml 部署应用</h3>
 <p>我将上面所创建的镜像推送到了阿里云，在此使用它</p>
 <h4 id="1新建-docker-composeyml-文件">1.新建 docker-compose.yml 文件</h4>
 <p>通过以下配置，在运行后可以创建两个站点(只为演示)</p>
-<pre><code>version: &quot;3&quot;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#34;3&#34;
 services:
   web1:
     image: registry.cn-hangzhou.aliyuncs.com/yimo_public/docker-nginx-test:latest
     ports:
-      - &quot;4466:80&quot;
+      - &#34;4466:80&#34;
   web2:
     image: registry.cn-hangzhou.aliyuncs.com/yimo_public/docker-nginx-test:latest
     ports:
-      - &quot;4477:80&quot;
-</code></pre><p>此处只是简单演示写法，说明 docker-compose 的方便</p>
+      - &#34;4477:80&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>此处只是简单演示写法，说明 docker-compose 的方便</p>
 <h4 id="2构建完成后台运行镜像">2.构建完成，后台运行镜像</h4>
-<pre><code>docker-compose up -d
-</code></pre><p>运行后就可以使用 ip+port 访问这两个站点了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d
+</code></pre></td></tr></table>
+</div>
+</div><p>运行后就可以使用 ip+port 访问这两个站点了</p>
 <h4 id="3镜像更新重新部署">3.镜像更新重新部署</h4>
-<pre><code>docker-compose down
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose down
 docker-compose pull
 docker-compose up -d
-</code></pre><h2 id="详细命名说明">详细命名说明</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="详细命名说明">详细命名说明</h2>
 <h3 id="1docker安装">1、Docker安装</h3>
 <p>系统环境：docker最低支持centos7且在64位平台上，内核版本在3.10以上</p>
 <p>版本：社区版，企业版（包含了一些收费服务）</p>
@@ -1161,24 +1702,125 @@ docker-compose up -d
 <p><a href="https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-after-using-the-convenience-script">https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-after-using-the-convenience-script</a></p>
 </blockquote>
 <p>博主版安装教程：</p>
-<pre><code># 安装docker
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 安装docker
 yum install docker
 # 启动docker 
 systemctl start/status docker 
 # 查看docker启动状态
 docker version 
-</code></pre><p><strong>配置加速器</strong></p>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>配置加速器</strong></p>
 <p>简介：DaoCloud 加速器 是广受欢迎的 Docker 工具，解决了国内用户访问 Docker Hub 缓慢的问题。DaoCloud 加速器结合国内的 CDN 服务与协议层优化，成倍的提升了下载速度。</p>
 <p>DaoCloud官网：</p>
 <blockquote>
 <p><a href="https://www.daocloud.io/mirror#accelerator-doc">https://www.daocloud.io/mirror#accelerator-doc</a></p>
 </blockquote>
-<pre><code># 一条命令加速（记得重启docker）
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 一条命令加速（记得重启docker）
 curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://95822026.m.daocloud.io
-</code></pre><hr>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
 <h3 id="2docker基础命令">2、Docker基础命令</h3>
 <p>docker &ndash;help（中文注解）</p>
-<pre><code>Usage:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Usage:
 docker [OPTIONS] COMMAND [arg...]
        docker daemon [ --help | ... ]
        docker [ --help | -v | --version ]
@@ -1201,13 +1843,13 @@ Options:
 Commands:
     attach    Attach to a running container  #当前shell下attach连接指定运行镜像
     build     Build an image from a Dockerfile  #通过Dockerfile定制镜像
-    commit    Create a new image from a container's changes  #提交当前容器为新的镜像
+    commit    Create a new image from a container&#39;s changes  #提交当前容器为新的镜像
     cp    Copy files/folders from a container to a HOSTDIR or to STDOUT  #从容器中拷贝指定文件或者目录到宿主机中
     create    Create a new container  #创建一个新的容器，同run 但不启动容器
-    diff    Inspect changes on a container's filesystem  #查看docker容器变化
+    diff    Inspect changes on a container&#39;s filesystem  #查看docker容器变化
     events    Get real time events from the server#从docker服务获取容器实时事件
     exec    Run a command in a running container#在已存在的容器上运行命令
-    export    Export a container's filesystem as a tar archive  #导出容器的内容流作为一个tar归档文件(对应import)
+    export    Export a container&#39;s filesystem as a tar archive  #导出容器的内容流作为一个tar归档文件(对应import)
     history    Show the history of an image  #展示一个镜像形成历史
     images    List images  #列出系统当前镜像
     import    Import the contents from a tarball to create a filesystem image  #从tar包中的内容创建一个新的文件系统映像(对应export)
@@ -1240,7 +1882,7 @@ hub中搜索镜像
     version    Show the Docker version information#查看容器版本号
     wait         Block until a container stops, then print its exit code  #截取容器停止时的退出状态值
 
-Run 'docker COMMAND --help' for more information on a command.  #运行docker命令在帮助可以获取更多信息
+Run &#39;docker COMMAND --help&#39; for more information on a command.  #运行docker命令在帮助可以获取更多信息
 docker search  hello-docker  # 搜索hello-docker的镜像
 docker search centos # 搜索centos镜像
 docker pull hello-docker # 获取centos镜像
@@ -1255,15 +1897,37 @@ docker load &lt; /opt/centos.tar.gz   #导入本地镜像到docker镜像库
 docker stop  `docker ps -aq`  # 停止所有正在运行的容器
 docker  rm `docker ps -aq`    # 一次性删除所有容器记录
 docker rmi  `docker images -aq`   # 一次性删除所有本地的镜像记录
-</code></pre><h4 id="21-启动容器的两种方式">2.1 启动容器的两种方式</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="21-启动容器的两种方式">2.1 启动容器的两种方式</h4>
 <p>容器是运行应用程序的，所以必须得先有一个操作系统为基础</p>
 <p>1、基于镜像新建一个容器并启动</p>
-<pre><code># 1. 后台运行一个docker
-docker run -d centos /bin/sh -c &quot;while true;do echo 正在运行; sleep 1;done&quot;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 1. 后台运行一个docker
+docker run -d centos /bin/sh -c &#34;while true;do echo 正在运行; sleep 1;done&#34;
     # -d  后台运行容器
     # /bin/sh  指定使用centos的bash解释器
     # -c 运行一段shell命令
-    # &quot;while true;do echo 正在运行; sleep 1;done&quot;  在linux后台，每秒中打印一次正在运行
+    # &#34;while true;do echo 正在运行; sleep 1;done&#34;  在linux后台，每秒中打印一次正在运行
 docker ps  # 检查容器进程
 docker  logs  -f  容器id/名称  # 不间断打印容器的日志信息 
 docker stop centos  # 停止容器
@@ -1274,7 +1938,9 @@ docker run --name mydocker -it centos /bin/bash
     # -i  让容器的标准输入保持打开
     # -t 让Docker分配一个伪终端,并绑定到容器的标准输入上
     # /bin/bash 指定docker容器，用shell解释器交互
-</code></pre><p>当利用docker run来创建容器时，Docker在后台运行的步骤如下：</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>当利用docker run来创建容器时，Docker在后台运行的步骤如下：</p>
 <blockquote>
 <ol>
 <li>检查本地是否存在指定的镜像，不存在就从公有仓库下载</li>
@@ -1287,17 +1953,50 @@ docker run --name mydocker -it centos /bin/bash
 </ol>
 </blockquote>
 <p>2、将一个终止状态(stopped)的容器重新启动</p>
-<pre><code>[root@localhost ~]# docker ps -a  # 先查询记录
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# docker ps -a  # 先查询记录
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                        PORTS                    NAMES
-ee92fcf6f32d        centos              &quot;/bin/bash&quot;              4 days ago          Exited (137) 3 days ago                                kickass_raman
+ee92fcf6f32d        centos              &#34;/bin/bash&#34;              4 days ago          Exited (137) 3 days ago                                kickass_raman
 
 [root@localhost ~]# docker start ee9  # 再启动这个容器
 ee9
 
 [root@localhost ~]# docker exec -it  ee9 /bin/bash  # 进入容器交互式界面
 [root@ee92fcf6f32d /]#   # 注意看用户名，已经变成容器用户名
-</code></pre><h4 id="22-提交创建自定义镜像">2.2 提交创建自定义镜像</h4>
-<pre><code># 1.我们进入交互式的centos容器中，发现没有vim命令
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="22-提交创建自定义镜像">2.2 提交创建自定义镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 1.我们进入交互式的centos容器中，发现没有vim命令
     docker run -it centos
 # 2.在当前容器中，安装一个vim
     yum install -y vim
@@ -1311,15 +2010,35 @@ ee9
     docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 chaoyu/centos-vim   latest              fd2685ae25fe        5 minutes ago   
-</code></pre><h4 id="23-外部访问容器">2.3 外部访问容器</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="23-外部访问容器">2.3 外部访问容器</h4>
 <p>容器中可以运行网络应用，但是要让外部也可以访问这些应用，可以通过-p或-P参数指定端口映射。</p>
-<pre><code>docker run -d -P training/webapp python app.py
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d -P training/webapp python app.py
   # -P 参数会随机映射端口到容器开放的网络端口
 
 # 检查映射的端口
 docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED            STATUS              PORTS                     NAMES
-cfd632821d7a        training/webapp     &quot;python app.py&quot;     21 seconds ago      Up 20 seconds       0.0.0.0:32768-&gt;5000/tcp   brave_fermi
+cfd632821d7a        training/webapp     &#34;python app.py&#34;     21 seconds ago      Up 20 seconds       0.0.0.0:32768-&gt;5000/tcp   brave_fermi
 #宿主机ip:32768 映射容器的5000端口
 
 # 查看容器日志信息
@@ -1327,7 +2046,9 @@ docker logs -f cfd  # #不间断显示log
 
 # 也可以通过-p参数指定映射端口
 docker run -d -p 9000:5000 training/webapp python app.py
-</code></pre><p>打开浏览器访问服务器的9000端口， 内容显示 Hello world！表示正常启动</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>打开浏览器访问服务器的9000端口， 内容显示 Hello world！表示正常启动</p>
 <p>(如果访问失败的话，检查自己的防火墙，以及云服务器的安全组)</p>
 <hr>
 <h3 id="3利用dockerfile定制镜像">3、利用dockerfile定制镜像</h3>
@@ -1337,17 +2058,54 @@ docker run -d -p 9000:5000 training/webapp python app.py
 <p>Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令 构建一层，因此每一条指令的内容，就是描述该层应当如何构建。</p>
 </blockquote>
 <p>参数详解</p>
-<pre><code>FROM scratch #制作base image 基础镜像，尽量使用官方的image作为base image
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM scratch #制作base image 基础镜像，尽量使用官方的image作为base image
 FROM centos #使用base image
 FROM ubuntu:14.04 #带有tag的base image
 
 LABEL version=“1.0” #容器元信息，帮助信息，Metadata，类似于代码注释
-LABEL maintainer=“yc_uuu@163.com&quot;
+LABEL maintainer=“yc_uuu@163.com&#34;
 
 #对于复杂的RUN命令，避免无用的分层，多条命令用反斜线换行，合成一条命令！
 RUN yum update &amp;&amp; yum install -y vim 
     Python-dev #反斜线换行
-RUN /bin/bash -c &quot;source $HOME/.bashrc;echo $HOME”
+RUN /bin/bash -c &#34;source $HOME/.bashrc;echo $HOME”
 
 WORKDIR /root #相当于linux的cd命令，改变目录，尽量使用绝对路径！！！不要用RUN cd
 WORKDIR /test # 如果没有就自动创建
@@ -1370,8 +2128,59 @@ ADD与COPY
 ENV # 环境变量，尽可能使用ENV增加可维护性
 ENV MYSQL_VERSION 5.6 # 设置一个mysql常量
 RUN yum install -y mysql-server=“${MYSQL_VERSION}” 
-</code></pre><p>进阶知识(了解)</p>
-<pre><code>VOLUME and EXPOSE 
+</code></pre></td></tr></table>
+</div>
+</div><p>进阶知识(了解)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">VOLUME and EXPOSE 
 存储和网络
 
 RUN and CMD and ENTRYPOINT
@@ -1395,7 +2204,7 @@ cat Dockerfile
     FROM centos
     ENV name Docker
     ENTRYPOINT [“/bin/echo”,”hello $name”]#这个仅仅是执行echo命令，读取不了shell变量
-    ENTRYPOINT  [“/bin/bash”,”-c”,”echo hello $name&quot;]
+    ENTRYPOINT  [“/bin/bash”,”-c”,”echo hello $name&#34;]
 
 CMD
 容器启动时默认执行的命令
@@ -1414,16 +2223,35 @@ CMD [“mongod”]
 [root@master home]# more Dockerfile
 FROm centos
 ENV name Docker
-#CMD [&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;echo hello $name&quot;]
-ENTRYPOINT [&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;echo hello $name”]
-</code></pre><hr>
+#CMD [&#34;/bin/bash&#34;,&#34;-c&#34;,&#34;echo hello $name&#34;]
+ENTRYPOINT [&#34;/bin/bash&#34;,&#34;-c&#34;,&#34;echo hello $name”]
+</code></pre></td></tr></table>
+</div>
+</div><hr>
 <h3 id="4发布到仓库">4、发布到仓库</h3>
 <h4 id="41-docker-hub共有镜像发布">4.1 docker hub共有镜像发布</h4>
 <p>docker提供了一个类似于github的仓库docker hub，官方网站（需注册使用）</p>
 <blockquote>
 <p><a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
 </blockquote>
-<pre><code># 注册docker id后，在linux中登录dockerhub
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 注册docker id后，在linux中登录dockerhub
     docker login
 
 # 注意要保证image的tag是账户名，如果镜像名字不对，需要改一下tag
@@ -1436,13 +2264,52 @@ ENTRYPOINT [&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;echo hello $name”]
 # 去dockerhub中检查镜像
 # 先删除本地镜像，然后再测试下载pull 镜像文件
     docker pull peng104/centos-entrypoint-exec
-</code></pre><h4 id="42-私有仓库">4.2 私有仓库</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="42-私有仓库">4.2 私有仓库</h4>
 <p>docker hub 是公开的，其他人也是可以下载，并不安全，因此还可以使用docker registry官方提供的私有仓库</p>
 <p>用法详解：</p>
 <blockquote>
 <p><a href="https://yeasy.gitbooks.io/docker_practice/repository/registry.html">https://yeasy.gitbooks.io/docker_practice/repository/registry.html</a></p>
 </blockquote>
-<pre><code># 1.下载一个docker官方私有仓库镜像
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 1.下载一个docker官方私有仓库镜像
     docker pull registry
 # 2.运行一个docker私有容器仓库
 docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  registry
@@ -1456,8 +2323,8 @@ docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  registry
     vim /etc/docker/daemon.json 
     # 写入如下内容
     {
-        &quot;registry-mirrors&quot;: [&quot;http://f1361db2.m.daocloud.io&quot;],
-        &quot;insecure-registries&quot;:[&quot;192.168.11.37:5000&quot;]
+        &#34;registry-mirrors&#34;: [&#34;http://f1361db2.m.daocloud.io&#34;],
+        &#34;insecure-registries&#34;:[&#34;192.168.11.37:5000&#34;]
     }
 # 4.修改docker的服务配置文件
     vim /lib/systemd/system/docker.service
@@ -1475,31 +2342,74 @@ docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  registry
     # 浏览器访问http://192.168.119.10:5000/v2/_catalog查看仓库
 # 8.下载私有仓库的镜像
     docker pull 192.168.11.37:5000/peng-hello
-</code></pre><hr>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
 <h3 id="5实例演示">5、实例演示</h3>
 <p>编写dockerfile，构建自己的镜像，运行flask程序。</p>
 <p>确保app.py和dockerfile在同一个目录！</p>
-<pre><code># 1.准备好app.py的flask程序
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 1.准备好app.py的flask程序
     [root@localhost ~]# cat app.py
     from flask import Flask
     app=Flask(__name__)
-    @app.route('/')
+    @app.route(&#39;/&#39;)
     def hello():
-        return &quot;hello docker&quot;
-    if __name__==&quot;__main__&quot;:
-        app.run(host='0.0.0.0',port=8080)
+        return &#34;hello docker&#34;
+    if __name__==&#34;__main__&#34;:
+        app.run(host=&#39;0.0.0.0&#39;,port=8080)
     [root@master home]# ls
     app.py  Dockerfile
 
 # 2.编写dockerfile
     [root@localhost ~]# cat Dockerfile
     FROM python:2.7
-    LABEL maintainer=&quot;温而新&quot;
+    LABEL maintainer=&#34;温而新&#34;
     RUN pip install flask
     COPY app.py /app/
     WORKDIR /app
     EXPOSE 8080
-    CMD [&quot;python&quot;,&quot;app.py&quot;]
+    CMD [&#34;python&#34;,&#34;app.py&#34;]
 
 # 3.构建镜像image,找到当前目录的Dockerfile，开始构建
     docker build -t peng104/flask-hello-docker .
@@ -1516,7 +2426,9 @@ docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  registry
 # 7.推送这个镜像到私有仓库
     docker tag  peng104/flask-hello-docker   192.168.11.37:5000/peng-flaskweb
     docker push 192.168.11.37:5000/peng-flaskweb
-</code></pre><h2 id="补充一些用法">补充一些用法</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="补充一些用法">补充一些用法</h2>
 <h3 id="挂载宿主机目录">挂载宿主机目录</h3>
 <p>docker可以支持把一个宿主机上的目录挂载到镜像里。</p>
 <p><code>docker run -it -v /home/dock/Downloads:/usr/Downloads ubuntu64 /bin/bash</code>
@@ -1534,7 +2446,49 @@ docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  registry
 <p>生成的docker镜像保存下来：docker save -o test.tar test:1.0
 导入docker镜像：docker load -i test.tar</p>
 <h3 id="docker容器内外互相拷贝数据">Docker容器内外互相拷贝数据</h3>
-<pre><code>从容器内拷贝文件到主机上
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">从容器内拷贝文件到主机上
 docker cp &lt;containerId&gt;:/file/path/within/container /host/path/target 
 
 从主机上拷贝文件到容器内
@@ -1548,7 +2502,7 @@ cp /mnt/sourcefile /path/to/destfile
 A. 获取容器名称或者id :
 $ docker ps
 B. 获取整个容器的id
-$ docker inspect -f   '{{.Id}}'  步骤A获取的名称或者id
+$ docker inspect -f   &#39;{{.Id}}&#39;  步骤A获取的名称或者id
 C. 在主机上拷贝文件:
 $ sudo cp path-file-host /var/lib/docker/aufs/mnt/FULL_CONTAINER_ID/PATH-NEW-FILE 
 或者
@@ -1559,20 +2513,22 @@ $ docker ps
 CONTAINER ID      IMAGE    COMMAND       CREATED      STATUS       PORTS        NAMES
 d8e703d7e303   solidleon/ssh:latest      /usr/sbin/sshd -D                      cranky_pare
 
-$ docker inspect -f   '{{.Id}}' cranky_pare
+$ docker inspect -f   &#39;{{.Id}}&#39; cranky_pare
 or 
-$ docker inspect -f   '{{.Id}}' d8e703d7e303
+$ docker inspect -f   &#39;{{.Id}}&#39; d8e703d7e303
 d8e703d7e3039a6df6d01bd7fb58d1882e592a85059eb16c4b83cf91847f88e5
 
 $ sudo cp file.txt /var/lib/docker/aufs/mnt/**d8e703d7e3039a6df6d01bd7fb58d1882e592a85059eb16c4b83cf91847f88e5
 
 3.用输入输出符
-docker run -i ubuntu /bin/bash -c 'cat &gt; /path/to/container/file' &lt; /path/to/host/file/
+docker run -i ubuntu /bin/bash -c &#39;cat &gt; /path/to/container/file&#39; &lt; /path/to/host/file/
 
 或者
 
-docker exec -it &lt;container_id&gt; bash -c 'cat &gt; /path/to/container/file' &lt; /path/to/host/file/
-</code></pre><p><strong>总结一下</strong></p>
+docker exec -it &lt;container_id&gt; bash -c &#39;cat &gt; /path/to/container/file&#39; &lt; /path/to/host/file/
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>总结一下</strong></p>
 <blockquote>
 <p>从主机复制到容器<code>sudo docker cp host_path containerID:container_path</code></p>
 <p>从容器复制到主机<code>sudo docker cp containerID:container_path host_path</code></p>
@@ -1588,29 +2544,76 @@ docker exec -it &lt;container_id&gt; bash -c 'cat &gt; /path/to/container/file' 
 <h3 id="docker一些有用的清理命令">docker一些有用的清理命令</h3>
 <p>以下命令参考自这篇<a href="http://blog.loof.fr/2016/05/docker-cleanup.html#">文章</a>：</p>
 <p>（1）清除已经终止的<code>container</code>：</p>
-<pre><code>docker rm -v $(docker ps --filter status=exited -q)
-</code></pre><p>（2）清除已经没用的<code>volume</code>：</p>
-<pre><code>docker volume rm $(docker volume ls -q -f 'dangling=true')
-</code></pre><p>（3）清除已经没用的<code>image</code>：</p>
-<pre><code>docker rmi $(docker images -f &quot;dangling=true&quot; -q) 
-</code></pre><p>（4）清除所有的<code>container</code>（包括正在运行的和已经退出的）：</p>
-<pre><code>docker rm -f $(docker ps -a | awk 'NR &gt; 1 {print $1}')
-</code></pre><h3 id="在docker-container中执行命令的脚本">在docker container中执行命令的脚本</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -v $(docker ps --filter status=exited -q)
+</code></pre></td></tr></table>
+</div>
+</div><p>（2）清除已经没用的<code>volume</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker volume rm $(docker volume ls -q -f &#39;dangling=true&#39;)
+</code></pre></td></tr></table>
+</div>
+</div><p>（3）清除已经没用的<code>image</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rmi $(docker images -f &#34;dangling=true&#34; -q) 
+</code></pre></td></tr></table>
+</div>
+</div><p>（4）清除所有的<code>container</code>（包括正在运行的和已经退出的）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f $(docker ps -a | awk &#39;NR &gt; 1 {print $1}&#39;)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="在docker-container中执行命令的脚本">在docker container中执行命令的脚本</h3>
 <p>下面脚本的功能是循环地在各个<code>container</code>中执行命令：</p>
-<pre><code>#!/bin/bash -x
-
-for i in {1..2}
-do
-        docker exec -i hammerdb_net${i} bash &lt;&lt;-EOF
-        su oracle
-        source /tmp/ora_env
-        cd /data/oracle/tablespaces/
-        rm -f *.html
-        ./create_awr.sh
-        mv awr.html awr_${i}.html
-        EOF
-done
-</code></pre><p>需要注意的是在<code>do</code>和<code>done</code>之间应该使用<code>tab</code>而不是空格。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash -x
+</span><span class="cp"></span>
+<span class="k">for</span> i in <span class="o">{</span>1..2<span class="o">}</span>
+<span class="k">do</span>
+        docker <span class="nb">exec</span> -i hammerdb_net<span class="si">${</span><span class="nv">i</span><span class="si">}</span> bash <span class="s">&lt;&lt;-EOF
+</span><span class="s">        su oracle
+</span><span class="s">        source /tmp/ora_env
+</span><span class="s">        cd /data/oracle/tablespaces/
+</span><span class="s">        rm -f *.html
+</span><span class="s">        ./create_awr.sh
+</span><span class="s">        mv awr.html awr_${i}.html
+</span><span class="s">        EOF</span>
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是在<code>do</code>和<code>done</code>之间应该使用<code>tab</code>而不是空格。</p>
     </div>
 
     
@@ -1640,12 +2643,12 @@ done
 
             </i>
             <span class="prev-text nav-default">tcpdump 使用</span>
-            <span class="prev-text nav-mobile">Prev</span>
+            <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
           <a class="next" href="/post/2019/helm%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6chart%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93.html">
             <span class="next-text nav-default">Helm模板文件chart编写语法总结</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
               <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1703,7 +2706,13 @@ done
 </div>
 
 <div class="copyright">
-  
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
 
   <span class="copyright-year">
     &copy;
@@ -1782,6 +2791,8 @@ done
 
 
 
+
+  <script src="/js/custom.js"></script>
 
 
 </body>

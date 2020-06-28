@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,6 +57,8 @@
 
 
 
+<link rel="stylesheet" href="/css/custom.css">
+
 
 <meta property="og:title" content="聊聊 C&#43;&#43; 的优雅写法" />
 <meta property="og:description" content="" />
@@ -68,7 +70,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2019-02-05T16:01:23&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-02T16:01:23&#43;08:00" />
-<meta itemprop="wordCount" content="5814">
+<meta itemprop="wordCount" content="6153">
 
 
 
@@ -134,7 +136,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
         
       </li>
@@ -270,7 +272,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
 
         
@@ -304,7 +306,8 @@
             <a href="http://justgo-now.github.io/categories/coding.html"> coding </a>
             
           </div>
-        
+        <span class="more-meta"> 约 6153 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
 
         
         
@@ -317,7 +320,7 @@
     
     
 <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Table of Contents</h2>
+  <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
@@ -416,16 +419,31 @@
 <h2 id="google-style">Google Style</h2>
 <hr>
 <h3 id="self-contained-headers">Self-contained Headers</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// foo.h
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Foo</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> param);
-<span style="color:#75715e">// bar.h
-</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">// baz.cc
-</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;        // give &lt;string&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;foo.h&#34;         // need &lt;string&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;bar.h&#34;         // give &lt;vector&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> Bar();  <span style="color:#75715e">// need &lt;vector&gt;
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// foo.h
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">param</span><span class="p">);</span>
+<span class="c1">// bar.h
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="c1">// baz.cc
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;        // give &lt;string&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;foo.h&#34;         // need &lt;string&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;bar.h&#34;         // give &lt;vector&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Bar</span><span class="p">();</span>  <span class="c1">// need &lt;vector&gt;
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Self_contained_Headers">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-implicit">SF.10: Avoid dependencies on implicitly <code>#include</code>d names</a>
@@ -442,16 +460,31 @@
 </blockquote>
 <hr>
 <h3 id="define-guard"><code>#define</code> Guard</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma once            </span><span style="color:#75715e">// Bad?
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#ifndef FOO_BAR_BAZ_H_  </span><span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#75715e">#define FOO_BAR_BAZ_H_
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// file: `foo/bar/baz.h`
-</span><span style="color:#75715e">// format: &lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#endif  </span><span style="color:#75715e">// FOO_BAR_BAZ_H_
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#pragma once            </span><span class="c1">// Bad?
+</span><span class="c1"></span>
+<span class="cp">#ifndef FOO_BAR_BAZ_H_  </span><span class="c1">// Good
+</span><span class="c1"></span><span class="cp">#define FOO_BAR_BAZ_H_
+</span><span class="cp"></span>
+<span class="c1">// file: `foo/bar/baz.h`
+</span><span class="c1">// format: &lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_
+</span><span class="c1"></span>
+<span class="cp">#endif  </span><span class="c1">// FOO_BAR_BAZ_H_
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#The__define_Guard">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-guards">SF.8: Use <code>#include</code> guards for all <code>.h</code> files</a></li>
@@ -461,16 +494,31 @@
 </blockquote>
 <hr>
 <h3 id="forward-declarations">Forward Declarations</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;src/foo.h&#34;  // include Foo</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bar</span>;            <span style="color:#75715e">// declare Bar
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Baz</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Bar<span style="color:#f92672">*</span> Qux(<span style="color:#66d9ef">const</span> Bar<span style="color:#f92672">&amp;</span>);  <span style="color:#75715e">// use Bar
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  Foo foo_;              <span style="color:#75715e">// own Foo
-</span><span style="color:#75715e"></span>  Bar<span style="color:#f92672">*</span> bar_ <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;   <span style="color:#75715e">// refer Bar
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&#34;src/foo.h&#34;  // include Foo</span><span class="cp">
+</span><span class="cp"></span><span class="k">class</span> <span class="nc">Bar</span><span class="p">;</span>            <span class="c1">// declare Bar
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Baz</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Bar</span><span class="o">*</span> <span class="n">Qux</span><span class="p">(</span><span class="k">const</span> <span class="n">Bar</span><span class="o">&amp;</span><span class="p">);</span>  <span class="c1">// use Bar
+</span><span class="c1"></span> <span class="k">private</span><span class="o">:</span>
+  <span class="n">Foo</span> <span class="n">foo_</span><span class="p">;</span>              <span class="c1">// own Foo
+</span><span class="c1"></span>  <span class="n">Bar</span><span class="o">*</span> <span class="n">bar_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>   <span class="c1">// refer Bar
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Forward_Declarations">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-cycles">SF.9: Avoid cyclic dependencies among source files</a></li>
@@ -481,16 +529,31 @@
 </blockquote>
 <hr>
 <h3 id="names-and-order-of-includes">Names and Order of Includes</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;foo/bar/baz.h&#34;  // self</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// blank
-</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;        // C</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;    // system</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// blank
-</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;         // C++</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// blank
-</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;base/macros.h&#34;  // other libs</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;foo/bar/qux.h&#34;  // in project</span><span style="color:#75715e">
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&#34;foo/bar/baz.h&#34;  // self</span><span class="cp">
+</span><span class="cp"></span>    <span class="c1">// blank
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;        // C</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;    // system</span><span class="cp">
+</span><span class="cp"></span>    <span class="c1">// blank
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;         // C++</span><span class="cp">
+</span><span class="cp"></span>    <span class="c1">// blank
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;base/macros.h&#34;  // other libs</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;foo/bar/qux.h&#34;  // in project</span><span class="cp">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-consistency">SF.5: A <code>.cpp</code> file must include the <code>.h</code> file(s) that defines its interface</a>
@@ -509,16 +572,31 @@
 </blockquote>
 <hr>
 <h3 id="namespaces">Namespaces</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">namespace</span> foo {         <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">namespace</span> bar {  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;    <span style="color:#75715e">// Bad  in global
-</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// Bad? in local
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">namespace</span> baz <span style="color:#f92672">=</span> <span style="color:#f92672">::</span>baz;  <span style="color:#75715e">// Bad? in global
-</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// Good in local
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> std<span style="color:#f92672">::</span>string;      <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>}  <span style="color:#75715e">// namespace bar
-</span><span style="color:#75715e"></span>}  <span style="color:#75715e">// namespace foo
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">namespace</span> <span class="n">foo</span> <span class="p">{</span>         <span class="c1">// Good
+</span><span class="c1"></span><span class="kr">inline</span> <span class="k">namespace</span> <span class="n">bar</span> <span class="p">{</span>  <span class="c1">// Bad
+</span><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>    <span class="c1">// Bad  in global
+</span><span class="c1"></span>                        <span class="c1">// Bad? in local
+</span><span class="c1"></span><span class="k">namespace</span> <span class="n">baz</span> <span class="o">=</span> <span class="o">::</span><span class="n">baz</span><span class="p">;</span>  <span class="c1">// Bad? in global
+</span><span class="c1"></span>                        <span class="c1">// Good in local
+</span><span class="c1"></span><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>      <span class="c1">// Good
+</span><span class="c1"></span><span class="p">}</span>  <span class="c1">// namespace bar
+</span><span class="c1"></span><span class="p">}</span>  <span class="c1">// namespace foo
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Namespaces">来源 1</a> / <a href="https://google.github.io/styleguide/cppguide.html#Namespace_Formatting">来源 2</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-using">SF.6: Use <code>using namespace</code> directives for transition, for foundation libraries (such as <code>std</code>), or within a local scope (only)</a>（Google Style 不允许）
@@ -532,16 +610,31 @@
 </blockquote>
 <hr>
 <h3 id="unnamed-namespaces-and-static">Unnamed Namespaces and Static</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Good in .cc, Bad in .h
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">namespace</span> {
-<span style="color:#66d9ef">constexpr</span> <span style="color:#66d9ef">auto</span> kFoo <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BarImpl</span>() { ... }
-}  <span style="color:#75715e">// namespace
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// Good in .cc, Bad in .h
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">constexpr</span> <span style="color:#66d9ef">auto</span> kFoo <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
-<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BarImpl</span>() { ... }
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Good in .cc, Bad in .h
+</span><span class="c1"></span><span class="k">namespace</span> <span class="p">{</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">kFoo</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">BarImpl</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>  <span class="c1">// namespace
+</span><span class="c1"></span>
+<span class="c1">// Good in .cc, Bad in .h
+</span><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">kFoo</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">BarImpl</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Unnamed_Namespaces_and_Static_Variables">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rs-unnamed">SF.21: Don’t use an unnamed (anonymous) namespace in a header</a></li>
@@ -551,19 +644,36 @@
 </blockquote>
 <hr>
 <h3 id="use-of-sizeof">Use of <code>sizeof</code></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">/* Foo data; */</span> Bar data;
-memset(<span style="color:#f92672">&amp;</span>data, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(Foo));   <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>memset(<span style="color:#f92672">&amp;</span>data, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(data));  <span style="color:#75715e">// Good
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* Foo data; */</span> <span class="n">Bar</span> <span class="n">data</span><span class="p">;</span>
+<span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Foo</span><span class="p">));</span>   <span class="c1">// Bad
+</span><span class="c1"></span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>  <span class="c1">// Good
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#sizeof">来源</a></li>
 <li>如果和变量有关，尽量使用 <code>sizeof(varname)</code>，而不是 <code>sizeof(type)</code>（因为类型会被修改，但不易察觉）</li>
 </ul>
 </blockquote>
 <h3 id="preincrement-and-predecrement">Preincrement and Predecrement</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> ; i <span style="color:#f92672">!=</span> ; i<span style="color:#f92672">++</span>) {}  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> ; i <span style="color:#f92672">!=</span> ; <span style="color:#f92672">++</span>i) {}  <span style="color:#75715e">// Good
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// Bad
+</span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// Good
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Preincrement_and_Predecrement">来源</a></li>
 <li>尽量使用 <code>++i</code>/<code>--i</code>，避免使用 <code>i++</code>/<code>i--</code> 生成不需要的临时对象（如果需要，可以使用）</li>
@@ -571,15 +681,29 @@ memset(<span style="color:#f92672">&amp;</span>data, <span style="color:#ae81ff"
 </blockquote>
 <hr>
 <h3 id="pointer-and-reference-expressions">Pointer and Reference Expressions</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> x;              <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> x, y;           <span style="color:#75715e">// Good?
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> a;             <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a;             <span style="color:#75715e">// Good?
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> a, b;          <span style="color:#75715e">// Bad, |b| is int
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> m <span style="color:#f92672">=</span> x;         <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>m <span style="color:#f92672">=</span> x;         <span style="color:#75715e">// Good?
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> m <span style="color:#f92672">=</span> x, n <span style="color:#f92672">=</span> y;  <span style="color:#75715e">// Bad, |n| is int
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">x</span><span class="p">;</span>              <span class="c1">// Good
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>           <span class="c1">// Good?
+</span><span class="c1"></span><span class="kt">int</span><span class="o">*</span> <span class="n">a</span><span class="p">;</span>             <span class="c1">// Good
+</span><span class="c1"></span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>             <span class="c1">// Good?
+</span><span class="c1"></span><span class="kt">int</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>          <span class="c1">// Bad, |b| is int
+</span><span class="c1"></span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>         <span class="c1">// Good
+</span><span class="c1"></span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>         <span class="c1">// Good?
+</span><span class="c1"></span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>  <span class="c1">// Bad, |n| is int
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Pointer_and_Reference_Expressions">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-name-one">ES.10: Declare one name (only) per declaration</a>（Google Style 没有限制）</li>
@@ -588,16 +712,31 @@ memset(<span style="color:#f92672">&amp;</span>data, <span style="color:#ae81ff"
 </blockquote>
 <hr>
 <h3 id="use-of-constconstexpr">Use of <code>const</code>/<code>constexpr</code></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">const</span> Ret<span style="color:#f92672">*</span> Bar(<span style="color:#66d9ef">const</span> Param<span style="color:#f92672">&amp;</span>) <span style="color:#66d9ef">const</span>;
-  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">constexpr</span> <span style="color:#66d9ef">auto</span> kBaz <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
-};
-<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span> foo : arr) {
-  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> qux <span style="color:#f92672">=</span> ...;  <span style="color:#75715e">// unnecessary
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>Foo<span style="color:#f92672">&amp;&gt;</span>(foo) <span style="color:#f92672">+=</span> qux;  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>}
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">const</span> <span class="n">Ret</span><span class="o">*</span> <span class="n">Bar</span><span class="p">(</span><span class="k">const</span> <span class="n">Param</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">kBaz</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span> <span class="nl">foo</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">qux</span> <span class="o">=</span> <span class="p">...;</span>  <span class="c1">// unnecessary
+</span><span class="c1"></span>  <span class="k">const_cast</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&amp;&gt;</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span> <span class="o">+=</span> <span class="n">qux</span><span class="p">;</span>  <span class="c1">// Bad
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="http://google.github.io/styleguide/cppguide.html#Use_of_const">来源 1</a> / <a href="https://google.github.io/styleguide/cppguide.html#Use_of_constexpr">来源 2</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconst-fct">Con.2: By default, make member functions <code>const</code></a>
@@ -618,16 +757,31 @@ memset(<span style="color:#f92672">&amp;</span>data, <span style="color:#ae81ff"
 </blockquote>
 <hr>
 <h3 id="local-variables">Local Variables</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> i;               <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>i <span style="color:#f92672">=</span> f();
-std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>v.push_back(<span style="color:#ae81ff">1</span>);
-v.push_back(<span style="color:#ae81ff">2</span>);
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="p">;</span>               <span class="c1">// Bad
+</span><span class="c1"></span><span class="n">i</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>  <span class="c1">// Bad
+</span><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
-<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> f();                  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>};  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> YieldI()) {}  <span style="color:#75715e">// Good
-</span></code></pre></div><blockquote>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>                  <span class="c1">// Good
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>  <span class="c1">// Good
+</span><span class="c1"></span><span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">YieldI</span><span class="p">())</span> <span class="p">{}</span>  <span class="c1">// Good
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Local_Variables">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-always">ES.20: Always initialize an object</a></li>
@@ -638,16 +792,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="constructors">Constructors</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">void</span> Init(...);         <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  Foo() <span style="color:#75715e">/* noexcept */</span> {
-    <span style="color:#66d9ef">if</span> (...) <span style="color:#66d9ef">throw</span> Err;   <span style="color:#75715e">// Bad?
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>VirtualFn(); }  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">static</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Foo<span style="color:#f92672">&gt;</span> Create() {
-    ret<span style="color:#f92672">-&gt;</span>VirtualFn(); }   <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">Init</span><span class="p">(...);</span>         <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">Foo</span><span class="p">()</span> <span class="cm">/* noexcept */</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(...)</span> <span class="k">throw</span> <span class="n">Err</span><span class="p">;</span>   <span class="c1">// Bad?
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">VirtualFn</span><span class="p">();</span> <span class="p">}</span>  <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">Create</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ret</span><span class="o">-&gt;</span><span class="n">VirtualFn</span><span class="p">();</span> <span class="p">}</span>   <span class="c1">// Good
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Doing_Work_in_Constructors">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rnr-two-phase-init">NR.5: Don’t use two-phase initialization</a></li>
@@ -665,16 +834,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="structs-vs-classes">Structs vs. Classes</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Node</span> {
-  Node() { depth_ <span style="color:#f92672">=</span> ...; }  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InvertBinaryTree</span>();  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  Node<span style="color:#f92672">*</span> left <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;     <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  Node<span style="color:#f92672">*</span> right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;    <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Reset</span>();             <span style="color:#75715e">// Good?
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  size_t depth_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;        <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">Node</span> <span class="p">{</span>
+  <span class="n">Node</span><span class="p">()</span> <span class="p">{</span> <span class="n">depth_</span> <span class="o">=</span> <span class="p">...;</span> <span class="p">}</span>  <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="kt">void</span> <span class="nf">InvertBinaryTree</span><span class="p">();</span>  <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">Node</span><span class="o">*</span> <span class="n">left</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>     <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">Node</span><span class="o">*</span> <span class="n">right</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>    <span class="c1">// Good
+</span><span class="c1"></span>  <span class="kt">void</span> <span class="nf">Reset</span><span class="p">();</span>             <span class="c1">// Good?
+</span><span class="c1"></span> <span class="k">private</span><span class="o">:</span>
+  <span class="n">size_t</span> <span class="n">depth_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// Bad
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Structs_vs._Classes">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-struct">C.2: Use <code>class</code> if the class has an invariant; use <code>struct</code> if the data members can vary independently</a></li>
@@ -684,16 +868,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="access-control">Access Control</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Bar bar_;                     <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">constexpr</span> <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
-  Baz baz_;  <span style="color:#75715e">// has invariant?  // Bad
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  Qux qux_;                     <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Bar</span> <span class="n">bar_</span><span class="p">;</span>                     <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>  <span class="c1">// Good
+</span><span class="c1"></span> <span class="k">protected</span><span class="o">:</span>
+  <span class="n">Baz</span> <span class="n">baz_</span><span class="p">;</span>  <span class="c1">// has invariant?  // Bad
+</span><span class="c1"></span> <span class="k">private</span><span class="o">:</span>
+  <span class="n">Qux</span> <span class="n">qux_</span><span class="p">;</span>                     <span class="c1">// Good
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Access_Control">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-private">C.9: Minimize exposure of members</a></li>
@@ -702,15 +901,29 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="implicit-conversions">Implicit Conversions</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo(Bar bar);          <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">Baz</span>() <span style="color:#66d9ef">const</span>;  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>
-  <span style="color:#66d9ef">explicit</span> <span style="color:#a6e22e">Foo</span>(Bar bar);          <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">explicit</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">Baz</span>() <span style="color:#66d9ef">const</span>;  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="n">Bar</span> <span class="n">bar</span><span class="p">);</span>          <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="k">operator</span> <span class="nf">Baz</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// Bad
+</span><span class="c1"></span>
+  <span class="k">explicit</span> <span class="nf">Foo</span><span class="p">(</span><span class="n">Bar</span> <span class="n">bar</span><span class="p">);</span>          <span class="c1">// Good
+</span><span class="c1"></span>  <span class="k">explicit</span> <span class="k">operator</span> <span class="nf">Baz</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// Good
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Implicit_Conversions">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-explicit">C.46: By default, declare single-argument constructors explicit</a></li>
@@ -720,16 +933,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="copyable-types-movable">Copyable Types (Movable)</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-  Foo<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="n">Foo</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 
-  <span style="color:#75715e">// move operations implicit deleted:
-</span><span style="color:#75715e"></span>  Foo(Foo<span style="color:#f92672">&amp;&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-  Foo<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(Foo<span style="color:#f92672">&amp;&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-};
-</code></pre></div><blockquote>
+  <span class="c1">// move operations implicit deleted:
+</span><span class="c1"></span>  <span class="n">Foo</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="n">Foo</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types">来源</a></li>
 <li>可拷贝（可移动）：可以写 <code>copy = default;</code> 和 <code>move = default;</code></li>
@@ -738,16 +966,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="copyable-types-not-movable">Copyable Types (Not Movable)</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-  Foo<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="n">Foo</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 
-  <span style="color:#75715e">// move operations implicit deleted:
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Foo(Foo&amp;&amp;) = delete;
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Foo&amp; operator=(Foo&amp;&amp;) = delete;
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+  <span class="c1">// move operations implicit deleted:
+</span><span class="c1"></span>  <span class="c1">// Foo(Foo&amp;&amp;) = delete;
+</span><span class="c1"></span>  <span class="c1">// Foo&amp; operator=(Foo&amp;&amp;) = delete;
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types">来源</a></li>
 <li>可拷贝（不可移动）：只需要写 <code>copy = default;</code>，不需要写 <code>move = delete;</code></li>
@@ -755,16 +998,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="moveonly-types">MoveOnly Types</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo(Foo<span style="color:#f92672">&amp;&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-  Foo<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(Foo<span style="color:#f92672">&amp;&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="n">Foo</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 
-  <span style="color:#75715e">// copy operations implicit deleted:
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Foo(const Foo&amp;) = delete;
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Foo&amp; operator=(const Foo&amp;) = delete;
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+  <span class="c1">// copy operations implicit deleted:
+</span><span class="c1"></span>  <span class="c1">// Foo(const Foo&amp;) = delete;
+</span><span class="c1"></span>  <span class="c1">// Foo&amp; operator=(const Foo&amp;) = delete;
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types">来源</a></li>
 <li>仅移动（不可拷贝）：只需要写 <code>move = default;</code>，不需要写 <code>copy = delete;</code></li>
@@ -772,16 +1030,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="not-copyable-or-movable-types">Not Copyable Or Movable Types</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
-  Foo<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">Foo</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 
-  <span style="color:#75715e">// move operations implicit deleted:
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Foo(Foo&amp;&amp;) = delete;
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Foo&amp; operator=(Foo&amp;&amp;) = delete;
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+  <span class="c1">// move operations implicit deleted:
+</span><span class="c1"></span>  <span class="c1">// Foo(Foo&amp;&amp;) = delete;
+</span><span class="c1"></span>  <span class="c1">// Foo&amp; operator=(Foo&amp;&amp;) = delete;
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types">来源</a></li>
 <li>不可拷贝或移动：只需要写 <code>copy = delete;</code>，不需要写 <code>move = delete;</code></li>
@@ -790,16 +1063,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="declaration-order">Declaration Order</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">using</span> Bar <span style="color:#f92672">=</span> <span style="color:#66d9ef">int</span>;  ...  <span style="color:#66d9ef">enum</span> { k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> };
-  <span style="color:#66d9ef">static</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Foo<span style="color:#f92672">&gt;</span> Create();
-  Foo();  ...  Foo(Foo<span style="color:#f92672">&amp;&amp;</span>);  ...  <span style="color:#f92672">~</span>Foo();
-  <span style="color:#75715e">/* inline */</span> Bar <span style="color:#a6e22e">bar</span>() <span style="color:#66d9ef">const</span> { ... }
- <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">void</span> QuxImpl();  ...  Bar bar_;
-};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">using</span> <span class="n">Bar</span> <span class="o">=</span> <span class="kt">int</span><span class="p">;</span>  <span class="p">...</span>  <span class="k">enum</span> <span class="p">{</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">};</span>
+  <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">Create</span><span class="p">();</span>
+  <span class="n">Foo</span><span class="p">();</span>  <span class="p">...</span>  <span class="n">Foo</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;&amp;</span><span class="p">);</span>  <span class="p">...</span>  <span class="o">~</span><span class="n">Foo</span><span class="p">();</span>
+  <span class="cm">/* inline */</span> <span class="n">Bar</span> <span class="nf">bar</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">QuxImpl</span><span class="p">();</span>  <span class="p">...</span>  <span class="n">Bar</span> <span class="n">bar_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Declaration_Order">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rl-order">NL.16: Use a conventional class member declaration order</a></li>
@@ -820,16 +1108,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="inheritance">Inheritance</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> <span style="color:#f92672">:</span> <span style="color:#75715e">/* private */</span> Bar,  <span style="color:#75715e">// Bad?
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">protected</span> BarImpl,  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">public</span> IBar {       <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> IFooFn() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">IBarFn</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>) <span style="color:#66d9ef">override</span>;  <span style="color:#75715e">// Good?
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">/* virtual */</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">IBarFn</span>();   <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">IBarFn</span>(<span style="color:#66d9ef">float</span>) <span style="color:#66d9ef">override</span>;  <span style="color:#75715e">// Check
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="o">:</span> <span class="cm">/* private */</span> <span class="n">Bar</span><span class="p">,</span>  <span class="c1">// Bad?
+</span><span class="c1"></span>            <span class="k">protected</span> <span class="n">BarImpl</span><span class="p">,</span>  <span class="c1">// Bad
+</span><span class="c1"></span>            <span class="k">public</span> <span class="n">IBar</span> <span class="p">{</span>       <span class="c1">// Good
+</span><span class="c1"></span> <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">IFooFn</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1">// Good
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="nf">IBarFn</span><span class="p">(</span><span class="kt">int</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>  <span class="c1">// Good?
+</span><span class="c1"></span>  <span class="cm">/* virtual */</span> <span class="kt">int</span> <span class="nf">IBarFn</span><span class="p">();</span>   <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">IBarFn</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>  <span class="c1">// Check
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Inheritance">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-override">C.128: Virtual functions should specify exactly one of <code>virtual</code>, <code>override</code>, or <code>final</code></a></li>
@@ -842,16 +1145,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="parameters-and-arguments">Parameters and Arguments</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MaybeMultiOut <span style="color:#a6e22e">fn</span>(  <span style="color:#75715e">// ISOCpp
-</span><span style="color:#75715e"></span>      T   in_not_null_mutable,
-<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span>  in_not_null_const,
-      T<span style="color:#f92672">*</span>  in_nullable_mutable,
-<span style="color:#66d9ef">const</span> T<span style="color:#f92672">*</span>  in_nullable_const,
-      T<span style="color:#f92672">&amp;&amp;</span> in_move_or_forward,
-      T<span style="color:#f92672">*</span>  in_out,  <span style="color:#75715e">// Google
-</span><span style="color:#75715e"></span>      T<span style="color:#f92672">&amp;</span>  in_out,  <span style="color:#75715e">// ISOCpp
-</span><span style="color:#75715e"></span>      T<span style="color:#f92672">*</span>  out);    <span style="color:#75715e">// Google
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">MaybeMultiOut</span> <span class="nf">fn</span><span class="p">(</span>  <span class="c1">// ISOCpp
+</span><span class="c1"></span>      <span class="n">T</span>   <span class="n">in_not_null_mutable</span><span class="p">,</span>
+<span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span>  <span class="n">in_not_null_const</span><span class="p">,</span>
+      <span class="n">T</span><span class="o">*</span>  <span class="n">in_nullable_mutable</span><span class="p">,</span>
+<span class="k">const</span> <span class="n">T</span><span class="o">*</span>  <span class="n">in_nullable_const</span><span class="p">,</span>
+      <span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">in_move_or_forward</span><span class="p">,</span>
+      <span class="n">T</span><span class="o">*</span>  <span class="n">in_out</span><span class="p">,</span>  <span class="c1">// Google
+</span><span class="c1"></span>      <span class="n">T</span><span class="o">&amp;</span>  <span class="n">in_out</span><span class="p">,</span>  <span class="c1">// ISOCpp
+</span><span class="c1"></span>      <span class="n">T</span><span class="o">*</span>  <span class="n">out</span><span class="p">);</span>    <span class="c1">// Google
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Output_Parameters">来源 1</a> / <a href="https://google.github.io/styleguide/cppguide.html#Reference_Arguments">来源 2</a> / <a href="https://google.github.io/styleguide/cppguide.html#Rvalue_references">来源 3</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-conventional">F.15: Prefer simple and conventional ways of passing information</a>
@@ -897,16 +1215,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="smart-pointers-ownership">Smart Pointers Ownership</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> owned_;   <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> shared_;  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>weak_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> referred_;  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  T<span style="color:#f92672">*</span> referred_without_check_;  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> owned_;   <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  T<span style="color:#f92672">*</span> owned_or_shared_;         <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">owned_</span><span class="p">;</span>   <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">shared_</span><span class="p">;</span>  <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">referred_</span><span class="p">;</span>  <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">T</span><span class="o">*</span> <span class="n">referred_without_check_</span><span class="p">;</span>  <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">owned_</span><span class="p">;</span>   <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">T</span><span class="o">*</span> <span class="n">owned_or_shared_</span><span class="p">;</span>         <span class="c1">// Bad
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Ownership_and_Smart_Pointers">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-owner">R.20: Use <code>unique_ptr</code> or <code>shared_ptr</code> to represent ownership</a></li>
@@ -922,15 +1255,29 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="smart-pointers-parameters">Smart Pointers Parameters</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Foo</span>(
-  <span style="color:#75715e">/* const */</span> T<span style="color:#f92672">*</span>,              <span style="color:#75715e">// refer
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>,          <span style="color:#75715e">// own
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span>,         <span style="color:#75715e">// reseat
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span>,   <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>,          <span style="color:#75715e">// share
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span>,         <span style="color:#75715e">// reseat?
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span>);  <span style="color:#75715e">// share?
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">Foo</span><span class="p">(</span>
+  <span class="cm">/* const */</span> <span class="n">T</span><span class="o">*</span><span class="p">,</span>              <span class="c1">// refer
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span>          <span class="c1">// own
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="p">,</span>         <span class="c1">// reseat
+</span><span class="c1"></span>  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="p">,</span>   <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span>          <span class="c1">// share
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="p">,</span>         <span class="c1">// reseat?
+</span><span class="c1"></span>  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="p">);</span>  <span class="c1">// share?
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Ownership_and_Smart_Pointers">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-smartptrparam">R.30: Take smart pointers as parameters only to explicitly express lifetime semantics</a></li>
@@ -944,16 +1291,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="lambda-expressions">Lambda expressions</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> Foo<span style="color:#f92672">::</span>Bar() {
-  Baz baz;     <span style="color:#75715e">// local variable
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>async(  <span style="color:#75715e">// async invocation
-</span><span style="color:#75715e"></span>    [<span style="color:#f92672">&amp;</span>] { Use(baz); }          <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>    [<span style="color:#f92672">=</span>] { Use(baz); }          <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>    [<span style="color:#66d9ef">this</span>, baz] { Use(baz); }  <span style="color:#75715e">// Good?
-</span><span style="color:#75715e"></span>    [q <span style="color:#f92672">=</span> Qux()] { q.QFn(); }   <span style="color:#75715e">// Bad?
-</span><span style="color:#75715e"></span>  );  <span style="color:#75715e">// - `Use(baz)` is `Foo::Use(baz)`
-</span><span style="color:#75715e"></span>}     <span style="color:#75715e">// - `Qux()` is not `Foo::Qux()`
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="n">Foo</span><span class="o">::</span><span class="n">Bar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Baz</span> <span class="n">baz</span><span class="p">;</span>     <span class="c1">// local variable
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">async</span><span class="p">(</span>  <span class="c1">// async invocation
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">Use</span><span class="p">(</span><span class="n">baz</span><span class="p">);</span> <span class="p">}</span>          <span class="c1">// Bad
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">=</span><span class="p">]</span> <span class="p">{</span> <span class="n">Use</span><span class="p">(</span><span class="n">baz</span><span class="p">);</span> <span class="p">}</span>          <span class="c1">// Bad
+</span><span class="c1"></span>    <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">baz</span><span class="p">]</span> <span class="p">{</span> <span class="n">Use</span><span class="p">(</span><span class="n">baz</span><span class="p">);</span> <span class="p">}</span>  <span class="c1">// Good?
+</span><span class="c1"></span>    <span class="p">[</span><span class="n">q</span> <span class="o">=</span> <span class="n">Qux</span><span class="p">()]</span> <span class="p">{</span> <span class="n">q</span><span class="p">.</span><span class="n">QFn</span><span class="p">();</span> <span class="p">}</span>   <span class="c1">// Bad?
+</span><span class="c1"></span>  <span class="p">);</span>  <span class="c1">// - `Use(baz)` is `Foo::Use(baz)`
+</span><span class="c1"></span><span class="p">}</span>     <span class="c1">// - `Qux()` is not `Foo::Qux()`
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Lambda_expressions">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rf-capture-vs-overload">F.50: Use a lambda when a function won’t do (to capture local variables, or to write a local function)</a>
@@ -975,16 +1337,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="exceptions">Exceptions</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">try</span> {
-  LOG(INFO) <span style="color:#f92672">&lt;&lt;</span> x;   <span style="color:#75715e">// may throw?
-</span><span style="color:#75715e"></span>  MayThrowFoo();    <span style="color:#75715e">// may throw Foo!
-</span><span style="color:#75715e"></span>  Deserialize(y);   <span style="color:#75715e">// exception no stack
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> Get();  <span style="color:#75715e">// null or throw?
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> a <span style="color:#f92672">/</span> b;   <span style="color:#75715e">// crash if |b| is 0
-</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> Bar<span style="color:#f92672">&amp;</span> bar) {
-  <span style="color:#75715e">// uncaught, and throw to caller...
-</span><span style="color:#75715e"></span>}
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">try</span> <span class="p">{</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">INFO</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">;</span>   <span class="c1">// may throw?
+</span><span class="c1"></span>  <span class="n">MayThrowFoo</span><span class="p">();</span>    <span class="c1">// may throw Foo!
+</span><span class="c1"></span>  <span class="n">Deserialize</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>   <span class="c1">// exception no stack
+</span><span class="c1"></span>  <span class="k">auto</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Get</span><span class="p">();</span>  <span class="c1">// null or throw?
+</span><span class="c1"></span>  <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">;</span>   <span class="c1">// crash if |b| is 0
+</span><span class="c1"></span><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">Bar</span><span class="o">&amp;</span> <span class="n">bar</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// uncaught, and throw to caller...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Exceptions">来源</a></li>
 <li>反方观点：避免使用异常，使用显式的错误处理，降低心智负担
@@ -1015,16 +1392,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="run-time-type-information-rtti">Run-Time Type Information (RTTI)</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">if</span> (Derived<span style="color:#f92672">*</span> derived <span style="color:#f92672">=</span>
-        <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>Derived<span style="color:#f92672">*&gt;</span>(base)) {
-  Foo(derived);  <span style="color:#75715e">// #1
-</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> {
-  Foo(base);     <span style="color:#75715e">// #2
-</span><span style="color:#75715e"></span>}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span> <span class="p">(</span><span class="n">Derived</span><span class="o">*</span> <span class="n">derived</span> <span class="o">=</span>
+        <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">base</span><span class="p">))</span> <span class="p">{</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="n">derived</span><span class="p">);</span>  <span class="c1">// #1
+</span><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>     <span class="c1">// #2
+</span><span class="c1"></span><span class="p">}</span>
 
-<span style="color:#66d9ef">void</span> Base<span style="color:#f92672">::</span>Foo() { <span style="color:#75715e">/* #2 */</span> }
-<span style="color:#66d9ef">void</span> Derived<span style="color:#f92672">::</span>Foo() { <span style="color:#75715e">/* #1 */</span> }
-</code></pre></div><blockquote>
+<span class="kt">void</span> <span class="n">Base</span><span class="o">::</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* #2 */</span> <span class="p">}</span>
+<span class="kt">void</span> <span class="n">Derived</span><span class="o">::</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* #1 */</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Run-Time_Type_Information__RTTI_">来源</a></li>
 <li>反方观点：<a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-use-virtual">C.153: Prefer virtual function to casting</a>
@@ -1049,16 +1441,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 </blockquote>
 <hr>
 <h3 id="line-length-80-columns">Line Length: 80 columns</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">if</span> (...) {
-    <span style="color:#66d9ef">while</span> (...) {
-        <span style="color:#66d9ef">if</span> (...) {
-            <span style="color:#66d9ef">if</span> (...) <span style="color:#66d9ef">break</span>; <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span>;
-        }
-        <span style="color:#66d9ef">switch</span>(...) {
-            <span style="color:#66d9ef">break</span>; ... <span style="color:#66d9ef">continue</span>; }
-    }
-}
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(...)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(...)</span> <span class="k">break</span><span class="p">;</span> <span class="k">else</span> <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">switch</span><span class="p">(...)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span> <span class="p">...</span> <span class="k">continue</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Line_Length">来源</a></li>
 <li><a href="https://coolshell.cn/articles/17757.html"><img src="Conventional-Cpp/arrow-code.jpg" alt="如何重构“箭头型”代码"></a></li>
@@ -1090,16 +1497,31 @@ v.push_back(<span style="color:#ae81ff">2</span>);
 <h2 id="chromium-style">Chromium Style</h2>
 <hr>
 <h3 id="variable-initialization">Variable Initialization</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-std<span style="color:#f92672">::</span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello&#34;</span>;
-std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> p <span style="color:#f92672">=</span> {true, <span style="color:#ae81ff">2.0</span>};
-std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>};
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="nb">true</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
 
-Foo <span style="color:#a6e22e">foo</span>(<span style="color:#ae81ff">1.7</span>, false, <span style="color:#e6db74">&#34;test&#34;</span>);
-std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> v(<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">0.97</span>);
+<span class="n">Foo</span> <span class="nf">foo</span><span class="p">(</span><span class="mf">1.7</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="s">&#34;test&#34;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mf">0.97</span><span class="p">);</span>
 
-Bar bar{std<span style="color:#f92672">::</span>string()};  <span style="color:#75715e">// explicit ctor
-</span></code></pre></div><blockquote>
+<span class="n">Bar</span> <span class="n">bar</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">()};</span>  <span class="c1">// explicit ctor
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#variable-initialization">来源</a></li>
 <li>优先级：赋值写法 &gt; 构造写法 &gt; C++ 11 <code>{}</code> 写法（仅当前两种写法不可用时，例如 <code>Bar bar(std::string());</code> 会导致 <a href="https://www.fluentcpp.com/2018/01/30/most-vexing-parse/">most vexing parse</a> 歧义）</li>
@@ -1113,16 +1535,31 @@ Bar bar{std<span style="color:#f92672">::</span>string()};  <span style="color:#
 </blockquote>
 <hr>
 <h3 id="in-class-initializers">In-class Initializers</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo() <span style="color:#f92672">:</span> b_(<span style="color:#ae81ff">42</span>) { <span style="color:#75715e">/* empty */</span> }  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  Foo(<span style="color:#66d9ef">int</span> b) <span style="color:#f92672">:</span> b_(b) {}  <span style="color:#75715e">// set |b_|
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">int</span> b_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;           <span style="color:#75715e">// use |b| or 42
-</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>string c_;        <span style="color:#75715e">// default ctor
-</span><span style="color:#75715e"></span>  Bar<span style="color:#f92672">&lt;</span>Foo<span style="color:#f92672">&gt;</span> bar_{<span style="color:#66d9ef">this</span>};   <span style="color:#75715e">// use |this|
-</span><span style="color:#75715e"></span>};
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">()</span> <span class="o">:</span> <span class="n">b_</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* empty */</span> <span class="p">}</span>  <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">b_</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// set |b_|
+</span><span class="c1"></span> <span class="k">private</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">b_</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>           <span class="c1">// use |b| or 42
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">c_</span><span class="p">;</span>        <span class="c1">// default ctor
+</span><span class="c1"></span>  <span class="n">Bar</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">bar_</span><span class="p">{</span><span class="k">this</span><span class="p">};</span>   <span class="c1">// use |this|
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#initialize-members-in-the-declaration-where-possible">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-default">C.45: Don’t define a default constructor that only initializes data members; use member initializers instead</a></li>
@@ -1131,16 +1568,31 @@ Bar bar{std<span style="color:#f92672">::</span>string()};  <span style="color:#
 </blockquote>
 <hr>
 <h3 id="prefer-default">Prefer <code>=default</code></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  Foo();  <span style="color:#75715e">// non-inlined defined below
-</span><span style="color:#75715e"></span>  Foo(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;     <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  Foo(<span style="color:#75715e">/* const */</span> Foo<span style="color:#f92672">&amp;</span>);         <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(Foo<span style="color:#f92672">&amp;</span>);  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  Foo(Foo<span style="color:#f92672">&amp;&amp;</span>) <span style="color:#75715e">/* noexcept */</span>;     <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>};
-Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;  <span style="color:#75715e">// Good for pImpl
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">();</span>  <span class="c1">// non-inlined defined below
+</span><span class="c1"></span>  <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>     <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">Foo</span><span class="p">(</span><span class="cm">/* const */</span> <span class="n">Foo</span><span class="o">&amp;</span><span class="p">);</span>         <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="k">virtual</span> <span class="kt">void</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;</span><span class="p">);</span>  <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">Foo</span><span class="p">(</span><span class="n">Foo</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="cm">/* noexcept */</span><span class="p">;</span>     <span class="c1">// Bad
+</span><span class="c1"></span><span class="p">};</span>
+<span class="n">Foo</span><span class="o">::</span><span class="n">Foo</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>  <span class="c1">// Good for pImpl
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#prefer-to-use-default">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-eqdefault">C.80: Use <code>=default</code> if you have to be explicit about using the default semantics</a></li>
@@ -1176,9 +1628,17 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 </blockquote>
 <hr>
 <h3 id="auto-p--"><code>auto* p = ...;</code></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span>  item <span style="color:#f92672">=</span> item_.get();  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> item <span style="color:#f92672">=</span> item_.get();  <span style="color:#75715e">// Good
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span>  <span class="n">item</span> <span class="o">=</span> <span class="n">item_</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>  <span class="c1">// Bad
+</span><span class="c1"></span><span class="k">auto</span><span class="o">*</span> <span class="n">item</span> <span class="o">=</span> <span class="n">item_</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>  <span class="c1">// Good
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#do-not-use-auto-to-deduce-a-raw-pointer">来源</a></li>
 <li>增强可读性 + 检查 <code>item</code> 必须为 指针类型</li>
@@ -1186,9 +1646,17 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 </ul>
 </blockquote>
 <h3 id="comment-style">Comment Style</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// TODO(botman): use FooImpl as FooBase.
-</span><span style="color:#75715e">// FooFunction() modifies |foo_member_|.
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// TODO(botman): use FooImpl as FooBase.
+</span><span class="c1">// FooFunction() modifies |foo_member_|.
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://github.com/chromium/chromium/blob/master/styleguide/c++/c++-dos-and-donts.md#comment-style">来源</a></li>
 <li><code>TODO(xxx)</code> 待办 要关联信息（<a href="https://google.github.io/styleguide/cppguide.html#TODO_Comments">Google Style</a>）</li>
@@ -1201,16 +1669,31 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 <h2 id="core-guidelines">Core Guidelines</h2>
 <hr>
 <h3 id="intent">Intent</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;                   <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> v.size(); <span style="color:#f92672">++</span>i) {
-  <span style="color:#66d9ef">if</span> (v[i] <span style="color:#f92672">==</span> val) {  <span style="color:#75715e">// compare     Bad
-</span><span style="color:#75715e"></span>    index <span style="color:#f92672">=</span> i;        <span style="color:#75715e">// set index   Bad
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">break</span>;            <span style="color:#75715e">// terminate   Bad
-</span><span style="color:#75715e"></span>  }
-}
-<span style="color:#66d9ef">auto</span> iter <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(            <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>begin(v), std<span style="color:#f92672">::</span>end(v), val);
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>                   <span class="c1">// Bad
+</span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// compare     Bad
+</span><span class="c1"></span>    <span class="n">index</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>        <span class="c1">// set index   Bad
+</span><span class="c1"></span>    <span class="k">break</span><span class="p">;</span>            <span class="c1">// terminate   Bad
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span>            <span class="c1">// Good
+</span><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">val</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rp-direct">P.1: Express ideas directly in code</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rp-what">P.3: Express intent</a></li>
@@ -1227,16 +1710,31 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 </blockquote>
 <hr>
 <h3 id="names-and-scopes">Names and Scopes</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> GetStartIndex();
-<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> ; i <span style="color:#f92672">!=</span> ; <span style="color:#f92672">++</span>i) {}       <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> ; i <span style="color:#f92672">!=</span> ; <span style="color:#f92672">++</span>i) {}  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">auto</span> foo <span style="color:#f92672">=</span> GetFoo()) {      <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  Reuse(i);                     <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  Bar i <span style="color:#f92672">=</span> foo<span style="color:#f92672">-&gt;</span>GetBar();        <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> { <span style="color:#75715e">/* handle nullptr */</span> }
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">GetStartIndex</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{}</span>       <span class="c1">// Bad
+</span><span class="c1"></span>
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">// Good
+</span><span class="c1"></span>
+<span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">GetFoo</span><span class="p">())</span> <span class="p">{</span>      <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">Reuse</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                     <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">Bar</span> <span class="n">i</span> <span class="o">=</span> <span class="n">foo</span><span class="o">-&gt;</span><span class="n">GetBar</span><span class="p">();</span>        <span class="c1">// Bad
+</span><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="cm">/* handle nullptr */</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-scope">ES.5: Keep scopes small</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-cond">ES.6: Declare names in for-statement initializers and conditions to limit scope</a></li>
@@ -1247,16 +1745,31 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 </blockquote>
 <hr>
 <h3 id="virtual-destructors">Virtual Destructors</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Strategy</span> {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">virtual</span> <span style="color:#f92672">~</span>Strategy() <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-};
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Strategy</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">Strategy</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Observer</span> {
- <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
-  <span style="color:#f92672">~</span>Observer() <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-};
-</code></pre></div><blockquote>
+<span class="k">class</span> <span class="nc">Observer</span> <span class="p">{</span>
+ <span class="k">protected</span><span class="o">:</span>
+  <span class="o">~</span><span class="n">Observer</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-dtor-virtual">C.35: A base class destructor should be either public and virtual, or protected and nonvirtual</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-dtor">C.127: A class with a virtual function should have a virtual or protected destructor</a></li>
@@ -1280,16 +1793,31 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 </blockquote>
 <hr>
 <h3 id="polymorphic-classes-slicing">Polymorphic Classes Slicing</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span>  base <span style="color:#f92672">=</span> derived;            <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> base <span style="color:#f92672">=</span> derived<span style="color:#f92672">-&gt;</span>clone();   <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PolyFoo</span>(      Base  base);  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PolyFoo</span>(      Base<span style="color:#f92672">*</span> base);  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PolyFoo</span>(<span style="color:#66d9ef">const</span> Base<span style="color:#f92672">&amp;</span> base);  <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Base<span style="color:#f92672">&gt;</span>  foos;         <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Base<span style="color:#f92672">*&gt;</span> foos;         <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Base<span style="color:#f92672">&gt;&gt;</span> foos;
-                                 <span style="color:#75715e">// Good
-</span></code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span>  <span class="n">base</span> <span class="o">=</span> <span class="n">derived</span><span class="p">;</span>            <span class="c1">// Bad
+</span><span class="c1"></span><span class="k">auto</span><span class="o">*</span> <span class="n">base</span> <span class="o">=</span> <span class="n">derived</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">();</span>   <span class="c1">// Good
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">PolyFoo</span><span class="p">(</span>      <span class="n">Base</span>  <span class="n">base</span><span class="p">);</span>  <span class="c1">// Bad
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">PolyFoo</span><span class="p">(</span>      <span class="n">Base</span><span class="o">*</span> <span class="n">base</span><span class="p">);</span>  <span class="c1">// Good
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">PolyFoo</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span><span class="o">&amp;</span> <span class="n">base</span><span class="p">);</span>  <span class="c1">// Good
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Base</span><span class="o">&gt;</span>  <span class="n">foos</span><span class="p">;</span>         <span class="c1">// Bad
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Base</span><span class="o">*&gt;</span> <span class="n">foos</span><span class="p">;</span>         <span class="c1">// Good
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Base</span><span class="o">&gt;&gt;</span> <span class="n">foos</span><span class="p">;</span>
+                                 <span class="c1">// Good
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-slice">ES.63: Don’t slice</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-copy-virtual">C.67: A polymorphic class should suppress copying</a></li>
@@ -1307,16 +1835,31 @@ Foo<span style="color:#f92672">::</span>Foo() <span style="color:#f92672">=</spa
 </blockquote>
 <hr>
 <h3 id="raii">RAII</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>FILE<span style="color:#f92672">*</span> file <span style="color:#f92672">=</span> fopen(filename, mode);
-<span style="color:#66d9ef">if</span> (...) <span style="color:#66d9ef">return</span>;
-<span style="color:#66d9ef">if</span> (...) <span style="color:#66d9ef">throw</span> XXX;
-fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// Good (or use std::fstream)
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>FILE, <span style="color:#66d9ef">decltype</span>(fclose)<span style="color:#f92672">*&gt;</span>
-    file(fopen(filename, mode), fclose);
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Bad
+</span><span class="c1"></span><span class="n">FILE</span><span class="o">*</span> <span class="n">file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(...)</span> <span class="k">return</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(...)</span> <span class="k">throw</span> <span class="n">XXX</span><span class="p">;</span>
+<span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>  <span class="c1">// maybe unreachable, leak
+</span><span class="c1"></span>
+<span class="c1">// Good (or use std::fstream)
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">FILE</span><span class="p">,</span> <span class="k">decltype</span><span class="p">(</span><span class="n">fclose</span><span class="p">)</span><span class="o">*&gt;</span>
+    <span class="n">file</span><span class="p">(</span><span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">),</span> <span class="n">fclose</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii">R.1: Manage resources automatically using resource handles and RAII (Resource Acquisition Is Initialization)</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Re-finally">E.19: Use a final_action object to express cleanup if no suitable resource handle is available</a></li>
@@ -1324,16 +1867,31 @@ fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
 </blockquote>
 <hr>
 <h3 id="smart-pointers-dangling">Smart Pointers Dangling</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>Bar<span style="color:#f92672">&gt;</span> Foo<span style="color:#f92672">::</span>bar() <span style="color:#66d9ef">const</span>;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Bar</span><span class="o">&gt;</span> <span class="n">Foo</span><span class="o">::</span><span class="n">bar</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">const</span> Foo<span style="color:#f92672">&amp;</span> foo) {    <span style="color:#75715e">// aliased
-</span><span style="color:#75715e"></span>  UseBarPtr(foo.bar().get());   <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  foo.bar()<span style="color:#f92672">-&gt;</span>IBar();            <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> pinned <span style="color:#f92672">=</span> foo.bar();  <span style="color:#75715e">// pinned
-</span><span style="color:#75715e"></span>  UseBarPtr(pinned.get());      <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  pinned<span style="color:#f92672">-&gt;</span>IBar();               <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>}
-</code></pre></div><blockquote>
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span> <span class="n">foo</span><span class="p">)</span> <span class="p">{</span>    <span class="c1">// aliased
+</span><span class="c1"></span>  <span class="n">UseBarPtr</span><span class="p">(</span><span class="n">foo</span><span class="p">.</span><span class="n">bar</span><span class="p">().</span><span class="n">get</span><span class="p">());</span>   <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">foo</span><span class="p">.</span><span class="n">bar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">IBar</span><span class="p">();</span>            <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="k">auto</span> <span class="n">pinned</span> <span class="o">=</span> <span class="n">foo</span><span class="p">.</span><span class="n">bar</span><span class="p">();</span>  <span class="c1">// pinned
+</span><span class="c1"></span>  <span class="n">UseBarPtr</span><span class="p">(</span><span class="n">pinned</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>      <span class="c1">// Good
+</span><span class="c1"></span>  <span class="n">pinned</span><span class="o">-&gt;</span><span class="n">IBar</span><span class="p">();</span>               <span class="c1">// Good
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://google.github.io/styleguide/cppguide.html#Ownership_and_Smart_Pointers">来源</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-smartptrget">R.37: Do not pass a pointer or reference obtained from an aliased smart pointer</a>
@@ -1346,16 +1904,31 @@ fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
 </blockquote>
 <hr>
 <h3 id="contracts">Contracts</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">sqrt</span>(<span style="color:#66d9ef">unsigned</span> x) {  <span style="color:#75715e">// Bad
-</span><span style="color:#75715e"></span>  Expects(x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>);         <span style="color:#75715e">// Good
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Foo</span>() {
-  <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>  memset(buffer, <span style="color:#ae81ff">0</span>, kMax);
-  Ensures(buffer[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
-}
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">double</span> <span class="nf">sqrt</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// Bad
+</span><span class="c1"></span>  <span class="n">Expects</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>         <span class="c1">// Good
+</span><span class="c1"></span>  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kt">void</span> <span class="nf">Foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kMax</span><span class="p">);</span>
+  <span class="n">Ensures</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-pre">I.5: State preconditions (if any)</a></li>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Ri-expects">I.6: Prefer <code>Expects()</code> for expressing preconditions</a></li>
@@ -1366,16 +1939,31 @@ fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
 </blockquote>
 <hr>
 <h3 id="lambda-for-complex-initialization">Lambda for Complex Initialization</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">using</span> Map <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>
-    <span style="color:#66d9ef">int</span>, std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Foo<span style="color:#f92672">&gt;&gt;</span>;
-<span style="color:#75715e">// cannot use Map{ {1, bar}, {2, baz}, }
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> Map foo_map <span style="color:#f92672">=</span> [] {
-  Map r;
-  r.emplace(<span style="color:#ae81ff">1</span>, std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>Bar<span style="color:#f92672">&gt;</span>());
-  r.emplace(<span style="color:#ae81ff">2</span>, std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>Baz<span style="color:#f92672">&gt;</span>());
-  <span style="color:#66d9ef">return</span> r;
-}();
-</code></pre></div><blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">using</span> <span class="n">Map</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span>
+    <span class="kt">int</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="c1">// cannot use Map{ {1, bar}, {2, baz}, }
+</span><span class="c1"></span><span class="k">const</span> <span class="n">Map</span> <span class="n">foo_map</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span>
+  <span class="n">Map</span> <span class="n">r</span><span class="p">;</span>
+  <span class="n">r</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Bar</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="n">r</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Baz</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}();</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <ul>
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-lambda-init">ES.28: Use lambdas for complex initialization, especially of <code>const</code> variables</a></li>
 <li>不能直接用 C++ 11 <code>{}</code> 写法构造（因为 <code>std::unique_ptr</code> 不可拷贝）</li>
@@ -1411,7 +1999,7 @@ fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
 
             </i>
             <span class="prev-text nav-default">K8S部署简介</span>
-            <span class="prev-text nav-mobile">Prev</span>
+            <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
       </nav>
@@ -1461,7 +2049,13 @@ fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
 </div>
 
 <div class="copyright">
-  
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
 
   <span class="copyright-year">
     &copy;
@@ -1540,6 +2134,8 @@ fclose(file);  <span style="color:#75715e">// maybe unreachable, leak
 
 
 
+
+  <script src="/js/custom.js"></script>
 
 
 </body>

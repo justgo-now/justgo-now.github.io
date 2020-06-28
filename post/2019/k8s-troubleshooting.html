@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,6 +57,8 @@
 
 
 
+<link rel="stylesheet" href="/css/custom.css">
+
 
 <meta property="og:title" content="Kubernetes排错指南" />
 <meta property="og:description" content="" />
@@ -68,7 +70,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2019-11-02T08:12:50&#43;00:00" />
 <meta itemprop="dateModified" content="2019-11-02T08:12:50&#43;00:00" />
-<meta itemprop="wordCount" content="2663">
+<meta itemprop="wordCount" content="2798">
 
 
 
@@ -134,7 +136,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
         
       </li>
@@ -270,7 +272,7 @@
         
           
           
-            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">About</a>
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
           
 
         
@@ -304,7 +306,8 @@
             <a href="http://justgo-now.github.io/categories/devops.html"> devops </a>
             
           </div>
-        
+        <span class="more-meta"> 约 2798 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -317,7 +320,7 @@
     
     
 <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Table of Contents</h2>
+  <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
@@ -353,7 +356,32 @@
     <div class="post-content">
       <h2 id="分析-exitcode-定位-pod-异常退出原因">分析 ExitCode 定位 Pod 异常退出原因</h2>
 <p>使用 <code>kubectl describe pod &lt;pod name&gt;</code> 查看异常 pod 的状态:</p>
-<pre><code>Containers:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Containers:
   kubedns:
     Container ID:  docker://5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
     Image:         ccr.ccs.tencentyun.com/library/kubedns-amd64:1.14.4
@@ -374,7 +402,9 @@
       Finished:     Tue, 27 Aug 2019 10:58:27 +0800
     Ready:          True
     Restart Count:  1
-</code></pre><p>在容器列表里看 <code>Last State</code> 字段，其中 <code>ExitCode</code> 即程序上次退出时的状态码，如果不为 0，表示异常退出，我们可以分析下原因。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>在容器列表里看 <code>Last State</code> 字段，其中 <code>ExitCode</code> 即程序上次退出时的状态码，如果不为 0，表示异常退出，我们可以分析下原因。</p>
 <h3 id="退出状态码的区间">退出状态码的区间</h3>
 <ul>
 <li>必须在 0-255 之间</li>
@@ -386,12 +416,26 @@
 <ul>
 <li>当指定的退出时状态码为负数，那么转换公式如下:</li>
 </ul>
-<pre><code>256 - (|code| % 256)
-</code></pre><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">256 - (|code| % 256)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>当指定的退出时状态码为正数，那么转换公式如下:</li>
 </ul>
-<pre><code>code % 256
-</code></pre><h3 id="常见异常状态码">常见异常状态码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">code % 256
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="常见异常状态码">常见异常状态码</h3>
 <ul>
 <li>
 <p>137 (被  <code>SIGKILL</code> 中断信号杀死)</p>
@@ -427,7 +471,34 @@
 <p>这里罗列了一些状态码的含义：<a href="http://tldp.org/LDP/abs/html/exitcodes.html">Appendix E. Exit Codes With Special Meanings</a></p>
 <h3 id="linux-标准中断信号">Linux 标准中断信号</h3>
 <p>Linux 程序被外界中断时会发送中断信号，程序退出时的状态码就是中断信号值加上 128 得到的，比如 <code>SIGKILL</code> 的中断信号值为 9，那么程序退出状态码就为 9+128=137。以下是标准信号值参考：</p>
-<pre><code>Signal     Value     Action   Comment
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Signal     Value     Action   Comment
 ──────────────────────────────────────────────────────────────────────
 SIGHUP        1       Term    Hangup detected on controlling terminal
                                      or death of controlling process
@@ -450,9 +521,36 @@ SIGSTOP   17,19,23    Stop    Stop process
 SIGTSTP   18,20,24    Stop    Stop typed at terminal
 SIGTTIN   21,21,26    Stop    Terminal input for background process
 SIGTTOU   22,22,27    Stop    Terminal output for background process
-</code></pre><h3 id="cc-退出状态码">C/C++ 退出状态码</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="cc-退出状态码">C/C++ 退出状态码</h3>
 <p><code>/usr/include/sysexits.h</code> 试图将退出状态码标准化(仅限 C/C++):</p>
-<pre><code>#define EX_OK           0       /* successful termination */
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">#define EX_OK           0       /* successful termination */
 
 #define EX__BASE        64      /* base value for error messages */
 
@@ -463,9 +561,9 @@ SIGTTOU   22,22,27    Stop    Terminal output for background process
 #define EX_NOHOST       68      /* host name unknown */
 #define EX_UNAVAILABLE  69      /* service unavailable */
 #define EX_SOFTWARE     70      /* internal software error */
-#define EX_OSERR        71      /* system error (e.g., can't fork) */
+#define EX_OSERR        71      /* system error (e.g., can&#39;t fork) */
 #define EX_OSFILE       72      /* critical OS file missing */
-#define EX_CANTCREAT    73      /* can't create (user) output file */
+#define EX_CANTCREAT    73      /* can&#39;t create (user) output file */
 #define EX_IOERR        74      /* input/output error */
 #define EX_TEMPFAIL     75      /* temp failure; user is invited to retry */
 #define EX_PROTOCOL     76      /* remote error in protocol */
@@ -473,22 +571,59 @@ SIGTTOU   22,22,27    Stop    Terminal output for background process
 #define EX_CONFIG       78      /* configuration error */
 
 #define EX__MAX 78      /* maximum listed value */
-</code></pre><h2 id="使用-systemtap-定位疑难杂症">使用 systemtap 定位疑难杂症</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="使用-systemtap-定位疑难杂症">使用 systemtap 定位疑难杂症</h2>
 <h3 id="ubuntu">Ubuntu</h3>
 <p>安装 systemtap:</p>
-<pre><code>apt install -y systemtap
-</code></pre><p>运行 <code>stap-prep</code> 检查还有什么需要安装:</p>
-<pre><code>$ stap-prep
-Please install linux-headers-4.4.0-104-generic
-You need package linux-image-4.4.0-104-generic-dbgsym but it does not seem to be available
- Ubuntu -dbgsym packages are typically in a separate repository
- Follow https://wiki.ubuntu.com/DebuggingProgramCrash to add this repository
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt install -y systemtap
+</code></pre></td></tr></table>
+</div>
+</div><p>运行 <code>stap-prep</code> 检查还有什么需要安装:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="err">$</span> <span class="nx">stap</span><span class="o">-</span><span class="nx">prep</span>
+<span class="nx">Please</span> <span class="nx">install</span> <span class="nx">linux</span><span class="o">-</span><span class="nx">headers</span><span class="o">-</span><span class="mf">4.4.0</span><span class="o">-</span><span class="mi">104</span><span class="o">-</span><span class="nx">generic</span>
+<span class="nx">You</span> <span class="nx">need</span> <span class="kn">package</span> <span class="nx">linux</span><span class="o">-</span><span class="nx">image</span><span class="o">-</span><span class="mf">4.4.0</span><span class="o">-</span><span class="mi">104</span><span class="o">-</span><span class="nx">generic</span><span class="o">-</span><span class="nx">dbgsym</span> <span class="nx">but</span> <span class="nx">it</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">seem</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">available</span>
+ <span class="nx">Ubuntu</span> <span class="o">-</span><span class="nx">dbgsym</span> <span class="nx">packages</span> <span class="nx">are</span> <span class="nx">typically</span> <span class="nx">in</span> <span class="nx">a</span> <span class="nx">separate</span> <span class="nx">repository</span>
+ <span class="nx">Follow</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//wiki.ubuntu.com/DebuggingProgramCrash to add this repository
+</span><span class="c1"></span>
+<span class="nx">apt</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">y</span> <span class="nx">linux</span><span class="o">-</span><span class="nx">headers</span><span class="o">-</span><span class="mf">4.4.0</span><span class="o">-</span><span class="mi">104</span><span class="o">-</span><span class="nx">generic</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>提示需要 dbgsym 包但当前已有软件源中并不包含，需要使用第三方软件源安装，下面是 dbgsym 安装方法(参考官方wiki: <a href="https://wiki.ubuntu.com/Kernel/Systemtap">https://wiki.ubuntu.com/Kernel/Systemtap</a>):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C8CAB6595FDFF622
 
-apt install -y linux-headers-4.4.0-104-generic
-</code></pre><p>提示需要 dbgsym 包但当前已有软件源中并不包含，需要使用第三方软件源安装，下面是 dbgsym 安装方法(参考官方wiki: <a href="https://wiki.ubuntu.com/Kernel/Systemtap">https://wiki.ubuntu.com/Kernel/Systemtap</a>):</p>
-<pre><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C8CAB6595FDFF622
-
-codename=$(lsb_release -c | awk  '{print $2}')
+codename=$(lsb_release -c | awk  &#39;{print $2}&#39;)
 sudo tee /etc/apt/sources.list.d/ddebs.list &lt;&lt; EOF
 deb http://ddebs.ubuntu.com/ ${codename}      main restricted universe multiverse
 deb http://ddebs.ubuntu.com/ ${codename}-security main restricted universe multiverse
@@ -497,37 +632,105 @@ deb http://ddebs.ubuntu.com/ ${codename}-proposed main restricted universe multi
 EOF
 
 sudo apt-get update
-</code></pre><p>配置好源后再运行下 <code>stap-prep</code>:</p>
-<pre><code>$ stap-prep
+</code></pre></td></tr></table>
+</div>
+</div><p>配置好源后再运行下 <code>stap-prep</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ stap-prep
 Please install linux-headers-4.4.0-104-generic
 Please install linux-image-4.4.0-104-generic-dbgsym
-</code></pre><p>提示需要装这两个包，我们安装一下:</p>
-<pre><code>apt install -y linux-image-4.4.0-104-generic-dbgsym
+</code></pre></td></tr></table>
+</div>
+</div><p>提示需要装这两个包，我们安装一下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt install -y linux-image-4.4.0-104-generic-dbgsym
 apt install -y linux-headers-4.4.0-104-generic
-</code></pre><h3 id="centos">CentOS</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="centos">CentOS</h3>
 <p>安装 systemtap:</p>
-<pre><code>yum install -y systemtap
-</code></pre><p>默认没装 <code>debuginfo</code>，我们需要装一下，添加软件源 <code>/etc/yum.repos.d/CentOS-Debug.repo</code>:</p>
-<pre><code>[debuginfo]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">yum install -y systemtap
+</code></pre></td></tr></table>
+</div>
+</div><p>默认没装 <code>debuginfo</code>，我们需要装一下，添加软件源 <code>/etc/yum.repos.d/CentOS-Debug.repo</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[debuginfo]
 name=CentOS-$releasever - DebugInfo
 baseurl=http://debuginfo.centos.org/$releasever/$basearch/
 gpgcheck=0
 enabled=1
 protect=1
 priority=1
-</code></pre><p>执行 <code>stap-prep</code> (会安装 <code>kernel-debuginfo</code>)</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行 <code>stap-prep</code> (会安装 <code>kernel-debuginfo</code>)</p>
 <p>最后检查确保 <code>kernel-debuginfo</code> 和 <code>kernel-devel</code> 均已安装并且版本跟当前内核版本相同，如果有多个版本，就删除跟当前内核版本不同的包(通过<code>uname -r</code>查看当前内核版本)。</p>
 <p>重点检查是否有多个版本的 <code>kernel-devel</code>:</p>
-<pre><code>$ rpm -qa | grep kernel-devel
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ rpm -qa | grep kernel-devel
 kernel-devel-3.10.0-327.el7.x86_64
 kernel-devel-3.10.0-514.26.2.el7.x86_64
 kernel-devel-3.10.0-862.9.1.el7.x86_64
-</code></pre><p>如果存在多个，保证只留跟当前内核版本相同的那个，假设当前内核版本是 <code>3.10.0-862.9.1.el7.x86_64</code>，那么使用 rpm 删除多余的版本:</p>
-<pre><code>rpm -e kernel-devel-3.10.0-327.el7.x86_64 kernel-devel-3.10.0-514.26.2.el7.x86_64
-</code></pre><h3 id="使用-systemtap-揪出杀死容器的真凶">使用 systemtap 揪出杀死容器的真凶</h3>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果存在多个，保证只留跟当前内核版本相同的那个，假设当前内核版本是 <code>3.10.0-862.9.1.el7.x86_64</code>，那么使用 rpm 删除多余的版本:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">rpm -e kernel-devel-3.10.0-327.el7.x86_64 kernel-devel-3.10.0-514.26.2.el7.x86_64
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用-systemtap-揪出杀死容器的真凶">使用 systemtap 揪出杀死容器的真凶</h3>
 <p>Pod 莫名其妙被杀死? 可以使用 systemtap 来监视进程的信号发送，原理是 systemtap 将脚本翻译成 C 代码然后调用 gcc 编译成 linux 内核模块，再通过 <code>modprobe</code> 加载到内核，根据脚本内容在内核做各种 hook，在这里我们就 hook 一下信号的发送，找出是谁 kill 掉了容器进程。</p>
 <p>首先，找到被杀死的 pod 又自动重启的容器的当前 pid，describe 一下 pod:</p>
-<pre><code>    ......
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    ......
     Container ID:  docker://5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
     ......
     Last State:     Terminated
@@ -535,47 +738,108 @@ kernel-devel-3.10.0-862.9.1.el7.x86_64
       Exit Code:    137
       Started:      Thu, 05 Sep 2019 19:22:30 +0800
       Finished:     Thu, 05 Sep 2019 19:33:44 +0800
-</code></pre><p>拿到容器 id 反查容器的主进程 pid:</p>
-<pre><code>$ docker inspect -f &quot;{{.State.Pid}}&quot; 5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
+</code></pre></td></tr></table>
+</div>
+</div><p>拿到容器 id 反查容器的主进程 pid:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker inspect -f &#34;{{.State.Pid}}&#34; 5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
 7942
-</code></pre><p>通过 <code>Exit Code</code> 可以看出容器上次退出的状态码，如果进程是被外界中断信号杀死的，退出状态码将在 129-255 之间，137 表示进程是被 SIGKILL 信号杀死的，但我们从这里并不能看出是被谁杀死的。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过 <code>Exit Code</code> 可以看出容器上次退出的状态码，如果进程是被外界中断信号杀死的，退出状态码将在 129-255 之间，137 表示进程是被 SIGKILL 信号杀死的，但我们从这里并不能看出是被谁杀死的。</p>
 <p>如果问题可以复现，我们可以使用下面的 systemtap 脚本来监视容器是被谁杀死的(保存为<code>sg.stp</code>):</p>
-<pre><code>global target_pid = 7942
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">global target_pid = 7942
 probe signal.send{
   if (sig_pid == target_pid) {
-    printf(&quot;%s(%d) send %s to %s(%d)\n&quot;, execname(), pid(), sig_name, pid_name, sig_pid);
-    printf(&quot;parent of sender: %s(%d)\n&quot;, pexecname(), ppid())
-    printf(&quot;task_ancestry:%s\n&quot;, task_ancestry(pid2task(pid()), 1));
+    printf(&#34;%s(%d) send %s to %s(%d)\n&#34;, execname(), pid(), sig_name, pid_name, sig_pid);
+    printf(&#34;parent of sender: %s(%d)\n&#34;, pexecname(), ppid())
+    printf(&#34;task_ancestry:%s\n&#34;, task_ancestry(pid2task(pid()), 1));
   }
 }
-</code></pre><ul>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>变量 <code>pid</code> 的值替换为查到的容器主进程 pid</li>
 </ul>
 <p>运行脚本:</p>
-<pre><code>stap sg.stp
-</code></pre><p>当容器进程被杀死时，脚本捕捉到事件，执行输出:</p>
-<pre><code>pkill(23549) send SIGKILL to server(7942)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">stap sg.stp
+</code></pre></td></tr></table>
+</div>
+</div><p>当容器进程被杀死时，脚本捕捉到事件，执行输出:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pkill(23549) send SIGKILL to server(7942)
 parent of sender: bash(23495)
 task_ancestry:swapper/0(0m0.000000000s)=&gt;systemd(0m0.080000000s)=&gt;vGhyM0(19491m2.579563677s)=&gt;sh(33473m38.074571885s)=&gt;bash(33473m38.077072025s)=&gt;bash(33473m38.081028267s)=&gt;bash(33475m4.817798337s)=&gt;pkill(33475m5.202486630s)
-</code></pre><p>通过观察 <code>task_ancestry</code> 可以看到杀死进程的所有父进程，在这里可以看到有个叫 <code>vGhyM0</code> 的奇怪进程名，通常是中了木马，需要安全专家介入继续排查。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过观察 <code>task_ancestry</code> 可以看到杀死进程的所有父进程，在这里可以看到有个叫 <code>vGhyM0</code> 的奇怪进程名，通常是中了木马，需要安全专家介入继续排查。</p>
 <h2 id="非root用户执行docker命令时提示permission-denied">非root用户执行docker命令时提示permission denied</h2>
 <h2 id="原因">原因</h2>
 <p>摘自docker mannual上的一段话</p>
-<pre><code>Manage Docker as a non-root user
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Manage Docker as a non-root user
 
 The docker daemon binds to a Unix socket instead of a TCP port. By default that Unix socket is owned by the user root and other users can only access it using sudo. The docker daemon always runs as the root user.
 
 If you don’t want to use sudo when you use the docker command, create a Unix group called docker and add users to it. When the docker daemon starts, it makes the ownership of the Unix socket read/writable by the docker group.
-</code></pre><p>大概的意思就是：docker进程使用Unix Socket而不是TCP端口。而默认情况下，Unix socket属于root用户，需要root权限才能访问。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>大概的意思就是：docker进程使用Unix Socket而不是TCP端口。而默认情况下，Unix socket属于root用户，需要root权限才能访问。</p>
 <h3 id="解决方法1">解决方法1</h3>
 <p>使用sudo获取管理员权限，运行docker命令</p>
 <h3 id="解决方法2">解决方法2</h3>
 <p>docker守护进程启动的时候，会默认赋予名字为docker的用户组读写Unix socket的权限，因此只要创建docker用户组，并将当前用户加入到docker用户组中，那么当前用户就有权限访问Unix socket了，进而也就可以执行docker相关命令</p>
-<pre><code>sudo groupadd docker     #添加docker用户组
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo groupadd docker     #添加docker用户组
 sudo gpasswd -a $USER docker     #将登陆用户加入到docker用户组中
 newgrp docker     #更新用户组
 docker ps    #测试docker命令是否可以使用sudo正常使用
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     
@@ -605,12 +869,12 @@ docker ps    #测试docker命令是否可以使用sudo正常使用
 
             </i>
             <span class="prev-text nav-default">Helm模板文件chart编写语法总结</span>
-            <span class="prev-text nav-mobile">Prev</span>
+            <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
           <a class="next" href="/post/2019/k8s%E9%83%A8%E7%BD%B2%E7%AE%80%E4%BB%8B.html">
             <span class="next-text nav-default">K8S部署简介</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
               <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -668,7 +932,13 @@ docker ps    #测试docker命令是否可以使用sudo正常使用
 </div>
 
 <div class="copyright">
-  
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
 
   <span class="copyright-year">
     &copy;
@@ -747,6 +1017,8 @@ docker ps    #测试docker命令是否可以使用sudo正常使用
 
 
 
+
+  <script src="/js/custom.js"></script>
 
 
 </body>
