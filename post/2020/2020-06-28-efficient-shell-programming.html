@@ -75,7 +75,7 @@
 ">
 <meta itemprop="datePublished" content="2020-06-28T09:07:03&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-28T09:07:03&#43;08:00" />
-<meta itemprop="wordCount" content="1604">
+<meta itemprop="wordCount" content="2741">
 
 
 
@@ -313,8 +313,8 @@
             <a href="http://justgo-now.github.io/categories/devops.html"> devops </a>
             
           </div>
-        <span class="more-meta"> 约 1604 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 2741 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -336,6 +336,14 @@
     <li><a href="#宝典秘籍之main函数">宝典秘籍之main函数</a></li>
     <li><a href="#宝典秘籍之函数返回值">宝典秘籍之函数返回值</a></li>
     <li><a href="#宝典秘籍之set命令">宝典秘籍之set命令</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#获取当前脚本文件所在的路径">获取当前脚本文件所在的路径</a></li>
+    <li><a href="#字符串-startswith-和-endswith">字符串 startsWith 和 endsWith</a></li>
+    <li><a href="#isnumber">isNumber</a></li>
+    <li><a href="#获取字符串的子串">获取字符串的子串</a></li>
+    <li><a href="#if-判断条件">if 判断条件</a></li>
   </ul>
 </nav>
   </div>
@@ -363,7 +371,8 @@
 nginx -c /etc/nginx/nginx.conf -tkill -HUP <span class="sb">`</span>ps auxf <span class="p">|</span> grep -E <span class="s2">&#34;nginx:[[:space:]]+master&#34;</span><span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="宝典秘籍之变量抽离">宝典秘籍之变量抽离</h2>
+</div><h1 id="宝典秘籍">宝典秘籍</h1>
+<h2 id="宝典秘籍之变量抽离">宝典秘籍之变量抽离</h2>
 <p>在脚本中，需要依赖外部的配置，比如配置文件位置，监听端口之类的可变参数，编程时，需要将其抽离为变量，为了更好的引用与维护，省去了外部配置变化时，一个个修改带来的麻烦。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -562,7 +571,195 @@ main <span class="nv">$@</span>
 <pre class="chroma"><code class="language-shell" data-lang="shell">bash -n main.sh
 </code></pre></td></tr></table>
 </div>
+</div><h1 id="一些实用的-bash-代码片段">一些实用的 bash 代码片段</h1>
+<p>前阵子写了不少 bash 脚本，有些代码片段值得一记。有以下几项内容：</p>
+<ul>
+<li>获取当前脚本文件所在路径</li>
+<li>字符串 startsWith 和 endsWith</li>
+<li>判断字符串内容是否是数字</li>
+<li>获取字符串的子串</li>
+<li>if 语句的几个判断条件</li>
+</ul>
+<h2 id="获取当前脚本文件所在的路径">获取当前脚本文件所在的路径</h2>
+<p>用户执行脚本时，用户所在的目录，也就是 current working directory，可以通过执行 <code>pwd</code> 或者 bash 的内置变量 <code>$PWD</code> 获取。</p>
+<p>有时用户执行脚本时，需要拿到脚本文件本身的路径，就稍微麻烦一些。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">CURRENT_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span><span class="nb">cd</span> <span class="s2">&#34;</span><span class="k">$(</span>dirname <span class="s2">&#34;</span><span class="si">${</span><span class="nv">BASH_SOURCE</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span> &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="nb">pwd</span><span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></td></tr></table>
 </div>
+</div><h2 id="字符串-startswith-和-endswith">字符串 startsWith 和 endsWith</h2>
+<p>使用 <code>*</code> 号来实现这两个小功能。</p>
+<p>如下，判断是否以 <code>sub_string</code> 开头。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">if</span> <span class="o">[[</span> <span class="nv">$var</span> <span class="o">==</span> sub_string* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">printf</span> <span class="s1">&#39;%s\n&#39;</span> <span class="s2">&#34;var starts with sub_string.&#34;</span>
+<span class="k">fi</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$var</span> !<span class="o">=</span> sub_string* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">printf</span> <span class="s1">&#39;%s\n&#39;</span> <span class="s2">&#34;var does not start with sub_string.&#34;</span>
+<span class="k">fi</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>判断是否以 <code>sub_string</code> 结尾</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">if</span> <span class="o">[[</span> <span class="nv">$var</span> <span class="o">==</span> *sub_string <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">printf</span> <span class="s1">&#39;%s\n&#39;</span> <span class="s2">&#34;var ends with sub_string.&#34;</span>
+<span class="k">fi</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$var</span> !<span class="o">=</span> *sub_string <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">printf</span> <span class="s1">&#39;%s\n&#39;</span> <span class="s2">&#34;var does not end with sub_string.&#34;</span>
+<span class="k">fi</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="isnumber">isNumber</h2>
+<p>判断字符串的内容是否是个数字，比如 <code>&quot;1234&quot;</code> 为真，<code>&quot;abcd&quot;</code> 或 <code>&quot;12abcd&quot;</code> 为假。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">isNumber<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">str</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+  <span class="nb">local</span> <span class="nv">re</span><span class="o">=</span><span class="s2">&#34;^[0-9]+</span>$<span class="s2">&#34;</span>
+  <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$str</span><span class="s2">&#34;</span> <span class="o">=</span>~ <span class="nv">$re</span> <span class="o">]]</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 <code>isNumber</code> 的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>isNumber<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">str</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+  <span class="nb">local</span> <span class="nv">re</span><span class="o">=</span><span class="s2">&#34;^[0-9]+</span>$<span class="s2">&#34;</span>
+  <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$str</span><span class="s2">&#34;</span> <span class="o">=</span>~ <span class="nv">$re</span> <span class="o">]]</span>
+<span class="o">}</span>
+tests<span class="o">()</span> <span class="o">{</span>
+  isNumber <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;yes&#34;</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;no&#34;</span>
+<span class="o">}</span>
+tests <span class="s2">&#34;&#34;</span>
+tests <span class="s2">&#34;abc&#34;</span>
+tests <span class="s2">&#34;abc123&#34;</span>
+tests <span class="s2">&#34;1acb23&#34;</span>
+tests <span class="s2">&#34;123&#34;</span>
+tests <span class="s2">&#34;455&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">no
+no
+no
+no
+yes
+yes
+</code></pre></td></tr></table>
+</div>
+</div><p>如果要允许带小数点的格式，那么要把上述代码中的正则表达式换成 <code>^[0-9]+([.][0-9]+)?$</code>。</p>
+<p><a href="https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash">Stackoverflow – How do I test if a variable is a number in Bash?</a></p>
+<h2 id="获取字符串的子串">获取字符串的子串</h2>
+<p>有很多方法可以做字符串分割，比如用 <code>cut</code> 命令，<code>awk</code> 命令等等。这里记录的是我一直记不住的一个代码片段。</p>
+<p>比如一个字符串变量是 <code>var=hello.world-1234.txt</code>，我们想要根据字符串中的点和横线来分割，获取子字符串。</p>
+<p><code>${var#pattern}</code> 从字符串开始位置，去除最短匹配 pattern 的部分。例如 <code>${var#*.}</code>，pattern 中的星号是通配符，结果就是匹配到第一个 <code>.</code> 之前的部分被去掉，获取到的字符串是 <code>world-1234.txt</code>。</p>
+<p><code>${var##pattern}</code> 从字符串开始位置，去除最长匹配 pattern 的部分。
+<code>${var%pattern}</code> 从字符串结尾位置，去除最短匹配 pattern 的部分。
+<code>${var%%pattern}</code> 从字符串结尾位置，去除最长匹配 pattern 的部分。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">var</span><span class="o">=</span>hello.world-1234.txt
+<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">var</span><span class="p">#*.</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">var</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">var</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">var</span><span class="p">%%.*</span><span class="si">}</span><span class="s2">&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">world-1234.txt     // 从前向后截掉最短匹配 *. 的子串
+txt                // 从前向后截掉最长匹配 *. 的字串
+hello.world-1234   // 从后向前截掉最短匹配 .* 的内容
+hello              // 从后向前截掉最长匹配 .* 的内容
+</code></pre></td></tr></table>
+</div>
+</div><p>如果想把 <code>hello.world</code> 截取出来，可以用 <code>${var%-*}</code>。由于 <code>var</code> 里只有一个 <code>-</code>，所以从前往后或者从后往前，找到的都是一个位置，<code>${var%%-*}</code> 同样得到 <code>hello.world</code>。</p>
+<h2 id="if-判断条件">if 判断条件</h2>
+<p>-e 文件是否存在（万物皆文件）
+-d 是否是目录并且存在
+-s 文件是否存在并且大小不为 0
+-f 文件是否存在并且是普通文件
+-h 文件是否存在并且是符号链接
+-L 文件是否存在并且是符号链接
+-z 字符串长度是否为 0
+-n 字符串长度是否不为 0</p>
+<p>要注意以下几点：</p>
+<ul>
+<li>不论是普通文件，软链接，目录，块设备等等，都是「文件」，<code>-e</code> 测试都为真。</li>
+<li><code>-f</code> 测试一个普通文件，或者一个软链接，结果都为真。要确定是否是软链接，用 <code>-h</code> 或 <code>-L</code>。</li>
+</ul>
     </div>
 
     
