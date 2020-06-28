@@ -6,7 +6,7 @@
     <description>Recent content on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2020 09:57:19 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 09:07:03 +0800</lastBuildDate>
     
         <atom:link href="http://justgo-now.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -28,6 +28,114 @@
 &lt;/ul&gt;
 &lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
+      
+    </item>
+    
+    <item>
+      <title>Efficient Shell Programming</title>
+      <link>http://justgo-now.github.io/post/2020/2020-06-28-efficient-shell-programming.html</link>
+      <pubDate>Sun, 28 Jun 2020 09:07:03 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-06-28-efficient-shell-programming.html</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;平常工作中，你是否感觉shell脚本只是命令的堆砌；很多时候只是为了实现功能而没有好的组织结构；自己的脚本都不想再看一遍；哈哈，我这就教给shell的“葵花宝典“，自此让你的shell脚本有python一样的美感并且极易维护，真的是shell脚本写到停不下来。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现以nginx控制脚本为例，看一下脚本的美容过程：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# set命令的奇妙用途留在文章末尾&lt;/span&gt;
+set -eu
+&lt;span style=&#34;color:#75715e&#34;&gt;# nginx重载配置文件&lt;/span&gt;
+nginx -c /etc/nginx/nginx.conf -tkill -HUP &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ps auxf | grep -E &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nginx:[[:space:]]+master&amp;#34;&lt;/span&gt;| awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;宝典秘籍之变量抽离&#34;&gt;宝典秘籍之变量抽离&lt;/h2&gt;
+&lt;p&gt;在脚本中，需要依赖外部的配置，比如配置文件位置，监听端口之类的可变参数，编程时，需要将其抽离为变量，为了更好的引用与维护，省去了外部配置变化时，一个个修改带来的麻烦。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# set命令的奇妙用途留在文章末尾&lt;/span&gt;
+set -eu
+&lt;span style=&#34;color:#75715e&#34;&gt;# nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用&lt;/span&gt;
+NGINX_CONFIG_FILE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/etc/nginx/nginx.conf
+&lt;span style=&#34;color:#75715e&#34;&gt;# nginx重载配置文件&lt;/span&gt;
+nginx -c $NGINX_CONFIG_FILE -tkill -HUP &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ps auxf | grep -E &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nginx:[[:space:]]+master&amp;#34;&lt;/span&gt;| awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;宝典秘籍之模块化&#34;&gt;宝典秘籍之模块化&lt;/h2&gt;
+&lt;p&gt;运维毕竟不是专业程序员，写脚本时是怎么舒服怎么来，简单讲就是从上到下依次执行，这就导致复用性差，不易维护，解决这问题的关键在于函数化、模块化思想，shell虽然是一种比较简单的语言，但语言基本的逻辑控制、函数功能都有，这就让我们编写高质量shell脚本带了无限可能。接下来就看一下具体例子来感受一下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 由于nginx配置文件检查是执行其他操作的第一步，所以我们将其独立成一个单独函数&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# set命令的奇妙用途留在文章末尾&lt;/span&gt;
+set -eu
+&lt;span style=&#34;color:#75715e&#34;&gt;# nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用&lt;/span&gt;
+NGINX_CONFIG_FILE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/etc/nginx/nginx.conf
+&lt;span style=&#34;color:#75715e&#34;&gt;# 抽离配置文件检查为单独的函数&lt;/span&gt;
+config_test&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+nginx -c $NGINX_CONFIG_FILE -t
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+get_nginx_master_pid&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;    
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ps auxf | grep -E &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nginx:[[:space:]]+master&amp;#34;&lt;/span&gt;| awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 抽离配置重载为独立函数&lt;/span&gt;
+reload&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+kill -HUP &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;get_nginx_master_pid&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nginx重载配置文件&lt;/span&gt;
+config_test 
+reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;宝典秘籍之main函数&#34;&gt;宝典秘籍之main函数&lt;/h2&gt;
+&lt;p&gt;脚本的可维护性在于脚本的结构的好坏，为了拥有更好的结构，通常需要在脚本中定义入口函数，即main函数，让我在维护脚本时，可以更好的把握脚本的组织架构，找到切入点：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 由于nginx配置文件检查是执行其他操作的第一步，所以我们将其独立成一个单独函数&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# set命令的奇妙用途留在文章末尾&lt;/span&gt;
+set -eu
+&lt;span style=&#34;color:#75715e&#34;&gt;# nginx配置文件在不同环境中，位置可能不同，所以需要将其抽离成可配置变量，脚本来引用&lt;/span&gt;
+NGINX_CONFIG_FILE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/etc/nginx/nginx.conf
+&lt;span style=&#34;color:#75715e&#34;&gt;# 抽离配置文件为单独的函数&lt;/span&gt;
+config_test&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+nginx -c $NGINX_CONFIG_FILE -t
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+get_nginx_master_pid&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;    
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ps auxf | grep -E &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nginx:[[:space:]]+master&amp;#34;&lt;/span&gt;| awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 抽离配置重载为独立函数&lt;/span&gt;
+reload&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+kill -HUP &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;get_nginx_master_pid&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 入口函数&lt;/span&gt;
+main&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+config_test    
+reload
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# main在此需要获取脚本本身的参数， 故将$@传递给main函数&lt;/span&gt;
+main $@
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;宝典秘籍之函数返回值&#34;&gt;宝典秘籍之函数返回值&lt;/h2&gt;
+&lt;p&gt;在其他编程语言，可以通过return获得函数的返回值，但是return语句在shell中含义不同，return命令会使一个函数返回,会返回一个单一的数字参数,而这个数字参数在调用这个函数的脚本是可见的,如果没有指定返回参数,return在默认情况下会返回上一次命令的返回代码。那如何实现类似其他编程语言的return效果呢？可以使用echo命令:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;set -eu
+NGINX_CONFIG_FILE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/etc/nginx/nginx.conf
+config_test&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+nginx -c $NGINX_CONFIG_FILE -t
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 在此处直接把nginx的master pid可以通过反引号来获取echo后的值&lt;/span&gt;
+get_nginx_master_pid&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;    
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ps auxf | grep -E &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nginx:[[:space:]]+master&amp;#34;&lt;/span&gt;| awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+reload&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+&lt;span style=&#34;color:#75715e&#34;&gt;# `get_nginx_master_pid` 获得nginx master pid&lt;/span&gt;    
+kill -HUP &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;get_nginx_master_pid&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 入口函数&lt;/span&gt;
+main&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+config_test    
+reload
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# main在此需要获取脚本本身的参数， 故将$@传递给main函数&lt;/span&gt;
+main $@
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;宝典秘籍之set命令&#34;&gt;宝典秘籍之set命令&lt;/h2&gt;
+&lt;p&gt;bash内置的set命令，可以改变我们脚本的执行行为，让我对脚本的把握和调试更有力，下面说几种常用的set指令，相信你都会喜欢的：&lt;/p&gt;
+&lt;p&gt;•set -e: bash脚本遇到错误立即退出•set -n: 检查脚本语法但不执行•set -u: 遇到未设置的变量立即退出•set -o pipefail: 控制在管道符执行过程中有错误立即退出•set -x: 分步调试命令&lt;/p&gt;
+&lt;p&gt;在写脚本时，我们可以直接在脚本开头简写为如下格式:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;set -euxo pipefail
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;检查bash脚本的语法时，可以这样写:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;bash -n main.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
       
     </item>
     
@@ -1514,10 +1622,10 @@ mount clntudp_create: RPC: Port mapper failure - RPC: Unable to receive&lt;/p&gt
 &lt;p&gt;下面我们来看下集中典型的输出。&lt;/p&gt;
 &lt;h3 id=&#34;数据链路层头信息&#34;&gt;数据链路层头信息&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;tcpdump -e host host2 and port 11211
-&amp;hellip;&amp;hellip;
-16:49:57.940257 00:16:3e:00:00:2f (oui Unknown) &amp;gt; 00:16:3e:00:6c:fc (oui Unknown), ethertype IPv4 (0x0800), length 110: host1.41684 &amp;gt; host2.11211: P 1036863:1036907(44) ack 839113 win 115 &amp;lt;nop,nop,timestamp 1914224417 1914343362&amp;gt;
-&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;tcpdump -e host host2 and port 11211&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;16:49:57.940257 00:16:3e:00:00:2f (oui Unknown) &amp;gt; 00:16:3e:00:6c:fc (oui Unknown), ethertype IPv4 (0x0800), length 110: host1.41684 &amp;gt; host2.11211: P 1036863:1036907(44) ack 839113 win 115 &amp;lt;nop,nop,timestamp 1914224417 1914343362&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;16:49:57 是时间。 格式为，小时:分:秒。
 940257 为ID号。
@@ -1534,10 +1642,10 @@ ack 839113 表示对序列号为839113的包进行响应。
 win 115 表示发送的窗口大小为115。
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;tcp包的输出信息&#34;&gt;TCP包的输出信息&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;tcpdump tcp port 11211
-&amp;hellip;.
-17:31:47.143178 IP host1.48232 &amp;gt; host2.11211: S 307816357:307816357(0) win 14600 &amp;lt;mss 1460,sackOK,timestamp 1916733618 0,nop,wscale 7&amp;gt;
-&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;tcpdump tcp port 11211&lt;/p&gt;
+&lt;p&gt;&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;17:31:47.143178 IP host1.48232 &amp;gt; host2.11211: S 307816357:307816357(0) win 14600 &amp;lt;mss 1460,sackOK,timestamp 1916733618 0,nop,wscale 7&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;hellip;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;17:31:47.143178 是时间
 IP 是协议说明。
@@ -1551,10 +1659,10 @@ S flags是TCP包中的标志信息（S是SYN标志，F(FIN)，P(PUSH)，R(RST)�
 &lt;p&gt;用TCPDUMP捕获的UDP包的一般输出信息是：
 route.port1 &amp;gt; ice.port2: udp lenth&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;tcpdump udp
-&amp;hellip;&amp;hellip;
-06:03:21.199876 IP v101081217.sqa.zmf.bo56.com.65535 &amp;gt; 224.7.3.1.entextxid: UDP, length 64
-&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;tcpdump udp&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;06:03:21.199876 IP v101081217.sqa.zmf.bo56.com.65535 &amp;gt; 224.7.3.1.entextxid: UDP, length 64&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;UDP十分简单，上面的输出行表明从主机ROUTE的port1端口发出的一个UDP数据包到主机ICE的port2端口，类型是UDP， 包的长度是lenth。&lt;/p&gt;
 &lt;p&gt;另外，为了让网络接口可以让tcpdump监听，所以执行tcpdump时网络接口会启动在“混杂模式（promiscuous）”，所以你会在 /var/log/messages里面看到很多的警告信息，通知你说你的网卡被设置成为混杂模式。别担心，那是正常的。至于更多的应用，请参考man tcpdump了。&lt;/p&gt;</description>
