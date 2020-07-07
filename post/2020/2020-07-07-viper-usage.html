@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Viper--方便好用的Golang 配置库 - JustGo</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Frank" />
+  <meta name="description" content="前言 本文主要是为读者介绍一个轻便好用的Golang配置库viper
+" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+<link rel="canonical" href="http://justgo-now.github.io/post/2020/2020-07-07-viper-usage.html" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="Viper--方便好用的Golang 配置库" />
+<meta property="og:description" content="前言
+本文主要是为读者介绍一个轻便好用的Golang配置库viper" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://justgo-now.github.io/post/2020/2020-07-07-viper-usage.html" />
+<meta property="article:published_time" content="2020-07-07T08:51:20+08:00" />
+<meta property="article:modified_time" content="2020-07-07T08:51:20+08:00" />
+<meta itemprop="name" content="Viper--方便好用的Golang 配置库">
+<meta itemprop="description" content="前言
+本文主要是为读者介绍一个轻便好用的Golang配置库viper">
+<meta itemprop="datePublished" content="2020-07-07T08:51:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-07T08:51:20&#43;08:00" />
+<meta itemprop="wordCount" content="2768">
+
+
+
+<meta itemprop="keywords" content="viper," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Viper--方便好用的Golang 配置库"/>
+<meta name="twitter:description" content="前言
+本文主要是为读者介绍一个轻便好用的Golang配置库viper"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">JustGo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/post.html">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      JustGo
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/post.html">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://justgo-now.github.io/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Viper--方便好用的Golang 配置库</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-07-07" class="post-time">
+          2020-07-07
+        </time>
+        <div class="post-category">
+            <a href="http://justgo-now.github.io/categories/coding.html"> coding </a>
+            
+          </div>
+        <span class="more-meta"> 约 2768 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#viper-的功能">viper 的功能</a></li>
+    <li><a href="#示例代码">示例代码</a>
+      <ul>
+        <li><a href="#读取yaml配置文件">读取yaml配置文件</a></li>
+        <li><a href="#从io中读取配置">从IO中读取配置</a></li>
+        <li><a href="#从环境变量中读取配置">从环境变量中读取配置</a></li>
+        <li><a href="#方便的替换符">方便的替换符</a></li>
+        <li><a href="#别名功能">别名功能</a></li>
+        <li><a href="#序列化和反序列化">序列化和反序列化</a></li>
+        <li><a href="#从command-line中读取配置">从command Line中读取配置</a></li>
+        <li><a href="#监听配置文件">监听配置文件</a></li>
+        <li><a href="#拷贝子分支">拷贝子分支</a></li>
+        <li><a href="#获取配置项的方法">获取配置项的方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#有趣的应用">有趣的应用</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h1 id="前言">前言</h1>
+<p>本文主要是为读者介绍一个轻便好用的Golang配置库<a href="https://github.com/spf13/viper">viper</a></p>
+<h1 id="正文">正文</h1>
+<h2 id="viper-的功能">viper 的功能</h2>
+<p>  viper 支持以下功能：
+  1. 支持Yaml、Json、 TOML、HCL 等格式的配置
+  2. 可以从文件、io、环境变量、command line中提取配置
+  3. 支持自动转换的类型解析
+  4. 可以远程从etcd中读取配置</p>
+<h2 id="示例代码">示例代码</h2>
+<p>定义一个类型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">config</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">v</span>  <span class="o">*</span><span class="nx">viper</span><span class="p">.</span><span class="nx">Viper</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>用于测试的Yaml配置文件 config.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">TimeStamp</span><span class="p">:</span> <span class="s">&#34;2018-07-16 10:23:19&#34;</span>
+<span class="nx">Author</span><span class="p">:</span> <span class="s">&#34;WZP&#34;</span>
+<span class="nx">PassWd</span><span class="p">:</span> <span class="s">&#34;Hello&#34;</span>
+<span class="nx">Information</span><span class="p">:</span>
+   <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Harry&#34;</span>
+   <span class="nx">Age</span><span class="p">:</span> <span class="s">&#34;37&#34;</span>
+   <span class="nx">Alise</span><span class="p">:</span>
+   <span class="o">-</span> <span class="s">&#34;Lion&#34;</span>
+   <span class="o">-</span> <span class="s">&#34;NK&#34;</span>
+   <span class="o">-</span> <span class="s">&#34;KaQS&#34;</span>
+   <span class="nx">Image</span><span class="p">:</span> <span class="s">&#34;/path/header.rpg&#34;</span>
+   <span class="nx">Public</span><span class="p">:</span> <span class="kc">false</span>
+
+<span class="nx">Favorite</span><span class="p">:</span>
+  <span class="nx">Sport</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s">&#34;swimming&#34;</span>
+  <span class="o">-</span> <span class="s">&#34;football&#34;</span>
+  <span class="nx">Music</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s">&#34;zui xuan min zu feng&#34;</span>
+  <span class="nx">LuckyNumber</span><span class="p">:</span> <span class="mi">99</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="读取yaml配置文件">读取yaml配置文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">LoadConfigFromYaml</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">error</span>  <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">();</span>
+
+	<span class="c1">//设置配置文件的名字
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">SetConfigName</span><span class="p">(</span><span class="s">&#34;config&#34;</span><span class="p">)</span>
+
+	<span class="c1">//添加配置文件所在的路径,注意在Linux环境下%GOPATH要替换为$GOPATH
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">AddConfigPath</span><span class="p">(</span><span class="s">&#34;%GOPATH/src/&#34;</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">AddConfigPath</span><span class="p">(</span><span class="s">&#34;./&#34;</span><span class="p">)</span>
+
+	<span class="c1">//设置配置文件类型
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">SetConfigType</span><span class="p">(</span><span class="s">&#34;yaml&#34;</span><span class="p">);</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">ReadInConfig</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="k">return</span>  <span class="nx">err</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;age: %s, name: %s \n&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;information.age&#34;</span><span class="p">),</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;information.name&#34;</span><span class="p">));</span>
+	<span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：如果不用AddConfigPath去指定路径，它会在程序执行的目录去寻找config.yaml</p>
+<h3 id="从io中读取配置">从IO中读取配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//由IO读取配置
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">ReadConfigFormIo</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;config.yaml&#34;</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;filure: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">());</span>
+		<span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+
+		<span class="nx">confLength</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span><span class="nx">f</span><span class="p">.</span><span class="nf">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+		<span class="c1">//注意，通常写c++的习惯害怕读取字符串的时候越界，都会多留出一个NULL在末尾，但是在这里不行，会报出如下错误：
+</span><span class="c1"></span>		<span class="c1">//While parsing config: yaml: control characters are not allowed
+</span><span class="c1"></span>		<span class="c1">//错误参考网址：https://stackoverflow.com/questions/33717799/go-yaml-control-characters-are-not-allowed-error
+</span><span class="c1"></span>		<span class="nx">configData</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">confLength</span><span class="p">);</span>
+		<span class="nx">f</span><span class="p">.</span><span class="nf">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="nx">f</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">configData</span><span class="p">);</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s\n&#34;</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">configData</span><span class="p">))</span>
+
+		<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">SetConfigType</span><span class="p">(</span><span class="s">&#34;yaml&#34;</span><span class="p">);</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">ReadConfig</span><span class="p">(</span><span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">configData</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">());</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;age: %s, name: %s \n&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;information.age&#34;</span><span class="p">),</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;information.name&#34;</span><span class="p">));</span>
+
+	<span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的代码是把配置文件中的数据导入IO，然后再从IO中读取</p>
+<h3 id="从环境变量中读取配置">从环境变量中读取配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//读取本地的环境变量
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">EnvConfigPrefix</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">();</span>
+
+	<span class="c1">//BindEnv($1,$2)
+</span><span class="c1"></span>	<span class="c1">// 如果只传入一个参数，则会提取指定的环境变量$1，如果设置了前缀，则会自动补全 前缀_$1
+</span><span class="c1"></span>	<span class="c1">//如果传入两个参数则不会补全前缀，直接获取第二参数中传入的环境变量$2
+</span><span class="c1"></span>	<span class="nx">os</span><span class="p">.</span><span class="nf">Setenv</span><span class="p">(</span><span class="s">&#34;LOG_LEVEL&#34;</span><span class="p">,</span> <span class="s">&#34;INFO&#34;</span><span class="p">);</span>
+	<span class="k">if</span> <span class="kc">nil</span> <span class="o">==</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;LOG_LEVEL &#34;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;LOG_LEVEL is nil&#34;</span><span class="p">);</span>
+	<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">ErrorNotMacth</span><span class="p">;</span>
+	<span class="p">}</span>
+        
+        <span class="c1">//必须要绑定后才能获取
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">BindEnv</span><span class="p">(</span><span class="s">&#34;LOG_LEVEL&#34;</span><span class="p">);</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;LOG_LEVEL is %s&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;log_level&#34;</span><span class="p">));</span>
+
+
+	<span class="c1">//会获取所有的环境变量，同时如果过设置了前缀则会自动补全前缀名
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">AutomaticEnv</span><span class="p">();</span>
+	<span class="c1">//环境变量前缀大小写不区分
+</span><span class="c1"></span>	<span class="nx">os</span><span class="p">.</span><span class="nf">Setenv</span><span class="p">(</span><span class="s">&#34;DEV_ADDONES&#34;</span><span class="p">,</span><span class="s">&#34;none&#34;</span><span class="p">);</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;DEV_ADDONES: %s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;dev_addones&#34;</span><span class="p">));</span>
+
+	<span class="c1">//SetEnvPrefix会设置一个环境变量的前缀名
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">SetEnvPrefix</span><span class="p">(</span><span class="s">&#34;DEV&#34;</span><span class="p">);</span>
+
+	<span class="nx">os</span><span class="p">.</span><span class="nf">Setenv</span><span class="p">(</span><span class="s">&#34;DEV_MODE&#34;</span><span class="p">,</span> <span class="s">&#34;true&#34;</span><span class="p">);</span>
+	<span class="c1">//此时会自动补全前缀，实际去获取的是DEV_DEV_MODE
+</span><span class="c1"></span>	<span class="k">if</span> <span class="kc">nil</span> <span class="o">==</span>  <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;dev_mode&#34;</span><span class="p">){</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;DEV_MODE is nil&#34;</span><span class="p">)</span> <span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">ErrorNotMacth</span><span class="p">;</span>
+	<span class="p">}</span>
+        
+        <span class="c1">//此时我们直接指定了loglevel所对应的环境变量，则不会去补全前缀
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">BindEnv</span><span class="p">(</span><span class="s">&#34;loglevel&#34;</span><span class="p">,</span> <span class="s">&#34;LOG_LEVEL&#34;</span><span class="p">);</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;LOG_LEVEL: %s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;loglevel&#34;</span><span class="p">))</span> <span class="p">;</span>
+
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>  SetEnvPrefix 和 AutomaticEnv、BindEnv搭配使用很方便，比如说我们把当前程序的环境变量都设置为xx_ ，这样方便我们管理，也避免和其他环境变量冲突，而在读取的时候又很方便的就可以读取。</p>
+<h3 id="方便的替换符">方便的替换符</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">EnvCongiReplacer</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">,</span> <span class="nx">setPerfix</span> <span class="kt">bool</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">();</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">AutomaticEnv</span><span class="p">();</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">SetEnvKeyReplacer</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReplacer</span><span class="p">(</span><span class="s">&#34;.&#34;</span><span class="p">,</span><span class="s">&#34;_&#34;</span><span class="p">));</span>
+
+	<span class="nx">os</span><span class="p">.</span><span class="nf">Setenv</span><span class="p">(</span><span class="s">&#34;API_VERSION&#34;</span><span class="p">,</span><span class="s">&#34;v0.1.0&#34;</span><span class="p">);</span>
+	<span class="c1">//Replacer和prefix一起使用可能会冲突,比如我下面的例子
+</span><span class="c1"></span>	<span class="c1">//因为会自动补全前缀最终由获取API_VERSION变成API_API_VERSION
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">setPerfix</span><span class="p">{</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">SetEnvPrefix</span><span class="p">(</span><span class="s">&#34;api&#34;</span><span class="p">);}</span>
+	<span class="k">if</span> <span class="nx">s</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;api.version&#34;</span><span class="p">);</span> <span class="nx">s</span><span class="o">==</span><span class="kc">nil</span><span class="p">{</span>
+		<span class="k">return</span> <span class="nx">ErrorNoxExistKey</span>
+	<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;api.version&#34;</span><span class="p">));</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们有时候需要去替换key中的某些字符，来转化为对应的环境变脸，比如说例子中将&rsquo; . &lsquo;替换为&rsquo;_&rsquo; ，由获取api.version变成了api_version，但是有一点需要注意的，SetEnvPrefix和SetEnvKeyReplacer一起用的时候可能会混淆。</p>
+<h3 id="别名功能">别名功能</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//设置重载 和别名
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">SetAndAliases</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">();</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Name&#34;</span><span class="p">,</span><span class="s">&#34;wzp&#34;</span><span class="p">);</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">RegisterAlias</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">,</span><span class="s">&#34;Name&#34;</span><span class="p">);</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">,</span><span class="s">&#34;Mr.Wang&#34;</span><span class="p">);</span>
+
+	<span class="c1">//我们可以发现当别名对应的值修改之后，原本的key也发生变化
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;id %s, name %s&#34;</span><span class="p">,</span><span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">),</span><span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">)</span> <span class="p">);</span>
+	<span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以为key设置别名，当别名的值被重置后，原key对应的值也会发生变化。</p>
+<h3 id="序列化和反序列化">序列化和反序列化</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">favorite</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Sports</span> <span class="p">[]</span><span class="kt">string</span><span class="p">;</span>
+	<span class="nx">Music</span> <span class="p">[]</span><span class="kt">string</span><span class="p">;</span>
+	<span class="nx">LuckyNumber</span> <span class="kt">int</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">information</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span> <span class="kt">string</span><span class="p">;</span>
+	<span class="nx">Age</span>  <span class="kt">int</span><span class="p">;</span>
+	<span class="nx">Alise</span> <span class="p">[]</span><span class="kt">string</span><span class="p">;</span>
+	<span class="nx">Image</span> <span class="kt">string</span><span class="p">;</span>
+	<span class="nx">Public</span> <span class="kt">bool</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">YamlConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">TimeStamp</span> <span class="kt">string</span>
+	<span class="nx">Author</span> <span class="kt">string</span>
+	<span class="nx">PassWd</span> <span class="kt">string</span>
+	<span class="nx">Information</span> <span class="nx">information</span>
+	<span class="nx">Favorite</span> <span class="nx">favorite</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">//将配置解析为Struct对象
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">UmshalStruct</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">error</span>  <span class="p">{</span>
+	<span class="nf">LoadConfigFromYaml</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">cf</span> <span class="nx">YamlConfig</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">cf</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+	<span class="p">}</span>
+        
+        
+	<span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">YamlStringSettings</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">();</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">,</span> <span class="s">&#34;wzp&#34;</span><span class="p">);</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;age&#34;</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;aliase&#34;</span><span class="p">,[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;one&#34;</span><span class="p">,</span><span class="s">&#34;two&#34;</span><span class="p">,</span><span class="s">&#34;three&#34;</span><span class="p">})</span>
+
+	<span class="nx">cf</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">AllSettings</span><span class="p">()</span>
+	<span class="nx">bs</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">yaml</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">cf</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;unable to marshal config to YAML: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bs</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">JsonStringSettings</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">config</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">();</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">,</span> <span class="s">&#34;wzp&#34;</span><span class="p">);</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;age&#34;</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;aliase&#34;</span><span class="p">,[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;one&#34;</span><span class="p">,</span><span class="s">&#34;two&#34;</span><span class="p">,</span><span class="s">&#34;three&#34;</span><span class="p">})</span>
+
+	<span class="nx">cf</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">AllSettings</span><span class="p">()</span>
+	<span class="nx">bs</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">cf</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;unable to marshal config to YAML: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bs</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>超级实惠的一个功能，直接把配置反序列化到一个结构体，爽歪歪有木有？也可以把设置直接序列化为我们想要的类型：yaml、json等等</p>
+<h3 id="从command-line中读取配置">从command Line中读取配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;mode&#34;</span><span class="p">,</span><span class="s">&#34;RUN&#34;</span><span class="p">,</span><span class="s">&#34;please input the mode: RUN or DEBUG&#34;</span><span class="p">);</span>
+	<span class="nx">pflag</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">,</span><span class="mi">1080</span><span class="p">,</span><span class="s">&#34;please input the listen port&#34;</span><span class="p">);</span>
+	<span class="nx">pflag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;ip&#34;</span><span class="p">,</span><span class="s">&#34;127.0.0.1&#34;</span><span class="p">,</span><span class="s">&#34;please input the bind ip&#34;</span><span class="p">);</span>
+	<span class="c1">//获取标准包的flag
+</span><span class="c1"></span>	<span class="nx">pflag</span><span class="p">.</span><span class="nx">CommandLine</span><span class="p">.</span><span class="nf">AddGoFlagSet</span><span class="p">(</span><span class="nx">flag</span><span class="p">.</span><span class="nx">CommandLine</span><span class="p">);</span>
+	<span class="nx">pflag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">();</span>
+
+	<span class="c1">//BindFlag
+</span><span class="c1"></span>	<span class="c1">//在pflag.Init key后面使用
+</span><span class="c1"></span>	<span class="nx">viper</span><span class="p">.</span><span class="nf">BindPFlag</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">,</span> <span class="nx">pflag</span><span class="p">.</span><span class="nf">Lookup</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">));</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;set port: %d&#34;</span><span class="p">,</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">GetInt</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">));</span>
+
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">BindPFlags</span><span class="p">(</span><span class="nx">pflag</span><span class="p">.</span><span class="nx">CommandLine</span><span class="p">);</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;set ip: %s&#34;</span><span class="p">,</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="s">&#34;ip&#34;</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以使用标准的flag也可以使用viper包中自带的pflag，作者建议使用pflag。</p>
+<h3 id="监听配置文件">监听配置文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">//监听配置文件的修改和变动
+func WatchConfig(c *config) error {
+	if err := LoadConfigFromYaml(c); err !=nil{
+		return err;
+	}
+	ctx, cancel := context.WithCancel(context.Background());
+
+	c.v.WatchConfig()
+        
+        //监听回调函数
+	watch := func(e fsnotify.Event) {
+		log.Printf(&#34;Config file is changed: %s \n&#34;, e.String())
+		cancel();
+	}
+
+	c.v.OnConfigChange(watch);
+	&lt;-ctx.Done();
+	return nil;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>重点来了啊，这个可以说是非常非常实用的一个功能，以往我们修改配置文件要么重启服务，要么搞一个api去修改，Viper把这个功能帮我们实现了。只要配置文件被修改保存后，我们事先注册的<strong>watch</strong>函数就回被触发，只要我们在这里面添加更新操作就ok了。不过美中不足的是，它目前只监听配置文件。</p>
+<h3 id="拷贝子分支">拷贝子分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestSubConfig</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="nx">c</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">{};</span>
+	<span class="nf">LoadConfigFromYaml</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">c</span><span class="p">);</span>
+	<span class="nx">sc</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">Sub</span><span class="p">(</span><span class="s">&#34;information&#34;</span><span class="p">);</span>
+	<span class="nx">sc</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;age&#34;</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+	<span class="nx">scs</span><span class="p">,</span><span class="nx">_</span><span class="o">:=</span><span class="nx">yaml</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">sc</span><span class="p">.</span><span class="nf">AllSettings</span><span class="p">())</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">scs</span><span class="p">));</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;age: %d&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetInt</span><span class="p">(</span><span class="s">&#34;information.age&#34;</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>  拷贝一个子分支最大的用途就是我们可以复制一份配置，这样在修改拷贝的时候原配置不会被修改，如果修改的配置出现了问题，我们可以方便的回滚。</p>
+<h3 id="获取配置项的方法">获取配置项的方法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//测试各种get类型
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestGetValues</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="nx">c</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">config</span><span class="p">{}</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">LoadConfigFromYaml</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;%s: %s&#34;</span><span class="p">,</span><span class="nx">t</span><span class="p">.</span><span class="nf">Name</span><span class="p">(),</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">());</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="nx">info</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetStringMap</span><span class="p">(</span><span class="s">&#34;information&#34;</span><span class="p">);</span> <span class="nx">info</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;%T&#34;</span><span class="p">,</span> <span class="nx">info</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="nx">aliases</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetStringSlice</span><span class="p">(</span><span class="s">&#34;information.aliases&#34;</span><span class="p">);</span> <span class="nx">aliases</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">a</span> <span class="o">:=</span> <span class="k">range</span>  <span class="nx">aliases</span><span class="p">{</span>
+			<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="nx">timeStamp</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetTime</span><span class="p">(</span><span class="s">&#34;timestamp&#34;</span><span class="p">);</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="nx">timeStamp</span><span class="p">.</span><span class="nf">String</span><span class="p">());</span>
+
+	<span class="k">if</span> <span class="nx">public</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetBool</span><span class="p">(</span><span class="s">&#34;information.public&#34;</span><span class="p">);</span> <span class="nx">public</span><span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;the information is public&#34;</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="nx">age</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetInt</span><span class="p">(</span><span class="s">&#34;information.age&#34;</span><span class="p">);</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;%s age  is %d&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">v</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="s">&#34;information.name&#34;</span><span class="p">),</span> <span class="nx">age</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p> 如果我们直接用Get获取的返回值都是interface{}类型，这样我们还要手动转化一下，可以直接指定类型去获取，方便快捷。</p>
+<p> 除了以上所说的功能外，viper还有从etcd提取配置以及自定义flage的功能，这些大家感兴趣可以自己去了解一下。</p>
+<h2 id="有趣的应用">有趣的应用</h2>
+<p>虽然Unmarshal Struct已经足够好用了，但有作者还是想开发一下新的玩法，比如说这个配置文件和当前的新版本不是很匹配，当然实际生产中我们是要讲究向下兼容的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go">        <span class="kd">var</span> <span class="nx">yamlConfig</span> <span class="p">=</span>  <span class="nx">YamlConfig</span><span class="p">{};</span>
+	<span class="nx">ycType</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">yamlConfig</span><span class="p">);</span>
+
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">ycType</span><span class="p">.</span><span class="nf">NumField</span><span class="p">();</span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+		<span class="nx">name</span> <span class="o">:=</span> <span class="nx">ycType</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Name</span><span class="p">;</span>
+		<span class="nx">element</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">yamlConfig</span><span class="p">).</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nf">Interface</span><span class="p">();</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nf">UnmarshalKey</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">element</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+			<span class="nx">logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Error reading configuration:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>  如上代码所示，我们从最外围的结构体中找出子元素的名称和interface，然后分别解析，这样及时某一项缺失了我们也可以及时提醒用户，或者设置缺省配置，还有很多好玩的方法，大家可以互相参考哦。</p>
+    </div>
+
+    
+    
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://justgo-now.github.io/tags/viper.html">viper</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/2020/2020-06-30-spike-system-design.html">
+            <span class="next-text nav-default">秒杀系统架构设计分析与实战</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="http://justgo-now.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Frank
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.dee43230127a73d039a734510fa896c89c3c7ce0cf0be0c7a7433f8fd69b76dc.js" integrity="sha256-3uQyMBJ6c9A5pzRRD6iWyJw8fODPC&#43;DHp0M/j9abdtw=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/custom.js"></script>
+
+
+</body>
+</html>

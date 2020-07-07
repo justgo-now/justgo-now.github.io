@@ -6,10 +6,20 @@
     <description>Recent content in coding on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 16 Jun 2020 09:50:04 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 08:51:20 +0800</lastBuildDate>
     
 	<atom:link href="http://justgo-now.github.io/categories/coding/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Viper--方便好用的Golang 配置库</title>
+      <link>http://justgo-now.github.io/post/2020/2020-07-07-viper-usage.html</link>
+      <pubDate>Tue, 07 Jul 2020 08:51:20 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-07-07-viper-usage.html</guid>
+      <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;本文主要是为读者介绍一个轻便好用的Golang配置库&lt;a href=&#34;https://github.com/spf13/viper&#34;&gt;viper&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Http状态码及协议头</title>

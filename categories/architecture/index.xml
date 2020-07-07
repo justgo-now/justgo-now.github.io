@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>architecture on JustGo</title>
+    <link>http://justgo-now.github.io/categories/architecture.html</link>
+    <description>Recent content in architecture on JustGo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 30 Jun 2020 09:41:54 +0800</lastBuildDate>
+    
+	<atom:link href="http://justgo-now.github.io/categories/architecture/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>秒杀系统架构设计分析与实战</title>
+      <link>http://justgo-now.github.io/post/2020/2020-06-30-spike-system-design.html</link>
+      <pubDate>Tue, 30 Jun 2020 09:41:54 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-06-30-spike-system-design.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

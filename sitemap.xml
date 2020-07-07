@@ -2,6 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://justgo-now.github.io/categories/coding.html</loc>
+    <lastmod>2020-07-07T08:51:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/</loc>
+    <lastmod>2020-07-07T08:51:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post.html</loc>
+    <lastmod>2020-07-07T08:51:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/tags/viper.html</loc>
+    <lastmod>2020-07-07T08:51:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/2020/2020-07-07-viper-usage.html</loc>
+    <lastmod>2020-07-07T08:51:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/categories/architecture.html</loc>
+    <lastmod>2020-06-30T09:41:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/post/2020/2020-06-30-spike-system-design.html</loc>
+    <lastmod>2020-06-30T09:41:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://justgo-now.github.io/tags/%E9%AB%98%E5%B9%B6%E5%8F%91.html</loc>
+    <lastmod>2020-06-30T09:41:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://justgo-now.github.io/about.html</loc>
     <lastmod>2020-06-28T14:05:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -17,20 +73,6 @@
   
   <url>
     <loc>http://justgo-now.github.io/post/2020/2020-06-28-efficient-shell-programming.html</loc>
-    <lastmod>2020-06-28T09:07:03+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/</loc>
-    <lastmod>2020-06-28T09:07:03+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/post.html</loc>
     <lastmod>2020-06-28T09:07:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -53,13 +95,6 @@
   <url>
     <loc>http://justgo-now.github.io/post/2020/2020-06-22-nfs-deploy-config.html</loc>
     <lastmod>2020-06-22T09:57:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://justgo-now.github.io/categories/coding.html</loc>
-    <lastmod>2020-06-16T09:50:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
