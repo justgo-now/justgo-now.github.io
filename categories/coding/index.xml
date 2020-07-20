@@ -6,10 +6,19 @@
     <description>Recent content in coding on JustGo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Jul 2020 08:51:20 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2020 09:18:52 +0800</lastBuildDate>
     
 	<atom:link href="http://justgo-now.github.io/categories/coding/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Shell脚本经典案例</title>
+      <link>http://justgo-now.github.io/post/2020/2020-07-20-commonly-used-linux-shell.html</link>
+      <pubDate>Mon, 20 Jul 2020 09:18:52 +0800</pubDate>
+      
+      <guid>http://justgo-now.github.io/post/2020/2020-07-20-commonly-used-linux-shell.html</guid>
+      <description>&lt;p&gt;编写Shell过程中注意事项： 开头加解释器：#!/bin/bash 语法缩进，使用四个空格；多加注释说明。 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用。 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域。 有两个命令能帮助我调试脚本：set -e 遇到执行非0时退出脚本，set-x 打印执行过程。 写脚本一定先测试再到生产上。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Viper--方便好用的Golang 配置库</title>
