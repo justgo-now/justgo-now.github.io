@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>安装使用教程 - Tutorial - ATQ v2.0</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+
+    <link rel="stylesheet" href="./resources/vue.css" />
+    <!-- <style>
+      .sidebar {
+        padding: 0 0 0 0;
+      }
+
+      .app-name {
+        padding-top: 10px;
+
+        border-bottom: 4px solid rgb(0, 136, 204);
+        background-color: rgb(51, 51, 51);
+      }
+
+      .app-name-link img {
+        width: 70%;
+      }
+
+      .seo-pic {
+        display: none;
+      }
+    </style> -->
+  </head>
+  <body>
+    <div id="app" />
+    <script>
+      window.$docsify = {
+        loadNavbar: true,
+        search: {
+			placeholder: '搜索...',
+			maxAge: 86400000,
+			paths: 'auto',
+			depth: 6,
+			namespace:'atqv2',
+			noData:'找不到结果',
+        },
+        // name: '安装使用教程 - Tutorial - ATQ v2.0',
+        loadSidebar: true,
+        auto2top: true,
+        topMargin: 90,
+        notFoundPage: true,
+        subMaxLevel: 4,
+        themeColor: 'rgb(23,147,209)',
+        formatUpdated: '{YYYY}-{MM}-{DD}',
+        pagination: {
+          previousText: 'Previous',
+          nextText: 'Next',
+          crossChapter: true,
+          crossChapterText: true,
+        },
+        count:{
+          countable:true,
+          fontsize:'0.9em',
+          color:'rgb(90,90,90)',
+          language:'chinese'
+        },
+        mermaidConfig: {
+          querySelector: ".mermaid"
+        },
+        plugins: [
+          function (hook, vm) {
+            hook.mounted(function () {
+              // 添加网站运行时间
+              let dom = Docsify.dom;
+              let runTimeNode = dom.create('div');
+              runTimeNode.className = 'runtime';
+              runTimeNode.style =
+                'color: #8590a6;max-width: 80%;margin: 0 auto 20px;padding: 0 15px 0 15px;';
+              dom.appendTo(dom.find('.content'), runTimeNode);
+            });
+			hook.beforeEach(function(html) {
+				return (
+				'> Last modified: {docsify-updated}\n'
+				+ html
+				);
+			});
+          },
+        ],
+      };
+    </script>
+    <script src="./resources/plugins/docsify.min.js"></script>
+    <script src="./resources/plugins/prism-bash.min.js"></script>
+    <script src="./resources/plugins/prism-c.min.js"></script>
+    <script src="./resources/plugins/prism-cpp.min.js"></script>
+    <script src="./resources/plugins/docsify-copy-code.min.js"></script>
+    <script src="./resources/plugins/docsify-pagination.min.js"></script>
+    <script src="./resources/plugins/search.min.js"></script>
+    <script src="./resources/plugins/countable.min.js"></script>
+    <script src="./resources/plugins/vanilla-back-to-top.min.js"></script>
+    <script src="./resources/plugins/emoji.min.js"></script>
+    <script src="./resources/plugins/mermaid.js"></script>
+    <script src="./resources/plugins/docsify-mermaid.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        securityLevel: 'loose',
+        logLevel: 1
+      });
+    </script>
+    <script>
+      addBackToTop({
+        diameter: 56,
+        backgroundColor: 'rgb(23,147,209)',
+        textColor: '#fff',
+      });
+    </script>
+
+    <script>
+      let client_id = '296c581fc4b2a837a1e3';
+      let client_secret = '7e7f0ad1809fa4a1915430ade04835f6849ab56a';
+
+      let props = {
+        clientID: client_id,
+        clientSecret: client_secret,
+        repo: 'ArchLinuxTutorialComments',
+        owner: 'ArchLinuxStudio',
+        admin: ['ryosukeeeeee'],
+        // facebook-like distraction free mode
+        distractionFreeMode: false,
+        id: decodeURI(location.hash.split('?')[0]),
+        language: 'en',
+      };
+    </script>
+    <script>
+      function change_search_plugin_order() {
+        let search_plugin = document.getElementsByClassName('search')[0];
+        let app_name = document.getElementsByClassName('app-name')[0];
+        search_plugin.parentNode.insertBefore(app_name, search_plugin);
+      }
+      setTimeout(change_search_plugin_order, 1);
+    </script>
+
+    <!-- 添加网站运行时间统计 -->
+    <script>
+      function siteTime() {
+        setTimeout(siteTime, 1000);
+        let seconds = 1000;
+        let minutes = seconds * 60;
+        let hours = minutes * 60;
+        let days = hours * 24;
+        let today = new Date();
+        let todayYear = today.getFullYear();
+        let todayMonth = today.getMonth() + 1;
+        let todayDate = today.getDate();
+        let todayHour = today.getHours();
+        let todayMinute = today.getMinutes();
+        let todaySecond = today.getSeconds();
+
+        let t1 = Date.UTC(2020, 09, 1, 0, 0, 0);
+        let t2 = Date.UTC(
+          todayYear,
+          todayMonth,
+          todayDate,
+          todayHour,
+          todayMinute,
+          todaySecond
+        );
+        let diff = t2 - t1;
+        let diffDays = Math.floor(diff / days);
+        let diffHours = Math.floor((diff - diffDays * days) / hours);
+        let diffMinutes = Math.floor(
+          (diff - diffDays * days - diffHours * hours) / minutes
+        );
+        let diffSeconds = Math.floor(
+          (diff - diffDays * days - diffHours * hours - diffMinutes * minutes) /
+            seconds
+        );
+        Docsify.dom.find('.runtime').innerHTML =
+          'ATQ v2.0 has been running for ' +
+          diffDays +
+          ' days ' +
+          diffHours +
+          ' hours ' +
+          diffMinutes +
+          ' minutes ' +
+          diffSeconds +
+          ' seconds';
+      }
+      // 先让网页加载完，否则 Docsify.dom.find('.runtime') == null
+      setTimeout(siteTime, 500);
+    </script>
+  </body>
+</html>
