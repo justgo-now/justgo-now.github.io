@@ -37,7 +37,7 @@
     <div id="app" />
     <script>
       window.$docsify = {
-        loadNavbar: true,
+        loadNavbar: false,
         search: {
 			placeholder: '搜索...',
 			maxAge: 86400000,
@@ -158,7 +158,7 @@
         let todayMinute = today.getMinutes();
         let todaySecond = today.getSeconds();
 
-        let t1 = Date.UTC(2020, 09, 1, 0, 0, 0);
+        let t1 = Date.UTC(2024, 06, 1, 0, 0, 0);
         let t2 = Date.UTC(
           todayYear,
           todayMonth,
@@ -178,7 +178,7 @@
             seconds
         );
         Docsify.dom.find('.runtime').innerHTML =
-          'ATQ v2.0 has been running for ' +
+          'The website has been running for ' +
           diffDays +
           ' days ' +
           diffHours +
