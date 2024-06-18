@@ -1,0 +1,10 @@
+{
+  "name": "my-docsify-project",
+  "version": "1.0.0",
+  "scripts": {
+    "docsify:generate": "docsify generate docs"
+  },
+  "dependencies": {
+    "docsify-cli": "^4.4.4"
+  }
+}
