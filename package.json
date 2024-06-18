@@ -5,6 +5,6 @@
     "docsify:generate": "docsify generate docs"
   },
   "dependencies": {
-    "docsify-cli": "^4.4.4"
+    "docsify-cli": "^4.13.1"
   }
 }
